@@ -11,26 +11,23 @@ DenotativeObject subclass: #I
 I class
 	instanceVariableNames: ''!
 
-!I class methodsFor: 'operaciones' stamp: 'FR 9/14/2020 21:50:20'!
-next
-	^self createChildNamed: self name,'I'.! !
+
+!I class methodsFor: 'Operaciones'!
+! !
+
+!I class methodsFor: 'Operaciones'!
+! !
 
 
-!I class methodsFor: 'as yet unclassified' stamp: 'FR 9/16/2020 18:36:34'!
-* unNumero
-	^unNumero == I ifTrue: [self] ifFalse: [self + (self*(unNumero previous))]. ! !
+!I class methodsFor: 'operaciones'!
+! !
 
-!I class methodsFor: 'as yet unclassified' stamp: 'FR 9/16/2020 19:01:41'!
-+ unNumero
-	^self next.! !
 
-!I class methodsFor: 'as yet unclassified' stamp: 'FR 9/16/2020 18:59:26'!
-/ unNumero
-	^unNumero == self ifTrue: [I] ifFalse: [ I + (self-unNumero/unNumero) ]. ! !
+!I class methodsFor: 'as yet unclassified'!
+! !
 
-!I class methodsFor: 'as yet unclassified' stamp: 'FR 9/14/2020 21:22:16'!
-previous
-	^self.! !
+!I class methodsFor: 'as yet unclassified'!
+! !
 
 
 !classDefinition: #II category: #NumerosDePeano!
@@ -46,18 +43,17 @@ I subclass: #II
 II class
 	instanceVariableNames: ''!
 
-!II class methodsFor: 'operaciones' stamp: 'FR 9/14/2020 21:53:27'!
-previous
-	^self parent.! !
+!II class methodsFor: 'Operaciones'!
+! !
 
 
-!II class methodsFor: 'as yet unclassified' stamp: 'FR 9/16/2020 18:34:07'!
-+ unNumero
-	^(self previous + unNumero) next. ! !
 
-!II class methodsFor: 'as yet unclassified' stamp: 'FR 9/16/2020 18:05:41'!
-- unNumero
-	^unNumero == I ifTrue: [self previous] ifFalse: [self previous - unNumero previous ].! !
+!II class methodsFor: 'operaciones'!
+! !
+
+
+!II class methodsFor: 'as yet unclassified'!
+! !
 
 
 !classDefinition: #III category: #NumerosDePeano!
@@ -137,24 +133,111 @@ DenotativeObject subclass: #NumerosDePeanoTest
 NumerosDePeanoTest class
 	instanceVariableNames: ''!
 
-!NumerosDePeanoTest class methodsFor: 'as yet unclassified' stamp: 'FR 9/14/2020 20:46:17'!
-test01NextDeUnoEsDos
-	Assert that: I next isEqualTo: II.! !
+!NumerosDePeanoTest class methodsFor: 'Tests' stamp: 'MSM 9/16/2020 18:47:26'!
+test01SiguienteIESII
 
-!NumerosDePeanoTest class methodsFor: 'as yet unclassified' stamp: 'FR 9/14/2020 20:48:23'!
-test02NextDeDosEsTres
-	Assert that: II next isEqualTo: III.! !
+	^Assert that: I next isEqualTo: II.
+	! !
 
-!NumerosDePeanoTest class methodsFor: 'as yet unclassified' stamp: 'FR 9/14/2020 20:53:16'!
-test03SumaDeUnoYUnoEsElSiguienteDeUno
-	Assert that: I+I isEqualTo: I next.! !
+!NumerosDePeanoTest class methodsFor: 'Tests' stamp: 'MSM 9/16/2020 19:01:47'!
+test02SiguienteIIESIII
 
-!NumerosDePeanoTest class methodsFor: 'as yet unclassified' stamp: 'FR 9/14/2020 21:41:29'!
-test04SumaDeUnoMasUnNumero
-	|unNumero|
-	unNumero := III.
-	Assert that: I+unNumero isEqualTo: unNumero next.! !
+	^Assert that: II next isEqualTo: III.! !
 
-!NumerosDePeanoTest class methodsFor: 'as yet unclassified' stamp: 'FR 9/14/2020 21:31:29'!
-test05SumaDefinirTitulo
-	Assert that: II+III isEqualTo: IIIII.! !
+!NumerosDePeanoTest class methodsFor: 'Tests' stamp: 'MSM 9/16/2020 19:02:14'!
+test03PreviousIIEsI
+
+	^Assert that: II previous isEqualTo: II.! !
+
+!NumerosDePeanoTest class methodsFor: 'Tests' stamp: 'MSM 9/15/2020 18:00:53'!
+test04OrdenDeSuma
+
+	Assert that: I + II isEqualTo: II + I.! !
+
+!NumerosDePeanoTest class methodsFor: 'Tests' stamp: 'MSM 9/15/2020 18:03:08'!
+test05SumaIMasIESII
+
+	^Assert that: I + I isEqualTo: II! !
+
+!NumerosDePeanoTest class methodsFor: 'Tests' stamp: 'MSM 9/16/2020 19:14:41'!
+test06SumaIIIMasIIIII
+
+	^Assert that: III + IIIII isEqualTo: IIIIIIII! !
+
+!NumerosDePeanoTest class methodsFor: 'Tests' stamp: 'MSM 9/15/2020 18:10:22'!
+test07SumaConmutativa
+
+	^Assert that: I + II isEqualTo: II + I.! !
+
+!NumerosDePeanoTest class methodsFor: 'Tests' stamp: 'MSM 9/15/2020 18:12:35'!
+test08SumaAsociativa
+
+	^Assert that: (I + II) + III isEqualTo: I + (II + III). ! !
+
+!NumerosDePeanoTest class methodsFor: 'Tests' stamp: 'MSM 9/16/2020 18:47:57'!
+test09ProductoIxI
+
+	^Assert that: I * I isEqualTo: I! !
+
+!NumerosDePeanoTest class methodsFor: 'Tests' stamp: 'MSM 9/16/2020 19:13:57'!
+test10ProductoIxII
+
+	^Assert that: I * II isEqualTo: II! !
+
+!NumerosDePeanoTest class methodsFor: 'Tests' stamp: 'MSM 9/16/2020 19:17:37'!
+test11ProductoIIxII
+
+	^Assert that: II * II isEqualTo: IIII.! !
+
+!NumerosDePeanoTest class methodsFor: 'Tests' stamp: 'MSM 9/16/2020 19:15:34'!
+test12OrdenDeProducto
+
+	^Assert that: I * II isEqualTo: II * I! !
+
+!NumerosDePeanoTest class methodsFor: 'Tests' stamp: 'MSM 9/16/2020 19:18:34'!
+test13ProductoDistributiva
+
+	^Assert that: II * (I + I) isEqualTo: (II * I) + (II * I).! !
+
+!NumerosDePeanoTest class methodsFor: 'Tests' stamp: 'MSM 9/16/2020 19:19:19'!
+test14ProductoConmutativa
+
+	^Assert that: II * III * IIII isEqualTo: III * IIII * II! !
+
+!NumerosDePeanoTest class methodsFor: 'Tests' stamp: 'MSM 9/16/2020 19:21:48'!
+test15ProductoAsociativa
+
+	^Assert that: (II * II) * III isEqualTo: (II * III) * II.! !
+
+!NumerosDePeanoTest class methodsFor: 'Tests' stamp: 'MSM 9/16/2020 19:22:02'!
+test16DivisionPorI
+
+	^Assert that: II / I isEqualTo: II! !
+
+!NumerosDePeanoTest class methodsFor: 'Tests' stamp: 'MSM 9/16/2020 19:25:58'!
+test17DivisionIIIIPorII
+
+	^Assert that: IIII / II isEqualTo: II! !
+
+!NumerosDePeanoTest class methodsFor: 'Tests' stamp: 'MSM 9/16/2020 19:29:16'!
+test18DivisionIIIPorII
+
+		^Assert signalFailure: III / II.
+
+! !
+
+
+!NumerosDePeanoTest class methodsFor: 'as yet unclassified'!
+! !
+
+!NumerosDePeanoTest class methodsFor: 'as yet unclassified'!
+! !
+
+!NumerosDePeanoTest class methodsFor: 'as yet unclassified'!
+! !
+
+!NumerosDePeanoTest class methodsFor: 'as yet unclassified'!
+! !
+
+!NumerosDePeanoTest class methodsFor: 'as yet unclassified'!
+! !
