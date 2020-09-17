@@ -19,13 +19,13 @@ I class
 + unNumero
 	^unNumero next.! !
 
-!I class methodsFor: 'operaciones' stamp: 'FR 9/17/2020 13:26:55'!
+!I class methodsFor: 'operaciones' stamp: 'FR 9/17/2020 17:22:17'!
 - unNumero
 	^self error:'ElResultadoNoPuedeSerRepresentadoEnLosNaturales'.! !
 
-!I class methodsFor: 'operaciones' stamp: 'FR 9/17/2020 13:18:05'!
+!I class methodsFor: 'operaciones' stamp: 'FR 9/17/2020 17:23:04'!
 / unNumero
-	self printString < unNumero printString ifTrue: [self error:'DivisorMuyGrandeParaDividendo'].	
+	self printString < unNumero printString ifTrue: [self error:'ErrorDeDivisionNoDivisibleODivisorMuyGrande'].	
 	^unNumero == self ifTrue: [I] ifFalse: [ I + ((self-unNumero)/unNumero) ]. ! !
 
 !I class methodsFor: 'operaciones' stamp: 'FR 9/14/2020 21:50:20'!
@@ -341,7 +341,6 @@ test18DivisionIIIPorII
 
 ! !
 
-
 
 !classDefinition: #TestsDeVerificacion category: #NumerosDePeano!
 DenotativeObject subclass: #TestsDeVerificacion
@@ -415,10 +414,10 @@ test11UnoDivididoUnoEsIgualAUno
 
 	Assert that: I / I isEqualTo: I.! !
 
-!TestsDeVerificacion class methodsFor: 'as yet unclassified' stamp: 'FR 9/17/2020 13:24:23'!
+!TestsDeVerificacion class methodsFor: 'as yet unclassified' stamp: 'FR 9/17/2020 17:24:43'!
 test12DivisionNoSoportaDividirPorUnNumeroMayor
 
-	Assert should: [ III /  IIII ] signal: Error withDescription: 'DivisorMuyGrandeParaDividendo'.
+	Assert should: [ III /  IIII ] signal: Error withDescription: 'ErrorDeDivisionNoDivisibleODivisorMuyGrande'.
 	
-	Assert should: [ I /  II] signal: Error withDescription: 'DivisorMuyGrandeParaDividendo'.
+	Assert should: [ I /  II] signal: Error withDescription: 'ErrorDeDivisionNoDivisibleODivisorMuyGrande'.
 ! !
