@@ -342,23 +342,6 @@ test18DivisionIIIPorII
 ! !
 
 
-!NumerosDePeanoTest class methodsFor: 'as yet unclassified' stamp: 'FR 9/14/2020 21:50:20'!
-next
-	^self createChildNamed: self name,'I'.! !
-
-!NumerosDePeanoTest class methodsFor: 'as yet unclassified'!
-eano'! !
-
-!NumerosDePeanoTest class methodsFor: 'as yet unclassified' stamp: 'MSM 9/17/2020 13:59:29'!
-lDictionaries: ''
-	category: 'NumerosDePeano'! !
-
-!NumerosDePeanoTest class methodsFor: 'as yet unclassified'!
-DePeano stamp: 'MSM 9/17/2020 13:59:29'! !
-
-!NumerosDePeanoTest class methodsFor: 'as yet unclassified' stamp: 'FR 9/16/2020 18:34:07'!
-Numero) next. ! !
-
 
 !classDefinition: #TestsDeVerificacion category: #NumerosDePeano!
 DenotativeObject subclass: #TestsDeVerificacion
