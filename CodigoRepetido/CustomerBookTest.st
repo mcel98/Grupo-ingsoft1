@@ -1,4 +1,4 @@
-'From Cuis 5.0 [latest update: #4365] on 19 September 2020 at 10:33:14 pm'!
+'From Cuis 5.0 [latest update: #4365] on 20 September 2020 at 3:02:08 pm'!
 !classDefinition: #CustomerBookTest category: #'CodigoRepetido-Ejercicio'!
 TestCase subclass: #CustomerBookTest
 	instanceVariableNames: 'messageText'
@@ -6,15 +6,37 @@ TestCase subclass: #CustomerBookTest
 	poolDictionaries: ''
 	category: 'CodigoRepetido-Ejercicio'!
 
-!CustomerBookTest methodsFor: 'testing' stamp: 'msm 9/19/2020 22:32:21'!
-onaries: ''
-	category: 'CodigoRepetido-Ejercicio'! !
+!CustomerBookTest methodsFor: 'testing' stamp: 'msm 9/19/2020 23:01:03'!
+test01AddingCustomerShouldNotTakeMoreThan50Milliseconds
+	|customerBook|
+	customerBook := CustomerBook new.
+	
+	self assert: [
+		self
+			mensaje: [ customerBook addCustomerNamed: 'Paul McCartney'.]
+			tardaMenosQue: 50 ].! !
 
-!CustomerBookTest methodsFor: 'testing'!
-! !
+!CustomerBookTest methodsFor: 'testing' stamp: 'msm 9/20/2020 15:00:25'!
+test02RemovingCustomerShouldNotTakeMoreThan100Milliseconds
+	| customerBook |
+	customerBook _ self
+		testCustomer: 'Paul McCartney'
+		suspend: False.
+	self assert: [
+		self
+			mensaje: [ customerBook removeCustomerNamed: 'Paul McCartney' ]
+			tardaMenosQue: 100 ].! !
 
-!CustomerBookTest methodsFor: 'testing'!
-! !
+!CustomerBookTest methodsFor: 'testing' stamp: 'msm 9/20/2020 15:01:02'!
+test03CanNotAddACustomerWithEmptyName
+	| customerBook |
+	customerBook _ CustomerBook new.
+	self
+		testMessageErrorHandler: [
+			customerBook addCustomerNamed: ''.
+			self fail ]
+		on: CustomerBook customerCanNotBeEmptyErrorMessage
+		and: [ customerBook isEmpty ].! !
 
 !CustomerBookTest methodsFor: 'testing' stamp: 'msm 9/19/2020 21:52:31'!
 test04CanNotRemoveAnInvalidCustomer
@@ -30,11 +52,42 @@ test04CanNotRemoveAnInvalidCustomer
 
 		! !
 
-!CustomerBookTest methodsFor: 'testing'!
-! !
+!CustomerBookTest methodsFor: 'testing' stamp: 'msm 9/20/2020 14:52:03'!
+test05SuspendingACustomerShouldNotRemoveItFromCustomerBook
+	| customerBook paulMcCartney |
+	paulMcCartney _ 'Paul McCartney'.
+	customerBook _ self
+		testCustomer: paulMcCartney
+		suspend: True.
+	self
+		assert: 0
+		equals: customerBook numberOfActiveCustomers.
+	self
+		assert: 1
+		equals: customerBook numberOfSuspendedCustomers.
+	self
+		assert: 1
+		equals: customerBook numberOfCustomers.
+	self assert: (customerBook includesCustomerNamed: paulMcCartney).! !
 
-!CustomerBookTest methodsFor: 'testing'!
-! !
+!CustomerBookTest methodsFor: 'testing' stamp: 'msm 9/20/2020 14:53:00'!
+test06RemovingASuspendedCustomerShouldRemoveItFromCustomerBook
+	| customerBook paulMcCartney |
+	paulMcCartney _ 'Paul McCartney'.
+	customerBook _ self
+		testCustomer: paulMcCartney
+		suspend: True.
+	customerBook removeCustomerNamed: paulMcCartney.
+	self
+		assert: 0
+		equals: customerBook numberOfActiveCustomers.
+	self
+		assert: 0
+		equals: customerBook numberOfSuspendedCustomers.
+	self
+		assert: 0
+		equals: customerBook numberOfCustomers.
+	self deny: (customerBook includesCustomerNamed: paulMcCartney).! !
 
 !CustomerBookTest methodsFor: 'testing' stamp: 'msm 9/19/2020 21:50:09'!
 test07CanNotSuspendAnInvalidCustomer
@@ -94,22 +147,37 @@ customerSignalHandler: aFirstBlock on: aSecondBlock and: aThirdBlock raced: aSig
 			self assert: aSecondBlock.
 			self assert: aThirdBlock.].! !
 
-!CustomerBookTest methodsFor: 'SignalHandlers'!
-! !
+!CustomerBookTest methodsFor: 'SignalHandlers' stamp: 'msm 9/20/2020 14:54:08'!
+testMessageErrorHandler: aFirstBlock on: aSecondBlock and: aThirdBlock
+	aFirstBlock
+		on: Error
+		do: [ :anError |
+			self assert: anError messageText = aSecondBlock.
+			self assert: aThirdBlock ].! !
 
 
-!CustomerBookTest methodsFor: 'TimeMeasurement' stamp: 'msm 9/19/2020 21:49:55'!
-customerCantSuspendHandler: customerBook 
-		realCustomerNamed: johnLennon 
-		testCustomerNamed: 'George Harrison'. 
-! !
+!CustomerBookTest methodsFor: 'TimeMeasurement' stamp: 'msm 9/19/2020 23:37:53'!
+compareTime: aFirstTimeStamp with: aSecondTimeStamp
 
-!CustomerBookTest methodsFor: 'TimeMeasurement'!
-rBook methodsFor: 'customer management' stamp: 'msm 9/19/2020 22:26:21' prior: 50863990! !
+	^ aFirstTimeStamp < aSecondTimeStamp.! !
+
+!CustomerBookTest methodsFor: 'TimeMeasurement' stamp: 'msm 9/19/2020 23:40:52'!
+mensaje: aBlock tardaMenosQue: aTimeStamp
+	|runtime|
+	runtime := Time millisecondsToRun: aBlock.
+	^self compareTime: runtime with: aTimeStamp * millisecond.
+
+	
+	! !
 
 
-!CustomerBookTest methodsFor: 'helpers'!
-! !
+!CustomerBookTest methodsFor: 'helpers' stamp: 'msm 9/20/2020 14:55:25'!
+testCustomer: aName suspend: aDecision
+	| customerBook |
+	customerBook _ CustomerBook new.
+	customerBook addCustomerNamed: aName.
+	aDecision = True ifTrue: [ customerBook suspendCustomerNamed: aName ].
+	^ aDecision.! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
