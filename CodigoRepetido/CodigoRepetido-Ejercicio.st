@@ -28,10 +28,10 @@ test01AddingCustomerShouldNotTakeMoreThan50Milliseconds
 		
 	self theOperation: [ customerBook addCustomerNamed: 'Paul McCartney' ] takesLessThan: 50.! !
 
-!CustomerBookTest methodsFor: 'Testing' stamp: 'FR 9/20/2020 20:05:47'!
+!CustomerBookTest methodsFor: 'Testing' stamp: 'FR 9/20/2020 20:12:38'!
 test02RemovingCustomerShouldNotTakeMoreThan100Milliseconds
 	| customerBook |
-	customerBook _ self testCustomer: 'Paul McCartney' suspend: False.
+	customerBook _ self insertCustomerNamed: 'Paul McCartney' andSuspendedSet: False.
 
 	self theOperation: [ customerBook removeCustomerNamed: 'Paul McCartney' ] takesLessThan: 100.! !
 
@@ -46,68 +46,55 @@ test03CanNotAddACustomerWithEmptyName
 		on: CustomerBook customerCanNotBeEmptyErrorMessage
 		and: [ customerBook isEmpty ].! !
 
-!CustomerBookTest methodsFor: 'Testing' stamp: 'msm 9/19/2020 21:52:31'!
+!CustomerBookTest methodsFor: 'Testing' stamp: 'FR 9/20/2020 20:14:08'!
 test04CanNotRemoveAnInvalidCustomer
 	| customerBook johnLennon |
 	johnLennon _ 'John Lennon'.
-	customerBook _ self
-		testCustomer: johnLennon
-		suspend: False.
-	self
-		customerNotFoundHandler: customerBook customerNamed: johnLennon
+	customerBook _ self insertCustomerNamed: johnLennon andSuspendedSet: False.
+
+	self customerNotFoundHandler: customerBook customerNamed: johnLennon
 
 
 
 		! !
 
-!CustomerBookTest methodsFor: 'Testing' stamp: 'FR 9/20/2020 20:06:16'!
+!CustomerBookTest methodsFor: 'Testing' stamp: 'FR 9/20/2020 20:12:38'!
 test05SuspendingACustomerShouldNotRemoveItFromCustomerBook
 	| customerBook paulMcCartney |
 	 paulMcCartney  _ 'Paul McCartney'.
-	customerBook _ self testCustomer: paulMcCartney suspend: True.
+	customerBook _ self insertCustomerNamed: paulMcCartney andSuspendedSet: True.
 		
 	self theBook: customerBook hasThisNumberOfActiveCustomers: 0 ThisNumberOfSuspended: 1 AndThisIsTheTotal: 1.
 	self assert: (customerBook includesCustomerNamed:  paulMcCartney ).! !
 
-!CustomerBookTest methodsFor: 'Testing' stamp: 'FR 9/20/2020 19:57:47'!
+!CustomerBookTest methodsFor: 'Testing' stamp: 'FR 9/20/2020 20:13:40'!
 test06RemovingASuspendedCustomerShouldRemoveItFromCustomerBook
 	| customerBook  paulMcCartney  |
 	 paulMcCartney  _ 'Paul McCartney'.
-	customerBook _ self
-		testCustomer:  paulMcCartney 
-		suspend: True.
+	customerBook _ self insertCustomerNamed:  paulMcCartney andSuspendedSet: True.
 	customerBook removeCustomerNamed:  paulMcCartney .
 	
 	self theBook: customerBook hasThisNumberOfActiveCustomers: 0 ThisNumberOfSuspended: 0 AndThisIsTheTotal: 0.
 	self deny: (customerBook includesCustomerNamed:  paulMcCartney ).! !
 
-!CustomerBookTest methodsFor: 'Testing' stamp: 'msm 9/19/2020 21:50:09'!
+!CustomerBookTest methodsFor: 'Testing' stamp: 'FR 9/20/2020 20:13:11'!
 test07CanNotSuspendAnInvalidCustomer
 	| customerBook johnLennon georgeHarrison |
 	johnLennon _ 'John Lennon'.
 	georgeHarrison _ 'George Harrison'.
-	customerBook _ self
-		testCustomer: johnLennon
-		suspend: False.
+	customerBook _ self insertCustomerNamed: johnLennon andSuspendedSet: False.
 		
-	self 
-		customerCantSuspendHandler: customerBook 
-		realCustomerNamed: johnLennon 
-		testCustomerNamed: georgeHarrison. 
+	self customerCantSuspendHandler: customerBook realCustomerNamed: johnLennon testCustomerNamed: georgeHarrison. 
 ! !
 
-!CustomerBookTest methodsFor: 'Testing' stamp: 'msm 9/19/2020 21:47:21'!
+!CustomerBookTest methodsFor: 'Testing' stamp: 'FR 9/20/2020 20:13:28'!
 test08CanNotSuspendAnAlreadySuspendedCustomer
 	
 	| customerBook johnLennon |
 	johnLennon := 'Jhon Lennon'.
-	 customerBook := self
-		testCustomer: johnLennon
-		suspend: True.
-	self 
-		customerCantSuspendHandler: customerBook 
-		realCustomerNamed: johnLennon 
-		testCustomerNamed: johnLennon 
+	customerBook := self insertCustomerNamed: johnLennon andSuspendedSet: True.
+	
+	self customerCantSuspendHandler: customerBook realCustomerNamed: johnLennon testCustomerNamed: johnLennon 
 	
 	
 	! !
@@ -163,8 +150,8 @@ mensaje: aBlock tardaMenosQue: aTimeStamp
 	! !
 
 
-!CustomerBookTest methodsFor: 'TestingUtils' stamp: 'msm 9/20/2020 15:13:12'!
-testCustomer: aName suspend: aDecision
+!CustomerBookTest methodsFor: 'TestingUtils' stamp: 'FR 9/20/2020 20:12:38'!
+insertCustomerNamed: aName andSuspendedSet: aDecision
 	| customerBook |
 	customerBook _ CustomerBook new.
 	customerBook addCustomerNamed: aName.
