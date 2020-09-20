@@ -21,7 +21,7 @@ TestCase subclass: #CustomerBookTest
 	poolDictionaries: ''
 	category: 'CodigoRepetido-Ejercicio'!
 
-!CustomerBookTest methodsFor: 'testing' stamp: 'msm 9/19/2020 18:27:47'!
+!CustomerBookTest methodsFor: 'Testing' stamp: 'msm 9/19/2020 18:27:47'!
 test01AddingCustomerShouldNotTakeMoreThan50Milliseconds
 
 	| customerBook|
@@ -31,7 +31,7 @@ test01AddingCustomerShouldNotTakeMoreThan50Milliseconds
 	
 ! !
 
-!CustomerBookTest methodsFor: 'testing' stamp: 'msm 9/19/2020 20:15:17'!
+!CustomerBookTest methodsFor: 'Testing' stamp: 'msm 9/19/2020 20:15:17'!
 test02RemovingCustomerShouldNotTakeMoreThan100Milliseconds
 
 	| customerBook|
@@ -41,7 +41,7 @@ test02RemovingCustomerShouldNotTakeMoreThan100Milliseconds
 	
 ! !
 
-!CustomerBookTest methodsFor: 'testing' stamp: 'msm 9/19/2020 19:42:06'!
+!CustomerBookTest methodsFor: 'Testing' stamp: 'msm 9/19/2020 19:42:06'!
 test03CanNotAddACustomerWithEmptyName 
 
 	| customerBook |
@@ -49,7 +49,7 @@ test03CanNotAddACustomerWithEmptyName
 	
 	self testMessageErrorHandler: [ customerBook addCustomerNamed: ''. self fail ] on: (CustomerBook customerCanNotBeEmptyErrorMessage) and: [customerBook isEmpty].! !
 
-!CustomerBookTest methodsFor: 'testing' stamp: 'msm 9/19/2020 20:21:00'!
+!CustomerBookTest methodsFor: 'Testing' stamp: 'msm 9/19/2020 20:21:00'!
 test04CanNotRemoveAnInvalidCustomer
 	
 	| customerBook johnLennon |
@@ -59,24 +59,22 @@ test04CanNotRemoveAnInvalidCustomer
 	self customerSignalHandler: [ customerBook removeCustomerNamed: 'Paul McCartney'.
 	self fail ] on: [customerBook numberOfCustomers = 1.] and: [(customerBook includesCustomerNamed: johnLennon)] raced: NotFound.! !
 
-!CustomerBookTest methodsFor: 'testing' stamp: 'msm 9/19/2020 20:14:52'!
+!CustomerBookTest methodsFor: 'Testing' stamp: 'FR 9/19/2020 21:06:13'!
 test05SuspendingACustomerShouldNotRemoveItFromCustomerBook
 
 	| customerBook paulMcCartney|
 	
 	paulMcCartney := 'Paul McCartney'.
 	customerBook :=  self testCustomer: paulMcCartney suspend: True.
-	
-	self assert: 0 equals: customerBook numberOfActiveCustomers.
-	self assert: 1 equals: customerBook numberOfSuspendedCustomers.
-	self assert: 1 equals: customerBook numberOfCustomers.
+
+	self elLibro: customerBook tieneEstaCantidadDeClientesActivos: 0 estaDeSuspendidos: 1 yEsteEsElTotal: 1.
 	self assert: (customerBook includesCustomerNamed: paulMcCartney).
 	
 
 	
 ! !
 
-!CustomerBookTest methodsFor: 'testing' stamp: 'msm 9/19/2020 20:16:13'!
+!CustomerBookTest methodsFor: 'Testing' stamp: 'FR 9/19/2020 21:06:42'!
 test06RemovingASuspendedCustomerShouldRemoveItFromCustomerBook
 
 	| customerBook paulMcCartney|
@@ -85,17 +83,15 @@ test06RemovingASuspendedCustomerShouldRemoveItFromCustomerBook
 	customerBook:= self testCustomer: paulMcCartney suspend: True.
 	
 	customerBook removeCustomerNamed: paulMcCartney.
-	
-	self assert: 0 equals: customerBook numberOfActiveCustomers.
-	self assert: 0 equals: customerBook numberOfSuspendedCustomers.
-	self assert: 0 equals: customerBook numberOfCustomers.
+
+	self elLibro: customerBook tieneEstaCantidadDeClientesActivos: 0 estaDeSuspendidos: 0 yEsteEsElTotal: 0.
 	self deny: (customerBook includesCustomerNamed: paulMcCartney).
 
 
 	
 ! !
 
-!CustomerBookTest methodsFor: 'testing' stamp: 'msm 9/19/2020 20:25:04'!
+!CustomerBookTest methodsFor: 'Testing' stamp: 'msm 9/19/2020 20:25:04'!
 test07CanNotSuspendAnInvalidCustomer
 	
 	| customerBook johnLennon |
@@ -107,7 +103,7 @@ test07CanNotSuspendAnInvalidCustomer
 
 ! !
 
-!CustomerBookTest methodsFor: 'testing' stamp: 'NR 9/19/2018 17:57:11'!
+!CustomerBookTest methodsFor: 'Testing' stamp: 'NR 9/19/2018 17:57:11'!
 test08CanNotSuspendAnAlreadySuspendedCustomer
 	
 	| customerBook johnLennon |
@@ -163,7 +159,11 @@ mensaje: aBlock tardaMenosQue: aTimeStamp
 	^self compareTime: miliegundosDeEjecucion with: aTimeStamp.! !
 
 
-!CustomerBookTest methodsFor: 'helpers' stamp: 'msm 9/19/2020 20:15:38'!
+!CustomerBookTest methodsFor: 'TestingUtils' stamp: 'FR 9/19/2020 21:05:54'!
+elLibro: unCustomerBook tieneEstaCantidadDeClientesActivos: cantidadDeActivos estaDeSuspendidos: cantidadDeSuspendidos yEsteEsElTotal: cantidadTotal
+	self assert: ( (cantidadDeActivos = unCustomerBook numberOfActiveCustomers) and: (cantidadDeSuspendidos = unCustomerBook numberOfSuspendedCustomers) and: (cantidadTotal = unCustomerBook numberOfCustomers)). ! !
+
+!CustomerBookTest methodsFor: 'TestingUtils' stamp: 'msm 9/19/2020 20:15:38'!
 testCustomer:aName	 suspend: decision
 	|Book|
 	Book := CustomerBook new.
