@@ -132,6 +132,23 @@ CustomerBookTest class
 	instanceVariableNames: 'milisegundosDeEjecucion customerBook paulMcCartney johnLennon'!
 
 
+!classDefinition: #ClientRegister category: #'CodigoRepetido-Ejercicio'!
+Object subclass: #ClientRegister
+	instanceVariableNames: 'name state'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'CodigoRepetido-Ejercicio'!
+
+!ClientRegister methodsFor: 'as yet unclassified'!
+! !
+
+!ClientRegister methodsFor: 'as yet unclassified'!
+! !
+
+!ClientRegister methodsFor: 'as yet unclassified'!
+! !
+
+
 !classDefinition: #CustomerBook category: #'CodigoRepetido-Ejercicio'!
 Object subclass: #CustomerBook
 	instanceVariableNames: 'suspended active'
