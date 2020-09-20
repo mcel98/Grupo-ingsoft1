@@ -21,155 +21,109 @@ TestCase subclass: #CustomerBookTest
 	poolDictionaries: ''
 	category: 'CodigoRepetido-Ejercicio'!
 
-!CustomerBookTest methodsFor: 'testing' stamp: 'msm 9/19/2020 18:27:47'!
-test01AddingCustomerShouldNotTakeMoreThan50Milliseconds
-
-	| customerBook|
-	customerBook := CustomerBook new.
-	
-	self assert: [self mensaje: [customerBook addCustomerNamed: 'John Lennon'.]  tardaMenosQue: 50].
-	
+!CustomerBookTest methodsFor: 'testing'!
 ! !
 
-!CustomerBookTest methodsFor: 'testing' stamp: 'msm 9/19/2020 20:15:17'!
-test02RemovingCustomerShouldNotTakeMoreThan100Milliseconds
-
-	| customerBook|
-	customerBook := self testCustomer: 'Paul McCartney' suspend: False.
-	
-	self assert: [self mensaje: [customerBook removeCustomerNamed: 'Paul McCartney']  tardaMenosQue: 100].
-	
+!CustomerBookTest methodsFor: 'testing'!
 ! !
 
-!CustomerBookTest methodsFor: 'testing' stamp: 'msm 9/19/2020 19:42:06'!
-test03CanNotAddACustomerWithEmptyName 
+!CustomerBookTest methodsFor: 'testing'!
+! !
 
-	| customerBook |
-	customerBook := CustomerBook new.
-	
-	self testMessageErrorHandler: [ customerBook addCustomerNamed: ''. self fail ] on: (CustomerBook customerCanNotBeEmptyErrorMessage) and: [customerBook isEmpty].! !
-
-!CustomerBookTest methodsFor: 'testing' stamp: 'msm 9/19/2020 20:21:00'!
+!CustomerBookTest methodsFor: 'testing' stamp: 'msm 9/19/2020 21:52:31'!
 test04CanNotRemoveAnInvalidCustomer
-	
 	| customerBook johnLennon |
-	johnLennon := 'John Lennon'.
-	customerBook :=  self testCustomer: johnLennon suspend: False.
+	johnLennon _ 'John Lennon'.
+	customerBook _ self
+		testCustomer: johnLennon
+		suspend: False.
+	self
+		customerNotFoundHandler: customerBook customerNamed: johnLennon
 
-	self customerSignalHandler: [ customerBook removeCustomerNamed: 'Paul McCartney'.
-	self fail ] on: [customerBook numberOfCustomers = 1.] and: [(customerBook includesCustomerNamed: johnLennon)] raced: NotFound.! !
 
-!CustomerBookTest methodsFor: 'testing' stamp: 'msm 9/19/2020 20:14:52'!
-test05SuspendingACustomerShouldNotRemoveItFromCustomerBook
 
-	| customerBook paulMcCartney|
-	
-	paulMcCartney := 'Paul McCartney'.
-	customerBook :=  self testCustomer: paulMcCartney suspend: True.
-	
-	self assert: 0 equals: customerBook numberOfActiveCustomers.
-	self assert: 1 equals: customerBook numberOfSuspendedCustomers.
-	self assert: 1 equals: customerBook numberOfCustomers.
-	self assert: (customerBook includesCustomerNamed: paulMcCartney).
-	
+		! !
 
-	
+!CustomerBookTest methodsFor: 'testing'!
 ! !
 
-!CustomerBookTest methodsFor: 'testing' stamp: 'msm 9/19/2020 20:16:13'!
-test06RemovingASuspendedCustomerShouldRemoveItFromCustomerBook
-
-	| customerBook paulMcCartney|
-	
-	paulMcCartney := 'Paul McCartney'.
-	customerBook:= self testCustomer: paulMcCartney suspend: True.
-	
-	customerBook removeCustomerNamed: paulMcCartney.
-	
-	self assert: 0 equals: customerBook numberOfActiveCustomers.
-	self assert: 0 equals: customerBook numberOfSuspendedCustomers.
-	self assert: 0 equals: customerBook numberOfCustomers.
-	self deny: (customerBook includesCustomerNamed: paulMcCartney).
-
-
-	
+!CustomerBookTest methodsFor: 'testing'!
 ! !
 
-!CustomerBookTest methodsFor: 'testing' stamp: 'msm 9/19/2020 20:25:04'!
+!CustomerBookTest methodsFor: 'testing' stamp: 'msm 9/19/2020 21:50:09'!
 test07CanNotSuspendAnInvalidCustomer
-	
-	| customerBook johnLennon |
-			
-	johnLennon := 'John Lennon'.
-	customerBook :=  self testCustomer: johnLennon suspend: False.
-
-	self customerSignalHandler: [ customerBook suspendCustomerNamed: 'George Harrison'. self fail ] on: [customerBook numberOfCustomers = 1] and: [ (customerBook includesCustomerNamed: johnLennon)] raced: CantSuspend
-
+	| customerBook johnLennon georgeHarrison |
+	johnLennon _ 'John Lennon'.
+	georgeHarrison _ 'George Harrison'.
+	customerBook _ self
+		testCustomer: johnLennon
+		suspend: False.
+		
+	self 
+		customerCantSuspendHandler: customerBook 
+		realCustomerNamed: johnLennon 
+		testCustomerNamed: georgeHarrison. 
 ! !
 
-!CustomerBookTest methodsFor: 'testing' stamp: 'NR 9/19/2018 17:57:11'!
+!CustomerBookTest methodsFor: 'testing' stamp: 'msm 9/19/2020 21:47:21'!
 test08CanNotSuspendAnAlreadySuspendedCustomer
 	
 	| customerBook johnLennon |
-			
-	customerBook := CustomerBook new.
-	johnLennon := 'John Lennon'.
-	customerBook addCustomerNamed: johnLennon.
-	customerBook suspendCustomerNamed: johnLennon.
-	
-	[ customerBook suspendCustomerNamed: johnLennon.
-	self fail ]
-		on: CantSuspend 
-		do: [ :anError | 
-			self assert: customerBook numberOfCustomers = 1.
-			self assert: (customerBook includesCustomerNamed: johnLennon) ]
-! !
-
-
-!CustomerBookTest methodsFor: 'SignalHandlers' stamp: 'msm 9/19/2020 20:20:25'!
-customerSignalHandler: aFirstBlock on: aSecondBlock and: aThirdBlock raced: aSignal
-
-	aFirstBlock
-		on: aSignal
-		do: [ :anError | 
-			self assert: aSecondBlock.
-			self assert: aThirdBlock]! !
-
-!CustomerBookTest methodsFor: 'SignalHandlers' stamp: 'msm 9/19/2020 19:40:51'!
-testMessageErrorHandler: aFirstBlock on: aSecondBlock and: aThirdBlock
-
-	aFirstBlock
-		on: Error
-		do: [ :anError | 
-			self assert: (anError messageText = aSecondBlock).
-			self assert: aThirdBlock].
-! !
-
-
-!CustomerBookTest methodsFor: 'TimeMeasurement' stamp: 'msm 9/19/2020 17:37:34'!
-compareTime: aTimeStampFirst with: aTimeStampSecond
-	
-	^aTimeStampFirst < (aTimeStampSecond * millisecond).
-
+	johnLennon := 'Jhon Lennon'.
+	 customerBook := self
+		testCustomer: johnLennon
+		suspend: True.
+	self 
+		customerCantSuspendHandler: customerBook 
+		realCustomerNamed: johnLennon 
+		testCustomerNamed: johnLennon 
 	
 	
 	! !
 
-!CustomerBookTest methodsFor: 'TimeMeasurement' stamp: 'msm 9/19/2020 18:23:37'!
-mensaje: aBlock tardaMenosQue: aTimeStamp
-	  |miliegundosDeEjecucion|
+
+!CustomerBookTest methodsFor: 'SignalHandlers' stamp: 'msm 9/19/2020 21:53:34'!
+customerCantSuspendHandler: anObject realCustomerNamed: aNameFirst testCustomerNamed: aNameSecond
+	 self 
+		customerSignalHandler: [anObject suspendCustomerNamed: aNameSecond.self fail ] 
+		on: [anObject numberOfCustomers = 1.] 
+		and:[(anObject includesCustomerNamed: aNameFirst).]
+		raced:CantSuspend! !
+
+!CustomerBookTest methodsFor: 'SignalHandlers' stamp: 'msm 9/19/2020 21:50:58'!
+customerNotFoundHandler: anObject customerNamed: aName
 	
-	miliegundosDeEjecucion := Time millisecondsToRun: aBlock.
-	^self compareTime: miliegundosDeEjecucion with: aTimeStamp.! !
+	 self 
+		customerSignalHandler: [anObject removeCustomerNamed: 'Paul McCartney'.self fail ] 
+		on: [anObject numberOfCustomers = 1.] 
+		and:[(anObject includesCustomerNamed: aName).]
+		raced:NotFound
+		! !
+
+!CustomerBookTest methodsFor: 'SignalHandlers' stamp: 'msm 9/19/2020 21:52:52'!
+customerSignalHandler: aFirstBlock on: aSecondBlock and: aThirdBlock raced: aSignal
+	aFirstBlock
+		on: aSignal
+		do: [ :aError |
+			self assert: aSecondBlock.
+			self assert: aThirdBlock.].! !
+
+!CustomerBookTest methodsFor: 'SignalHandlers'!
+! !
 
 
-!CustomerBookTest methodsFor: 'helpers' stamp: 'msm 9/19/2020 20:15:38'!
-testCustomer:aName	 suspend: decision
-	|Book|
-	Book := CustomerBook new.
-	Book addCustomerNamed: aName.
-	decision = True ifTrue: [Book suspendCustomerNamed: aName].
-	^Book! !
+!CustomerBookTest methodsFor: 'TimeMeasurement' stamp: 'msm 9/19/2020 21:49:55'!
+customerCantSuspendHandler: customerBook 
+		realCustomerNamed: johnLennon 
+		testCustomerNamed: 'George Harrison'. 
+! !
+
+!CustomerBookTest methodsFor: 'TimeMeasurement'!
+! !
+
+
+!CustomerBookTest methodsFor: 'helpers'!
+! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
@@ -199,11 +153,12 @@ isEmpty
 	^active isEmpty and: [ suspended isEmpty ]! !
 
 
-!CustomerBook methodsFor: 'initialization' stamp: 'msm 9/17/2020 21:40:21'!
+!CustomerBook methodsFor: 'initialization' stamp: 'msm 9/19/2020 21:59:53'!
 initialize
 	"reemplazar por un objeto listaDeRegistro, la cual va a poseer un dictionario de nombre de cliente a estado y 3 contadores"
 	active := OrderedCollection new.
-	suspended:= OrderedCollection new.! !
+	suspended:= OrderedCollection new.
+	"customers := ListaDeRegistro"! !
 
 
 !CustomerBook methodsFor: 'customer management' stamp: 'msm 9/17/2020 21:32:56'!
@@ -291,3 +246,17 @@ customerAlreadyExistsErrorMessage
 customerCanNotBeEmptyErrorMessage
 
 	^'customer name cannot be empty!!'! !
+
+
+!classDefinition: #RegisterList category: #'CodigoRepetido-Ejercicio'!
+Object subclass: #RegisterList
+	instanceVariableNames: 'customers'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'CodigoRepetido-Ejercicio'!
+
+!RegisterList methodsFor: 'as yet unclassified' stamp: 'msm 9/19/2020 22:03:03'!
+initialize
+
+	"customers := OrderedCollection new."
+	! !
