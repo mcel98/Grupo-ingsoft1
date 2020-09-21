@@ -109,13 +109,13 @@ customerNotFoundHandler: aCustomerBook customerNamed: aName
 	 self customerSignalHandler: [aCustomerBook removeCustomerNamed: 'Paul McCartney'.self fail ] on: [aCustomerBook numberOfCustomers = 1.] and:[(aCustomerBook includesCustomerNamed: aName).] raced: NotFound.
 		! !
 
-!CustomerBookTest methodsFor: 'SignalHandlers' stamp: 'FR 9/20/2020 21:05:35'!
+!CustomerBookTest methodsFor: 'SignalHandlers' stamp: 'FR 9/20/2020 21:34:09'!
 customerSignalHandler: aFirstBlock on: aSecondBlock and: aThirdBlock raced: aSignal
 	
 	aFirstBlock
 		on: aSignal
 		do: [ :anError |
-			self assert: (aSecondBlock value: anError).
+			self assert: (aSecondBlock numArgs = 0 ifTrue: [aSecondBlock] ifFalse: [aSecondBlock value: anError]). "esto podemos ponerlo dentro de otro mensaje"
 			self assert: aThirdBlock.].! !
 
 !CustomerBookTest methodsFor: 'SignalHandlers' stamp: 'FR 9/20/2020 21:05:15'!
@@ -152,9 +152,9 @@ theBook: customerBook hasThisNumberOfActiveCustomers: active ThisNumberOfSuspend
 	self assert: ((customerBook numberOfActiveCustomers = active)and:(customerBook numberOfSuspendedCustomers = suspended)and:(customerBook numberOfCustomers = total)).
 ! !
 
-!CustomerBookTest methodsFor: 'TestingUtils' stamp: 'FR 9/20/2020 20:04:13'!
+!CustomerBookTest methodsFor: 'TestingUtils' stamp: 'FR 9/20/2020 21:22:21'!
 theOperation: blockWithOperation takesLessThan: limit
-	self assert: (Time millisecondsToRun: blockWithOperation)*millisecond < limit*millisecond.! !
+	self assert: ((Time millisecondsToRun: blockWithOperation)*millisecond) < (limit*millisecond).! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
