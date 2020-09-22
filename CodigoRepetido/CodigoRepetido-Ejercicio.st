@@ -161,44 +161,43 @@ CustomerBookTest class
 	instanceVariableNames: 'milisegundosDeEjecucion customerBook paulMcCartney johnLennon'!
 
 
-!classDefinition: #ClientRegister category: #'CodigoRepetido-Ejercicio'!
-Object subclass: #ClientRegister
+!classDefinition: #Customer category: #'CodigoRepetido-Ejercicio'!
+Object subclass: #Customer
 	instanceVariableNames: 'name state'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'CodigoRepetido-Ejercicio'!
 
-!ClientRegister methodsFor: 'as yet unclassified' stamp: 'msm 9/19/2020 23:44:00'!
+!Customer methodsFor: 'Operations' stamp: 'msm 9/20/2020 18:59:22'!
+changeState
+
+	state = 'activo' ifTrue: [state := 'suspended'] ifFalse: [state := 'activo'].
+
+	! !
+
+!Customer methodsFor: 'Operations' stamp: 'msm 9/19/2020 23:44:00'!
 getName
 
 	^name.! !
 
-!ClientRegister methodsFor: 'as yet unclassified' stamp: 'msm 9/19/2020 23:44:36'!
+!Customer methodsFor: 'Operations' stamp: 'msm 9/19/2020 23:44:36'!
 getState
 
 	^state.! !
 
-!ClientRegister methodsFor: 'as yet unclassified' stamp: 'FR 9/22/2020 07:54:30'!
-suspend
 
-	state _ 'suspended'.
-
-	! !
-
-
-!ClientRegister methodsFor: 'initialization' stamp: 'FR 9/22/2020 07:54:46'!
+!Customer methodsFor: 'Initialization' stamp: 'msm 9/19/2020 22:53:52'!
 initialize: aName
-
 	name := aName.
 	state := 'activo'! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
-!classDefinition: 'ClientRegister class' category: #'CodigoRepetido-Ejercicio'!
-ClientRegister class
+!classDefinition: 'Customer class' category: #'CodigoRepetido-Ejercicio'!
+Customer class
 	instanceVariableNames: ''!
 
-!ClientRegister class methodsFor: 'as yet unclassified' stamp: 'msm 9/19/2020 22:54:12'!
+!Customer class methodsFor: 'Creation' stamp: 'msm 9/19/2020 22:54:12'!
 new: aName
 
 	^self new initialize: aName. ! !
@@ -211,26 +210,41 @@ Object subclass: #CustomerBook
 	poolDictionaries: ''
 	category: 'CodigoRepetido-Ejercicio'!
 
-!CustomerBook methodsFor: 'testing' stamp: 'msm 9/20/2020 18:12:23'!
+!CustomerBook methodsFor: 'Properties' stamp: 'msm 9/20/2020 18:12:23'!
 includesCustomerNamed: aName
 
 	"Se revisa la lista unica"
 
 	^customers includes: aName.! !
 
-!CustomerBook methodsFor: 'testing' stamp: 'msm 9/20/2020 22:07:45'!
+!CustomerBook methodsFor: 'Properties' stamp: 'msm 9/20/2020 22:07:45'!
 isEmpty
 
 	^customers isEmpty.! !
 
+!CustomerBook methodsFor: 'Properties' stamp: 'msm 9/20/2020 18:12:51'!
+numberOfActiveCustomers
+	
+	^customers activeSize.! !
 
-!CustomerBook methodsFor: 'initialization' stamp: 'msm 9/19/2020 23:32:21'!
+!CustomerBook methodsFor: 'Properties' stamp: 'msm 9/20/2020 18:13:05'!
+numberOfCustomers
+	
+	^ customers size.! !
+
+!CustomerBook methodsFor: 'Properties' stamp: 'msm 9/20/2020 18:13:30'!
+numberOfSuspendedCustomers
+	
+	^customers suspendedSize.! !
+
+
+!CustomerBook methodsFor: 'Initialization' stamp: 'FR 9/22/2020 14:11:45'!
 initialize
 
-	customers := RegisterList new.! !
+	customers := CustomerList new.! !
 
 
-!CustomerBook methodsFor: 'customer management' stamp: 'msm 9/20/2020 22:25:52'!
+!CustomerBook methodsFor: 'CustomerManagement' stamp: 'msm 9/20/2020 22:25:52'!
 addCustomerNamed: aName
 
 	aName isEmpty ifTrue: [self signalCustomerNameCannotBeEmpty].
@@ -238,22 +252,7 @@ addCustomerNamed: aName
 	
 	customers add: aName.! !
 
-!CustomerBook methodsFor: 'customer management' stamp: 'msm 9/20/2020 18:12:51'!
-numberOfActiveCustomers
-	
-	^customers activeSize.! !
-
-!CustomerBook methodsFor: 'customer management' stamp: 'FR 9/22/2020 07:41:37'!
-numberOfCustomers
-	
-	^customers size.! !
-
-!CustomerBook methodsFor: 'customer management' stamp: 'msm 9/20/2020 18:13:30'!
-numberOfSuspendedCustomers
-	
-	^customers suspendedSize.! !
-
-!CustomerBook methodsFor: 'customer management' stamp: 'FR 9/22/2020 08:07:56'!
+!CustomerBook methodsFor: 'CustomerManagement' stamp: 'msm 9/20/2020 22:31:42'!
 removeCustomerNamed: aName 
  	"lista unica borra codigo repetido "
 	1 to: customers size do: 
@@ -265,20 +264,10 @@ removeCustomerNamed: aName
 			]. 
 	].
 
-	^NotFound signal.
+	^ NotFound signal.
 ! !
 
-!CustomerBook methodsFor: 'customer management' stamp: 'msm 9/20/2020 20:56:33'!
-signalCustomerAlreadyExists 
-
-	self error: self class customerAlreadyExistsErrorMessage.! !
-
-!CustomerBook methodsFor: 'customer management' stamp: 'msm 9/20/2020 20:56:27'!
-signalCustomerNameCannotBeEmpty 
-
-	self error: self class customerCanNotBeEmptyErrorMessage.! !
-
-!CustomerBook methodsFor: 'customer management' stamp: 'msm 9/20/2020 18:25:43'!
+!CustomerBook methodsFor: 'CustomerManagement' stamp: 'msm 9/20/2020 18:25:43'!
 suspendCustomerNamed: aName 
 	
 	(customers isActive: aName) ifFalse: [^CantSuspend signal].
@@ -287,54 +276,75 @@ suspendCustomerNamed: aName
 	
 ! !
 
+
+!CustomerBook methodsFor: 'Signals' stamp: 'msm 9/20/2020 20:56:33'!
+signalCustomerAlreadyExists 
+
+	self error: self class customerAlreadyExistsErrorMessage.! !
+
+!CustomerBook methodsFor: 'Signals' stamp: 'msm 9/20/2020 20:56:27'!
+signalCustomerNameCannotBeEmpty 
+
+	self error: self class customerCanNotBeEmptyErrorMessage.! !
+
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
 !classDefinition: 'CustomerBook class' category: #'CodigoRepetido-Ejercicio'!
 CustomerBook class
 	instanceVariableNames: 'customers aName'!
 
-!CustomerBook class methodsFor: 'error messages' stamp: 'msm 9/20/2020 19:28:10'!
+!CustomerBook class methodsFor: 'ErrorMessages' stamp: 'msm 9/20/2020 19:28:10'!
 customerAlreadyExistsErrorMessage
 
 	^'customer already exists!!'.! !
 
-!CustomerBook class methodsFor: 'error messages' stamp: 'msm 9/20/2020 19:31:26'!
+!CustomerBook class methodsFor: 'ErrorMessages' stamp: 'msm 9/20/2020 19:31:26'!
 customerCanNotBeEmptyErrorMessage
 
 	^'customer name cannot be empty!!'.! !
 
 
-!classDefinition: #RegisterList category: #'CodigoRepetido-Ejercicio'!
-Object subclass: #RegisterList
+!classDefinition: #CustomerList category: #'CodigoRepetido-Ejercicio'!
+Object subclass: #CustomerList
 	instanceVariableNames: 'customers suspendedCounter activeCounter'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'CodigoRepetido-Ejercicio'!
 
-!RegisterList methodsFor: 'setOperations' stamp: 'FR 9/22/2020 07:50:28'!
+!CustomerList methodsFor: 'Operations' stamp: 'FR 9/22/2020 14:12:02'!
 add: aName
 	|customer|
-	customer _ ClientRegister new: aName.
+	customer := Customer new: aName.
 	customers add: customer.
 	activeCounter := activeCounter + 1.
 	! !
 
-!RegisterList methodsFor: 'setOperations' stamp: 'FR 9/22/2020 07:50:22'!
-includes: aName
+!CustomerList methodsFor: 'Operations' stamp: 'msm 9/20/2020 23:08:54'!
+getCustomer: aName
 
-	|exists|
-	exists _ customers select: [:customer | (customer getName) = aName].
-	^(exists isEmpty) not.! !
+	^ customers detect: [:aCustomer | aName = (aCustomer getName)] ifNone: ['customer not found'].! !
 
-!RegisterList methodsFor: 'setOperations' stamp: 'FR 9/22/2020 07:50:40'!
+!CustomerList methodsFor: 'Operations' stamp: 'msm 9/20/2020 22:44:27'!
 removeAt: anIndex
 
-	(customers at: anIndex) = 'activo' ifTrue: [activeCounter _ self activeSize - 1] ifFalse: [suspendedCounter _ self suspendedSize - 1.].
+	(customers at: anIndex) = 'activo' ifTrue: [activeCounter := self activeSize - 1] ifFalse: [suspendedCounter := self suspendedSize - 1.].
 
 	customers removeAt: anIndex.! !
 
+!CustomerList methodsFor: 'Operations' stamp: 'msm 9/20/2020 20:45:04'!
+suspend: aName
 
-!RegisterList methodsFor: 'initialization' stamp: 'msm 9/20/2020 18:04:57'!
+	|index|
+
+ 	index := customers findFirst: [:a | a getName = aName].
+	
+	(customers at: index) changeState.
+	
+	(customers at: index) = 'activo' ifTrue: [suspendedCounter := self suspendedSize - 1. activeCounter := self activeSize + 1] ifFalse: [suspendedCounter := self suspendedSize + 1. activeCounter := self activeSize - 1].
+	! !
+
+
+!CustomerList methodsFor: 'Initialization' stamp: 'msm 9/20/2020 18:04:57'!
 initialize
 
 	customers := OrderedCollection new.
@@ -343,52 +353,40 @@ initialize
 	! !
 
 
-!RegisterList methodsFor: 'information' stamp: 'msm 9/20/2020 18:10:38'!
+!CustomerList methodsFor: 'Properties' stamp: 'msm 9/20/2020 18:10:38'!
 activeSize
 
 	^activeCounter.! !
 
-!RegisterList methodsFor: 'information' stamp: 'FR 9/22/2020 07:52:05'!
-getCustomer: aName
-
-	^customers detect: [:aCustomer | aName = (aCustomer getName)] ifNone: ['customer not found'].! !
-
-!RegisterList methodsFor: 'information' stamp: 'msm 9/20/2020 22:32:15'!
+!CustomerList methodsFor: 'Properties' stamp: 'msm 9/20/2020 22:32:15'!
 hasName: aName atIndex: anIndex
 
 	^aName = ((customers at: anIndex) getName).! !
 
-!RegisterList methodsFor: 'information' stamp: 'FR 9/22/2020 07:49:30'!
+!CustomerList methodsFor: 'Properties' stamp: 'msm 9/20/2020 20:49:52'!
+includes: aName
+	|exists|
+	exists := customers select: [:customer | (customer getName) = aName].
+	^(exists isEmpty) not.! !
+
+!CustomerList methodsFor: 'Properties' stamp: 'msm 9/20/2020 23:08:25'!
 isActive: aName
 	
 	|state client|
-	client _ self getCustomer: aName.
-	state _ client = 'customer not found' ifTrue: [ 'sin estado'] ifFalse: [client getState].
+	client := self getCustomer: aName.
+	state := client = 'customer not found' ifTrue: [ 'sin estado'] ifFalse: [client getState].
 	^state = 'activo'.! !
 
-!RegisterList methodsFor: 'information' stamp: 'msm 9/20/2020 22:02:32'!
+!CustomerList methodsFor: 'Properties' stamp: 'msm 9/20/2020 22:02:32'!
 isEmpty
 
 	^customers isEmpty.! !
 
-!RegisterList methodsFor: 'information' stamp: 'msm 9/20/2020 18:11:58'!
+!CustomerList methodsFor: 'Properties' stamp: 'msm 9/20/2020 18:11:58'!
 size
 	^customers size.! !
 
-!RegisterList methodsFor: 'information' stamp: 'msm 9/20/2020 18:11:21'!
+!CustomerList methodsFor: 'Properties' stamp: 'msm 9/20/2020 18:11:21'!
 suspendedSize
 	
 	^suspendedCounter.! !
-
-
-!RegisterList methodsFor: 'as yet unclassified' stamp: 'FR 9/22/2020 07:44:29'!
-suspend: aName
-
-	|index|
-
- 	index := customers findFirst: [:a | a getName = aName].
-	(customers at: index) suspend.
-	
-	suspendedCounter _ suspendedCounter + 1.
-	activeCounter _ activeCounter - 1.
-	! !
