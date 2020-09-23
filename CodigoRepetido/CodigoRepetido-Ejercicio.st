@@ -16,24 +16,24 @@ Error subclass: #NotFound
 
 !classDefinition: #CustomerBookTest category: #'CodigoRepetido-Ejercicio'!
 TestCase subclass: #CustomerBookTest
-	instanceVariableNames: 'messageText'
+	instanceVariableNames: 'johnLennon paulMcCartney georgeHarrison'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'CodigoRepetido-Ejercicio'!
 
-!CustomerBookTest methodsFor: 'Testing' stamp: 'FR 9/20/2020 20:06:07'!
+!CustomerBookTest methodsFor: 'Testing' stamp: 'FR 9/23/2020 18:40:07'!
 test01AddingCustomerShouldNotTakeMoreThan50Milliseconds
 	|customerBook|
-	customerBook := CustomerBook new.
+	customerBook _ CustomerBook new.
 		
-	self theOperation: [ customerBook addCustomerNamed: 'Paul McCartney' ] takesLessThan: 50.! !
+	self theOperation: [ customerBook addCustomerNamed: paulMcCartney ] takesLessThan: 50.! !
 
-!CustomerBookTest methodsFor: 'Testing' stamp: 'FR 9/20/2020 20:12:38'!
+!CustomerBookTest methodsFor: 'Testing' stamp: 'FR 9/23/2020 18:52:25'!
 test02RemovingCustomerShouldNotTakeMoreThan100Milliseconds
 	| customerBook |
-	customerBook _ self insertCustomerNamed: 'Paul McCartney' andSuspendedSet: False.
+	customerBook _ self insertCustomerNamed: paulMcCartney andSuspended: False.
 
-	self theOperation: [ customerBook removeCustomerNamed: 'Paul McCartney' ] takesLessThan: 100.! !
+	self theOperation: [ customerBook removeCustomerNamed: paulMcCartney ] takesLessThan: 100.! !
 
 !CustomerBookTest methodsFor: 'Testing' stamp: 'FR 9/20/2020 21:56:08'!
 test03CanNotAddACustomerWithEmptyName
@@ -42,11 +42,10 @@ test03CanNotAddACustomerWithEmptyName
 	
 	self emptyNameHandler: customerBook.! !
 
-!CustomerBookTest methodsFor: 'Testing' stamp: 'FR 9/20/2020 20:14:08'!
+!CustomerBookTest methodsFor: 'Testing' stamp: 'FR 9/23/2020 18:52:29'!
 test04CanNotRemoveAnInvalidCustomer
-	| customerBook johnLennon |
-	johnLennon _ 'John Lennon'.
-	customerBook _ self insertCustomerNamed: johnLennon andSuspendedSet: False.
+	| customerBook |
+	customerBook _ self insertCustomerNamed: johnLennon andSuspended: False.
 
 	self customerNotFoundHandler: customerBook customerNamed: johnLennon
 
@@ -54,41 +53,36 @@ test04CanNotRemoveAnInvalidCustomer
 
 		! !
 
-!CustomerBookTest methodsFor: 'Testing' stamp: 'FR 9/20/2020 20:12:38'!
+!CustomerBookTest methodsFor: 'Testing' stamp: 'FR 9/23/2020 18:52:33'!
 test05SuspendingACustomerShouldNotRemoveItFromCustomerBook
-	| customerBook paulMcCartney |
-	 paulMcCartney  _ 'Paul McCartney'.
-	customerBook _ self insertCustomerNamed: paulMcCartney andSuspendedSet: True.
+	| customerBook |
+	customerBook _ self insertCustomerNamed: paulMcCartney andSuspended: True.
 		
 	self theBook: customerBook hasThisNumberOfActiveCustomers: 0 ThisNumberOfSuspended: 1 AndThisIsTheTotal: 1.
 	self assert: (customerBook includesCustomerNamed:  paulMcCartney ).! !
 
-!CustomerBookTest methodsFor: 'Testing' stamp: 'FR 9/20/2020 20:13:40'!
+!CustomerBookTest methodsFor: 'Testing' stamp: 'FR 9/23/2020 18:52:36'!
 test06RemovingASuspendedCustomerShouldRemoveItFromCustomerBook
-	| customerBook  paulMcCartney  |
-	 paulMcCartney  _ 'Paul McCartney'.
-	customerBook _ self insertCustomerNamed:  paulMcCartney andSuspendedSet: True.
+	| customerBook |
+	customerBook _ self insertCustomerNamed:  paulMcCartney andSuspended: True.
 	customerBook removeCustomerNamed:  paulMcCartney .
 	
 	self theBook: customerBook hasThisNumberOfActiveCustomers: 0 ThisNumberOfSuspended: 0 AndThisIsTheTotal: 0.
 	self deny: (customerBook includesCustomerNamed:  paulMcCartney ).! !
 
-!CustomerBookTest methodsFor: 'Testing' stamp: 'FR 9/20/2020 20:13:11'!
+!CustomerBookTest methodsFor: 'Testing' stamp: 'FR 9/23/2020 18:52:41'!
 test07CanNotSuspendAnInvalidCustomer
-	| customerBook johnLennon georgeHarrison |
-	johnLennon _ 'John Lennon'.
-	georgeHarrison _ 'George Harrison'.
-	customerBook _ self insertCustomerNamed: johnLennon andSuspendedSet: False.
+	| customerBook |
+	customerBook _ self insertCustomerNamed: johnLennon andSuspended: False.
 		
 	self customerCantSuspendHandler: customerBook realCustomerNamed: johnLennon testCustomerNamed: georgeHarrison. 
 ! !
 
-!CustomerBookTest methodsFor: 'Testing' stamp: 'FR 9/20/2020 20:36:39'!
+!CustomerBookTest methodsFor: 'Testing' stamp: 'FR 9/23/2020 18:52:44'!
 test08CanNotSuspendAnAlreadySuspendedCustomer
 	
-	| customerBook johnLennon |
-	johnLennon _ 'Jhon Lennon'.
-	customerBook _ self insertCustomerNamed: johnLennon andSuspendedSet: True.
+	| customerBook |
+	customerBook _ self insertCustomerNamed: johnLennon andSuspended: True.
 	
 	self customerCantSuspendHandler: customerBook realCustomerNamed: johnLennon testCustomerNamed: johnLennon 
 	
@@ -122,28 +116,13 @@ emptyNameHandler: aCustomerBook
 ! !
 
 
-!CustomerBookTest methodsFor: 'TimeMeasurement' stamp: 'msm 9/19/2020 23:37:53'!
-compareTime: aFirstTimeStamp with: aSecondTimeStamp
-
-	^ aFirstTimeStamp < aSecondTimeStamp.! !
-
-!CustomerBookTest methodsFor: 'TimeMeasurement' stamp: 'msm 9/19/2020 23:40:52'!
-mensaje: aBlock tardaMenosQue: aTimeStamp
-	|runtime|
-	runtime := Time millisecondsToRun: aBlock.
-	^self compareTime: runtime with: aTimeStamp * millisecond.
-
-	
-	! !
-
-
-!CustomerBookTest methodsFor: 'TestingUtils' stamp: 'FR 9/20/2020 20:12:38'!
-insertCustomerNamed: aName andSuspendedSet: aDecision
+!CustomerBookTest methodsFor: 'TestingUtils' stamp: 'FR 9/23/2020 18:52:13'!
+insertCustomerNamed: aName andSuspended: aChoice
 	| customerBook |
 	customerBook _ CustomerBook new.
 	customerBook addCustomerNamed: aName.
-	aDecision = True ifTrue: [ customerBook suspendCustomerNamed: aName].
-	^ customerBook.! !
+	aChoice = True ifTrue: [ customerBook suspendCustomerNamed: aName].
+	^customerBook.! !
 
 !CustomerBookTest methodsFor: 'TestingUtils' stamp: 'FR 9/20/2020 19:56:46'!
 theBook: customerBook hasThisNumberOfActiveCustomers: active ThisNumberOfSuspended: suspended AndThisIsTheTotal: total
@@ -154,11 +133,12 @@ theBook: customerBook hasThisNumberOfActiveCustomers: active ThisNumberOfSuspend
 theOperation: blockWithOperation takesLessThan: limit
 	self assert: ((Time millisecondsToRun: blockWithOperation)*millisecond) < (limit*millisecond).! !
 
-"-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
-!classDefinition: 'CustomerBookTest class' category: #'CodigoRepetido-Ejercicio'!
-CustomerBookTest class
-	instanceVariableNames: 'milisegundosDeEjecucion customerBook paulMcCartney johnLennon'!
+!CustomerBookTest methodsFor: 'Initialization' stamp: 'FR 9/23/2020 18:36:16'!
+initialize
+	johnLennon _ 'John Lennon'.
+	paulMcCartney _ 'Paul McCartney'.
+	georgeHarrison _ 'George Harrison'.! !
 
 
 !classDefinition: #Customer category: #'CodigoRepetido-Ejercicio'!
@@ -168,22 +148,22 @@ Object subclass: #Customer
 	poolDictionaries: ''
 	category: 'CodigoRepetido-Ejercicio'!
 
-!Customer methodsFor: 'Operations' stamp: 'msm 9/20/2020 18:59:22'!
-changeState
+!Customer methodsFor: 'Operations' stamp: 'FR 9/23/2020 18:53:20'!
+name
+
+	^name.! !
+
+!Customer methodsFor: 'Operations' stamp: 'FR 9/23/2020 18:53:26'!
+state
+
+	^state.! !
+
+!Customer methodsFor: 'Operations' stamp: 'FR 9/23/2020 17:57:57'!
+suspend
 
 	state = 'activo' ifTrue: [state := 'suspended'] ifFalse: [state := 'activo'].
 
 	! !
-
-!Customer methodsFor: 'Operations' stamp: 'msm 9/19/2020 23:44:00'!
-getName
-
-	^name.! !
-
-!Customer methodsFor: 'Operations' stamp: 'msm 9/19/2020 23:44:36'!
-getState
-
-	^state.! !
 
 
 !Customer methodsFor: 'Initialization' stamp: 'msm 9/19/2020 22:53:52'!
@@ -205,61 +185,61 @@ new: aName
 
 !classDefinition: #CustomerBook category: #'CodigoRepetido-Ejercicio'!
 Object subclass: #CustomerBook
-	instanceVariableNames: 'suspended active customers'
+	instanceVariableNames: 'customerList'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'CodigoRepetido-Ejercicio'!
 
-!CustomerBook methodsFor: 'Properties' stamp: 'msm 9/20/2020 18:12:23'!
+!CustomerBook methodsFor: 'Properties' stamp: 'FR 9/23/2020 19:01:06'!
 includesCustomerNamed: aName
 
 	"Se revisa la lista unica"
 
-	^customers includes: aName.! !
+	^customerList includesCustomerNamed: aName.! !
 
-!CustomerBook methodsFor: 'Properties' stamp: 'msm 9/20/2020 22:07:45'!
+!CustomerBook methodsFor: 'Properties' stamp: 'FR 9/23/2020 17:51:57'!
 isEmpty
 
-	^customers isEmpty.! !
+	^customerList isEmpty.! !
 
-!CustomerBook methodsFor: 'Properties' stamp: 'msm 9/20/2020 18:12:51'!
+!CustomerBook methodsFor: 'Properties' stamp: 'FR 9/23/2020 17:52:05'!
 numberOfActiveCustomers
 	
-	^customers activeSize.! !
+	^customerList activeSize.! !
 
-!CustomerBook methodsFor: 'Properties' stamp: 'msm 9/20/2020 18:13:05'!
+!CustomerBook methodsFor: 'Properties' stamp: 'FR 9/23/2020 17:52:22'!
 numberOfCustomers
 	
-	^ customers size.! !
+	^customerList size.! !
 
-!CustomerBook methodsFor: 'Properties' stamp: 'msm 9/20/2020 18:13:30'!
+!CustomerBook methodsFor: 'Properties' stamp: 'FR 9/23/2020 17:52:18'!
 numberOfSuspendedCustomers
 	
-	^customers suspendedSize.! !
+	^customerList suspendedSize.! !
 
 
-!CustomerBook methodsFor: 'Initialization' stamp: 'FR 9/22/2020 14:11:45'!
+!CustomerBook methodsFor: 'Initialization' stamp: 'FR 9/23/2020 17:52:30'!
 initialize
 
-	customers := CustomerList new.! !
+	customerList _ CustomerList new.! !
 
 
-!CustomerBook methodsFor: 'CustomerManagement' stamp: 'msm 9/20/2020 22:25:52'!
+!CustomerBook methodsFor: 'CustomerManagement' stamp: 'FR 9/23/2020 19:03:29'!
 addCustomerNamed: aName
 
-	aName isEmpty ifTrue: [self signalCustomerNameCannotBeEmpty].
-	(customers includes: aName) ifTrue: [self signalCustomerAlreadyExists ].
+	self checkIfNameIsEmpty: aName.
+	self checkIfCustomerAlreadyExists: aName.
 	
-	customers add: aName.! !
+	customerList addCustomerNamed: aName.! !
 
-!CustomerBook methodsFor: 'CustomerManagement' stamp: 'msm 9/20/2020 22:31:42'!
+!CustomerBook methodsFor: 'CustomerManagement' stamp: 'FR 9/23/2020 19:07:58'!
 removeCustomerNamed: aName 
  	"lista unica borra codigo repetido "
-	1 to: customers size do: 
+	1 to: customerList size do: 
 	[ :index |
-		(customers hasName: aName atIndex: index) 
+		(customerList hasCustomerNamed: aName atIndex: index) 
 			ifTrue: [
-				customers removeAt: index.
+				customerList removeCustomerAt: index.
 				^ aName
 			]. 
 	].
@@ -267,12 +247,12 @@ removeCustomerNamed: aName
 	^ NotFound signal.
 ! !
 
-!CustomerBook methodsFor: 'CustomerManagement' stamp: 'msm 9/20/2020 18:25:43'!
+!CustomerBook methodsFor: 'CustomerManagement' stamp: 'FR 9/23/2020 19:13:02'!
 suspendCustomerNamed: aName 
 	
-	(customers isActive: aName) ifFalse: [^CantSuspend signal].
+	self checkIfCustomerExistsAndIsActive: aName.
 	
-	customers suspend: aName.
+	customerList suspendCustomerNamed: aName.
 	
 ! !
 
@@ -287,11 +267,27 @@ signalCustomerNameCannotBeEmpty
 
 	self error: self class customerCanNotBeEmptyErrorMessage.! !
 
+
+!CustomerBook methodsFor: 'Checks' stamp: 'FR 9/23/2020 19:03:55'!
+checkIfCustomerAlreadyExists: aName
+
+	(customerList includesCustomerNamed: aName) ifTrue: [self signalCustomerAlreadyExists ]! !
+
+!CustomerBook methodsFor: 'Checks' stamp: 'FR 9/23/2020 19:12:54'!
+checkIfCustomerExistsAndIsActive: aName
+
+	(customerList isActive: aName) ifFalse: [^CantSuspend signal]! !
+
+!CustomerBook methodsFor: 'Checks' stamp: 'FR 9/23/2020 19:12:08'!
+checkIfNameIsEmpty: aName
+
+	aName isEmpty ifTrue: [self signalCustomerNameCannotBeEmpty]! !
+
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
 !classDefinition: 'CustomerBook class' category: #'CodigoRepetido-Ejercicio'!
 CustomerBook class
-	instanceVariableNames: 'customers aName'!
+	instanceVariableNames: ''!
 
 !CustomerBook class methodsFor: 'ErrorMessages' stamp: 'msm 9/20/2020 19:28:10'!
 customerAlreadyExistsErrorMessage
@@ -306,87 +302,89 @@ customerCanNotBeEmptyErrorMessage
 
 !classDefinition: #CustomerList category: #'CodigoRepetido-Ejercicio'!
 Object subclass: #CustomerList
-	instanceVariableNames: 'customers suspendedCounter activeCounter'
+	instanceVariableNames: 'customerCollection suspendedCounter'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'CodigoRepetido-Ejercicio'!
 
-!CustomerList methodsFor: 'Operations' stamp: 'FR 9/22/2020 14:12:02'!
-add: aName
+!CustomerList methodsFor: 'Operations' stamp: 'FR 9/23/2020 18:56:53'!
+addCustomerNamed: aName
 	|customer|
-	customer := Customer new: aName.
-	customers add: customer.
-	activeCounter := activeCounter + 1.
+	customer _ Customer new: aName.
+	customerCollection add: customer.
 	! !
 
-!CustomerList methodsFor: 'Operations' stamp: 'msm 9/20/2020 23:08:54'!
-getCustomer: aName
+!CustomerList methodsFor: 'Operations' stamp: 'FR 9/23/2020 18:55:28'!
+getCustomerNamed: aName
 
-	^ customers detect: [:aCustomer | aName = (aCustomer getName)] ifNone: ['customer not found'].! !
+	^customerCollection detect: [:aCustomer | aName = (aCustomer name)] ifNone: ['customer not found'].! !
 
-!CustomerList methodsFor: 'Operations' stamp: 'msm 9/20/2020 22:44:27'!
-removeAt: anIndex
+!CustomerList methodsFor: 'Operations' stamp: 'FR 9/23/2020 19:14:50'!
+removeCustomerAt: anIndex
 
-	(customers at: anIndex) = 'activo' ifTrue: [activeCounter := self activeSize - 1] ifFalse: [suspendedCounter := self suspendedSize - 1.].
+	self decreaseSuspendedCounterIfCustomerIsSuspended: anIndex.
+	
+	customerCollection removeAt: anIndex.! !
 
-	customers removeAt: anIndex.! !
-
-!CustomerList methodsFor: 'Operations' stamp: 'msm 9/20/2020 20:45:04'!
-suspend: aName
-
+!CustomerList methodsFor: 'Operations' stamp: 'FR 9/23/2020 19:16:07'!
+suspendCustomerNamed: aName
 	|index|
-
- 	index := customers findFirst: [:a | a getName = aName].
+ 	index _ customerCollection findFirst: [:a | a name = aName].
 	
-	(customers at: index) changeState.
+	(customerCollection at: index) suspend.
 	
-	(customers at: index) = 'activo' ifTrue: [suspendedCounter := self suspendedSize - 1. activeCounter := self activeSize + 1] ifFalse: [suspendedCounter := self suspendedSize + 1. activeCounter := self activeSize - 1].
+	suspendedCounter _ suspendedCounter + 1.
 	! !
 
 
-!CustomerList methodsFor: 'Initialization' stamp: 'msm 9/20/2020 18:04:57'!
+!CustomerList methodsFor: 'Initialization' stamp: 'FR 9/23/2020 17:59:50'!
 initialize
 
-	customers := OrderedCollection new.
-	suspendedCounter := 0.
-	activeCounter := 0.
+	customerCollection _ OrderedCollection new.
+	suspendedCounter _ 0.
 	! !
 
 
-!CustomerList methodsFor: 'Properties' stamp: 'msm 9/20/2020 18:10:38'!
+!CustomerList methodsFor: 'Properties' stamp: 'FR 9/23/2020 18:03:59'!
 activeSize
 
-	^activeCounter.! !
+	^customerCollection size - suspendedCounter.! !
 
-!CustomerList methodsFor: 'Properties' stamp: 'msm 9/20/2020 22:32:15'!
-hasName: aName atIndex: anIndex
+!CustomerList methodsFor: 'Properties' stamp: 'FR 9/23/2020 18:56:15'!
+hasCustomerNamed: aName atIndex: anIndex
 
-	^aName = ((customers at: anIndex) getName).! !
+	^aName = ((customerCollection at: anIndex) name).! !
 
-!CustomerList methodsFor: 'Properties' stamp: 'msm 9/20/2020 20:49:52'!
-includes: aName
+!CustomerList methodsFor: 'Properties' stamp: 'FR 9/23/2020 19:00:39'!
+includesCustomerNamed: aName
 	|exists|
-	exists := customers select: [:customer | (customer getName) = aName].
+	exists _ customerCollection select: [:customer | (customer name) = aName].
 	^(exists isEmpty) not.! !
 
-!CustomerList methodsFor: 'Properties' stamp: 'msm 9/20/2020 23:08:25'!
+!CustomerList methodsFor: 'Properties' stamp: 'FR 9/23/2020 19:16:38'!
 isActive: aName
-	
 	|state client|
-	client := self getCustomer: aName.
-	state := client = 'customer not found' ifTrue: [ 'sin estado'] ifFalse: [client getState].
+	client _ self getCustomerNamed: aName.
+	state _ client = 'customer not found' ifTrue: [ 'sin estado'] ifFalse: [client state].
 	^state = 'activo'.! !
 
-!CustomerList methodsFor: 'Properties' stamp: 'msm 9/20/2020 22:02:32'!
+!CustomerList methodsFor: 'Properties' stamp: 'FR 9/23/2020 17:56:38'!
 isEmpty
 
-	^customers isEmpty.! !
+	^customerCollection isEmpty.! !
 
-!CustomerList methodsFor: 'Properties' stamp: 'msm 9/20/2020 18:11:58'!
+!CustomerList methodsFor: 'Properties' stamp: 'FR 9/23/2020 17:56:47'!
 size
-	^customers size.! !
+
+	^customerCollection size.! !
 
 !CustomerList methodsFor: 'Properties' stamp: 'msm 9/20/2020 18:11:21'!
 suspendedSize
 	
 	^suspendedCounter.! !
+
+
+!CustomerList methodsFor: 'Utils' stamp: 'FR 9/23/2020 19:15:31'!
+decreaseSuspendedCounterIfCustomerIsSuspended: anIndex
+
+	^((customerCollection at: anIndex) state = 'suspended') ifTrue: [suspendedCounter _ suspendedCounter - 1]! !
