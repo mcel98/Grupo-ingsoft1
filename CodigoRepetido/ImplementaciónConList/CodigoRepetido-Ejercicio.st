@@ -158,10 +158,10 @@ state
 
 	^state.! !
 
-!Customer methodsFor: 'Operations' stamp: 'FR 9/23/2020 17:57:57'!
+!Customer methodsFor: 'Operations' stamp: 'FR 9/24/2020 05:14:48'!
 suspend
 
-	state = 'activo' ifTrue: [state := 'suspended'] ifFalse: [state := 'activo'].
+	state _ 'suspended'.
 
 	! !
 
