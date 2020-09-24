@@ -201,13 +201,6 @@ Object subclass: #CustomerBook
 	poolDictionaries: ''
 	category: 'CodigoRepetido-Ejercicio'!
 
-!CustomerBook methodsFor: 'Properties' stamp: 'fr 9/24/2020 04:56:26'!
-includesCustomerNamed: aName
-	
-	|exists|
-	exists _ customers select: [:customer | (customer name) = aName].
-	^(exists isEmpty) not.! !
-
 !CustomerBook methodsFor: 'Properties' stamp: 'fr 9/24/2020 04:56:47'!
 isEmpty
 	
@@ -263,25 +256,18 @@ addCustomerNamed: aName
 	newCustomer _ Customer new: aName.
 	customers add:  newCustomer.! !
 
-!CustomerBook methodsFor: 'CustomerManagement' stamp: 'fr 9/24/2020 11:45:46'!
+!CustomerBook methodsFor: 'CustomerManagement' stamp: 'fr 9/24/2020 15:49:26'!
 removeCustomerNamed: aName 
 
-	1 to: customers size do: 
-	[ :index |
-		(self hasCustomerNamed: aName atIndex: index) 
-			ifTrue: [
-				self removeCustomerAt: index.
-				^ aName
-			]. 
-	].
-
-	^ NotFound signal.
+	| index |
+	index _ self getIndexForCustomerNamed: aName.
+	index = 0 ifTrue: [^ NotFound signal] ifFalse: [self removeCustomerAt: index]. 	
 ! !
 
-!CustomerBook methodsFor: 'CustomerManagement' stamp: 'fr 9/24/2020 11:45:51'!
+!CustomerBook methodsFor: 'CustomerManagement' stamp: 'fr 9/24/2020 15:52:11'!
 suspendCustomerNamed: aName 
 	
-	|index|
+	| index |
 	self checkAndFailIfCustomerExistsAndIsActive: aName.
 	index _ self getIndexForCustomerNamed: aName.
 	(customers at: index) suspend.
@@ -300,27 +286,24 @@ signalCustomerNameCannotBeEmpty
 	self error: self class customerCanNotBeEmptyErrorMessage ! !
 
 
-!CustomerBook methodsFor: 'BookUtils' stamp: 'fr 9/24/2020 11:46:14'!
-getCustomerNamed: aName
-
-	^customers detect: [:aCustomer | aName = (aCustomer name)] ifNone: ['customer not found'].! !
-
 !CustomerBook methodsFor: 'BookUtils' stamp: 'fr 9/24/2020 11:54:26'!
 getIndexForCustomerNamed: aName
 
 	^customers findFirst: [:aCustomer | aCustomer name = aName].! !
 
-!CustomerBook methodsFor: 'BookUtils' stamp: 'fr 9/24/2020 12:02:26'!
+!CustomerBook methodsFor: 'BookUtils' stamp: 'fr 9/24/2020 15:54:41'!
 hasAnActiveCustomerNamed: aName
 
-	|client|
-	client _ self getCustomerNamed: aName.
-	^(client = 'customer not found' ifTrue: [false] ifFalse: [client isActive]).! !
+	| index |
+	index _ self getIndexForCustomerNamed: aName.
+	^(index = 0 ifTrue: [false] ifFalse: [(customers at: index) isActive]).! !
 
-!CustomerBook methodsFor: 'BookUtils' stamp: 'fr 9/24/2020 05:03:16'!
-hasCustomerNamed: aName atIndex: anIndex
-
-	^aName = (customers at: anIndex) name.! !
+!CustomerBook methodsFor: 'BookUtils' stamp: 'fr 9/24/2020 15:57:09'!
+includesCustomerNamed: aName
+	
+	| index |
+	index _ self getIndexForCustomerNamed: aName.
+	^(index = 0) not.! !
 
 !CustomerBook methodsFor: 'BookUtils' stamp: 'fr 9/24/2020 11:46:29'!
 removeCustomerAt: anIndex
