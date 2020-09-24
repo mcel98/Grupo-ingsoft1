@@ -29,11 +29,11 @@ test01AddingCustomerShouldNotTakeMoreThan50Milliseconds
 		
 	self assertTheOperation: [ customerBook addCustomerNamed: paulMcCartney ] takesLessThan: 50.! !
 
-!CustomerBookTest methodsFor: 'Testing' stamp: 'fr 9/24/2020 12:08:54'!
+!CustomerBookTest methodsFor: 'Testing' stamp: 'fr 9/24/2020 12:16:40'!
 test02RemovingCustomerShouldNotTakeMoreThan100Milliseconds
 
 	| customerBook |
-	customerBook _ self insertCustomerNamed: paulMcCartney andState: 'active'.
+	customerBook _ self insertCustomerNamed: paulMcCartney andSuspended: false.
 
 	self assertTheOperation: [ customerBook removeCustomerNamed: paulMcCartney ] takesLessThan: 100.! !
 
@@ -45,11 +45,11 @@ test03CanNotAddACustomerWithEmptyName
 	
 	self customerBookIsEmptyAfterFailingToAddAnEmptyCustomer: customerBook.! !
 
-!CustomerBookTest methodsFor: 'Testing' stamp: 'fr 9/24/2020 12:09:08'!
+!CustomerBookTest methodsFor: 'Testing' stamp: 'fr 9/24/2020 12:16:46'!
 test04CanNotRemoveAnInvalidCustomer
 
 	| customerBook |
-	customerBook _ self insertCustomerNamed: johnLennon andState: 'active'.
+	customerBook _ self insertCustomerNamed: johnLennon andSuspended: false.
 	
 	self customerBookWithJustOneCustomer: customerBook staysTheSameAfterFailingToRemoveACustomerNamedDifferentlyThan: johnLennon.
 
@@ -57,37 +57,37 @@ test04CanNotRemoveAnInvalidCustomer
 
 		! !
 
-!CustomerBookTest methodsFor: 'Testing' stamp: 'fr 9/24/2020 12:09:19'!
+!CustomerBookTest methodsFor: 'Testing' stamp: 'fr 9/24/2020 12:16:51'!
 test05SuspendingACustomerShouldNotRemoveItFromCustomerBook
 
 	| customerBook |
-	customerBook _ self insertCustomerNamed: paulMcCartney andState: 'suspended'.
+	customerBook _ self insertCustomerNamed: paulMcCartney andSuspended: true.
 		
 	self theBook: customerBook hasThisNumberOfActiveCustomers: 0 ThisNumberOfSuspended: 1 thisIsTheTotal: 1 andThisIsTrueAboutTheBook: [customerBook includesCustomerNamed:  paulMcCartney].! !
 
-!CustomerBookTest methodsFor: 'Testing' stamp: 'fr 9/24/2020 12:09:32'!
+!CustomerBookTest methodsFor: 'Testing' stamp: 'fr 9/24/2020 12:16:56'!
 test06RemovingASuspendedCustomerShouldRemoveItFromCustomerBook
 
 	| customerBook |
-	customerBook _ self insertCustomerNamed:  paulMcCartney andState: 'suspended'.
+	customerBook _ self insertCustomerNamed:  paulMcCartney andSuspended: true.
 	customerBook removeCustomerNamed:  paulMcCartney .
 	
 	self theBook: customerBook hasThisNumberOfActiveCustomers: 0 ThisNumberOfSuspended: 0 thisIsTheTotal: 0 andThisIsTrueAboutTheBook: [(customerBook includesCustomerNamed:  paulMcCartney ) not].! !
 
-!CustomerBookTest methodsFor: 'Testing' stamp: 'fr 9/24/2020 12:09:42'!
+!CustomerBookTest methodsFor: 'Testing' stamp: 'fr 9/24/2020 12:17:01'!
 test07CanNotSuspendAnInvalidCustomer
 
 	| customerBook |
-	customerBook _ self insertCustomerNamed: johnLennon andState: 'active'.
+	customerBook _ self insertCustomerNamed: johnLennon andSuspended: false.
 		
 	self customerBook: customerBook withJustOneCustomerNamed: johnLennon staysTheSameAfterFailingToSuspend: georgeHarrison.
 ! !
 
-!CustomerBookTest methodsFor: 'Testing' stamp: 'fr 9/24/2020 12:09:53'!
+!CustomerBookTest methodsFor: 'Testing' stamp: 'fr 9/24/2020 12:17:06'!
 test08CanNotSuspendAnAlreadySuspendedCustomer
 	
 	| customerBook |
-	customerBook _ self insertCustomerNamed: johnLennon andState: 'suspended'.
+	customerBook _ self insertCustomerNamed: johnLennon andSuspended: true.
 
 	self customerBook: customerBook withJustOneCustomerNamed: johnLennon staysTheSameAfterFailingToSuspend: johnLennon
 
@@ -127,12 +127,12 @@ tryToRun: aBlockToRun andAssert: aBlockToAssert and: anotherBlockToAssert when: 
 assertTheOperation: blockWithOperation takesLessThan: limit
 	self assert: ((Time millisecondsToRun: blockWithOperation)*millisecond) < (limit*millisecond).! !
 
-!CustomerBookTest methodsFor: 'TestingUtils' stamp: 'fr 9/24/2020 12:08:16'!
-insertCustomerNamed: aName andState: aState
+!CustomerBookTest methodsFor: 'TestingUtils' stamp: 'fr 9/24/2020 12:16:27'!
+insertCustomerNamed: aName andSuspended: aChoice
 	| customerBook |
 	customerBook _ CustomerBook new.
 	customerBook addCustomerNamed: aName.
-	(aState = 'suspended') ifTrue: [ customerBook suspendCustomerNamed: aName].
+	aChoice ifTrue: [ customerBook suspendCustomerNamed: aName].
 	^customerBook.! !
 
 !CustomerBookTest methodsFor: 'TestingUtils' stamp: 'fr 9/24/2020 11:38:20'!
