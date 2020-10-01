@@ -566,9 +566,9 @@ Entero subclass: #Cero
 asDenominatorOf: aNumerator
 	^self error: Fraccion canNotDivideByZeroErrorDescription! !
 
-!Cero methodsFor: 'Fraction role checks - private' stamp: 'fr 9/30/2020 19:16:36'!
+!Cero methodsFor: 'Fraction role checks - private' stamp: 'fr 10/1/2020 13:12:38'!
 asNumeratorOf: aNumerator
-	^self.! !
+	^self! !
 
 
 !Cero methodsFor: 'Operations' stamp: 'fr 9/30/2020 17:28:53'!
@@ -632,9 +632,9 @@ Entero subclass: #Uno
 asDenominatorOf: aNumerator
 	^aNumerator! !
 
-!Uno methodsFor: 'Fraction role checks - private' stamp: 'fr 9/30/2020 19:24:58'!
+!Uno methodsFor: 'Fraction role checks - private' stamp: 'fr 10/1/2020 13:13:17'!
 asNumeratorOf: aDenominator
-	^Fraccion new initializeWith: self over: aDenominator. ! !
+	^Fraccion new initializeWith: self over: aDenominator! !
 
 
 !Uno methodsFor: 'Operations' stamp: 'fr 9/30/2020 17:29:09'!
