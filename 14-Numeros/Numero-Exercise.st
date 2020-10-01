@@ -385,7 +385,7 @@ canNotDivideByZeroErrorDescription
 !Numero class methodsFor: 'error descriptions' stamp: 'NR 9/24/2020 04:33:41'!
 invalidNumberTypeErrorDescription
 	
-	^ 'Tipo de número inválido!!'! !
+	^ 'Tipo de nï¿½mero invï¿½lido!!'! !
 
 
 !classDefinition: #Entero category: 'Numero-Exercise'!
@@ -415,9 +415,12 @@ Numero subclass: #Entero
 	"Original: ^self class with: value + anAdder integerValue"
 ! !
 
-!Entero methodsFor: 'arithmetic operations' stamp: 'fr 9/28/2020 19:55:08'!
+!Entero methodsFor: 'arithmetic operations' stamp: 'fr 10/1/2020 12:44:41'!
 - aSubtrahend 
-	^self + aSubtrahend negated
+	
+	^aSubtrahend restarEntero: self
+
+	"Version usando suma: ^self + aSubtrahend negated"
 	
 	"Original: ^ self class with: value - aSubtrahend integerValue."! !
 
@@ -527,6 +530,16 @@ multiplicarPorUnaFraccion: aMultiplier
 
 	^(aMultiplier numerator * self) / (aMultiplier denominator)! !
 
+!Entero methodsFor: 'arithmetic operations - private' stamp: 'fr 10/1/2020 12:48:56'!
+restarEntero: aSubtrahend
+
+	^self class with: aSubtrahend integerValue - value! !
+
+!Entero methodsFor: 'arithmetic operations - private' stamp: 'fr 10/1/2020 12:54:27'!
+restarFraccion: aSubtrahend
+
+	^aSubtrahend numerator - (self * aSubtrahend denominator) / aSubtrahend denominator.! !
+
 !Entero methodsFor: 'arithmetic operations - private' stamp: 'fr 9/28/2020 20:05:21'!
 sumarEntero: anAdder
 
@@ -568,7 +581,7 @@ with: aValue
 
 !Entero class methodsFor: 'error' stamp: 'fr 9/30/2020 17:36:08'!
 negativeFibonacciErrorDescription
-	^ ' Fibonacci no está definido aquí para Enteros Negativos'! !
+	^ ' Fibonacci no estï¿½ definido aquï¿½ para Enteros Negativos'! !
 
 
 !classDefinition: #Cero category: 'Numero-Exercise'!
@@ -697,10 +710,12 @@ Numero subclass: #Fraccion
 	^newNumerator / newDenominator "
 ! !
 
-!Fraccion methodsFor: 'arithmetic operations' stamp: 'fr 9/28/2020 15:52:36'!
+!Fraccion methodsFor: 'arithmetic operations' stamp: 'fr 10/1/2020 12:56:46'!
 - aSubtrahend 
 	
-	^self + (aSubtrahend negated).
+	^aSubtrahend restarFraccion: self
+	
+	"Version usando la suma: ^self + (aSubtrahend negated)."
 	
 	"Original: | newNumerator newDenominator |
 	
@@ -797,6 +812,16 @@ multiplicarPorUnEntero: aMultiplier
 multiplicarPorUnaFraccion: aMultiplier
 
 	^(numerator * aMultiplier numerator) / (denominator * aMultiplier denominator)! !
+
+!Fraccion methodsFor: 'arithmetic operations - private' stamp: 'fr 10/1/2020 12:51:59'!
+restarEntero: aSubtrahend
+	
+	^(aSubtrahend restarFraccion: self) negated! !
+
+!Fraccion methodsFor: 'arithmetic operations - private' stamp: 'fr 10/1/2020 12:59:54'!
+restarFraccion: aSubtrahend
+
+	^(denominator * aSubtrahend numerator)- (numerator * aSubtrahend denominator) / (denominator * aSubtrahend denominator).! !
 
 !Fraccion methodsFor: 'arithmetic operations - private' stamp: 'fr 9/28/2020 16:27:30'!
 sumarEntero: anAdder
