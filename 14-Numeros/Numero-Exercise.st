@@ -776,7 +776,7 @@ sumarFraccion: anAdder
 Fraccion class
 	instanceVariableNames: ''!
 
-!Fraccion class methodsFor: 'intance creation' stamp: 'fr 9/30/2020 19:28:49'!
+!Fraccion class methodsFor: 'intance creation' stamp: 'fr 10/1/2020 13:15:55'!
 with: aDividend over: aDivisor
 	
 	| greatestCommonDivisor numerator denominator |
@@ -786,19 +786,4 @@ with: aDividend over: aDivisor
 	denominator := aDivisor // greatestCommonDivisor.
 	
 	^denominator asDenominatorOf: numerator.
-		
-	"Original: | greatestCommonDivisor numerator denominator |
-	
-	aDivisor isZero ifTrue: [ self error: self canNotDivideByZeroErrorDescription ].
-	aDividend isZero ifTrue: [ ^aDividend ].
-	
-	aDivisor isNegative ifTrue:[ ^aDividend negated / aDivisor negated].
-	
-	greatestCommonDivisor := aDividend greatestCommonDivisorWith: aDivisor. 
-	numerator := aDividend // greatestCommonDivisor.
-	denominator := aDivisor // greatestCommonDivisor.
-	
-	denominator isOne ifTrue: [ ^numerator ].
-
-	^self new initializeWith: numerator over: denominator"
 	! !
