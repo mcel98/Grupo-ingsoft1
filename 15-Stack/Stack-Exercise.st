@@ -283,7 +283,29 @@ stackEmptyErrorDescription
 
 !classDefinition: #SentenceFinderByPrefix category: 'Stack-Exercise'!
 Object subclass: #SentenceFinderByPrefix
-	instanceVariableNames: ''
+	instanceVariableNames: 'stackSentences'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Stack-Exercise'!
+
+!SentenceFinderByPrefix methodsFor: 'initialization' stamp: 'fr 10/2/2020 04:49:57'!
+initializeWithStack: aStack
+	stackSentences _ OrderedCollection new.
+	[aStack isEmpty] whileFalse: [stackSentences add: aStack pop]  ! !
+
+
+!SentenceFinderByPrefix methodsFor: 'as yet unclassified' stamp: 'fr 10/2/2020 04:52:05'!
+find: aPrefix
+	"Asegurarse que sea prefijo válido"
+	
+	^stackSentences select: [:sentece | sentece beginsWith: aPrefix]! !
+
+"-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
+
+!classDefinition: 'SentenceFinderByPrefix class' category: 'Stack-Exercise'!
+SentenceFinderByPrefix class
+	instanceVariableNames: ''!
+
+!SentenceFinderByPrefix class methodsFor: 'instance creation' stamp: 'fr 10/2/2020 04:39:41'!
+withStack: aStack
+	^self new initializeWithStack: aStack copy! !
