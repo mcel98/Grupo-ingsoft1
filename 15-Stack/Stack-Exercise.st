@@ -139,10 +139,113 @@ test10CanNotTopWhenThereAreNoObjectsInTheStack
 
 !classDefinition: #SentenceFinderByPrefixTest category: 'Stack-Exercise'!
 TestCase subclass: #SentenceFinderByPrefixTest
-	instanceVariableNames: ''
+	instanceVariableNames: 'stack emptyStack noMatchStack'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Stack-Exercise'!
+
+!SentenceFinderByPrefixTest methodsFor: 'tests' stamp: 'fr 10/2/2020 05:39:53'!
+test01LookingForAPrefixInAnEmptyStackShouldReturnAnEmptyCollection
+	
+	| sentenceFinder  |
+	
+	sentenceFinder _ SentenceFinderByPrefix withStack: emptyStack. 
+	
+	self assert: (sentenceFinder find: 'Wint') size = 0
+	! !
+
+!SentenceFinderByPrefixTest methodsFor: 'tests' stamp: 'fr 10/2/2020 05:40:52'!
+test02LookingForAPrefixInAStackWithNoMatchesShouldReturnAnEmptyCollection
+	
+	|  sentenceFinder |
+	
+	sentenceFinder _ SentenceFinderByPrefix withStack: noMatchStack . 
+	
+	self assert: (sentenceFinder find: 'Wint') size = 0
+	! !
+
+!SentenceFinderByPrefixTest methodsFor: 'tests' stamp: 'fr 10/2/2020 06:03:19'!
+test03LookingForAnEmptyPrefixShouldEndWithAnError
+
+	self assertFinding: '' producesAnErrorWIthMessage: SentenceFinderByPrefix voidPrefixError.
+	! !
+
+!SentenceFinderByPrefixTest methodsFor: 'tests' stamp: 'fr 10/2/2020 05:54:45'!
+test04LookingForAPrefixWithABlankSpaceShouldEndWithAnError
+		
+	self assertFinding: 'prefix with blank spaces' producesAnErrorWIthMessage: SentenceFinderByPrefix blankSpaceInPrefix
+	! !
+
+!SentenceFinderByPrefixTest methodsFor: 'tests' stamp: 'fr 10/2/2020 06:04:08'!
+test05LookingForAPrefixWithoutMatchesShouldNotModifyTheStackLength
+	
+	self assertSizeDoesNotChangeWhenFinding: 'Wint'
+
+	! !
+
+!SentenceFinderByPrefixTest methodsFor: 'tests' stamp: 'fr 10/2/2020 06:04:17'!
+test06LookingForAPrefixWithMatchesShouldNotModifyTheStackLength
+		
+	self assertSizeDoesNotChangeWhenFinding: 'soy'
+	! !
+
+!SentenceFinderByPrefixTest methodsFor: 'tests' stamp: 'fr 10/2/2020 06:17:50'!
+test09FindIsCaseSensitive
+		
+	| sentenceFinder |
+	
+	sentenceFinder _ SentenceFinderByPrefix withStack: stack.
+	
+	self assert: ((sentenceFinder find: 'soy') size = 1 and: (sentenceFinder find: 'Soy') size = 0)
+! !
+
+
+!SentenceFinderByPrefixTest methodsFor: 'setup' stamp: 'fr 10/2/2020 05:45:33'!
+setUp
+
+	emptyStack _ OOStack new.
+	
+	noMatchStack _ OOStack new.
+	noMatchStack push: 'hola'.
+	noMatchStack push: 'no'.
+	noMatchStack push: 'tengo'.
+	noMatchStack push: 'matches'.
+	
+	stack _ OOStack new.
+	stack push: 'soy'.
+	stack push: 'un'.
+	stack push: 'stack'.
+
+! !
+
+
+!SentenceFinderByPrefixTest methodsFor: 'private' stamp: 'fr 10/2/2020 06:02:26'!
+assertFinding: aPrefix producesAnErrorWIthMessage: anErrorMessage
+	
+	| sentenceFinder |
+
+	sentenceFinder _ SentenceFinderByPrefix withStack: stack. 
+	
+	self 
+		should: [sentenceFinder find: aPrefix]
+		raise: Error 
+		withExceptionDo: [:anError |
+			self assert: anError messageText = anErrorMessage].
+! !
+
+!SentenceFinderByPrefixTest methodsFor: 'private' stamp: 'fr 10/2/2020 05:49:55'!
+assertSizeDoesNotChangeWhenFinding: aPrefix
+	
+	| sentenceFinder previousLength |
+	
+	previousLength _ stack size.
+
+	sentenceFinder _ SentenceFinderByPrefix withStack: stack . 
+	sentenceFinder find: aPrefix.
+	
+	self assert: previousLength = stack size.
+	
+	"¿Implementar = en OOStack para comparar aunque no sea requerido?"! !
 
 
 !classDefinition: #LinkedNode category: 'Stack-Exercise'!
@@ -240,11 +343,11 @@ Object subclass: #OOStack
 	poolDictionaries: ''
 	category: 'Stack-Exercise'!
 
-!OOStack methodsFor: 'operations' stamp: 'fr 10/2/2020 03:53:17'!
+!OOStack methodsFor: 'operations' stamp: 'fr 10/2/2020 06:23:31'!
 pop
 	| topValue |
 	topValue _ self top.
-	top _ top nextIfAbsent: [self error: OOStack stackEmptyErrorDescription]. "ACÁ NO ROMPO ENCAPSULAMIENTO?"
+	top _ self moveTop. "ACÁ NO ROMPO ENCAPSULAMIENTO?"
 	^topValue	! !
 
 !OOStack methodsFor: 'operations' stamp: 'fr 10/2/2020 03:47:04'!
@@ -257,6 +360,12 @@ initialize
 	top _ VoidLinkedNode new! !
 
 
+!OOStack methodsFor: 'private' stamp: 'fr 10/2/2020 06:23:31'!
+moveTop
+
+	^ top nextIfAbsent: [self error: OOStack stackEmptyErrorDescription]! !
+
+
 !OOStack methodsFor: 'properties' stamp: 'fr 10/2/2020 03:30:04'!
 isEmpty
 	^top isVoid! !
@@ -265,9 +374,9 @@ isEmpty
 size
 	^top chainLengthFromHere! !
 
-!OOStack methodsFor: 'properties' stamp: 'fr 10/2/2020 04:04:28'!
+!OOStack methodsFor: 'properties' stamp: 'fr 10/2/2020 06:24:34'!
 top
-	^top contentIfAbsent: [self error: OOStack stackEmptyErrorDescription]. "NUEVAMENTE ENCAPSULAMIENTO. LINKED NODE TERMINA SIENDO ANÉMICA"! !
+	^top contentIfAbsent: [self error: OOStack stackEmptyErrorDescription]. "NUEVAMENTE ENCAPSULAMIENTO. LINKED NODE PARECE SER ANÉMICA"! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
@@ -294,10 +403,26 @@ initializeWithStack: aStack
 	[aStack isEmpty] whileFalse: [stackSentences add: aStack pop]  ! !
 
 
-!SentenceFinderByPrefix methodsFor: 'as yet unclassified' stamp: 'fr 10/2/2020 04:52:05'!
+!SentenceFinderByPrefix methodsFor: 'private' stamp: 'fr 10/2/2020 05:10:24'!
+isAValidPrefix: aPrefix
+	self prefixIsNotEmpty: aPrefix.
+	self prefixDoesNotContainBlankSpace: aPrefix.
+	^true! !
+
+!SentenceFinderByPrefix methodsFor: 'private' stamp: 'fr 10/2/2020 05:13:28'!
+prefixDoesNotContainBlankSpace: aPrefix
+
+	^ (aPrefix findString: ' ') = 0 ifFalse: [self error: self class blankSpaceInPrefix]! !
+
+!SentenceFinderByPrefix methodsFor: 'private' stamp: 'fr 10/2/2020 05:09:56'!
+prefixIsNotEmpty: aPrefix
+
+	^ aPrefix = '' ifTrue: [self error: self class voidPrefixError]! !
+
+
+!SentenceFinderByPrefix methodsFor: 'operations' stamp: 'fr 10/2/2020 06:19:54'!
 find: aPrefix
-	"Asegurarse que sea prefijo válido"
-	
+	self isAValidPrefix: aPrefix.
 	^stackSentences select: [:sentece | sentece beginsWith: aPrefix]! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
@@ -309,3 +434,12 @@ SentenceFinderByPrefix class
 !SentenceFinderByPrefix class methodsFor: 'instance creation' stamp: 'fr 10/2/2020 04:39:41'!
 withStack: aStack
 	^self new initializeWithStack: aStack copy! !
+
+
+!SentenceFinderByPrefix class methodsFor: 'error messages' stamp: 'fr 10/2/2020 05:08:21'!
+blankSpaceInPrefix
+	^'Prefix can not contain blank space'! !
+
+!SentenceFinderByPrefix class methodsFor: 'error messages' stamp: 'fr 10/2/2020 05:08:04'!
+voidPrefixError
+	^'Prefix can not be empty'! !
