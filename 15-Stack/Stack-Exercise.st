@@ -1,4 +1,4 @@
-!classDefinition: #OOStackTest category: 'Stack-Exercise'!
+!classDefinition: #OOStackTest category: #'Stack-Exercise'!
 TestCase subclass: #OOStackTest
 	instanceVariableNames: ''
 	classVariableNames: ''
@@ -137,7 +137,7 @@ test10CanNotTopWhenThereAreNoObjectsInTheStack
 ! !
 
 
-!classDefinition: #SentenceFinderByPrefixTest category: 'Stack-Exercise'!
+!classDefinition: #SentenceFinderByPrefixTest category: #'Stack-Exercise'!
 TestCase subclass: #SentenceFinderByPrefixTest
 	instanceVariableNames: 'stack emptyStack noMatchStack'
 	classVariableNames: ''
@@ -248,7 +248,7 @@ assertSizeDoesNotChangeWhenFinding: aPrefix
 	"¿Implementar = en OOStack para comparar aunque no sea requerido?"! !
 
 
-!classDefinition: #LinkedNode category: 'Stack-Exercise'!
+!classDefinition: #LinkedNode category: #'Stack-Exercise'!
 Object subclass: #LinkedNode
 	instanceVariableNames: ''
 	classVariableNames: ''
@@ -272,7 +272,7 @@ nextIfAbsent: aBlock
 	self subclassResponsibility ! !
 
 
-!classDefinition: #FullLinkedNode category: 'Stack-Exercise'!
+!classDefinition: #FullLinkedNode category: #'Stack-Exercise'!
 LinkedNode subclass: #FullLinkedNode
 	instanceVariableNames: 'content next'
 	classVariableNames: ''
@@ -303,7 +303,7 @@ initializeWithContent: someContent andNext: aLinkedNode
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
-!classDefinition: 'FullLinkedNode class' category: 'Stack-Exercise'!
+!classDefinition: 'FullLinkedNode class' category: #'Stack-Exercise'!
 FullLinkedNode class
 	instanceVariableNames: ''!
 
@@ -312,7 +312,7 @@ withContent: someContent andNext: aLinkedNode
 	^self new initializeWithContent: someContent andNext: aLinkedNode! !
 
 
-!classDefinition: #VoidLinkedNode category: 'Stack-Exercise'!
+!classDefinition: #VoidLinkedNode category: #'Stack-Exercise'!
 LinkedNode subclass: #VoidLinkedNode
 	instanceVariableNames: ''
 	classVariableNames: ''
@@ -336,28 +336,29 @@ nextIfAbsent: aBlock
 	^aBlock value! !
 
 
-!classDefinition: #OOStack category: 'Stack-Exercise'!
+!classDefinition: #OOStack category: #'Stack-Exercise'!
 Object subclass: #OOStack
-	instanceVariableNames: 'top'
+	instanceVariableNames: ''
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Stack-Exercise'!
 
-!OOStack methodsFor: 'operations' stamp: 'fr 10/2/2020 06:23:31'!
+!OOStack methodsFor: 'operations' stamp: 'msm 10/3/2020 13:10:34'!
 pop
+
+	^self subclassResponsibility 
+
+"
 	| topValue |
 	topValue _ self top.
-	top _ self moveTop. "ACÁ NO ROMPO ENCAPSULAMIENTO?"
-	^topValue	! !
+	top _ self moveTop. ACÁ NO ROMPO ENCAPSULAMIENTO?
+	^topValue	
+	"! !
 
-!OOStack methodsFor: 'operations' stamp: 'fr 10/2/2020 03:47:04'!
+!OOStack methodsFor: 'operations' stamp: 'msm 10/3/2020 13:11:24'!
 push: someContent
-	top _ FullLinkedNode withContent: someContent andNext: top! !
 
-
-!OOStack methodsFor: 'initialization' stamp: 'fr 10/2/2020 03:37:54'!
-initialize
-	top _ VoidLinkedNode new! !
+	^self subclassResponsibility. ! !
 
 
 !OOStack methodsFor: 'private' stamp: 'fr 10/2/2020 06:23:31'!
@@ -366,21 +367,22 @@ moveTop
 	^ top nextIfAbsent: [self error: OOStack stackEmptyErrorDescription]! !
 
 
-!OOStack methodsFor: 'properties' stamp: 'fr 10/2/2020 03:30:04'!
+!OOStack methodsFor: 'properties' stamp: 'msm 10/3/2020 12:52:23'!
 isEmpty
-	^top isVoid! !
+	^self subclassResponsibility ! !
 
-!OOStack methodsFor: 'properties' stamp: 'fr 10/2/2020 04:02:22'!
+!OOStack methodsFor: 'properties' stamp: 'msm 10/3/2020 13:13:36'!
 size
-	^top chainLengthFromHere! !
+	^self subclassResponsibility.! !
 
-!OOStack methodsFor: 'properties' stamp: 'fr 10/2/2020 06:24:34'!
+!OOStack methodsFor: 'properties' stamp: 'msm 10/3/2020 13:16:33'!
 top
-	^top contentIfAbsent: [self error: OOStack stackEmptyErrorDescription]. "NUEVAMENTE ENCAPSULAMIENTO. LINKED NODE PARECE SER ANÉMICA"! !
+	^self subclassResponsibility.
+	"^top contentIfAbsent: [self error: OOStack stackEmptyErrorDescription]. NUEVAMENTE ENCAPSULAMIENTO. LINKED NODE PARECE SER ANÉMICA"! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
-!classDefinition: 'OOStack class' category: 'Stack-Exercise'!
+!classDefinition: 'OOStack class' category: #'Stack-Exercise'!
 OOStack class
 	instanceVariableNames: ''!
 
@@ -390,7 +392,45 @@ stackEmptyErrorDescription
 	^ 'Stack is empty!!'! !
 
 
-!classDefinition: #SentenceFinderByPrefix category: 'Stack-Exercise'!
+!classDefinition: #OOStackTyped category: #'Stack-Exercise'!
+OOStack subclass: #OOStackTyped
+	instanceVariableNames: 'Toplink'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Stack-Exercise'!
+
+!OOStackTyped methodsFor: 'nil' stamp: 'msm 10/3/2020 13:35:17'!
+push: aObject
+
+	|link oldTop|
+	oldTop _ Toplink.
+	link _ StackLink new: aObject before: oldTop.
+	Toplink _ link.
+
+	! !
+
+
+!OOStackTyped methodsFor: 'as yet unclassified' stamp: 'msm 10/3/2020 13:25:12'!
+initialize: aObject
+
+	Toplink := StackLink new: aObject."implementar new en StackLink"! !
+
+
+!classDefinition: #OOStackVacio category: #'Stack-Exercise'!
+OOStack subclass: #OOStackVacio
+	instanceVariableNames: 'top'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Stack-Exercise'!
+
+!OOStackVacio methodsFor: 'nil' stamp: 'msm 10/2/2020 17:25:04'!
+push: aValue.
+
+	^OOStackTyped newWith: aValue.
+! !
+
+
+!classDefinition: #SentenceFinderByPrefix category: #'Stack-Exercise'!
 Object subclass: #SentenceFinderByPrefix
 	instanceVariableNames: 'stackSentences'
 	classVariableNames: ''
@@ -427,7 +467,7 @@ find: aPrefix
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
-!classDefinition: 'SentenceFinderByPrefix class' category: 'Stack-Exercise'!
+!classDefinition: 'SentenceFinderByPrefix class' category: #'Stack-Exercise'!
 SentenceFinderByPrefix class
 	instanceVariableNames: ''!
 
@@ -443,3 +483,11 @@ blankSpaceInPrefix
 !SentenceFinderByPrefix class methodsFor: 'error messages' stamp: 'fr 10/2/2020 05:08:04'!
 voidPrefixError
 	^'Prefix can not be empty'! !
+
+
+!classDefinition: #StackLink category: #'Stack-Exercise'!
+Object subclass: #StackLink
+	instanceVariableNames: 'ObjectWrap Next'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Stack-Exercise'!
