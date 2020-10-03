@@ -247,90 +247,90 @@ assertSizeDoesNotChangeWhenFinding: aPrefix
 	"¿Implementar = en OOStack para comparar aunque no sea requerido?"! !
 
 
-!classDefinition: #LinkedNode category: 'Stack-Exercise'!
-Object subclass: #LinkedNode
+!classDefinition: #LinkedElement category: 'Stack-Exercise'!
+Object subclass: #LinkedElement
 	instanceVariableNames: ''
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Stack-Exercise'!
 
-!LinkedNode methodsFor: 'as yet unclassified' stamp: 'fr 10/2/2020 04:02:36'!
+!LinkedElement methodsFor: 'as yet unclassified' stamp: 'fr 10/2/2020 04:02:36'!
 chainLengthFromHere
 	self subclassResponsibility ! !
 
-!LinkedNode methodsFor: 'as yet unclassified' stamp: 'fr 10/2/2020 04:07:46'!
+!LinkedElement methodsFor: 'as yet unclassified' stamp: 'fr 10/2/2020 04:07:46'!
 contentIfAbsent: aBlock
 	self subclassResponsibility ! !
 
-!LinkedNode methodsFor: 'as yet unclassified' stamp: 'fr 10/2/2020 03:36:48'!
+!LinkedElement methodsFor: 'as yet unclassified' stamp: 'fr 10/2/2020 03:36:48'!
 isVoid
 	self subclassResponsibility ! !
 
-!LinkedNode methodsFor: 'as yet unclassified' stamp: 'fr 10/2/2020 03:54:30'!
+!LinkedElement methodsFor: 'as yet unclassified' stamp: 'fr 10/2/2020 03:54:30'!
 nextIfAbsent: aBlock
 	self subclassResponsibility ! !
 
 
-!classDefinition: #FullLinkedNode category: 'Stack-Exercise'!
-LinkedNode subclass: #FullLinkedNode
+!classDefinition: #FullLinkedElement category: 'Stack-Exercise'!
+LinkedElement subclass: #FullLinkedElement
 	instanceVariableNames: 'content next'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Stack-Exercise'!
 
-!FullLinkedNode methodsFor: 'operations' stamp: 'fr 10/2/2020 04:03:01'!
+!FullLinkedElement methodsFor: 'operations' stamp: 'fr 10/3/2020 16:23:20'!
 chainLengthFromHere
-	^1+next chainLengthFromHere! !
+	^1+next chainLengthFromHere ! !
 
-!FullLinkedNode methodsFor: 'operations' stamp: 'fr 10/2/2020 04:04:03'!
+!FullLinkedElement methodsFor: 'operations' stamp: 'fr 10/3/2020 16:33:58'!
 contentIfAbsent: aBlock
-	^content! !
+	^content copy "¿DEVOLVER COPIA?"! !
 
-!FullLinkedNode methodsFor: 'operations' stamp: 'fr 10/2/2020 03:36:57'!
+!FullLinkedElement methodsFor: 'operations' stamp: 'fr 10/2/2020 03:36:57'!
 isVoid
 	^false! !
 
-!FullLinkedNode methodsFor: 'operations' stamp: 'fr 10/2/2020 03:54:45'!
+!FullLinkedElement methodsFor: 'operations' stamp: 'fr 10/3/2020 16:17:15'!
 nextIfAbsent: aBlock
 	^next! !
 
 
-!FullLinkedNode methodsFor: 'initialize' stamp: 'fr 10/2/2020 03:45:27'!
+!FullLinkedElement methodsFor: 'initialize' stamp: 'fr 10/2/2020 03:45:27'!
 initializeWithContent: someContent andNext: aLinkedNode
 	content _ someContent.
 	next _ aLinkedNode ! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
-!classDefinition: 'FullLinkedNode class' category: 'Stack-Exercise'!
-FullLinkedNode class
+!classDefinition: 'FullLinkedElement class' category: 'Stack-Exercise'!
+FullLinkedElement class
 	instanceVariableNames: ''!
 
-!FullLinkedNode class methodsFor: 'instance creation' stamp: 'fr 10/2/2020 03:47:58'!
+!FullLinkedElement class methodsFor: 'instance creation' stamp: 'fr 10/2/2020 03:47:58'!
 withContent: someContent andNext: aLinkedNode
 	^self new initializeWithContent: someContent andNext: aLinkedNode! !
 
 
-!classDefinition: #VoidLinkedNode category: 'Stack-Exercise'!
-LinkedNode subclass: #VoidLinkedNode
+!classDefinition: #VoidLinkedElement category: 'Stack-Exercise'!
+LinkedElement subclass: #VoidLinkedElement
 	instanceVariableNames: ''
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Stack-Exercise'!
 
-!VoidLinkedNode methodsFor: 'operations' stamp: 'fr 10/2/2020 04:03:14'!
+!VoidLinkedElement methodsFor: 'operations' stamp: 'fr 10/2/2020 04:03:14'!
 chainLengthFromHere
 	^0! !
 
-!VoidLinkedNode methodsFor: 'operations' stamp: 'fr 10/2/2020 04:04:12'!
+!VoidLinkedElement methodsFor: 'operations' stamp: 'fr 10/2/2020 04:04:12'!
 contentIfAbsent: aBlock
 	^aBlock value! !
 
-!VoidLinkedNode methodsFor: 'operations' stamp: 'fr 10/2/2020 03:37:06'!
+!VoidLinkedElement methodsFor: 'operations' stamp: 'fr 10/2/2020 03:37:06'!
 isVoid
 	^true! !
 
-!VoidLinkedNode methodsFor: 'operations' stamp: 'fr 10/2/2020 03:55:00'!
+!VoidLinkedElement methodsFor: 'operations' stamp: 'fr 10/2/2020 03:55:00'!
 nextIfAbsent: aBlock
 	^aBlock value! !
 
@@ -349,18 +349,18 @@ pop
 	top _ self moveTop. "ACÁ NO ROMPO ENCAPSULAMIENTO?"
 	^topValue	! !
 
-!OOStack methodsFor: 'operations' stamp: 'fr 10/2/2020 03:47:04'!
+!OOStack methodsFor: 'operations' stamp: 'fr 10/3/2020 16:35:21'!
 push: someContent
-	top _ FullLinkedNode withContent: someContent andNext: top! !
+	top _ FullLinkedElement withContent: someContent andNext: top! !
 
 
-!OOStack methodsFor: 'initialization' stamp: 'fr 10/2/2020 03:37:54'!
+!OOStack methodsFor: 'initialization' stamp: 'fr 10/3/2020 16:34:31'!
 initialize
-	top _ VoidLinkedNode new! !
+	top _ VoidLinkedElement new! !
 
 
-!OOStack methodsFor: 'private' stamp: 'fr 10/2/2020 21:36:23'!
-= anotherStack
+!OOStack methodsFor: 'private' stamp: 'fr 10/3/2020 16:10:42'!
+= anotherStack "¿ESTÁ BIEN IMPLEMENTARLO? ¿IMPLEMENTAMOS EL = DE LINKED NODE?" 
 	| equal selfCopy anotherStackCopy |
 	
 	equal _ true.	
@@ -369,10 +369,10 @@ initialize
 	[selfCopy isEmpty]  whileFalse: [equal _ equal and: selfCopy pop = anotherStackCopy pop].
 	^equal and: anotherStackCopy isEmpty! !
 
-!OOStack methodsFor: 'private' stamp: 'fr 10/2/2020 06:23:31'!
+!OOStack methodsFor: 'private' stamp: 'fr 10/3/2020 16:11:11'!
 moveTop
 
-	^ top nextIfAbsent: [self error: OOStack stackEmptyErrorDescription]! !
+	^ top nextIfAbsent: [self error: OOStack stackEmptyErrorDescription] "¿DOUBLE DISPATCH PARA EL ERROR O IFABSENT?"! !
 
 
 !OOStack methodsFor: 'properties' stamp: 'fr 10/2/2020 03:30:04'!
@@ -383,9 +383,9 @@ isEmpty
 size
 	^top chainLengthFromHere! !
 
-!OOStack methodsFor: 'properties' stamp: 'fr 10/2/2020 06:24:34'!
+!OOStack methodsFor: 'properties' stamp: 'fr 10/3/2020 16:11:30'!
 top
-	^top contentIfAbsent: [self error: OOStack stackEmptyErrorDescription]. "NUEVAMENTE ENCAPSULAMIENTO. LINKED NODE PARECE SER ANÉMICA"! !
+	^top contentIfAbsent: [self error: OOStack stackEmptyErrorDescription]. "NUEVAMENTE ENCAPSULAMIENTO. LINKED NODE PARECE ANÉMICA"! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
@@ -429,10 +429,10 @@ prefixIsNotEmpty: aPrefix
 	^ aPrefix = '' ifTrue: [self error: self class voidPrefixError]! !
 
 
-!SentenceFinderByPrefix methodsFor: 'operations' stamp: 'fr 10/2/2020 06:19:54'!
-find: aPrefix
+!SentenceFinderByPrefix methodsFor: 'operations' stamp: 'fr 10/3/2020 16:10:05'!
+find: aPrefix "¿SE PUEDE BUSCAR EN MÁS DE UN STACK?" 
 	self isAValidPrefix: aPrefix.
-	^stackSentences select: [:sentece | sentece beginsWith: aPrefix]! !
+	^stackSentences select: [:sentece | sentece beginsWith: aPrefix] ! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
@@ -440,9 +440,9 @@ find: aPrefix
 SentenceFinderByPrefix class
 	instanceVariableNames: ''!
 
-!SentenceFinderByPrefix class methodsFor: 'instance creation' stamp: 'fr 10/2/2020 04:39:41'!
+!SentenceFinderByPrefix class methodsFor: 'instance creation' stamp: 'fr 10/3/2020 16:08:10'!
 withStack: aStack
-	^self new initializeWithStack: aStack copy! !
+	^self new initializeWithStack: aStack copy "¿CUÁNDO HACER LA COPIA?"! !
 
 
 !SentenceFinderByPrefix class methodsFor: 'error messages' stamp: 'fr 10/2/2020 05:08:21'!
