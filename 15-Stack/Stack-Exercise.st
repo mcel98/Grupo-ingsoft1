@@ -259,7 +259,7 @@ assertSizeDoesNotChangeWhenFinding: aPrefix
 	
 	"¿Implementar = en OOStack para comparar aunque no sea requerido?"! !
 
-!SentenceFinderByPrefixTest methodsFor: 'private' stamp: 'fr 10/3/2020 17:17:18'!
+!SentenceFinderByPrefixTest methodsFor: 'private' stamp: 'fr 10/5/2020 21:47:24'!
 assertStackIsNotModifiedWhenFindingPrefix: aPrefix
 		
 	| stackBefore stackAfter sentenceFinder |
@@ -268,88 +268,16 @@ assertStackIsNotModifiedWhenFindingPrefix: aPrefix
 	sentenceFinder _ SentenceFinderByPrefix withStack: stack. 
 	sentenceFinder find: aPrefix.
 	stackAfter _ stack copy.
-	self assert: (self thereIsNoDifferenceBetweenStackAfterFind: stackAfter andBeforeFind: stackBefore)
+	self thereIsNoDifferenceBetweenStackAfterFind: stackAfter andBeforeFind: stackBefore
 ! !
 
-!SentenceFinderByPrefixTest methodsFor: 'private' stamp: 'fr 10/3/2020 16:57:23'!
+!SentenceFinderByPrefixTest methodsFor: 'private' stamp: 'fr 10/5/2020 21:47:39'!
 thereIsNoDifferenceBetweenStackAfterFind: stackAfter andBeforeFind: stackBefore
 	| equal |
 	equal _ true.
 	[stackAfter isEmpty] whileFalse: [equal _ equal and: (stackAfter pop = stackBefore pop)].
-	^equal and: stackBefore isEmpty 
+	self assert: (equal and: stackBefore isEmpty)
 	! !
-
-
-!classDefinition: #LinkedElement category: 'Stack-Exercise'!
-Object subclass: #LinkedElement
-	instanceVariableNames: ''
-	classVariableNames: ''
-	poolDictionaries: ''
-	category: 'Stack-Exercise'!
-
-!LinkedElement methodsFor: 'as yet unclassified' stamp: 'fr 10/2/2020 04:02:36'!
-chainLengthFromHere
-	self subclassResponsibility ! !
-
-!LinkedElement methodsFor: 'as yet unclassified' stamp: 'fr 10/2/2020 04:07:46'!
-contentIfAbsent: aBlock
-	self subclassResponsibility ! !
-
-!LinkedElement methodsFor: 'as yet unclassified' stamp: 'fr 10/2/2020 03:36:48'!
-isVoid
-	self subclassResponsibility ! !
-
-!LinkedElement methodsFor: 'as yet unclassified' stamp: 'fr 10/2/2020 03:54:30'!
-nextIfAbsent: aBlock
-	self subclassResponsibility ! !
-
-
-!classDefinition: #FullLinkedElement category: 'Stack-Exercise'!
-LinkedElement subclass: #FullLinkedElement
-	instanceVariableNames: 'content next'
-	classVariableNames: ''
-	poolDictionaries: ''
-	category: 'Stack-Exercise'!
-
-!FullLinkedElement methodsFor: 'operations' stamp: 'fr 10/3/2020 16:33:58'!
-contentIfAbsent: aBlock
-	^content copy "¿DEVOLVER COPIA?"! !
-
-!FullLinkedElement methodsFor: 'operations' stamp: 'fr 10/3/2020 16:17:15'!
-nextIfAbsent: aBlock
-	^next! !
-
-
-!FullLinkedElement methodsFor: 'initialize' stamp: 'fr 10/3/2020 17:13:37'!
-initializeWithContent: someContent andNext: anElement
-	content _ someContent.
-	next _ anElement ! !
-
-"-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
-
-!classDefinition: 'FullLinkedElement class' category: 'Stack-Exercise'!
-FullLinkedElement class
-	instanceVariableNames: ''!
-
-!FullLinkedElement class methodsFor: 'instance creation' stamp: 'fr 10/2/2020 03:47:58'!
-withContent: someContent andNext: aLinkedNode
-	^self new initializeWithContent: someContent andNext: aLinkedNode! !
-
-
-!classDefinition: #VoidLinkedElement category: 'Stack-Exercise'!
-LinkedElement subclass: #VoidLinkedElement
-	instanceVariableNames: ''
-	classVariableNames: ''
-	poolDictionaries: ''
-	category: 'Stack-Exercise'!
-
-!VoidLinkedElement methodsFor: 'operations' stamp: 'fr 10/2/2020 04:04:12'!
-contentIfAbsent: aBlock
-	^aBlock value! !
-
-!VoidLinkedElement methodsFor: 'operations' stamp: 'fr 10/2/2020 03:55:00'!
-nextIfAbsent: aBlock
-	^aBlock value! !
 
 
 !classDefinition: #OOStack category: 'Stack-Exercise'!
@@ -359,52 +287,42 @@ Object subclass: #OOStack
 	poolDictionaries: ''
 	category: 'Stack-Exercise'!
 
-!OOStack methodsFor: 'operations' stamp: 'fr 10/3/2020 17:07:59'!
+!OOStack methodsFor: 'operations' stamp: 'fr 10/5/2020 21:36:11'!
 pop
 	| topValue |
 	topValue _ self top.
-	top _ self moveTop. "ACÁ NO ROMPO ENCAPSULAMIENTO?"
+	self moveTop.
 	size _ size -1.
 	^topValue	! !
 
-!OOStack methodsFor: 'operations' stamp: 'fr 10/3/2020 17:08:18'!
+!OOStack methodsFor: 'operations' stamp: 'fr 10/5/2020 21:37:09'!
 push: someContent
-	top _ FullLinkedElement withContent: someContent andNext: top.
+	top _ FullStackLinkedElement withContent: someContent andNext: top.
 	size _ size + 1! !
 
 
-!OOStack methodsFor: 'initialization' stamp: 'fr 10/3/2020 17:11:15'!
+!OOStack methodsFor: 'initialization' stamp: 'fr 10/5/2020 21:37:27'!
 initialize
-	top _ VoidLinkedElement new.
+	top _ NullStackLinkedElement new.
 	size _ 0! !
 
 
-!OOStack methodsFor: 'private' stamp: 'fr 10/3/2020 16:10:42'!
-= anotherStack "¿ESTÁ BIEN IMPLEMENTARLO? ¿IMPLEMENTAMOS EL = DE LINKED NODE?" 
-	| equal selfCopy anotherStackCopy |
-	
-	equal _ true.	
-	selfCopy _ self copy.
-	anotherStackCopy _ anotherStack copy.
-	[selfCopy isEmpty]  whileFalse: [equal _ equal and: selfCopy pop = anotherStackCopy pop].
-	^equal and: anotherStackCopy isEmpty! !
-
-!OOStack methodsFor: 'private' stamp: 'fr 10/3/2020 17:09:31'!
+!OOStack methodsFor: 'private' stamp: 'fr 10/5/2020 21:35:51'!
 moveTop
-	^top nextIfAbsent: [self error: OOStack stackEmptyErrorDescription] "¿DOUBLE DISPATCH PARA EL ERROR O IFABSENT?"! !
+	top _ top next! !
 
 
-!OOStack methodsFor: 'properties' stamp: 'fr 10/3/2020 17:10:55'!
+!OOStack methodsFor: 'properties' stamp: 'fr 10/5/2020 21:35:11'!
 isEmpty
-	^size = 0 "size = 0 disminuye acoplamiento frente a isVoid"! !
+	^size = 0! !
 
-!OOStack methodsFor: 'properties' stamp: 'fr 10/3/2020 17:09:59'!
+!OOStack methodsFor: 'properties' stamp: 'fr 10/5/2020 21:35:16'!
 size
-	^size "¿ENCAPSULAMIENTO?"! !
+	^size! !
 
-!OOStack methodsFor: 'properties' stamp: 'fr 10/3/2020 16:11:30'!
+!OOStack methodsFor: 'properties' stamp: 'fr 10/5/2020 21:39:15'!
 top
-	^top contentIfAbsent: [self error: OOStack stackEmptyErrorDescription]. "NUEVAMENTE ENCAPSULAMIENTO. LINKED NODE PARECE ANÉMICA"! !
+	^top content.! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
@@ -420,16 +338,28 @@ stackEmptyErrorDescription
 
 !classDefinition: #SentenceFinderByPrefix category: 'Stack-Exercise'!
 Object subclass: #SentenceFinderByPrefix
-	instanceVariableNames: 'stackSentences'
+	instanceVariableNames: 'stack backUpStack filteredSentences'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Stack-Exercise'!
 
-!SentenceFinderByPrefix methodsFor: 'initialization' stamp: 'fr 10/2/2020 04:49:57'!
+!SentenceFinderByPrefix methodsFor: 'initialization' stamp: 'fr 10/5/2020 21:31:36'!
 initializeWithStack: aStack
-	stackSentences _ OrderedCollection new.
-	[aStack isEmpty] whileFalse: [stackSentences add: aStack pop]  ! !
+	stack _ aStack. 
+	backUpStack _ OOStack new.
+! !
 
+
+!SentenceFinderByPrefix methodsFor: 'private' stamp: 'fr 10/5/2020 21:33:16'!
+addSentence: aSentence withPrefix: aPrefix
+	(aSentence beginsWith: aPrefix) ifTrue: [filteredSentences add: aSentence]	.! !
+
+!SentenceFinderByPrefix methodsFor: 'private' stamp: 'fr 10/5/2020 22:07:39'!
+filterByPrefix: aPrefix
+	filteredSentences _ OrderedCollection new.
+	self storeFilteredSentencesBy: aPrefix.
+	self restoreStack.
+! !
 
 !SentenceFinderByPrefix methodsFor: 'private' stamp: 'fr 10/2/2020 05:10:24'!
 isAValidPrefix: aPrefix
@@ -437,21 +367,33 @@ isAValidPrefix: aPrefix
 	self prefixDoesNotContainBlankSpace: aPrefix.
 	^true! !
 
-!SentenceFinderByPrefix methodsFor: 'private' stamp: 'fr 10/3/2020 17:25:11'!
+!SentenceFinderByPrefix methodsFor: 'private' stamp: 'fr 10/5/2020 22:07:07'!
 prefixDoesNotContainBlankSpace: aPrefix
-
 	^(aPrefix findString: ' ') = 0 ifFalse: [self error: self class blankSpaceInPrefix]! !
 
-!SentenceFinderByPrefix methodsFor: 'private' stamp: 'fr 10/3/2020 17:24:53'!
+!SentenceFinderByPrefix methodsFor: 'private' stamp: 'fr 10/5/2020 22:08:06'!
 prefixIsNotEmpty: aPrefix
+	^aPrefix isEmpty ifTrue: [self error: self class voidPrefixError]! !
 
-	^ aPrefix isEmpty ifTrue: [self error: self class voidPrefixError]! !
+!SentenceFinderByPrefix methodsFor: 'private' stamp: 'fr 10/5/2020 22:07:14'!
+restoreStack
+	^[backUpStack isEmpty] whileFalse: [stack push: backUpStack pop]! !
+
+!SentenceFinderByPrefix methodsFor: 'private' stamp: 'fr 10/5/2020 21:32:25'!
+storeFilteredSentencesBy: aPrefix
+	| current |
+	[stack isEmpty] whileFalse: [
+		current _ stack pop.
+		self addSentence: current withPrefix: aPrefix.
+		backUpStack push: current
+	]! !
 
 
-!SentenceFinderByPrefix methodsFor: 'operations' stamp: 'fr 10/3/2020 17:16:45'!
-find: aPrefix "¿SE PUEDE BUSCAR EN MÁS DE UN STACK?¿COPIAR STACK ACÁ?" 
+!SentenceFinderByPrefix methodsFor: 'operations' stamp: 'fr 10/5/2020 22:06:45'!
+find: aPrefix
 	self isAValidPrefix: aPrefix.
-	^stackSentences select: [:sentece | sentece beginsWith: aPrefix] ! !
+	self filterByPrefix: aPrefix.
+	^filteredSentences ! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
@@ -459,9 +401,9 @@ find: aPrefix "¿SE PUEDE BUSCAR EN MÁS DE UN STACK?¿COPIAR STACK ACÁ?"
 SentenceFinderByPrefix class
 	instanceVariableNames: ''!
 
-!SentenceFinderByPrefix class methodsFor: 'instance creation' stamp: 'fr 10/3/2020 16:08:10'!
+!SentenceFinderByPrefix class methodsFor: 'instance creation' stamp: 'fr 10/5/2020 18:37:56'!
 withStack: aStack
-	^self new initializeWithStack: aStack copy "¿CUÁNDO HACER LA COPIA?"! !
+	^self new initializeWithStack: aStack! !
 
 
 !SentenceFinderByPrefix class methodsFor: 'error messages' stamp: 'fr 10/3/2020 17:27:24'!
@@ -471,3 +413,69 @@ blankSpaceInPrefix
 !SentenceFinderByPrefix class methodsFor: 'error messages' stamp: 'fr 10/3/2020 17:27:28'!
 voidPrefixError
 	^'Prefix can not be empty!!'! !
+
+
+!classDefinition: #StackLinkedElement category: 'Stack-Exercise'!
+Object subclass: #StackLinkedElement
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Stack-Exercise'!
+
+!StackLinkedElement methodsFor: 'as yet unclassified' stamp: 'fr 10/5/2020 21:42:50'!
+content
+	self subclassResponsibility ! !
+
+
+!classDefinition: #FullStackLinkedElement category: 'Stack-Exercise'!
+StackLinkedElement subclass: #FullStackLinkedElement
+	instanceVariableNames: 'content next'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Stack-Exercise'!
+
+!FullStackLinkedElement methodsFor: 'operations' stamp: 'fr 10/5/2020 21:38:19'!
+content
+	^content copy! !
+
+!FullStackLinkedElement methodsFor: 'operations' stamp: 'fr 10/5/2020 21:36:25'!
+next
+	^next! !
+
+
+!FullStackLinkedElement methodsFor: 'initialize' stamp: 'fr 10/3/2020 17:13:37'!
+initializeWithContent: someContent andNext: anElement
+	content _ someContent.
+	next _ anElement ! !
+
+"-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
+
+!classDefinition: 'FullStackLinkedElement class' category: 'Stack-Exercise'!
+FullStackLinkedElement class
+	instanceVariableNames: ''!
+
+!FullStackLinkedElement class methodsFor: 'instance creation' stamp: 'fr 10/2/2020 03:47:58'!
+withContent: someContent andNext: aLinkedNode
+	^self new initializeWithContent: someContent andNext: aLinkedNode! !
+
+
+!classDefinition: #NullStackLinkedElement category: 'Stack-Exercise'!
+StackLinkedElement subclass: #NullStackLinkedElement
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Stack-Exercise'!
+
+!NullStackLinkedElement methodsFor: 'operations' stamp: 'fr 10/5/2020 22:01:12'!
+content 
+	self class nullError ! !
+
+"-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
+
+!classDefinition: 'NullStackLinkedElement class' category: 'Stack-Exercise'!
+NullStackLinkedElement class
+	instanceVariableNames: ''!
+
+!NullStackLinkedElement class methodsFor: 'error' stamp: 'fr 10/5/2020 21:40:10'!
+nullError
+	self error: OOStack stackEmptyErrorDescription! !
