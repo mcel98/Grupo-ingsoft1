@@ -307,9 +307,9 @@ initialize
 	size _ 0! !
 
 
-!OOStack methodsFor: 'private' stamp: 'fr 10/5/2020 21:35:51'!
+!OOStack methodsFor: 'private' stamp: 'fr 10/6/2020 01:29:19'!
 moveTop
-	top _ top next! !
+	top _ top previous! !
 
 
 !OOStack methodsFor: 'properties' stamp: 'fr 10/5/2020 21:35:11'!
@@ -422,31 +422,31 @@ Object subclass: #StackLinkedElement
 	poolDictionaries: ''
 	category: 'Stack-Exercise'!
 
-!StackLinkedElement methodsFor: 'as yet unclassified' stamp: 'fr 10/5/2020 21:42:50'!
+!StackLinkedElement methodsFor: 'operations' stamp: 'fr 10/5/2020 21:42:50'!
 content
 	self subclassResponsibility ! !
 
 
 !classDefinition: #FullStackLinkedElement category: 'Stack-Exercise'!
 StackLinkedElement subclass: #FullStackLinkedElement
-	instanceVariableNames: 'content next'
+	instanceVariableNames: 'content previous'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Stack-Exercise'!
 
-!FullStackLinkedElement methodsFor: 'operations' stamp: 'fr 10/5/2020 21:38:19'!
+!FullStackLinkedElement methodsFor: 'operations' stamp: 'fr 10/6/2020 01:35:23'!
 content
 	^content copy! !
 
-!FullStackLinkedElement methodsFor: 'operations' stamp: 'fr 10/5/2020 21:36:25'!
-next
-	^next! !
+!FullStackLinkedElement methodsFor: 'operations' stamp: 'fr 10/6/2020 01:31:00'!
+previous
+	^previous! !
 
 
-!FullStackLinkedElement methodsFor: 'initialize' stamp: 'fr 10/3/2020 17:13:37'!
+!FullStackLinkedElement methodsFor: 'initialize' stamp: 'fr 10/6/2020 01:31:00'!
 initializeWithContent: someContent andNext: anElement
 	content _ someContent.
-	next _ anElement ! !
+	previous _ anElement ! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
