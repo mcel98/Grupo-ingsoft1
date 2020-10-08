@@ -307,15 +307,15 @@ pop
 	size _ size -1.
 	^topValue	! !
 
-!OOStack methodsFor: 'operations' stamp: 'fr 10/5/2020 21:37:09'!
+!OOStack methodsFor: 'operations' stamp: 'fr 10/8/2020 16:46:14'!
 push: someContent
-	top _ FullStackLinkedElement withContent: someContent andNext: top.
+	top _ FullStackElement withContent: someContent andNext: top.
 	size _ size + 1! !
 
 
-!OOStack methodsFor: 'initialization' stamp: 'fr 10/5/2020 21:37:27'!
+!OOStack methodsFor: 'initialization' stamp: 'fr 10/8/2020 16:46:27'!
 initialize
-	top _ NullStackLinkedElement new.
+	top _ NullStackElement new.
 	size _ 0! !
 
 
@@ -427,67 +427,67 @@ voidPrefixError
 	^'Prefix can not be empty!!'! !
 
 
-!classDefinition: #StackLinkedElement category: 'Stack-Exercise'!
-Object subclass: #StackLinkedElement
+!classDefinition: #StackElement category: 'Stack-Exercise'!
+Object subclass: #StackElement
 	instanceVariableNames: ''
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Stack-Exercise'!
 
-!StackLinkedElement methodsFor: 'operations' stamp: 'fr 10/5/2020 21:42:50'!
+!StackElement methodsFor: 'operations' stamp: 'fr 10/5/2020 21:42:50'!
 content
 	self subclassResponsibility ! !
 
 
-!classDefinition: #FullStackLinkedElement category: 'Stack-Exercise'!
-StackLinkedElement subclass: #FullStackLinkedElement
+!classDefinition: #FullStackElement category: 'Stack-Exercise'!
+StackElement subclass: #FullStackElement
 	instanceVariableNames: 'content previous'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Stack-Exercise'!
 
-!FullStackLinkedElement methodsFor: 'operations' stamp: 'fr 10/6/2020 01:35:23'!
+!FullStackElement methodsFor: 'operations' stamp: 'fr 10/6/2020 01:35:23'!
 content
 	^content copy! !
 
-!FullStackLinkedElement methodsFor: 'operations' stamp: 'fr 10/6/2020 01:31:00'!
+!FullStackElement methodsFor: 'operations' stamp: 'fr 10/6/2020 01:31:00'!
 previous
 	^previous! !
 
 
-!FullStackLinkedElement methodsFor: 'initialize' stamp: 'fr 10/8/2020 14:01:40'!
+!FullStackElement methodsFor: 'initialize' stamp: 'fr 10/8/2020 14:01:40'!
 initializeWithContent: someContent andNext: aStackLinkedElement
 	content _ someContent.
 	previous _ aStackLinkedElement ! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
-!classDefinition: 'FullStackLinkedElement class' category: 'Stack-Exercise'!
-FullStackLinkedElement class
+!classDefinition: 'FullStackElement class' category: 'Stack-Exercise'!
+FullStackElement class
 	instanceVariableNames: ''!
 
-!FullStackLinkedElement class methodsFor: 'instance creation' stamp: 'fr 10/8/2020 14:01:03'!
+!FullStackElement class methodsFor: 'instance creation' stamp: 'fr 10/8/2020 14:01:03'!
 withContent: someContent andNext: aStackLinkedElement
 	^self new initializeWithContent: someContent andNext: aStackLinkedElement! !
 
 
-!classDefinition: #NullStackLinkedElement category: 'Stack-Exercise'!
-StackLinkedElement subclass: #NullStackLinkedElement
+!classDefinition: #NullStackElement category: 'Stack-Exercise'!
+StackElement subclass: #NullStackElement
 	instanceVariableNames: ''
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Stack-Exercise'!
 
-!NullStackLinkedElement methodsFor: 'operations' stamp: 'fr 10/5/2020 22:01:12'!
+!NullStackElement methodsFor: 'operations' stamp: 'fr 10/5/2020 22:01:12'!
 content 
 	self class nullError ! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
-!classDefinition: 'NullStackLinkedElement class' category: 'Stack-Exercise'!
-NullStackLinkedElement class
+!classDefinition: 'NullStackElement class' category: 'Stack-Exercise'!
+NullStackElement class
 	instanceVariableNames: ''!
 
-!NullStackLinkedElement class methodsFor: 'error' stamp: 'fr 10/5/2020 21:40:10'!
+!NullStackElement class methodsFor: 'error' stamp: 'fr 10/5/2020 21:40:10'!
 nullError
 	self error: OOStack stackEmptyErrorDescription! !
