@@ -139,7 +139,7 @@ test10CanNotTopWhenThereAreNoObjectsInTheStack
 
 !classDefinition: #SentenceFinderByPrefixTest category: 'Stack-Exercise'!
 TestCase subclass: #SentenceFinderByPrefixTest
-	instanceVariableNames: 'stack emptyStack noMatchStack stackWithPrefixes expectedCollections stackBefore'
+	instanceVariableNames: 'stack emptyStack noMatchStack stackWithPrefixes stackBefore expectedCollectionWithPrefixes expectedCollectionWithRepeatedSentences stackWithRepeatedSentences'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Stack-Exercise'!
@@ -169,14 +169,14 @@ test04LookingForAPrefixWithABlankSpaceShouldEndWithAnError
 	self assertFinding: 'prefix with blank spaces' producesAnErrorWIthMessage: SentenceFinderByPrefix blankSpaceInPrefix
 	! !
 
-!SentenceFinderByPrefixTest methodsFor: 'tests' stamp: 'fr 10/8/2020 14:25:45'!
+!SentenceFinderByPrefixTest methodsFor: 'tests' stamp: 'fr 10/8/2020 14:54:04'!
 test05FindWorksAsExpected
-			
+
 	| sentenceFinder |
 	
 	sentenceFinder _ SentenceFinderByPrefix withStack: stackWithPrefixes.
 	
-	self assert: ( expectedCollections = (sentenceFinder find: 'stack'))
+	self assert: expectedCollectionWithPrefixes = (sentenceFinder find: 'stack')
 	
 	
 ! !
@@ -202,8 +202,17 @@ test08FindIsCaseSensitive
 	
 	self assert: ((sentenceFinder find: 'soy') size = 1 and: (sentenceFinder find: 'Soy') size = 0)! !
 
+!SentenceFinderByPrefixTest methodsFor: 'tests' stamp: 'fr 10/8/2020 14:55:58'!
+test09FindReturnsRepeatedSentences
+		
+	| sentenceFinder |
+	
+	sentenceFinder _ SentenceFinderByPrefix withStack: stackWithRepeatedSentences.
+	
+	self assert: expectedCollectionWithRepeatedSentences = (sentenceFinder find: 'repeated') ! !
 
-!SentenceFinderByPrefixTest methodsFor: 'setup' stamp: 'fr 10/8/2020 14:33:18'!
+
+!SentenceFinderByPrefixTest methodsFor: 'setup' stamp: 'fr 10/8/2020 14:55:03'!
 setUp
 
 	emptyStack _ OOStack new.
@@ -219,17 +228,25 @@ setUp
 	stack push: 'un'.
 	stack push: 'stack'.
 	
+	stackBefore _ stack copy.
+	
 	stackWithPrefixes _ OOStack new.
 	stackWithPrefixes push: 'sta'.
 	stackWithPrefixes push: 'stack'.
 	stackWithPrefixes push: 'stacks'.
 	
-	expectedCollections _ OrderedCollection new.
-	expectedCollections add: 'stacks'.
-	expectedCollections add: 'stack'.
+	expectedCollectionWithPrefixes _ OrderedCollection new.
+	expectedCollectionWithPrefixes add: 'stacks'.
+	expectedCollectionWithPrefixes add: 'stack'.
 	
-	stackBefore _ stack copy.
-
+	stackWithRepeatedSentences _ OOStack new.
+	stackWithRepeatedSentences push: 'repeated'.
+	stackWithRepeatedSentences push: 'repeated'.
+	
+	expectedCollectionWithRepeatedSentences _ OrderedCollection new.
+	expectedCollectionWithRepeatedSentences add: 'repeated'.
+	expectedCollectionWithRepeatedSentences add: 'repeated'
+	
 
 ! !
 
