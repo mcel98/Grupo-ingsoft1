@@ -265,13 +265,13 @@ assertFinding: aPrefix producesAnErrorWIthMessage: anErrorMessage
 			self assert: anError messageText = anErrorMessage].
 ! !
 
-!SentenceFinderByPrefixTest methodsFor: 'private' stamp: 'fr 10/3/2020 17:23:44'!
+!SentenceFinderByPrefixTest methodsFor: 'private' stamp: 'fr 10/8/2020 15:01:02'!
 assertFindingPrefix: aPrefix returnsAnEmptyCollectionWhenCalledWithStack: aStack 
 	| sentenceFinder |
 	
 	sentenceFinder _ SentenceFinderByPrefix withStack: aStack . 
 	
-	self assert: (sentenceFinder find: aPrefix) size = 0.! !
+	self assert: (sentenceFinder find: aPrefix) isEmpty.! !
 
 !SentenceFinderByPrefixTest methodsFor: 'private' stamp: 'fr 10/8/2020 14:36:21'!
 assertStackIsNotModifiedWhenFindingPrefix: aPrefix
