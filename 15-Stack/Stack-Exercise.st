@@ -139,7 +139,7 @@ test10CanNotTopWhenThereAreNoObjectsInTheStack
 
 !classDefinition: #SentenceFinderByPrefixTest category: 'Stack-Exercise'!
 TestCase subclass: #SentenceFinderByPrefixTest
-	instanceVariableNames: 'stack emptyStack noMatchStack'
+	instanceVariableNames: 'stack emptyStack noMatchStack stackWithPrefixes expectedCollections stackBefore'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Stack-Exercise'!
@@ -169,33 +169,32 @@ test04LookingForAPrefixWithABlankSpaceShouldEndWithAnError
 	self assertFinding: 'prefix with blank spaces' producesAnErrorWIthMessage: SentenceFinderByPrefix blankSpaceInPrefix
 	! !
 
-!SentenceFinderByPrefixTest methodsFor: 'tests' stamp: 'fr 10/2/2020 06:04:08'!
-test05LookingForAPrefixWithoutMatchesShouldNotModifyTheStackLength
+!SentenceFinderByPrefixTest methodsFor: 'tests' stamp: 'fr 10/8/2020 14:25:45'!
+test05FindWorksAsExpected
+			
+	| sentenceFinder |
 	
-	self assertSizeDoesNotChangeWhenFinding: 'Wint'
+	sentenceFinder _ SentenceFinderByPrefix withStack: stackWithPrefixes.
+	
+	self assert: ( expectedCollections = (sentenceFinder find: 'stack'))
+	
+	
+! !
 
-	! !
-
-!SentenceFinderByPrefixTest methodsFor: 'tests' stamp: 'fr 10/2/2020 06:04:17'!
-test06LookingForAPrefixWithMatchesShouldNotModifyTheStackLength
-		
-	self assertSizeDoesNotChangeWhenFinding: 'soy'
-	! !
-
-!SentenceFinderByPrefixTest methodsFor: 'tests' stamp: 'fr 10/3/2020 17:17:26'!
-test07LookingForAPrefixWithMatchesShouldNotModifyTheStack
+!SentenceFinderByPrefixTest methodsFor: 'tests' stamp: 'fr 10/8/2020 14:21:43'!
+test06LookingForAPrefixWithMatchesShouldNotModifyTheStack
 			
 	self assertStackIsNotModifiedWhenFindingPrefix: 'soy'
 ! !
 
-!SentenceFinderByPrefixTest methodsFor: 'tests' stamp: 'fr 10/3/2020 17:17:30'!
-test08LookingForAPrefixWithoutMatchesShouldNotModifyTheStack
+!SentenceFinderByPrefixTest methodsFor: 'tests' stamp: 'fr 10/8/2020 14:21:50'!
+test07LookingForAPrefixWithoutMatchesShouldNotModifyTheStack
 			
 	self assertStackIsNotModifiedWhenFindingPrefix: 'inge1'.
 ! !
 
-!SentenceFinderByPrefixTest methodsFor: 'tests' stamp: 'fr 10/2/2020 21:41:26'!
-test09FindIsCaseSensitive
+!SentenceFinderByPrefixTest methodsFor: 'tests' stamp: 'fr 10/8/2020 14:21:58'!
+test08FindIsCaseSensitive
 		
 	| sentenceFinder |
 	
@@ -204,7 +203,7 @@ test09FindIsCaseSensitive
 	self assert: ((sentenceFinder find: 'soy') size = 1 and: (sentenceFinder find: 'Soy') size = 0)! !
 
 
-!SentenceFinderByPrefixTest methodsFor: 'setup' stamp: 'fr 10/2/2020 05:45:33'!
+!SentenceFinderByPrefixTest methodsFor: 'setup' stamp: 'fr 10/8/2020 14:33:18'!
 setUp
 
 	emptyStack _ OOStack new.
@@ -219,6 +218,18 @@ setUp
 	stack push: 'soy'.
 	stack push: 'un'.
 	stack push: 'stack'.
+	
+	stackWithPrefixes _ OOStack new.
+	stackWithPrefixes push: 'sta'.
+	stackWithPrefixes push: 'stack'.
+	stackWithPrefixes push: 'stacks'.
+	
+	expectedCollections _ OrderedCollection new.
+	expectedCollections add: 'stacks'.
+	expectedCollections add: 'stack'.
+	
+	stackBefore _ stack copy.
+
 
 ! !
 
@@ -245,35 +256,19 @@ assertFindingPrefix: aPrefix returnsAnEmptyCollectionWhenCalledWithStack: aStack
 	
 	self assert: (sentenceFinder find: aPrefix) size = 0.! !
 
-!SentenceFinderByPrefixTest methodsFor: 'private' stamp: 'fr 10/2/2020 05:49:55'!
-assertSizeDoesNotChangeWhenFinding: aPrefix
-	
-	| sentenceFinder previousLength |
-	
-	previousLength _ stack size.
-
-	sentenceFinder _ SentenceFinderByPrefix withStack: stack . 
-	sentenceFinder find: aPrefix.
-	
-	self assert: previousLength = stack size.
-	
-	"¿Implementar = en OOStack para comparar aunque no sea requerido?"! !
-
-!SentenceFinderByPrefixTest methodsFor: 'private' stamp: 'fr 10/5/2020 21:47:24'!
+!SentenceFinderByPrefixTest methodsFor: 'private' stamp: 'fr 10/8/2020 14:36:21'!
 assertStackIsNotModifiedWhenFindingPrefix: aPrefix
-		
-	| stackBefore stackAfter sentenceFinder |
-	
-	stackBefore _ stack copy.
+	| sentenceFinder |
+
 	sentenceFinder _ SentenceFinderByPrefix withStack: stack. 
 	sentenceFinder find: aPrefix.
-	stackAfter _ stack copy.
-	self thereIsNoDifferenceBetweenStackAfterFind: stackAfter andBeforeFind: stackBefore
+	self stackDoesNotChangeAfterFind
 ! !
 
-!SentenceFinderByPrefixTest methodsFor: 'private' stamp: 'fr 10/5/2020 21:47:39'!
-thereIsNoDifferenceBetweenStackAfterFind: stackAfter andBeforeFind: stackBefore
-	| equal |
+!SentenceFinderByPrefixTest methodsFor: 'private' stamp: 'fr 10/8/2020 14:35:51'!
+stackDoesNotChangeAfterFind
+	| equal stackAfter |
+	stackAfter _ stack copy.
 	equal _ true.
 	[stackAfter isEmpty] whileFalse: [equal _ equal and: (stackAfter pop = stackBefore pop)].
 	self assert: (equal and: stackBefore isEmpty)
@@ -443,10 +438,10 @@ previous
 	^previous! !
 
 
-!FullStackLinkedElement methodsFor: 'initialize' stamp: 'fr 10/6/2020 01:31:00'!
-initializeWithContent: someContent andNext: anElement
+!FullStackLinkedElement methodsFor: 'initialize' stamp: 'fr 10/8/2020 14:01:40'!
+initializeWithContent: someContent andNext: aStackLinkedElement
 	content _ someContent.
-	previous _ anElement ! !
+	previous _ aStackLinkedElement ! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
@@ -454,9 +449,9 @@ initializeWithContent: someContent andNext: anElement
 FullStackLinkedElement class
 	instanceVariableNames: ''!
 
-!FullStackLinkedElement class methodsFor: 'instance creation' stamp: 'fr 10/2/2020 03:47:58'!
-withContent: someContent andNext: aLinkedNode
-	^self new initializeWithContent: someContent andNext: aLinkedNode! !
+!FullStackLinkedElement class methodsFor: 'instance creation' stamp: 'fr 10/8/2020 14:01:03'!
+withContent: someContent andNext: aStackLinkedElement
+	^self new initializeWithContent: someContent andNext: aStackLinkedElement! !
 
 
 !classDefinition: #NullStackLinkedElement category: 'Stack-Exercise'!
