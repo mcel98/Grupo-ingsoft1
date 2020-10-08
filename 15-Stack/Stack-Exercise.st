@@ -362,8 +362,8 @@ initializeWithStack: aStack
 ! !
 
 
-!SentenceFinderByPrefix methodsFor: 'private' stamp: 'fr 10/5/2020 21:33:16'!
-addSentence: aSentence withPrefix: aPrefix
+!SentenceFinderByPrefix methodsFor: 'private' stamp: 'fr 10/8/2020 15:11:24'!
+addSentence: aSentence ifBeginsWith: aPrefix
 	(aSentence beginsWith: aPrefix) ifTrue: [filteredSentences add: aSentence]	.! !
 
 !SentenceFinderByPrefix methodsFor: 'private' stamp: 'fr 10/5/2020 22:07:39'!
@@ -391,12 +391,12 @@ prefixIsNotEmpty: aPrefix
 restoreStack
 	^[backUpStack isEmpty] whileFalse: [stack push: backUpStack pop]! !
 
-!SentenceFinderByPrefix methodsFor: 'private' stamp: 'fr 10/5/2020 21:32:25'!
+!SentenceFinderByPrefix methodsFor: 'private' stamp: 'fr 10/8/2020 15:11:24'!
 storeFilteredSentencesBy: aPrefix
 	| current |
 	[stack isEmpty] whileFalse: [
 		current _ stack pop.
-		self addSentence: current withPrefix: aPrefix.
+		self addSentence: current ifBeginsWith: aPrefix.
 		backUpStack push: current
 	]! !
 
