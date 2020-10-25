@@ -32499,3 +32499,479 @@ process: aCommand
 ----SNAPSHOT----(25 October 2020 06:13:32) CuisUniversity-4384.image priorSource: 17304930!
 
 ----QUIT----(25 October 2020 06:13:57) CuisUniversity-4384.image priorSource: 17305532!
+
+----STARTUP---- (25 October 2020 17:18:44) as /home/fede/Documentos/Facultad/Inge1/Cuises/katas/linux64/CuisUniversity-4384.image!
+
+
+!testRun: #MarsRoverTests #test06MovingForwardWorksProperlyOnXAxis stamp: 'fr 10/25/2020 17:19:40'!
+PASSED!
+
+!testRun: #MarsRoverTests #test01EmptyCommandListDoesNothing stamp: 'fr 10/25/2020 17:19:42'!
+PASSED!
+
+!testRun: #MarsRoverTests #test02MovingForwardWorksProperlyOnYAxis stamp: 'fr 10/25/2020 17:19:42'!
+PASSED!
+
+!testRun: #MarsRoverTests #test03MovingBackwardsWorksProperlyOnYAxis stamp: 'fr 10/25/2020 17:19:42'!
+PASSED!
+
+!testRun: #MarsRoverTests #test04RotatingRightWorksProperly stamp: 'fr 10/25/2020 17:19:42'!
+PASSED!
+
+!testRun: #MarsRoverTests #test05RotatingLeftWorksProperly stamp: 'fr 10/25/2020 17:19:42'!
+PASSED!
+
+!testRun: #MarsRoverTests #test06MovingForwardWorksProperlyOnXAxis stamp: 'fr 10/25/2020 17:19:42'!
+PASSED!
+
+!testRun: #MarsRoverTests #test07MovingBackwardsWorksProperlyOnXAxis stamp: 'fr 10/25/2020 17:19:42'!
+PASSED!
+
+!testRun: #MarsRoverTests #test08CommandListWithMoreThanOneCommandExecutesProperly stamp: 'fr 10/25/2020 17:19:42'!
+PASSED!
+
+!testRun: #MarsRoverTests #test09CreatingAMarsRoverWithAnInvalidCardinalPointShouldFail stamp: 'fr 10/25/2020 17:19:42'!
+PASSED!
+
+!testRun: #MarsRoverTests #test10CommandListWithAnInvalidCommandShouldExecuteUntilItsFoundAndNoFurther stamp: 'fr 10/25/2020 17:19:42'!
+PASSED!
+
+!testRun: #MarsRoverTests #test01EmptyCommandListDoesNothing stamp: 'fr 10/25/2020 17:19:46'!
+PASSED!
+
+!testRun: #MarsRoverTests #test02MovingForwardWorksProperlyOnYAxis stamp: 'fr 10/25/2020 17:19:46'!
+PASSED!
+
+!testRun: #MarsRoverTests #test03MovingBackwardsWorksProperlyOnYAxis stamp: 'fr 10/25/2020 17:19:46'!
+PASSED!
+
+!testRun: #MarsRoverTests #test04RotatingRightWorksProperly stamp: 'fr 10/25/2020 17:19:46'!
+PASSED!
+
+!testRun: #MarsRoverTests #test05RotatingLeftWorksProperly stamp: 'fr 10/25/2020 17:19:46'!
+PASSED!
+
+!testRun: #MarsRoverTests #test06MovingForwardWorksProperlyOnXAxis stamp: 'fr 10/25/2020 17:19:46'!
+PASSED!
+
+!testRun: #MarsRoverTests #test07MovingBackwardsWorksProperlyOnXAxis stamp: 'fr 10/25/2020 17:19:46'!
+PASSED!
+
+!testRun: #MarsRoverTests #test08CommandListWithMoreThanOneCommandExecutesProperly stamp: 'fr 10/25/2020 17:19:46'!
+PASSED!
+
+!testRun: #MarsRoverTests #test09CreatingAMarsRoverWithAnInvalidCardinalPointShouldFail stamp: 'fr 10/25/2020 17:19:46'!
+PASSED!
+
+!testRun: #MarsRoverTests #test10CommandListWithAnInvalidCommandShouldExecuteUntilItsFoundAndNoFurther stamp: 'fr 10/25/2020 17:19:46'!
+PASSED!
+
+----STARTUP---- (25 October 2020 17:20:00) as /home/fede/Documentos/Facultad/Inge1/Cuises/katas/linux64/CuisUniversity-4384.image!
+
+
+!testRun: #MarsRoverTests #test01EmptyCommandListDoesNothing stamp: 'fr 10/25/2020 17:20:04'!
+PASSED!
+
+!testRun: #MarsRoverTests #test02MovingForwardWorksProperlyOnYAxis stamp: 'fr 10/25/2020 17:20:04'!
+PASSED!
+
+!testRun: #MarsRoverTests #test03MovingBackwardsWorksProperlyOnYAxis stamp: 'fr 10/25/2020 17:20:04'!
+PASSED!
+
+!testRun: #MarsRoverTests #test04RotatingRightWorksProperly stamp: 'fr 10/25/2020 17:20:04'!
+PASSED!
+
+!testRun: #MarsRoverTests #test05RotatingLeftWorksProperly stamp: 'fr 10/25/2020 17:20:04'!
+PASSED!
+
+!testRun: #MarsRoverTests #test06MovingForwardWorksProperlyOnXAxis stamp: 'fr 10/25/2020 17:20:04'!
+PASSED!
+
+!testRun: #MarsRoverTests #test07MovingBackwardsWorksProperlyOnXAxis stamp: 'fr 10/25/2020 17:20:04'!
+PASSED!
+
+!testRun: #MarsRoverTests #test08CommandListWithMoreThanOneCommandExecutesProperly stamp: 'fr 10/25/2020 17:20:04'!
+PASSED!
+
+!testRun: #MarsRoverTests #test09CreatingAMarsRoverWithAnInvalidCardinalPointShouldFail stamp: 'fr 10/25/2020 17:20:04'!
+PASSED!
+
+!testRun: #MarsRoverTests #test10CommandListWithAnInvalidCommandShouldExecuteUntilItsFoundAndNoFurther stamp: 'fr 10/25/2020 17:20:04'!
+PASSED!
+
+!classRemoval: #WestOrientation stamp: 'fr 10/25/2020 17:21:40'!
+MarsRoverOrientation subclass: #WestOrientation
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'MarsRover - Exercise'!
+
+!classRemoval: #SouthOrientation stamp: 'fr 10/25/2020 17:21:40'!
+MarsRoverOrientation subclass: #SouthOrientation
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'MarsRover - Exercise'!
+
+!classRemoval: #NorthOrientation stamp: 'fr 10/25/2020 17:21:41'!
+MarsRoverOrientation subclass: #NorthOrientation
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'MarsRover - Exercise'!
+
+!classRemoval: #EastOrientation stamp: 'fr 10/25/2020 17:21:41'!
+MarsRoverOrientation subclass: #EastOrientation
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'MarsRover - Exercise'!
+
+!classRemoval: #MarsRoverOrientation stamp: 'fr 10/25/2020 17:21:42'!
+Object subclass: #MarsRoverOrientation
+	instanceVariableNames: 'marsRover'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'MarsRover - Exercise'!
+
+!classRemoval: #MarsRover stamp: 'fr 10/25/2020 17:21:42'!
+Object subclass: #MarsRover
+	instanceVariableNames: 'position orientation'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'MarsRover - Exercise'!
+
+!classRemoval: #MarsRoverTests stamp: 'fr 10/25/2020 17:21:43'!
+TestCase subclass: #MarsRoverTests
+	instanceVariableNames: 'south north east west'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'MarsRover - Exercise'!
+
+----End fileIn of /home/fede/Documentos/Facultad/Inge1/Repositorio/Grupo-ingsoft1/16-MarsRover/MarsRover - Exercise.st----!
+
+!testRun: #MarsRoverTests #test01EmptyCommandListDoesNothing stamp: 'fr 10/25/2020 17:21:56'!
+PASSED!
+
+!testRun: #MarsRoverTests #test02MovingForwardWorksProperlyOnYAxis stamp: 'fr 10/25/2020 17:21:56'!
+PASSED!
+
+!testRun: #MarsRoverTests #test03MovingBackwardsWorksProperlyOnYAxis stamp: 'fr 10/25/2020 17:21:56'!
+PASSED!
+
+!testRun: #MarsRoverTests #test04RotatingRightWorksProperly stamp: 'fr 10/25/2020 17:21:56'!
+PASSED!
+
+!testRun: #MarsRoverTests #test05RotatingLeftWorksProperly stamp: 'fr 10/25/2020 17:21:56'!
+PASSED!
+
+!testRun: #MarsRoverTests #test06MovingForwardWorksProperlyOnXAxis stamp: 'fr 10/25/2020 17:21:56'!
+PASSED!
+
+!testRun: #MarsRoverTests #test07MovingBackwardsWorksProperlyOnXAxis stamp: 'fr 10/25/2020 17:21:56'!
+PASSED!
+
+!testRun: #MarsRoverTests #test08CommandListWithMoreThanOneCommandExecutesProperly stamp: 'fr 10/25/2020 17:21:56'!
+PASSED!
+
+!testRun: #MarsRoverTests #test09CreatingAMarsRoverWithAnInvalidCardinalPointShouldFail stamp: 'fr 10/25/2020 17:21:56'!
+PASSED!
+
+!testRun: #MarsRoverTests #test10CommandListWithAnInvalidCommandShouldExecuteUntilItsFoundAndNoFurther stamp: 'fr 10/25/2020 17:21:56'!
+PASSED!
+
+!testRun: #MarsRoverTests #test11NegativeCoordinates stamp: 'fr 10/25/2020 17:21:56'!
+PASSED!
+
+!methodRemoval: MarsRoverTests #test11NegativeCoordinates stamp: 'fr 10/25/2020 17:23:26'!
+test11NegativeCoordinates
+
+	| marsRover |
+	
+	marsRover _ MarsRover at: -1@1 facing: south.
+	
+	marsRover move: ''.
+	
+	self assert: (marsRover isAt: -1@1 facing: south)!
+!MarsRoverCommandHandler methodsFor: 'initialization' stamp: 'fr 10/25/2020 17:26:19' prior: 50872790!
+initializeWith: aMarsRover
+
+	marsRover _ aMarsRover.
+
+
+! !
+!MarsRover methodsFor: 'initialization' stamp: 'fr 10/25/2020 17:27:17' prior: 50872669!
+initializeAt: aPosition facing: aCardinalPoint 
+	
+	position _ aPosition.
+	orientation _ MarsRoverOrientation facing: aCardinalPoint for: self.
+	self mapActions! !
+
+!classDefinition: #MarsRover category: 'MarsRover - Exercise' stamp: 'fr 10/25/2020 17:27:42'!
+Object subclass: #MarsRover
+	instanceVariableNames: 'position orientation commandsHandler actionsForCommands'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'MarsRover - Exercise'!
+!MarsRover methodsFor: 'initialization' stamp: 'fr 10/25/2020 17:27:40'!
+mapActions
+
+	actionsForCommands _ Dictionary new.
+	actionsForCommands at: $f put: MarsRoverCommandsMoveForward new.
+	actionsForCommands at: $b put: MarsRoverCommandsMoveBackwards new.
+	actionsForCommands at: $l put: MarsRoverCommandsRotateLeft new.
+	actionsForCommands at: $r put: MarsRoverCommandsRotateRight new.! !
+
+Object subclass: #MarsRover
+	instanceVariableNames: 'position orientation actionsForCommands'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'MarsRover - Exercise'!
+
+!classDefinition: #MarsRover category: 'MarsRover - Exercise' stamp: 'fr 10/25/2020 17:27:48'!
+Object subclass: #MarsRover
+	instanceVariableNames: 'position orientation actionsForCommands'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'MarsRover - Exercise'!
+!MarsRoverCommandHandler methodsFor: 'execution' stamp: 'fr 10/25/2020 17:28:16' prior: 50872804!
+execute: aCommand
+! !
+!MarsRover methodsFor: 'movement' stamp: 'fr 10/25/2020 17:29:08' prior: 50872683!
+process: aCommand
+
+	|action|
+	action _ actionsForCommands at: aCommand ifAbsent: [self error: MarsRover invalidCommandErrorDescription ].
+	action executeWith: orientation
+	
+	"
+	aCommandList = $f ifTrue: [^orientation moveForward].
+	aCommandList = $b ifTrue: [^orientation moveBackwards].
+	aCommandList = $l ifTrue: [^orientation rotateLeft].
+	aCommandList = $r ifTrue: [^orientation rotateRight].
+	
+	self error: self class invalidCommandErrorDescription 
+	"! !
+
+!testRun: #MarsRoverTests #test01EmptyCommandListDoesNothing stamp: 'fr 10/25/2020 17:29:24'!
+PASSED!
+
+!testRun: #MarsRoverTests #test02MovingForwardWorksProperlyOnYAxis stamp: 'fr 10/25/2020 17:29:24'!
+PASSED!
+
+!testRun: #MarsRoverTests #test03MovingBackwardsWorksProperlyOnYAxis stamp: 'fr 10/25/2020 17:29:24'!
+PASSED!
+
+!testRun: #MarsRoverTests #test04RotatingRightWorksProperly stamp: 'fr 10/25/2020 17:29:24'!
+PASSED!
+
+!testRun: #MarsRoverTests #test05RotatingLeftWorksProperly stamp: 'fr 10/25/2020 17:29:24'!
+PASSED!
+
+!testRun: #MarsRoverTests #test06MovingForwardWorksProperlyOnXAxis stamp: 'fr 10/25/2020 17:29:24'!
+PASSED!
+
+!testRun: #MarsRoverTests #test07MovingBackwardsWorksProperlyOnXAxis stamp: 'fr 10/25/2020 17:29:24'!
+PASSED!
+
+!testRun: #MarsRoverTests #test08CommandListWithMoreThanOneCommandExecutesProperly stamp: 'fr 10/25/2020 17:29:24'!
+PASSED!
+
+!testRun: #MarsRoverTests #test09CreatingAMarsRoverWithAnInvalidCardinalPointShouldFail stamp: 'fr 10/25/2020 17:29:24'!
+PASSED!
+
+!testRun: #MarsRoverTests #test10CommandListWithAnInvalidCommandShouldExecuteUntilItsFoundAndNoFurther stamp: 'fr 10/25/2020 17:29:24'!
+PASSED!
+
+!classRemoval: #MarsRoverCommandHandler stamp: 'fr 10/25/2020 17:29:29'!
+Object subclass: #MarsRoverCommandHandler
+	instanceVariableNames: 'commandsDictionary marsRover'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'MarsRover - Exercise'!
+!MarsRoverCommands methodsFor: 'execution' stamp: 'fr 10/25/2020 17:30:45' prior: 50872840!
+executeWith: anOrientation
+
+	self subclassResponsibility.! !
+!MarsRoverCommandsMoveBackwards methodsFor: 'execution' stamp: 'fr 10/25/2020 17:30:56' prior: 50872860 overrides: 50873371!
+executeWith: anOrientation
+
+	^anOrientation moveBackwards.! !
+!MarsRoverCommandsMoveForward methodsFor: 'execution' stamp: 'fr 10/25/2020 17:31:02' prior: 50872880 overrides: 50873371!
+executeWith: anOrientation
+
+	^anOrientation moveForward.! !
+!MarsRoverCommandsRotateLeft methodsFor: 'execution' stamp: 'fr 10/25/2020 17:31:07' prior: 50872899 overrides: 50873371!
+executeWith: anOrientation
+
+	^anOrientation rotateLeft.! !
+!MarsRoverCommandsRotateRight methodsFor: 'execution' stamp: 'fr 10/25/2020 17:31:13' prior: 50872919 overrides: 50873371!
+executeWith: anOrientation
+
+	^anOrientation rotateRight.! !
+
+!classRenamed: #MarsRoverCommands as: #MarsRoverActions stamp: 'fr 10/25/2020 17:31:34'!
+Smalltalk renameClassNamed: #MarsRoverCommands as: #MarsRoverActions!
+
+!classRenamed: #MarsRoverCommandsMoveBackwards as: #MarsRoverMoveBackwards stamp: 'fr 10/25/2020 17:31:54'!
+Smalltalk renameClassNamed: #MarsRoverCommandsMoveBackwards as: #MarsRoverMoveBackwards!
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'fr 10/25/2020 17:31:54' prior: 50873279!
+mapActions
+
+	actionsForCommands _ Dictionary new.
+	actionsForCommands at: $f put: MarsRoverCommandsMoveForward new.
+	actionsForCommands at: $b put: MarsRoverMoveBackwards new.
+	actionsForCommands at: $l put: MarsRoverCommandsRotateLeft new.
+	actionsForCommands at: $r put: MarsRoverCommandsRotateRight new.! !
+
+!classRenamed: #MarsRoverCommandsMoveForward as: #MarsRoverMoveForward stamp: 'fr 10/25/2020 17:32:08'!
+Smalltalk renameClassNamed: #MarsRoverCommandsMoveForward as: #MarsRoverMoveForward!
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'fr 10/25/2020 17:32:08' prior: 50873411!
+mapActions
+
+	actionsForCommands _ Dictionary new.
+	actionsForCommands at: $f put: MarsRoverMoveForward new.
+	actionsForCommands at: $b put: MarsRoverMoveBackwards new.
+	actionsForCommands at: $l put: MarsRoverCommandsRotateLeft new.
+	actionsForCommands at: $r put: MarsRoverCommandsRotateRight new.! !
+
+!classRenamed: #MarsRoverCommandsRotateRight as: #MarsRoverRotateRight stamp: 'fr 10/25/2020 17:32:20'!
+Smalltalk renameClassNamed: #MarsRoverCommandsRotateRight as: #MarsRoverRotateRight!
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'fr 10/25/2020 17:32:20' prior: 50873430!
+mapActions
+
+	actionsForCommands _ Dictionary new.
+	actionsForCommands at: $f put: MarsRoverMoveForward new.
+	actionsForCommands at: $b put: MarsRoverMoveBackwards new.
+	actionsForCommands at: $l put: MarsRoverCommandsRotateLeft new.
+	actionsForCommands at: $r put: MarsRoverRotateRight new.! !
+
+!classRenamed: #MarsRoverCommandsRotateLeft as: #MarsRoverRotateLeft stamp: 'fr 10/25/2020 17:32:30'!
+Smalltalk renameClassNamed: #MarsRoverCommandsRotateLeft as: #MarsRoverRotateLeft!
+!MarsRover methodsFor: 'as yet unclassified' stamp: 'fr 10/25/2020 17:32:31' prior: 50873449!
+mapActions
+
+	actionsForCommands _ Dictionary new.
+	actionsForCommands at: $f put: MarsRoverMoveForward new.
+	actionsForCommands at: $b put: MarsRoverMoveBackwards new.
+	actionsForCommands at: $l put: MarsRoverRotateLeft new.
+	actionsForCommands at: $r put: MarsRoverRotateRight new.! !
+
+!testRun: #MarsRoverTests #test01EmptyCommandListDoesNothing stamp: 'fr 10/25/2020 17:33:49'!
+PASSED!
+
+!testRun: #MarsRoverTests #test02MovingForwardWorksProperlyOnYAxis stamp: 'fr 10/25/2020 17:33:49'!
+PASSED!
+
+!testRun: #MarsRoverTests #test03MovingBackwardsWorksProperlyOnYAxis stamp: 'fr 10/25/2020 17:33:49'!
+PASSED!
+
+!testRun: #MarsRoverTests #test04RotatingRightWorksProperly stamp: 'fr 10/25/2020 17:33:49'!
+PASSED!
+
+!testRun: #MarsRoverTests #test05RotatingLeftWorksProperly stamp: 'fr 10/25/2020 17:33:49'!
+PASSED!
+
+!testRun: #MarsRoverTests #test06MovingForwardWorksProperlyOnXAxis stamp: 'fr 10/25/2020 17:33:49'!
+PASSED!
+
+!testRun: #MarsRoverTests #test07MovingBackwardsWorksProperlyOnXAxis stamp: 'fr 10/25/2020 17:33:49'!
+PASSED!
+
+!testRun: #MarsRoverTests #test08CommandListWithMoreThanOneCommandExecutesProperly stamp: 'fr 10/25/2020 17:33:49'!
+PASSED!
+
+!testRun: #MarsRoverTests #test09CreatingAMarsRoverWithAnInvalidCardinalPointShouldFail stamp: 'fr 10/25/2020 17:33:49'!
+PASSED!
+
+!testRun: #MarsRoverTests #test10CommandListWithAnInvalidCommandShouldExecuteUntilItsFoundAndNoFurther stamp: 'fr 10/25/2020 17:33:49'!
+PASSED!
+
+!methodRemoval: MarsRover #orientation stamp: 'fr 10/25/2020 17:36:37'!
+orientation
+
+	^orientation.!
+
+----SNAPSHOT----(25 October 2020 17:36:47) CuisUniversity-4384.image priorSource: 17305625!
+
+!testRun: #MarsRoverTests #test01EmptyCommandListDoesNothing stamp: 'fr 10/25/2020 17:36:50'!
+PASSED!
+
+!testRun: #MarsRoverTests #test02MovingForwardWorksProperlyOnYAxis stamp: 'fr 10/25/2020 17:36:50'!
+PASSED!
+
+!testRun: #MarsRoverTests #test03MovingBackwardsWorksProperlyOnYAxis stamp: 'fr 10/25/2020 17:36:50'!
+PASSED!
+
+!testRun: #MarsRoverTests #test04RotatingRightWorksProperly stamp: 'fr 10/25/2020 17:36:50'!
+PASSED!
+
+!testRun: #MarsRoverTests #test05RotatingLeftWorksProperly stamp: 'fr 10/25/2020 17:36:50'!
+PASSED!
+
+!testRun: #MarsRoverTests #test06MovingForwardWorksProperlyOnXAxis stamp: 'fr 10/25/2020 17:36:50'!
+PASSED!
+
+!testRun: #MarsRoverTests #test07MovingBackwardsWorksProperlyOnXAxis stamp: 'fr 10/25/2020 17:36:50'!
+PASSED!
+
+!testRun: #MarsRoverTests #test08CommandListWithMoreThanOneCommandExecutesProperly stamp: 'fr 10/25/2020 17:36:50'!
+PASSED!
+
+!testRun: #MarsRoverTests #test09CreatingAMarsRoverWithAnInvalidCardinalPointShouldFail stamp: 'fr 10/25/2020 17:36:50'!
+PASSED!
+
+!testRun: #MarsRoverTests #test10CommandListWithAnInvalidCommandShouldExecuteUntilItsFoundAndNoFurther stamp: 'fr 10/25/2020 17:36:50'!
+PASSED!
+!MarsRover methodsFor: 'movement' stamp: 'fr 10/25/2020 17:45:31' prior: 50873310!
+process: aCommand
+
+	|action|
+	action _ actionsForCommands at: aCommand ifAbsent: [self error: MarsRover invalidCommandErrorDescription ].
+	action executeWith: orientation! !
+!MarsRover methodsFor: 'movement' stamp: 'fr 10/25/2020 17:45:36' prior: 50873557!
+process: aCommand
+
+	|action|
+	
+	action _ actionsForCommands at: aCommand ifAbsent: [self error: MarsRover invalidCommandErrorDescription ].
+	
+	action executeWith: orientation! !
+
+----SNAPSHOT----(25 October 2020 17:45:43) CuisUniversity-4384.image priorSource: 17339741!
+
+----SNAPSHOT----(25 October 2020 17:49:45) CuisUniversity-4384.image priorSource: 17341553!
+
+!testRun: #MarsRoverTests #test01EmptyCommandListDoesNothing stamp: 'fr 10/25/2020 17:50:09'!
+PASSED!
+
+!testRun: #MarsRoverTests #test02MovingForwardWorksProperlyOnYAxis stamp: 'fr 10/25/2020 17:50:09'!
+PASSED!
+
+!testRun: #MarsRoverTests #test03MovingBackwardsWorksProperlyOnYAxis stamp: 'fr 10/25/2020 17:50:09'!
+PASSED!
+
+!testRun: #MarsRoverTests #test04RotatingRightWorksProperly stamp: 'fr 10/25/2020 17:50:09'!
+PASSED!
+
+!testRun: #MarsRoverTests #test05RotatingLeftWorksProperly stamp: 'fr 10/25/2020 17:50:09'!
+PASSED!
+
+!testRun: #MarsRoverTests #test06MovingForwardWorksProperlyOnXAxis stamp: 'fr 10/25/2020 17:50:09'!
+PASSED!
+
+!testRun: #MarsRoverTests #test07MovingBackwardsWorksProperlyOnXAxis stamp: 'fr 10/25/2020 17:50:09'!
+PASSED!
+
+!testRun: #MarsRoverTests #test08CommandListWithMoreThanOneCommandExecutesProperly stamp: 'fr 10/25/2020 17:50:09'!
+PASSED!
+
+!testRun: #MarsRoverTests #test09CreatingAMarsRoverWithAnInvalidCardinalPointShouldFail stamp: 'fr 10/25/2020 17:50:09'!
+PASSED!
+
+!testRun: #MarsRoverTests #test10CommandListWithAnInvalidCommandShouldExecuteUntilItsFoundAndNoFurther stamp: 'fr 10/25/2020 17:50:09'!
+PASSED!
+
+----SNAPSHOT----(25 October 2020 17:50:13) CuisUniversity-4384.image priorSource: 17341646!
+
+----QUIT----(25 October 2020 17:50:22) CuisUniversity-4384.image priorSource: 17342885!
