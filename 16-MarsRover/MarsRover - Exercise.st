@@ -140,13 +140,13 @@ move: aCommandList
 	
 	! !
 
-!MarsRover methodsFor: 'movement' stamp: 'fr 10/24/2020 22:11:10'!
-process: aCommandList
+!MarsRover methodsFor: 'movement' stamp: 'fr 10/25/2020 06:13:18'!
+process: aCommand
 
-	aCommandList = $f ifTrue: [^orientation moveForward].
-	aCommandList = $b ifTrue: [^orientation moveBackwards].
-	aCommandList = $l ifTrue: [^orientation rotateLeft].
-	aCommandList = $r ifTrue: [^orientation rotateRight].
+	aCommand = $f ifTrue: [^orientation moveForward].
+	aCommand = $b ifTrue: [^orientation moveBackwards].
+	aCommand = $l ifTrue: [^orientation rotateLeft].
+	aCommand = $r ifTrue: [^orientation rotateRight].
 	
 	self error: self class invalidCommandErrorDescription ! !
 

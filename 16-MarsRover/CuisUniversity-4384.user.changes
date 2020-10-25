@@ -32477,3 +32477,25 @@ PASSED!
 PASSED!
 
 ----SNAPSHOT----(24 October 2020 22:36:49) CuisUniversity-4384.image priorSource: 17247981!
+
+----SNAPSHOT----(24 October 2020 22:49:45) CuisUniversity-4384.image priorSource: 17304651!
+
+----SNAPSHOT----(24 October 2020 22:49:54) CuisUniversity-4384.image priorSource: 17304744!
+
+----QUIT----(24 October 2020 22:51:02) CuisUniversity-4384.image priorSource: 17304837!
+
+----STARTUP---- (25 October 2020 06:12:22) as /home/fede/Documentos/Facultad/Inge1/Cuises/katas/linux64/CuisUniversity-4384.image!
+
+!MarsRover methodsFor: 'movement' stamp: 'fr 10/25/2020 06:13:18' prior: 50871142!
+process: aCommand
+
+	aCommand = $f ifTrue: [^orientation moveForward].
+	aCommand = $b ifTrue: [^orientation moveBackwards].
+	aCommand = $l ifTrue: [^orientation rotateLeft].
+	aCommand = $r ifTrue: [^orientation rotateRight].
+	
+	self error: self class invalidCommandErrorDescription ! !
+
+----SNAPSHOT----(25 October 2020 06:13:32) CuisUniversity-4384.image priorSource: 17304930!
+
+----QUIT----(25 October 2020 06:13:57) CuisUniversity-4384.image priorSource: 17305532!
