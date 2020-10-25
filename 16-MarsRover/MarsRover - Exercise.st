@@ -1,4 +1,4 @@
-!classDefinition: #MarsRoverTests category: 'MarsRover - Exercise'!
+!classDefinition: #MarsRoverTests category: #'MarsRover - Exercise'!
 TestCase subclass: #MarsRoverTests
 	instanceVariableNames: 'south north east west'
 	classVariableNames: ''
@@ -117,19 +117,31 @@ test10CommandListWithAnInvalidCommandShouldExecuteUntilItsFoundAndNoFurther
 	self should: [marsRover move: 'flbzfr'] raise: Error withMessageText: MarsRover invalidCommandErrorDescription.
 	self assert: (marsRover isAt: 2@2 facing: west)! !
 
+!MarsRoverTests methodsFor: 'tests' stamp: 'MSM 10/25/2020 02:16:01'!
+test11NegativeCoordinates
+
+	| marsRover |
+	
+	marsRover _ MarsRover at: -1@1 facing: south.
+	
+	marsRover move: ''.
+	
+	self assert: (marsRover isAt: -1@1 facing: south)! !
+
 
-!classDefinition: #MarsRover category: 'MarsRover - Exercise'!
+!classDefinition: #MarsRover category: #'MarsRover - Exercise'!
 Object subclass: #MarsRover
-	instanceVariableNames: 'position orientation'
+	instanceVariableNames: 'position orientation commandsHandler'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'MarsRover - Exercise'!
 
-!MarsRover methodsFor: 'initialization' stamp: 'fr 10/24/2020 20:50:28'!
+!MarsRover methodsFor: 'initialization' stamp: 'MSM 10/25/2020 03:43:34'!
 initializeAt: aPosition facing: aCardinalPoint 
 	
 	position _ aPosition.
-	orientation _ MarsRoverOrientation facing: aCardinalPoint for: self! !
+	orientation _ MarsRoverOrientation facing: aCardinalPoint for: self.
+	commandsHandler _ MarsRoverCommandHandler for: self.! !
 
 
 !MarsRover methodsFor: 'movement' stamp: 'fr 10/24/2020 21:04:55'!
@@ -140,15 +152,18 @@ move: aCommandList
 	
 	! !
 
-!MarsRover methodsFor: 'movement' stamp: 'fr 10/25/2020 06:13:18'!
+!MarsRover methodsFor: 'movement' stamp: 'MSM 10/25/2020 03:46:48'!
 process: aCommand
 
-	aCommand = $f ifTrue: [^orientation moveForward].
-	aCommand = $b ifTrue: [^orientation moveBackwards].
-	aCommand = $l ifTrue: [^orientation rotateLeft].
-	aCommand = $r ifTrue: [^orientation rotateRight].
+	^commandsHandler execute: aCommand.
+	"
+	aCommandList = $f ifTrue: [^orientation moveForward].
+	aCommandList = $b ifTrue: [^orientation moveBackwards].
+	aCommandList = $l ifTrue: [^orientation rotateLeft].
+	aCommandList = $r ifTrue: [^orientation rotateRight].
 	
-	self error: self class invalidCommandErrorDescription ! !
+	self error: self class invalidCommandErrorDescription 
+	"! !
 
 
 !MarsRover methodsFor: 'orientation' stamp: 'fr 10/24/2020 20:57:06'!
@@ -170,6 +185,11 @@ faceSouth
 faceWest
 
 	orientation _ MarsRoverOrientation facing: #W for: self ! !
+
+!MarsRover methodsFor: 'orientation' stamp: 'MSM 10/25/2020 03:36:05'!
+orientation
+
+	^orientation.! !
 
 
 !MarsRover methodsFor: 'movement cardinal orientation' stamp: 'fr 10/24/2020 20:55:58'!
@@ -202,7 +222,7 @@ isAt: aPosition facing: aCardinalPoint
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
-!classDefinition: 'MarsRover class' category: 'MarsRover - Exercise'!
+!classDefinition: 'MarsRover class' category: #'MarsRover - Exercise'!
 MarsRover class
 	instanceVariableNames: ''!
 
@@ -229,7 +249,110 @@ invalidCommandErrorDescription
 	^'Invalid command'! !
 
 
-!classDefinition: #MarsRoverOrientation category: 'MarsRover - Exercise'!
+!classDefinition: #MarsRoverCommandHandler category: #'MarsRover - Exercise'!
+Object subclass: #MarsRoverCommandHandler
+	instanceVariableNames: 'commandsDictionary marsRover'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'MarsRover - Exercise'!
+
+!MarsRoverCommandHandler methodsFor: 'initialization' stamp: 'MSM 10/25/2020 03:35:15'!
+initializeWith: aMarsRover
+
+	marsRover _ aMarsRover.
+	commandsDictionary _ Dictionary new.
+	commandsDictionary at: $f put: MarsRoverCommandsMoveForward new.
+	commandsDictionary at: $b put: MarsRoverCommandsMoveBackwards new.
+	commandsDictionary at: $l put: MarsRoverCommandsRotateLeft new.
+	commandsDictionary at: $r put: MarsRoverCommandsRotateRight new.
+
+! !
+
+
+!MarsRoverCommandHandler methodsFor: 'execution' stamp: 'MSM 10/25/2020 03:37:11'!
+execute: aCommand
+	|parsedCommand|
+	parsedCommand := commandsDictionary at: aCommand ifAbsent: [self error: MarsRover invalidCommandErrorDescription ].
+	parsedCommand executeWith: marsRover orientation.! !
+
+"-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
+
+!classDefinition: 'MarsRoverCommandHandler class' category: #'MarsRover - Exercise'!
+MarsRoverCommandHandler class
+	instanceVariableNames: ''!
+
+!MarsRoverCommandHandler class methodsFor: 'as yet unclassified' stamp: 'MSM 10/25/2020 03:49:38'!
+for: aMarsRover
+
+	^self new initializeWith: aMarsRover.! !
+
+
+!classDefinition: #MarsRoverCommands category: #'MarsRover - Exercise'!
+Object subclass: #MarsRoverCommands
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'MarsRover - Exercise'!
+
+!MarsRoverCommands methodsFor: 'execution' stamp: 'MSM 10/25/2020 03:37:41'!
+executeWith: aOrientation
+
+	self subclassResponsibility.! !
+
+
+!classDefinition: #MarsRoverCommandsMoveBackwards category: #'MarsRover - Exercise'!
+MarsRoverCommands subclass: #MarsRoverCommandsMoveBackwards
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'MarsRover - Exercise'!
+
+!MarsRoverCommandsMoveBackwards methodsFor: 'execution' stamp: 'MSM 10/25/2020 03:38:20'!
+executeWith: orientation
+
+	^orientation moveBackwards.! !
+
+
+!classDefinition: #MarsRoverCommandsMoveForward category: #'MarsRover - Exercise'!
+MarsRoverCommands subclass: #MarsRoverCommandsMoveForward
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'MarsRover - Exercise'!
+
+!MarsRoverCommandsMoveForward methodsFor: 'execution' stamp: 'MSM 10/25/2020 03:39:58'!
+executeWith: orientation
+
+	^orientation moveForward.! !
+
+
+!classDefinition: #MarsRoverCommandsRotateLeft category: #'MarsRover - Exercise'!
+MarsRoverCommands subclass: #MarsRoverCommandsRotateLeft
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'MarsRover - Exercise'!
+
+!MarsRoverCommandsRotateLeft methodsFor: 'execution' stamp: 'MSM 10/25/2020 03:39:29'!
+executeWith: orientation
+
+	^orientation rotateLeft.! !
+
+
+!classDefinition: #MarsRoverCommandsRotateRight category: #'MarsRover - Exercise'!
+MarsRoverCommands subclass: #MarsRoverCommandsRotateRight
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'MarsRover - Exercise'!
+
+!MarsRoverCommandsRotateRight methodsFor: 'execution' stamp: 'MSM 10/25/2020 03:38:58'!
+executeWith: orientation
+
+	^orientation rotateRight.! !
+
+
+!classDefinition: #MarsRoverOrientation category: #'MarsRover - Exercise'!
 Object subclass: #MarsRoverOrientation
 	instanceVariableNames: 'marsRover'
 	classVariableNames: ''
@@ -270,7 +393,7 @@ faces: aCardinalPoint
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
-!classDefinition: 'MarsRoverOrientation class' category: 'MarsRover - Exercise'!
+!classDefinition: 'MarsRoverOrientation class' category: #'MarsRover - Exercise'!
 MarsRoverOrientation class
 	instanceVariableNames: ''!
 
@@ -301,7 +424,7 @@ invalidCardinalPointErrorDescription
 	^'Invalid cardinal point'! !
 
 
-!classDefinition: #EastOrientation category: 'MarsRover - Exercise'!
+!classDefinition: #EastOrientation category: #'MarsRover - Exercise'!
 MarsRoverOrientation subclass: #EastOrientation
 	instanceVariableNames: ''
 	classVariableNames: ''
@@ -336,7 +459,7 @@ faces: aCardinalPoint
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
-!classDefinition: 'EastOrientation class' category: 'MarsRover - Exercise'!
+!classDefinition: 'EastOrientation class' category: #'MarsRover - Exercise'!
 EastOrientation class
 	instanceVariableNames: ''!
 
@@ -346,7 +469,7 @@ canHandle: aCardinalPoint
 	^aCardinalPoint = #E! !
 
 
-!classDefinition: #NorthOrientation category: 'MarsRover - Exercise'!
+!classDefinition: #NorthOrientation category: #'MarsRover - Exercise'!
 MarsRoverOrientation subclass: #NorthOrientation
 	instanceVariableNames: ''
 	classVariableNames: ''
@@ -381,7 +504,7 @@ faces: aCardinalPoint
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
-!classDefinition: 'NorthOrientation class' category: 'MarsRover - Exercise'!
+!classDefinition: 'NorthOrientation class' category: #'MarsRover - Exercise'!
 NorthOrientation class
 	instanceVariableNames: ''!
 
@@ -391,7 +514,7 @@ canHandle: aCardinalPoint
 	^aCardinalPoint = #N! !
 
 
-!classDefinition: #SouthOrientation category: 'MarsRover - Exercise'!
+!classDefinition: #SouthOrientation category: #'MarsRover - Exercise'!
 MarsRoverOrientation subclass: #SouthOrientation
 	instanceVariableNames: ''
 	classVariableNames: ''
@@ -429,7 +552,7 @@ faces: aCardinalPoint
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
-!classDefinition: 'SouthOrientation class' category: 'MarsRover - Exercise'!
+!classDefinition: 'SouthOrientation class' category: #'MarsRover - Exercise'!
 SouthOrientation class
 	instanceVariableNames: ''!
 
@@ -439,7 +562,7 @@ canHandle: aCardinalPoint
 	^aCardinalPoint = #S! !
 
 
-!classDefinition: #WestOrientation category: 'MarsRover - Exercise'!
+!classDefinition: #WestOrientation category: #'MarsRover - Exercise'!
 MarsRoverOrientation subclass: #WestOrientation
 	instanceVariableNames: ''
 	classVariableNames: ''
@@ -474,7 +597,7 @@ faces: aCardinalPoint
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
-!classDefinition: 'WestOrientation class' category: 'MarsRover - Exercise'!
+!classDefinition: 'WestOrientation class' category: #'MarsRover - Exercise'!
 WestOrientation class
 	instanceVariableNames: ''!
 
