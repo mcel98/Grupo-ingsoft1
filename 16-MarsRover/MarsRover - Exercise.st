@@ -342,10 +342,8 @@ faces: aCardinalPoint
 MarsRoverOrientation class
 	instanceVariableNames: ''!
 
-!MarsRoverOrientation class methodsFor: 'instance creation' stamp: 'fr 10/24/2020 21:59:17'!
+!MarsRoverOrientation class methodsFor: 'instance creation' stamp: 'fr 10/26/2020 16:29:54'!
 facing: aCardinalPoint for: aMarsRover
-
-	"^(self subclasses detect: [:anOrientationClass | anOrientationClass canHandle: aCardinalPoint]) for: aMarsRover"
 	
 	^self subclasses detect: [:anOrientationClass | anOrientationClass canHandle: aCardinalPoint] ifFound: [:anOrientationClass | anOrientationClass for: aMarsRover] ifNone: [self invalidCardinalPoint] 
 	! !

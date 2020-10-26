@@ -35424,3 +35424,10 @@ assertRotating: aRotationCommand worksProperlyPassingFirst: firstCardinalPoint a
 ----SNAPSHOT----(26 October 2020 16:23:37) CuisUniversity-4384.image priorSource: 17432352!
 
 ----SNAPSHOT----(26 October 2020 16:24:28) CuisUniversity-4384.image priorSource: 17435992!
+!MarsRoverOrientation class methodsFor: 'instance creation' stamp: 'fr 10/26/2020 16:29:54' prior: 50872973!
+facing: aCardinalPoint for: aMarsRover
+	
+	^self subclasses detect: [:anOrientationClass | anOrientationClass canHandle: aCardinalPoint] ifFound: [:anOrientationClass | anOrientationClass for: aMarsRover] ifNone: [self invalidCardinalPoint] 
+	! !
+
+----SNAPSHOT----(26 October 2020 16:30:03) CuisUniversity-4384.image priorSource: 17436085!
