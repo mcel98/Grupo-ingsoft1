@@ -32975,3 +32975,2166 @@ PASSED!
 ----SNAPSHOT----(25 October 2020 17:50:13) CuisUniversity-4384.image priorSource: 17341646!
 
 ----QUIT----(25 October 2020 17:50:22) CuisUniversity-4384.image priorSource: 17342885!
+
+----STARTUP---- (25 October 2020 17:51:52) as /home/fede/Documentos/Facultad/Inge1/Cuises/katas/linux64/CuisUniversity-4384.image!
+
+
+----SNAPSHOT----(25 October 2020 18:42:03) CuisUniversity-4384.image priorSource: 17342978!
+
+----QUIT----(25 October 2020 18:42:55) CuisUniversity-4384.image priorSource: 17343200!
+
+----STARTUP---- (25 October 2020 22:17:42) as /home/fede/Documentos/Facultad/Inge1/Cuises/katas/linux64/CuisUniversity-4384.image!
+
+!MarsRoverTests methodsFor: 'tests' stamp: 'fr 10/25/2020 22:26:34' prior: 50872570!
+test02MovingForwardWorksProperlyOnYAxis
+
+	| marsRover |
+	
+	marsRover _ MarsRover at: 1@1 facing: south.
+	
+	marsRover move: 'f'.
+	
+	self assert: (marsRover isAt: 1@0 facing: south).
+	
+	marsRover move: 'b'.
+	
+	self assert: (marsRover isAt: 1@1 facing: south) ! !
+
+!testRun: #MarsRoverTests #test02MovingForwardWorksProperlyOnYAxis stamp: 'fr 10/25/2020 22:26:36'!
+PASSED!
+
+!testRun: #MarsRoverTests #test01EmptyCommandListDoesNothing stamp: 'fr 10/25/2020 22:26:36'!
+PASSED!
+
+!testRun: #MarsRoverTests #test02MovingForwardWorksProperlyOnYAxis stamp: 'fr 10/25/2020 22:26:36'!
+PASSED!
+
+!testRun: #MarsRoverTests #test03MovingBackwardsWorksProperlyOnYAxis stamp: 'fr 10/25/2020 22:26:36'!
+PASSED!
+
+!testRun: #MarsRoverTests #test04RotatingRightWorksProperly stamp: 'fr 10/25/2020 22:26:36'!
+PASSED!
+
+!testRun: #MarsRoverTests #test05RotatingLeftWorksProperly stamp: 'fr 10/25/2020 22:26:36'!
+PASSED!
+
+!testRun: #MarsRoverTests #test06MovingForwardWorksProperlyOnXAxis stamp: 'fr 10/25/2020 22:26:36'!
+PASSED!
+
+!testRun: #MarsRoverTests #test07MovingBackwardsWorksProperlyOnXAxis stamp: 'fr 10/25/2020 22:26:36'!
+PASSED!
+
+!testRun: #MarsRoverTests #test08CommandListWithMoreThanOneCommandExecutesProperly stamp: 'fr 10/25/2020 22:26:36'!
+PASSED!
+
+!testRun: #MarsRoverTests #test09CreatingAMarsRoverWithAnInvalidCardinalPointShouldFail stamp: 'fr 10/25/2020 22:26:36'!
+PASSED!
+
+!testRun: #MarsRoverTests #test10CommandListWithAnInvalidCommandShouldExecuteUntilItsFoundAndNoFurther stamp: 'fr 10/25/2020 22:26:36'!
+PASSED!
+!MarsRoverTests methodsFor: 'tests' stamp: 'fr 10/25/2020 22:28:36'!
+test02MovingWorksProperlyFacingSouth
+
+	| marsRover |
+	
+	marsRover _ MarsRover at: 1@1 facing: south.
+	
+	marsRover move: 'f'.
+	
+	self assert: (marsRover isAt: 1@0 facing: south).
+	
+	marsRover move: 'b'.
+	
+	self assert: (marsRover isAt: 1@1 facing: south) ! !
+
+!methodRemoval: MarsRoverTests #test02MovingForwardWorksProperlyOnYAxis stamp: 'fr 10/25/2020 22:28:58'!
+test02MovingForwardWorksProperlyOnYAxis
+
+	| marsRover |
+	
+	marsRover _ MarsRover at: 1@1 facing: south.
+	
+	marsRover move: 'f'.
+	
+	self assert: (marsRover isAt: 1@0 facing: south).
+	
+	marsRover move: 'b'.
+	
+	self assert: (marsRover isAt: 1@1 facing: south) !
+!MarsRoverTests methodsFor: 'tests' stamp: 'fr 10/25/2020 22:31:23'!
+test03MovingWorksProperlyFacingNorth
+
+	| marsRover |
+	
+	marsRover _ MarsRover at: 1@1 facing: north.
+	
+	marsRover move: 'f'.
+	
+	self assert: (marsRover isAt: 1@2 facing: north).
+	
+	marsRover move: 'b'.
+	
+	self assert: (marsRover isAt: 1@1 facing: north) ! !
+
+!testRun: #MarsRoverTests #test03MovingWorksProperlyFacingNorth stamp: 'fr 10/25/2020 22:31:24'!
+PASSED!
+
+!testRun: #MarsRoverTests #test01EmptyCommandListDoesNothing stamp: 'fr 10/25/2020 22:31:24'!
+PASSED!
+
+!testRun: #MarsRoverTests #test02MovingWorksProperlyFacingSouth stamp: 'fr 10/25/2020 22:31:24'!
+PASSED!
+
+!testRun: #MarsRoverTests #test03MovingBackwardsWorksProperlyOnYAxis stamp: 'fr 10/25/2020 22:31:24'!
+PASSED!
+
+!testRun: #MarsRoverTests #test03MovingWorksProperlyFacingNorth stamp: 'fr 10/25/2020 22:31:24'!
+PASSED!
+
+!testRun: #MarsRoverTests #test04RotatingRightWorksProperly stamp: 'fr 10/25/2020 22:31:24'!
+PASSED!
+
+!testRun: #MarsRoverTests #test05RotatingLeftWorksProperly stamp: 'fr 10/25/2020 22:31:24'!
+PASSED!
+
+!testRun: #MarsRoverTests #test06MovingForwardWorksProperlyOnXAxis stamp: 'fr 10/25/2020 22:31:24'!
+PASSED!
+
+!testRun: #MarsRoverTests #test07MovingBackwardsWorksProperlyOnXAxis stamp: 'fr 10/25/2020 22:31:24'!
+PASSED!
+
+!testRun: #MarsRoverTests #test08CommandListWithMoreThanOneCommandExecutesProperly stamp: 'fr 10/25/2020 22:31:24'!
+PASSED!
+
+!testRun: #MarsRoverTests #test09CreatingAMarsRoverWithAnInvalidCardinalPointShouldFail stamp: 'fr 10/25/2020 22:31:24'!
+PASSED!
+
+!testRun: #MarsRoverTests #test10CommandListWithAnInvalidCommandShouldExecuteUntilItsFoundAndNoFurther stamp: 'fr 10/25/2020 22:31:24'!
+PASSED!
+!MarsRoverTests methodsFor: 'tests' stamp: 'fr 10/25/2020 22:32:09'!
+test04MovingWorksProperlyFacingEast
+
+	| marsRover |
+	
+	marsRover _ MarsRover at: 1@1 facing: east.
+	
+	marsRover move: 'f'.
+	
+	self assert: (marsRover isAt: 2@1 facing: east).
+	
+	marsRover move: 'b'.
+	
+	self assert: (marsRover isAt: 1@1 facing: east) ! !
+
+!testRun: #MarsRoverTests #test04MovingWorksProperlyFacingEast stamp: 'fr 10/25/2020 22:32:11'!
+PASSED!
+
+!testRun: #MarsRoverTests #test01EmptyCommandListDoesNothing stamp: 'fr 10/25/2020 22:32:11'!
+PASSED!
+
+!testRun: #MarsRoverTests #test02MovingWorksProperlyFacingSouth stamp: 'fr 10/25/2020 22:32:11'!
+PASSED!
+
+!testRun: #MarsRoverTests #test03MovingBackwardsWorksProperlyOnYAxis stamp: 'fr 10/25/2020 22:32:11'!
+PASSED!
+
+!testRun: #MarsRoverTests #test03MovingWorksProperlyFacingNorth stamp: 'fr 10/25/2020 22:32:11'!
+PASSED!
+
+!testRun: #MarsRoverTests #test04MovingWorksProperlyFacingEast stamp: 'fr 10/25/2020 22:32:11'!
+PASSED!
+
+!testRun: #MarsRoverTests #test04RotatingRightWorksProperly stamp: 'fr 10/25/2020 22:32:11'!
+PASSED!
+
+!testRun: #MarsRoverTests #test05RotatingLeftWorksProperly stamp: 'fr 10/25/2020 22:32:11'!
+PASSED!
+
+!testRun: #MarsRoverTests #test06MovingForwardWorksProperlyOnXAxis stamp: 'fr 10/25/2020 22:32:11'!
+PASSED!
+
+!testRun: #MarsRoverTests #test07MovingBackwardsWorksProperlyOnXAxis stamp: 'fr 10/25/2020 22:32:11'!
+PASSED!
+
+!testRun: #MarsRoverTests #test08CommandListWithMoreThanOneCommandExecutesProperly stamp: 'fr 10/25/2020 22:32:11'!
+PASSED!
+
+!testRun: #MarsRoverTests #test09CreatingAMarsRoverWithAnInvalidCardinalPointShouldFail stamp: 'fr 10/25/2020 22:32:11'!
+PASSED!
+
+!testRun: #MarsRoverTests #test10CommandListWithAnInvalidCommandShouldExecuteUntilItsFoundAndNoFurther stamp: 'fr 10/25/2020 22:32:11'!
+PASSED!
+
+!methodRemoval: MarsRoverTests #test03MovingBackwardsWorksProperlyOnYAxis stamp: 'fr 10/25/2020 22:33:17'!
+test03MovingBackwardsWorksProperlyOnYAxis
+
+	| marsRover |
+	
+	marsRover _ MarsRover at: 1@1 facing: south.
+	
+	marsRover move: 'b'.
+	
+	self assert: (marsRover isAt: 1@2 facing: south)!
+!MarsRoverTests methodsFor: 'tests' stamp: 'fr 10/25/2020 22:35:20'!
+test05MovingWorksProperlyFacingWest
+
+	| marsRover |
+	
+	marsRover _ MarsRover at: 1@1 facing: west.
+	
+	marsRover move: 'f'.
+	
+	self assert: (marsRover isAt: 2@1 facing: west).
+	
+	marsRover move: 'b'.
+	
+	self assert: (marsRover isAt: 1@1 facing: west) ! !
+!MarsRoverTests methodsFor: 'tests' stamp: 'fr 10/25/2020 22:35:30' prior: 50873826!
+test05MovingWorksProperlyFacingWest
+
+	| marsRover |
+	
+	marsRover _ MarsRover at: 1@1 facing: west.
+	
+	marsRover move: 'f'.
+	
+	self assert: (marsRover isAt: 0@1 facing: west).
+	
+	marsRover move: 'b'.
+	
+	self assert: (marsRover isAt: 1@1 facing: west) ! !
+
+!testRun: #MarsRoverTests #test05MovingWorksProperlyFacingWest stamp: 'fr 10/25/2020 22:35:31'!
+PASSED!
+
+!testRun: #MarsRoverTests #test01EmptyCommandListDoesNothing stamp: 'fr 10/25/2020 22:35:31'!
+PASSED!
+
+!testRun: #MarsRoverTests #test02MovingWorksProperlyFacingSouth stamp: 'fr 10/25/2020 22:35:31'!
+PASSED!
+
+!testRun: #MarsRoverTests #test03MovingWorksProperlyFacingNorth stamp: 'fr 10/25/2020 22:35:31'!
+PASSED!
+
+!testRun: #MarsRoverTests #test04MovingWorksProperlyFacingEast stamp: 'fr 10/25/2020 22:35:31'!
+PASSED!
+
+!testRun: #MarsRoverTests #test04RotatingRightWorksProperly stamp: 'fr 10/25/2020 22:35:31'!
+PASSED!
+
+!testRun: #MarsRoverTests #test05MovingWorksProperlyFacingWest stamp: 'fr 10/25/2020 22:35:31'!
+PASSED!
+
+!testRun: #MarsRoverTests #test05RotatingLeftWorksProperly stamp: 'fr 10/25/2020 22:35:31'!
+PASSED!
+
+!testRun: #MarsRoverTests #test06MovingForwardWorksProperlyOnXAxis stamp: 'fr 10/25/2020 22:35:31'!
+PASSED!
+
+!testRun: #MarsRoverTests #test07MovingBackwardsWorksProperlyOnXAxis stamp: 'fr 10/25/2020 22:35:31'!
+PASSED!
+
+!testRun: #MarsRoverTests #test08CommandListWithMoreThanOneCommandExecutesProperly stamp: 'fr 10/25/2020 22:35:31'!
+PASSED!
+
+!testRun: #MarsRoverTests #test09CreatingAMarsRoverWithAnInvalidCardinalPointShouldFail stamp: 'fr 10/25/2020 22:35:31'!
+PASSED!
+
+!testRun: #MarsRoverTests #test10CommandListWithAnInvalidCommandShouldExecuteUntilItsFoundAndNoFurther stamp: 'fr 10/25/2020 22:35:31'!
+PASSED!
+!MarsRoverTests methodsFor: 'tests' stamp: 'fr 10/25/2020 22:36:20'!
+test06RotatingWorksProperlyForAllOrientations
+
+	| marsRover |
+	
+	marsRover _ MarsRover at: 1@1 facing: south.
+	
+	marsRover move: 'r'.
+	
+	self assert: (marsRover isAt: 1@1 facing: west)! !
+
+!methodRemoval: MarsRoverTests #test06MovingForwardWorksProperlyOnXAxis stamp: 'fr 10/25/2020 22:36:28'!
+test06MovingForwardWorksProperlyOnXAxis
+
+	| marsRover |
+	
+	marsRover _ MarsRover at: 1@1 facing: east.
+	
+	marsRover move: 'f'.
+	
+	self assert: (marsRover isAt: 2@1 facing: east)!
+!MarsRoverTests methodsFor: 'tests' stamp: 'fr 10/25/2020 22:37:48' prior: 50873893!
+test06RotatingWorksProperlyForAllOrientations
+
+	| marsRover |
+	
+	marsRover _ MarsRover at: 1@1 facing: south.
+	
+	marsRover move: 'r'.
+	
+	self assert: (marsRover isAt: 1@1 facing: west).
+	
+	marsRover move: 'r'.
+	
+	self assert: (marsRover isAt: 1@1 facing: north).
+	
+	marsRover move: 'r'.
+	
+	self assert: (marsRover isAt: 1@1 facing: east).
+	
+	marsRover move: 'r'.
+	
+	self assert: (marsRover isAt: 1@1 facing: south).! !
+
+!testRun: #MarsRoverTests #test06RotatingWorksProperlyForAllOrientations stamp: 'fr 10/25/2020 22:37:50'!
+PASSED!
+
+!testRun: #MarsRoverTests #test01EmptyCommandListDoesNothing stamp: 'fr 10/25/2020 22:37:50'!
+PASSED!
+
+!testRun: #MarsRoverTests #test02MovingWorksProperlyFacingSouth stamp: 'fr 10/25/2020 22:37:50'!
+PASSED!
+
+!testRun: #MarsRoverTests #test03MovingWorksProperlyFacingNorth stamp: 'fr 10/25/2020 22:37:50'!
+PASSED!
+
+!testRun: #MarsRoverTests #test04MovingWorksProperlyFacingEast stamp: 'fr 10/25/2020 22:37:50'!
+PASSED!
+
+!testRun: #MarsRoverTests #test04RotatingRightWorksProperly stamp: 'fr 10/25/2020 22:37:50'!
+PASSED!
+
+!testRun: #MarsRoverTests #test05MovingWorksProperlyFacingWest stamp: 'fr 10/25/2020 22:37:50'!
+PASSED!
+
+!testRun: #MarsRoverTests #test05RotatingLeftWorksProperly stamp: 'fr 10/25/2020 22:37:50'!
+PASSED!
+
+!testRun: #MarsRoverTests #test06RotatingWorksProperlyForAllOrientations stamp: 'fr 10/25/2020 22:37:50'!
+PASSED!
+
+!testRun: #MarsRoverTests #test07MovingBackwardsWorksProperlyOnXAxis stamp: 'fr 10/25/2020 22:37:50'!
+PASSED!
+
+!testRun: #MarsRoverTests #test08CommandListWithMoreThanOneCommandExecutesProperly stamp: 'fr 10/25/2020 22:37:50'!
+PASSED!
+
+!testRun: #MarsRoverTests #test09CreatingAMarsRoverWithAnInvalidCardinalPointShouldFail stamp: 'fr 10/25/2020 22:37:50'!
+PASSED!
+
+!testRun: #MarsRoverTests #test10CommandListWithAnInvalidCommandShouldExecuteUntilItsFoundAndNoFurther stamp: 'fr 10/25/2020 22:37:50'!
+PASSED!
+!MarsRoverTests methodsFor: 'tests' stamp: 'fr 10/25/2020 22:38:00'!
+test06RotatingRightWorksProperlyForAllOrientations
+
+	| marsRover |
+	
+	marsRover _ MarsRover at: 1@1 facing: south.
+	
+	marsRover move: 'r'.
+	
+	self assert: (marsRover isAt: 1@1 facing: west).
+	
+	marsRover move: 'r'.
+	
+	self assert: (marsRover isAt: 1@1 facing: north).
+	
+	marsRover move: 'r'.
+	
+	self assert: (marsRover isAt: 1@1 facing: east).
+	
+	marsRover move: 'r'.
+	
+	self assert: (marsRover isAt: 1@1 facing: south).! !
+
+!methodRemoval: MarsRoverTests #test06RotatingWorksProperlyForAllOrientations stamp: 'fr 10/25/2020 22:38:12'!
+test06RotatingWorksProperlyForAllOrientations
+
+	| marsRover |
+	
+	marsRover _ MarsRover at: 1@1 facing: south.
+	
+	marsRover move: 'r'.
+	
+	self assert: (marsRover isAt: 1@1 facing: west).
+	
+	marsRover move: 'r'.
+	
+	self assert: (marsRover isAt: 1@1 facing: north).
+	
+	marsRover move: 'r'.
+	
+	self assert: (marsRover isAt: 1@1 facing: east).
+	
+	marsRover move: 'r'.
+	
+	self assert: (marsRover isAt: 1@1 facing: south).!
+!MarsRoverTests methodsFor: 'tests' stamp: 'fr 10/25/2020 22:39:00'!
+test05RotatingLeftWorksProperlyForAllOrientations
+
+	| marsRover |
+	
+	marsRover _ MarsRover at: 1@1 facing: south.
+	
+	marsRover move: 'l'.
+	
+	self assert: (marsRover isAt: 1@1 facing: east).
+	
+	marsRover move: 'l'.
+	
+	self assert: (marsRover isAt: 1@1 facing: east).
+	
+	marsRover move: 'l'.
+	
+	self assert: (marsRover isAt: 1@1 facing: east).
+	
+	marsRover move: 'l'.
+	
+	self assert: (marsRover isAt: 1@1 facing: east).! !
+!MarsRoverTests methodsFor: 'tests' stamp: 'fr 10/25/2020 22:39:17' prior: 50874005!
+test05RotatingLeftWorksProperlyForAllOrientations
+
+	| marsRover |
+	
+	marsRover _ MarsRover at: 1@1 facing: south.
+	
+	marsRover move: 'l'.
+	
+	self assert: (marsRover isAt: 1@1 facing: east).
+	
+	marsRover move: 'l'.
+	
+	self assert: (marsRover isAt: 1@1 facing: north).
+	
+	marsRover move: 'l'.
+	
+	self assert: (marsRover isAt: 1@1 facing: west).
+	
+	marsRover move: 'l'.
+	
+	self assert: (marsRover isAt: 1@1 facing: south).! !
+
+!methodRemoval: MarsRoverTests #test05RotatingLeftWorksProperly stamp: 'fr 10/25/2020 22:39:22'!
+test05RotatingLeftWorksProperly
+
+	| marsRover |
+	
+	marsRover _ MarsRover at: 1@1 facing: south.
+	
+	marsRover move: 'l'.
+	
+	self assert: (marsRover isAt: 1@1 facing: east)!
+
+!testRun: #MarsRoverTests #test01EmptyCommandListDoesNothing stamp: 'fr 10/25/2020 22:39:27'!
+PASSED!
+
+!testRun: #MarsRoverTests #test02MovingWorksProperlyFacingSouth stamp: 'fr 10/25/2020 22:39:27'!
+PASSED!
+
+!testRun: #MarsRoverTests #test03MovingWorksProperlyFacingNorth stamp: 'fr 10/25/2020 22:39:27'!
+PASSED!
+
+!testRun: #MarsRoverTests #test04MovingWorksProperlyFacingEast stamp: 'fr 10/25/2020 22:39:27'!
+PASSED!
+
+!testRun: #MarsRoverTests #test04RotatingRightWorksProperly stamp: 'fr 10/25/2020 22:39:27'!
+PASSED!
+
+!testRun: #MarsRoverTests #test05MovingWorksProperlyFacingWest stamp: 'fr 10/25/2020 22:39:27'!
+PASSED!
+
+!testRun: #MarsRoverTests #test05RotatingLeftWorksProperlyForAllOrientations stamp: 'fr 10/25/2020 22:39:27'!
+PASSED!
+
+!testRun: #MarsRoverTests #test06RotatingRightWorksProperlyForAllOrientations stamp: 'fr 10/25/2020 22:39:27'!
+PASSED!
+
+!testRun: #MarsRoverTests #test07MovingBackwardsWorksProperlyOnXAxis stamp: 'fr 10/25/2020 22:39:27'!
+PASSED!
+
+!testRun: #MarsRoverTests #test08CommandListWithMoreThanOneCommandExecutesProperly stamp: 'fr 10/25/2020 22:39:27'!
+PASSED!
+
+!testRun: #MarsRoverTests #test09CreatingAMarsRoverWithAnInvalidCardinalPointShouldFail stamp: 'fr 10/25/2020 22:39:27'!
+PASSED!
+
+!testRun: #MarsRoverTests #test10CommandListWithAnInvalidCommandShouldExecuteUntilItsFoundAndNoFurther stamp: 'fr 10/25/2020 22:39:27'!
+PASSED!
+
+!methodRemoval: MarsRoverTests #test07MovingBackwardsWorksProperlyOnXAxis stamp: 'fr 10/25/2020 22:39:44'!
+test07MovingBackwardsWorksProperlyOnXAxis
+
+	| marsRover |
+	
+	marsRover _ MarsRover at: 1@1 facing: east.
+	
+	marsRover move: 'b'.
+	
+	self assert: (marsRover isAt: 0@1 facing: east)!
+
+!testRun: #MarsRoverTests #test01EmptyCommandListDoesNothing stamp: 'fr 10/25/2020 22:39:52'!
+PASSED!
+
+!testRun: #MarsRoverTests #test02MovingWorksProperlyFacingSouth stamp: 'fr 10/25/2020 22:39:52'!
+PASSED!
+
+!testRun: #MarsRoverTests #test03MovingWorksProperlyFacingNorth stamp: 'fr 10/25/2020 22:39:52'!
+PASSED!
+
+!testRun: #MarsRoverTests #test04MovingWorksProperlyFacingEast stamp: 'fr 10/25/2020 22:39:52'!
+PASSED!
+
+!testRun: #MarsRoverTests #test04RotatingRightWorksProperly stamp: 'fr 10/25/2020 22:39:52'!
+PASSED!
+
+!testRun: #MarsRoverTests #test05MovingWorksProperlyFacingWest stamp: 'fr 10/25/2020 22:39:52'!
+PASSED!
+
+!testRun: #MarsRoverTests #test05RotatingLeftWorksProperlyForAllOrientations stamp: 'fr 10/25/2020 22:39:52'!
+PASSED!
+
+!testRun: #MarsRoverTests #test06RotatingRightWorksProperlyForAllOrientations stamp: 'fr 10/25/2020 22:39:52'!
+PASSED!
+
+!testRun: #MarsRoverTests #test08CommandListWithMoreThanOneCommandExecutesProperly stamp: 'fr 10/25/2020 22:39:52'!
+PASSED!
+
+!testRun: #MarsRoverTests #test09CreatingAMarsRoverWithAnInvalidCardinalPointShouldFail stamp: 'fr 10/25/2020 22:39:52'!
+PASSED!
+
+!testRun: #MarsRoverTests #test10CommandListWithAnInvalidCommandShouldExecuteUntilItsFoundAndNoFurther stamp: 'fr 10/25/2020 22:39:52'!
+PASSED!
+!MarsRoverTests methodsFor: 'tests' stamp: 'fr 10/25/2020 22:43:55'!
+moveAndAssert: marsRover
+
+	marsRover move: 'f'.
+	
+	self assert: (marsRover isAt: 1@0 facing: south)! !
+!MarsRoverTests methodsFor: 'tests' stamp: 'fr 10/25/2020 22:43:55' prior: 50873686!
+test02MovingWorksProperlyFacingSouth
+
+	| marsRover |
+	
+	marsRover _ MarsRover at: 1@1 facing: south.
+	
+	self moveAndAssert: marsRover.
+	
+	marsRover move: 'b'.
+	
+	self assert: (marsRover isAt: 1@1 facing: south) ! !
+!MarsRoverTests methodsFor: 'tests - private' stamp: 'fr 10/25/2020 22:46:45'!
+execute: aCommandList assert: marsRover isAt: aPosition facing: aCardinalPoint
+
+	marsRover move: 'f'.
+	
+	self assert: (marsRover isAt: 1@0 facing: south)! !
+!MarsRoverTests methodsFor: 'tests - private' stamp: 'fr 10/25/2020 22:46:52' prior: 50874153!
+execute: aCommandList assert: marsRover isAt: aPosition facing: aCardinalPoint
+
+	marsRover move: aCommandList.
+	
+	self assert: (marsRover isAt: 1@0 facing: south)! !
+!MarsRoverTests methodsFor: 'tests - private' stamp: 'fr 10/25/2020 22:47:01' prior: 50874161!
+execute: aCommandList assert: marsRover isAt: aPosition facing: aCardinalPoint
+
+	marsRover move: aCommandList.
+	
+	self assert: (marsRover isAt: aPosition facing: aCardinalPoint)! !
+
+!methodRemoval: MarsRoverTests #moveAndAssert: stamp: 'fr 10/25/2020 22:47:07'!
+moveAndAssert: marsRover
+
+	marsRover move: 'f'.
+	
+	self assert: (marsRover isAt: 1@0 facing: south)!
+!MarsRoverTests methodsFor: 'tests' stamp: 'fr 10/25/2020 22:28:36' prior: 50874143!
+test02MovingWorksProperlyFacingSouth
+
+	| marsRover |
+	
+	marsRover _ MarsRover at: 1@1 facing: south.
+	
+	marsRover move: 'f'.
+	
+	self assert: (marsRover isAt: 1@0 facing: south).
+	
+	marsRover move: 'b'.
+	
+	self assert: (marsRover isAt: 1@1 facing: south) ! !
+!MarsRoverTests methodsFor: 'tests' stamp: 'fr 10/25/2020 22:48:06' prior: 50874184!
+test02MovingWorksProperlyFacingSouth
+
+	| marsRover |
+	
+	marsRover _ MarsRover at: 1@1 facing: south.
+	
+	self execute: 'f' assert: marsRover isAt: 1@0 facing: south.
+	
+	marsRover move: 'b'.
+	
+	self assert: (marsRover isAt: 1@1 facing: south) ! !
+
+!testRun: #MarsRoverTests #test02MovingWorksProperlyFacingSouth stamp: 'fr 10/25/2020 22:48:17'!
+PASSED!
+
+!testRun: #MarsRoverTests #test01EmptyCommandListDoesNothing stamp: 'fr 10/25/2020 22:48:17'!
+PASSED!
+
+!testRun: #MarsRoverTests #test02MovingWorksProperlyFacingSouth stamp: 'fr 10/25/2020 22:48:17'!
+PASSED!
+
+!testRun: #MarsRoverTests #test03MovingWorksProperlyFacingNorth stamp: 'fr 10/25/2020 22:48:17'!
+PASSED!
+
+!testRun: #MarsRoverTests #test04MovingWorksProperlyFacingEast stamp: 'fr 10/25/2020 22:48:17'!
+PASSED!
+
+!testRun: #MarsRoverTests #test04RotatingRightWorksProperly stamp: 'fr 10/25/2020 22:48:17'!
+PASSED!
+
+!testRun: #MarsRoverTests #test05MovingWorksProperlyFacingWest stamp: 'fr 10/25/2020 22:48:17'!
+PASSED!
+
+!testRun: #MarsRoverTests #test05RotatingLeftWorksProperlyForAllOrientations stamp: 'fr 10/25/2020 22:48:17'!
+PASSED!
+
+!testRun: #MarsRoverTests #test06RotatingRightWorksProperlyForAllOrientations stamp: 'fr 10/25/2020 22:48:17'!
+PASSED!
+
+!testRun: #MarsRoverTests #test08CommandListWithMoreThanOneCommandExecutesProperly stamp: 'fr 10/25/2020 22:48:17'!
+PASSED!
+
+!testRun: #MarsRoverTests #test09CreatingAMarsRoverWithAnInvalidCardinalPointShouldFail stamp: 'fr 10/25/2020 22:48:17'!
+PASSED!
+
+!testRun: #MarsRoverTests #test10CommandListWithAnInvalidCommandShouldExecuteUntilItsFoundAndNoFurther stamp: 'fr 10/25/2020 22:48:17'!
+PASSED!
+!MarsRoverTests methodsFor: 'tests' stamp: 'fr 10/25/2020 22:48:37' prior: 50874195!
+test02MovingWorksProperlyFacingSouth
+
+	| marsRover |
+	
+	marsRover _ MarsRover at: 1@1 facing: south.
+	
+	self execute: 'f' assert: marsRover isAt: 1@0 facing: south.
+	self execute: 'b' assert: marsRover isAt: 1@1 facing: south! !
+
+!testRun: #MarsRoverTests #test02MovingWorksProperlyFacingSouth stamp: 'fr 10/25/2020 22:48:38'!
+PASSED!
+
+!testRun: #MarsRoverTests #test01EmptyCommandListDoesNothing stamp: 'fr 10/25/2020 22:48:38'!
+PASSED!
+
+!testRun: #MarsRoverTests #test02MovingWorksProperlyFacingSouth stamp: 'fr 10/25/2020 22:48:38'!
+PASSED!
+
+!testRun: #MarsRoverTests #test03MovingWorksProperlyFacingNorth stamp: 'fr 10/25/2020 22:48:38'!
+PASSED!
+
+!testRun: #MarsRoverTests #test04MovingWorksProperlyFacingEast stamp: 'fr 10/25/2020 22:48:38'!
+PASSED!
+
+!testRun: #MarsRoverTests #test04RotatingRightWorksProperly stamp: 'fr 10/25/2020 22:48:38'!
+PASSED!
+
+!testRun: #MarsRoverTests #test05MovingWorksProperlyFacingWest stamp: 'fr 10/25/2020 22:48:38'!
+PASSED!
+
+!testRun: #MarsRoverTests #test05RotatingLeftWorksProperlyForAllOrientations stamp: 'fr 10/25/2020 22:48:38'!
+PASSED!
+
+!testRun: #MarsRoverTests #test06RotatingRightWorksProperlyForAllOrientations stamp: 'fr 10/25/2020 22:48:38'!
+PASSED!
+
+!testRun: #MarsRoverTests #test08CommandListWithMoreThanOneCommandExecutesProperly stamp: 'fr 10/25/2020 22:48:38'!
+PASSED!
+
+!testRun: #MarsRoverTests #test09CreatingAMarsRoverWithAnInvalidCardinalPointShouldFail stamp: 'fr 10/25/2020 22:48:38'!
+PASSED!
+
+!testRun: #MarsRoverTests #test10CommandListWithAnInvalidCommandShouldExecuteUntilItsFoundAndNoFurther stamp: 'fr 10/25/2020 22:48:38'!
+PASSED!
+!MarsRoverTests methodsFor: 'tests' stamp: 'fr 10/25/2020 22:49:57' prior: 50873708!
+test03MovingWorksProperlyFacingNorth
+
+	| marsRover |
+	
+	marsRover _ MarsRover at: 1@1 facing: north.
+
+	self execute: 'f' assert: marsRover isAt: 1@2 facing: north.
+	self execute: 'b' assert: marsRover isAt: 1@1 facing: north.! !
+!MarsRoverTests methodsFor: 'tests' stamp: 'fr 10/25/2020 22:49:58' prior: 50874302!
+test03MovingWorksProperlyFacingNorth
+
+	| marsRover |
+	
+	marsRover _ MarsRover at: 1@1 facing: north.
+
+	self execute: 'f' assert: marsRover isAt: 1@2 facing: north.
+	self execute: 'b' assert: marsRover isAt: 1@1 facing: north! !
+
+!testRun: #MarsRoverTests #test03MovingWorksProperlyFacingNorth stamp: 'fr 10/25/2020 22:49:59'!
+PASSED!
+
+!testRun: #MarsRoverTests #test01EmptyCommandListDoesNothing stamp: 'fr 10/25/2020 22:49:59'!
+PASSED!
+
+!testRun: #MarsRoverTests #test02MovingWorksProperlyFacingSouth stamp: 'fr 10/25/2020 22:49:59'!
+PASSED!
+
+!testRun: #MarsRoverTests #test03MovingWorksProperlyFacingNorth stamp: 'fr 10/25/2020 22:49:59'!
+PASSED!
+
+!testRun: #MarsRoverTests #test04MovingWorksProperlyFacingEast stamp: 'fr 10/25/2020 22:49:59'!
+PASSED!
+
+!testRun: #MarsRoverTests #test04RotatingRightWorksProperly stamp: 'fr 10/25/2020 22:49:59'!
+PASSED!
+
+!testRun: #MarsRoverTests #test05MovingWorksProperlyFacingWest stamp: 'fr 10/25/2020 22:49:59'!
+PASSED!
+
+!testRun: #MarsRoverTests #test05RotatingLeftWorksProperlyForAllOrientations stamp: 'fr 10/25/2020 22:49:59'!
+PASSED!
+
+!testRun: #MarsRoverTests #test06RotatingRightWorksProperlyForAllOrientations stamp: 'fr 10/25/2020 22:49:59'!
+PASSED!
+
+!testRun: #MarsRoverTests #test08CommandListWithMoreThanOneCommandExecutesProperly stamp: 'fr 10/25/2020 22:49:59'!
+PASSED!
+
+!testRun: #MarsRoverTests #test09CreatingAMarsRoverWithAnInvalidCardinalPointShouldFail stamp: 'fr 10/25/2020 22:49:59'!
+PASSED!
+
+!testRun: #MarsRoverTests #test10CommandListWithAnInvalidCommandShouldExecuteUntilItsFoundAndNoFurther stamp: 'fr 10/25/2020 22:49:59'!
+PASSED!
+!MarsRoverTests methodsFor: 'tests' stamp: 'fr 10/25/2020 22:51:07' prior: 50873761!
+test04MovingWorksProperlyFacingEast
+
+	| marsRover |
+	
+	marsRover _ MarsRover at: 1@1 facing: east.
+	
+	self execute: 'f' assert: marsRover isAt: 2@1 facing: east.	
+	
+	marsRover move: 'f'.
+	
+	self assert: (marsRover isAt: 2@1 facing: east).
+	
+	marsRover move: 'b'.
+	
+	self assert: (marsRover isAt: 1@1 facing: east) ! !
+!MarsRoverTests methodsFor: 'tests' stamp: 'fr 10/25/2020 22:51:30' prior: 50874365!
+test04MovingWorksProperlyFacingEast
+
+	| marsRover |
+	
+	marsRover _ MarsRover at: 1@1 facing: east.
+	
+	self execute: 'f' assert: marsRover isAt: 2@1 facing: east.	
+	self execute: 'b' assert: marsRover isAt: 1@1 facing: east! !
+
+!testRun: #MarsRoverTests #test04MovingWorksProperlyFacingEast stamp: 'fr 10/25/2020 22:51:31'!
+PASSED!
+
+!testRun: #MarsRoverTests #test01EmptyCommandListDoesNothing stamp: 'fr 10/25/2020 22:51:31'!
+PASSED!
+
+!testRun: #MarsRoverTests #test02MovingWorksProperlyFacingSouth stamp: 'fr 10/25/2020 22:51:31'!
+PASSED!
+
+!testRun: #MarsRoverTests #test03MovingWorksProperlyFacingNorth stamp: 'fr 10/25/2020 22:51:31'!
+PASSED!
+
+!testRun: #MarsRoverTests #test04MovingWorksProperlyFacingEast stamp: 'fr 10/25/2020 22:51:31'!
+PASSED!
+
+!testRun: #MarsRoverTests #test04RotatingRightWorksProperly stamp: 'fr 10/25/2020 22:51:31'!
+PASSED!
+
+!testRun: #MarsRoverTests #test05MovingWorksProperlyFacingWest stamp: 'fr 10/25/2020 22:51:31'!
+PASSED!
+
+!testRun: #MarsRoverTests #test05RotatingLeftWorksProperlyForAllOrientations stamp: 'fr 10/25/2020 22:51:31'!
+PASSED!
+
+!testRun: #MarsRoverTests #test06RotatingRightWorksProperlyForAllOrientations stamp: 'fr 10/25/2020 22:51:31'!
+PASSED!
+
+!testRun: #MarsRoverTests #test08CommandListWithMoreThanOneCommandExecutesProperly stamp: 'fr 10/25/2020 22:51:31'!
+PASSED!
+
+!testRun: #MarsRoverTests #test09CreatingAMarsRoverWithAnInvalidCardinalPointShouldFail stamp: 'fr 10/25/2020 22:51:31'!
+PASSED!
+
+!testRun: #MarsRoverTests #test10CommandListWithAnInvalidCommandShouldExecuteUntilItsFoundAndNoFurther stamp: 'fr 10/25/2020 22:51:31'!
+PASSED!
+
+!methodRemoval: MarsRoverTests #test04RotatingRightWorksProperly stamp: 'fr 10/25/2020 22:51:38'!
+test04RotatingRightWorksProperly
+
+	| marsRover |
+	
+	marsRover _ MarsRover at: 1@1 facing: south.
+	
+	marsRover move: 'r'.
+	
+	self assert: (marsRover isAt: 1@1 facing: west)!
+!MarsRoverTests methodsFor: 'tests' stamp: 'fr 10/25/2020 22:52:59' prior: 50873837!
+test05MovingWorksProperlyFacingWest
+
+	| marsRover |
+	
+	marsRover _ MarsRover at: 1@1 facing: west.
+	
+	self execute: 'f' assert: marsRover isAt: 0@1 facing: west.
+
+	
+	marsRover move: 'f'.
+	
+	self assert: (marsRover isAt: 0@1 facing: west).
+	
+	marsRover move: 'b'.
+	
+	self assert: (marsRover isAt: 1@1 facing: west) ! !
+!MarsRoverTests methodsFor: 'tests' stamp: 'fr 10/25/2020 22:53:14' prior: 50874440!
+test05MovingWorksProperlyFacingWest
+
+	| marsRover |
+	
+	marsRover _ MarsRover at: 1@1 facing: west.
+	
+	self execute: 'f' assert: marsRover isAt: 0@1 facing: west.
+	self execute: 'b' assert: marsRover isAt: 1@1 facing: west! !
+
+!testRun: #MarsRoverTests #test05MovingWorksProperlyFacingWest stamp: 'fr 10/25/2020 22:53:16'!
+PASSED!
+
+!testRun: #MarsRoverTests #test01EmptyCommandListDoesNothing stamp: 'fr 10/25/2020 22:53:16'!
+PASSED!
+
+!testRun: #MarsRoverTests #test02MovingWorksProperlyFacingSouth stamp: 'fr 10/25/2020 22:53:16'!
+PASSED!
+
+!testRun: #MarsRoverTests #test03MovingWorksProperlyFacingNorth stamp: 'fr 10/25/2020 22:53:16'!
+PASSED!
+
+!testRun: #MarsRoverTests #test04MovingWorksProperlyFacingEast stamp: 'fr 10/25/2020 22:53:16'!
+PASSED!
+
+!testRun: #MarsRoverTests #test05MovingWorksProperlyFacingWest stamp: 'fr 10/25/2020 22:53:16'!
+PASSED!
+
+!testRun: #MarsRoverTests #test05RotatingLeftWorksProperlyForAllOrientations stamp: 'fr 10/25/2020 22:53:16'!
+PASSED!
+
+!testRun: #MarsRoverTests #test06RotatingRightWorksProperlyForAllOrientations stamp: 'fr 10/25/2020 22:53:16'!
+PASSED!
+
+!testRun: #MarsRoverTests #test08CommandListWithMoreThanOneCommandExecutesProperly stamp: 'fr 10/25/2020 22:53:16'!
+PASSED!
+
+!testRun: #MarsRoverTests #test09CreatingAMarsRoverWithAnInvalidCardinalPointShouldFail stamp: 'fr 10/25/2020 22:53:16'!
+PASSED!
+
+!testRun: #MarsRoverTests #test10CommandListWithAnInvalidCommandShouldExecuteUntilItsFoundAndNoFurther stamp: 'fr 10/25/2020 22:53:16'!
+PASSED!
+!MarsRoverTests methodsFor: 'tests' stamp: 'fr 10/25/2020 23:10:06' prior: 50873973!
+test06RotatingRightWorksProperlyForAllOrientations
+
+	| marsRover |
+	
+	marsRover _ MarsRover at: 1@1 facing: south.
+	
+	self execute: 'r' assert: marsRover isAt: 1@1 facing: west.
+	self execute: 'r' assert: marsRover isAt: 1@1 facing: north.
+	self execute: 'r' assert: marsRover isAt: 1@1 facing: east.
+	self execute: 'r' assert: marsRover isAt: 1@1 facing: south! !
+
+!testRun: #MarsRoverTests #test06RotatingRightWorksProperlyForAllOrientations stamp: 'fr 10/25/2020 23:10:07'!
+PASSED!
+
+!testRun: #MarsRoverTests #test01EmptyCommandListDoesNothing stamp: 'fr 10/25/2020 23:10:07'!
+PASSED!
+
+!testRun: #MarsRoverTests #test02MovingWorksProperlyFacingSouth stamp: 'fr 10/25/2020 23:10:07'!
+PASSED!
+
+!testRun: #MarsRoverTests #test03MovingWorksProperlyFacingNorth stamp: 'fr 10/25/2020 23:10:07'!
+PASSED!
+
+!testRun: #MarsRoverTests #test04MovingWorksProperlyFacingEast stamp: 'fr 10/25/2020 23:10:07'!
+PASSED!
+
+!testRun: #MarsRoverTests #test05MovingWorksProperlyFacingWest stamp: 'fr 10/25/2020 23:10:07'!
+PASSED!
+
+!testRun: #MarsRoverTests #test05RotatingLeftWorksProperlyForAllOrientations stamp: 'fr 10/25/2020 23:10:07'!
+PASSED!
+
+!testRun: #MarsRoverTests #test06RotatingRightWorksProperlyForAllOrientations stamp: 'fr 10/25/2020 23:10:07'!
+PASSED!
+
+!testRun: #MarsRoverTests #test08CommandListWithMoreThanOneCommandExecutesProperly stamp: 'fr 10/25/2020 23:10:07'!
+PASSED!
+
+!testRun: #MarsRoverTests #test09CreatingAMarsRoverWithAnInvalidCardinalPointShouldFail stamp: 'fr 10/25/2020 23:10:07'!
+PASSED!
+
+!testRun: #MarsRoverTests #test10CommandListWithAnInvalidCommandShouldExecuteUntilItsFoundAndNoFurther stamp: 'fr 10/25/2020 23:10:07'!
+PASSED!
+!MarsRoverTests methodsFor: 'tests' stamp: 'fr 10/25/2020 23:10:48' prior: 50874021!
+test05RotatingLeftWorksProperlyForAllOrientations
+
+	| marsRover |
+	
+	marsRover _ MarsRover at: 1@1 facing: south.
+		
+	self execute: 'l' assert: marsRover isAt: 1@1 facing: east.
+	self execute: 'l' assert: marsRover isAt: 1@1 facing: north.
+	self execute: 'l' assert: marsRover isAt: 1@1 facing: west.
+	self execute: 'l' assert: marsRover isAt: 1@1 facing: south! !
+
+!testRun: #MarsRoverTests #test05RotatingLeftWorksProperlyForAllOrientations stamp: 'fr 10/25/2020 23:10:49'!
+PASSED!
+
+!testRun: #MarsRoverTests #test01EmptyCommandListDoesNothing stamp: 'fr 10/25/2020 23:10:49'!
+PASSED!
+
+!testRun: #MarsRoverTests #test02MovingWorksProperlyFacingSouth stamp: 'fr 10/25/2020 23:10:49'!
+PASSED!
+
+!testRun: #MarsRoverTests #test03MovingWorksProperlyFacingNorth stamp: 'fr 10/25/2020 23:10:49'!
+PASSED!
+
+!testRun: #MarsRoverTests #test04MovingWorksProperlyFacingEast stamp: 'fr 10/25/2020 23:10:49'!
+PASSED!
+
+!testRun: #MarsRoverTests #test05MovingWorksProperlyFacingWest stamp: 'fr 10/25/2020 23:10:49'!
+PASSED!
+
+!testRun: #MarsRoverTests #test05RotatingLeftWorksProperlyForAllOrientations stamp: 'fr 10/25/2020 23:10:49'!
+PASSED!
+
+!testRun: #MarsRoverTests #test06RotatingRightWorksProperlyForAllOrientations stamp: 'fr 10/25/2020 23:10:49'!
+PASSED!
+
+!testRun: #MarsRoverTests #test08CommandListWithMoreThanOneCommandExecutesProperly stamp: 'fr 10/25/2020 23:10:49'!
+PASSED!
+
+!testRun: #MarsRoverTests #test09CreatingAMarsRoverWithAnInvalidCardinalPointShouldFail stamp: 'fr 10/25/2020 23:10:49'!
+PASSED!
+
+!testRun: #MarsRoverTests #test10CommandListWithAnInvalidCommandShouldExecuteUntilItsFoundAndNoFurther stamp: 'fr 10/25/2020 23:10:49'!
+PASSED!
+!MarsRoverTests methodsFor: 'tests' stamp: 'fr 10/25/2020 23:11:20' prior: 50872618!
+test08CommandListWithMoreThanOneCommandExecutesProperly
+
+	| marsRover |
+	
+	marsRover _ MarsRover at: 1@1 facing: north.
+	
+	self execute: 'flf' assert: marsRover isAt: 0@2 facing: west! !
+
+!testRun: #MarsRoverTests #test08CommandListWithMoreThanOneCommandExecutesProperly stamp: 'fr 10/25/2020 23:11:21'!
+PASSED!
+
+!testRun: #MarsRoverTests #test01EmptyCommandListDoesNothing stamp: 'fr 10/25/2020 23:11:21'!
+PASSED!
+
+!testRun: #MarsRoverTests #test02MovingWorksProperlyFacingSouth stamp: 'fr 10/25/2020 23:11:21'!
+PASSED!
+
+!testRun: #MarsRoverTests #test03MovingWorksProperlyFacingNorth stamp: 'fr 10/25/2020 23:11:21'!
+PASSED!
+
+!testRun: #MarsRoverTests #test04MovingWorksProperlyFacingEast stamp: 'fr 10/25/2020 23:11:21'!
+PASSED!
+
+!testRun: #MarsRoverTests #test05MovingWorksProperlyFacingWest stamp: 'fr 10/25/2020 23:11:21'!
+PASSED!
+
+!testRun: #MarsRoverTests #test05RotatingLeftWorksProperlyForAllOrientations stamp: 'fr 10/25/2020 23:11:21'!
+PASSED!
+
+!testRun: #MarsRoverTests #test06RotatingRightWorksProperlyForAllOrientations stamp: 'fr 10/25/2020 23:11:21'!
+PASSED!
+
+!testRun: #MarsRoverTests #test08CommandListWithMoreThanOneCommandExecutesProperly stamp: 'fr 10/25/2020 23:11:21'!
+PASSED!
+
+!testRun: #MarsRoverTests #test09CreatingAMarsRoverWithAnInvalidCardinalPointShouldFail stamp: 'fr 10/25/2020 23:11:21'!
+PASSED!
+
+!testRun: #MarsRoverTests #test10CommandListWithAnInvalidCommandShouldExecuteUntilItsFoundAndNoFurther stamp: 'fr 10/25/2020 23:11:21'!
+PASSED!
+!MarsRoverTests methodsFor: 'tests' stamp: 'fr 10/25/2020 23:11:33'!
+test06RotatingLeftWorksProperlyForAllOrientations
+
+	| marsRover |
+	
+	marsRover _ MarsRover at: 1@1 facing: south.
+		
+	self execute: 'l' assert: marsRover isAt: 1@1 facing: east.
+	self execute: 'l' assert: marsRover isAt: 1@1 facing: north.
+	self execute: 'l' assert: marsRover isAt: 1@1 facing: west.
+	self execute: 'l' assert: marsRover isAt: 1@1 facing: south! !
+
+!methodRemoval: MarsRoverTests #test05RotatingLeftWorksProperlyForAllOrientations stamp: 'fr 10/25/2020 23:11:36'!
+test05RotatingLeftWorksProperlyForAllOrientations
+
+	| marsRover |
+	
+	marsRover _ MarsRover at: 1@1 facing: south.
+		
+	self execute: 'l' assert: marsRover isAt: 1@1 facing: east.
+	self execute: 'l' assert: marsRover isAt: 1@1 facing: north.
+	self execute: 'l' assert: marsRover isAt: 1@1 facing: west.
+	self execute: 'l' assert: marsRover isAt: 1@1 facing: south!
+!MarsRoverTests methodsFor: 'tests' stamp: 'fr 10/25/2020 23:11:42'!
+test07RotatingRightWorksProperlyForAllOrientations
+
+	| marsRover |
+	
+	marsRover _ MarsRover at: 1@1 facing: south.
+	
+	self execute: 'r' assert: marsRover isAt: 1@1 facing: west.
+	self execute: 'r' assert: marsRover isAt: 1@1 facing: north.
+	self execute: 'r' assert: marsRover isAt: 1@1 facing: east.
+	self execute: 'r' assert: marsRover isAt: 1@1 facing: south! !
+
+!methodRemoval: MarsRoverTests #test06RotatingRightWorksProperlyForAllOrientations stamp: 'fr 10/25/2020 23:11:44'!
+test06RotatingRightWorksProperlyForAllOrientations
+
+	| marsRover |
+	
+	marsRover _ MarsRover at: 1@1 facing: south.
+	
+	self execute: 'r' assert: marsRover isAt: 1@1 facing: west.
+	self execute: 'r' assert: marsRover isAt: 1@1 facing: north.
+	self execute: 'r' assert: marsRover isAt: 1@1 facing: east.
+	self execute: 'r' assert: marsRover isAt: 1@1 facing: south!
+
+!testRun: #MarsRoverTests #test06RotatingLeftWorksProperlyForAllOrientations stamp: 'fr 10/25/2020 23:11:47'!
+PASSED!
+
+!testRun: #MarsRoverTests #test01EmptyCommandListDoesNothing stamp: 'fr 10/25/2020 23:11:49'!
+PASSED!
+
+!testRun: #MarsRoverTests #test02MovingWorksProperlyFacingSouth stamp: 'fr 10/25/2020 23:11:49'!
+PASSED!
+
+!testRun: #MarsRoverTests #test03MovingWorksProperlyFacingNorth stamp: 'fr 10/25/2020 23:11:49'!
+PASSED!
+
+!testRun: #MarsRoverTests #test04MovingWorksProperlyFacingEast stamp: 'fr 10/25/2020 23:11:49'!
+PASSED!
+
+!testRun: #MarsRoverTests #test05MovingWorksProperlyFacingWest stamp: 'fr 10/25/2020 23:11:49'!
+PASSED!
+
+!testRun: #MarsRoverTests #test06RotatingLeftWorksProperlyForAllOrientations stamp: 'fr 10/25/2020 23:11:49'!
+PASSED!
+
+!testRun: #MarsRoverTests #test07RotatingRightWorksProperlyForAllOrientations stamp: 'fr 10/25/2020 23:11:49'!
+PASSED!
+
+!testRun: #MarsRoverTests #test08CommandListWithMoreThanOneCommandExecutesProperly stamp: 'fr 10/25/2020 23:11:49'!
+PASSED!
+
+!testRun: #MarsRoverTests #test09CreatingAMarsRoverWithAnInvalidCardinalPointShouldFail stamp: 'fr 10/25/2020 23:11:49'!
+PASSED!
+
+!testRun: #MarsRoverTests #test10CommandListWithAnInvalidCommandShouldExecuteUntilItsFoundAndNoFurther stamp: 'fr 10/25/2020 23:11:49'!
+PASSED!
+!MarsRoverTests methodsFor: 'tests' stamp: 'fr 10/25/2020 23:12:21' prior: 50874453!
+test05MovingWorksProperlyFacingWest
+
+	| marsRover |
+	
+	marsRover _ MarsRover at: 1@1 facing: west.
+	
+	self execute: 'f' assert: marsRover isAt: 0@1 facing: west.
+	self execute: 'b' assert: marsRover isAt: 1@1 facing: west! !
+!MarsRoverTests methodsFor: 'tests' stamp: 'fr 10/25/2020 23:17:35' prior: 50872562!
+test01EmptyCommandListDoesNothing
+
+	| marsRover |
+	
+	marsRover _ MarsRover at: 1@1 facing: south.
+	
+	marsRover move: ''.
+	
+	self assert: (marsRover isAt: 1@1 facing: south).
+	
+	self execute: '' assert: marsRover isAt: 1@1 facing: south ! !
+!MarsRoverTests methodsFor: 'tests' stamp: 'fr 10/25/2020 23:17:37' prior: 50874771!
+test01EmptyCommandListDoesNothing
+
+	| marsRover |
+	
+	marsRover _ MarsRover at: 1@1 facing: south.
+	
+	self execute: '' assert: marsRover isAt: 1@1 facing: south ! !
+
+!testRun: #MarsRoverTests #test01EmptyCommandListDoesNothing stamp: 'fr 10/25/2020 23:17:38'!
+PASSED!
+
+!testRun: #MarsRoverTests #test01EmptyCommandListDoesNothing stamp: 'fr 10/25/2020 23:17:38'!
+PASSED!
+
+!testRun: #MarsRoverTests #test02MovingWorksProperlyFacingSouth stamp: 'fr 10/25/2020 23:17:38'!
+PASSED!
+
+!testRun: #MarsRoverTests #test03MovingWorksProperlyFacingNorth stamp: 'fr 10/25/2020 23:17:38'!
+PASSED!
+
+!testRun: #MarsRoverTests #test04MovingWorksProperlyFacingEast stamp: 'fr 10/25/2020 23:17:38'!
+PASSED!
+
+!testRun: #MarsRoverTests #test05MovingWorksProperlyFacingWest stamp: 'fr 10/25/2020 23:17:38'!
+PASSED!
+
+!testRun: #MarsRoverTests #test06RotatingLeftWorksProperlyForAllOrientations stamp: 'fr 10/25/2020 23:17:38'!
+PASSED!
+
+!testRun: #MarsRoverTests #test07RotatingRightWorksProperlyForAllOrientations stamp: 'fr 10/25/2020 23:17:38'!
+PASSED!
+
+!testRun: #MarsRoverTests #test08CommandListWithMoreThanOneCommandExecutesProperly stamp: 'fr 10/25/2020 23:17:38'!
+PASSED!
+
+!testRun: #MarsRoverTests #test09CreatingAMarsRoverWithAnInvalidCardinalPointShouldFail stamp: 'fr 10/25/2020 23:17:38'!
+PASSED!
+
+!testRun: #MarsRoverTests #test10CommandListWithAnInvalidCommandShouldExecuteUntilItsFoundAndNoFurther stamp: 'fr 10/25/2020 23:17:38'!
+PASSED!
+!MarsRoverTests methodsFor: 'tests' stamp: 'fr 10/25/2020 23:20:09'!
+assertMovingTo: aPosition worksProperlyWhenFacing: aCardinalPoint
+
+	| marsRover |
+	
+	marsRover _ MarsRover at: 1@1 facing: aCardinalPoint.
+	
+	self execute: 'f' assert: marsRover isAt: aPosition facing: aCardinalPoint.
+	self execute: 'b' assert: marsRover isAt: 1@1 facing: aCardinalPoint! !
+!MarsRoverTests methodsFor: 'tests' stamp: 'fr 10/25/2020 23:20:48' prior: 50874249!
+test02MovingWorksProperlyFacingSouth
+	
+	self assertMovingTo: 1@0 worksProperlyWhenFacing: south ! !
+
+!testRun: #MarsRoverTests #test02MovingWorksProperlyFacingSouth stamp: 'fr 10/25/2020 23:20:51'!
+PASSED!
+
+!testRun: #MarsRoverTests #test01EmptyCommandListDoesNothing stamp: 'fr 10/25/2020 23:20:51'!
+PASSED!
+
+!testRun: #MarsRoverTests #test02MovingWorksProperlyFacingSouth stamp: 'fr 10/25/2020 23:20:51'!
+PASSED!
+
+!testRun: #MarsRoverTests #test03MovingWorksProperlyFacingNorth stamp: 'fr 10/25/2020 23:20:51'!
+PASSED!
+
+!testRun: #MarsRoverTests #test04MovingWorksProperlyFacingEast stamp: 'fr 10/25/2020 23:20:51'!
+PASSED!
+
+!testRun: #MarsRoverTests #test05MovingWorksProperlyFacingWest stamp: 'fr 10/25/2020 23:20:51'!
+PASSED!
+
+!testRun: #MarsRoverTests #test06RotatingLeftWorksProperlyForAllOrientations stamp: 'fr 10/25/2020 23:20:51'!
+PASSED!
+
+!testRun: #MarsRoverTests #test07RotatingRightWorksProperlyForAllOrientations stamp: 'fr 10/25/2020 23:20:51'!
+PASSED!
+
+!testRun: #MarsRoverTests #test08CommandListWithMoreThanOneCommandExecutesProperly stamp: 'fr 10/25/2020 23:20:51'!
+PASSED!
+
+!testRun: #MarsRoverTests #test09CreatingAMarsRoverWithAnInvalidCardinalPointShouldFail stamp: 'fr 10/25/2020 23:20:51'!
+PASSED!
+
+!testRun: #MarsRoverTests #test10CommandListWithAnInvalidCommandShouldExecuteUntilItsFoundAndNoFurther stamp: 'fr 10/25/2020 23:20:51'!
+PASSED!
+!MarsRoverTests methodsFor: 'tests' stamp: 'fr 10/25/2020 23:21:31'!
+assertGoingAndComingBackFrom: aPosition worksProperlyWhenFacing: aCardinalPoint
+
+	| marsRover |
+	
+	marsRover _ MarsRover at: 1@1 facing: aCardinalPoint.
+	
+	self execute: 'f' assert: marsRover isAt: aPosition facing: aCardinalPoint.
+	self execute: 'b' assert: marsRover isAt: 1@1 facing: aCardinalPoint! !
+!MarsRoverTests methodsFor: 'as yet unclassified' stamp: 'fr 10/25/2020 23:21:31' prior: 50874841!
+test02MovingWorksProperlyFacingSouth
+	
+	self assertGoingAndComingBackFrom: 1@0 worksProperlyWhenFacing: south ! !
+
+!methodRemoval: MarsRoverTests #assertMovingTo:worksProperlyWhenFacing: stamp: 'fr 10/25/2020 23:21:31'!
+assertMovingTo: aPosition worksProperlyWhenFacing: aCardinalPoint
+
+	| marsRover |
+	
+	marsRover _ MarsRover at: 1@1 facing: aCardinalPoint.
+	
+	self execute: 'f' assert: marsRover isAt: aPosition facing: aCardinalPoint.
+	self execute: 'b' assert: marsRover isAt: 1@1 facing: aCardinalPoint!
+!MarsRoverTests methodsFor: 'tests' stamp: 'fr 10/25/2020 23:22:11' prior: 50874312!
+test03MovingWorksProperlyFacingNorth
+
+	self assertGoingAndComingBackFrom: 1@2 worksProperlyWhenFacing: north ! !
+
+!testRun: #MarsRoverTests #test03MovingWorksProperlyFacingNorth stamp: 'fr 10/25/2020 23:22:12'!
+PASSED!
+
+!testRun: #MarsRoverTests #test01EmptyCommandListDoesNothing stamp: 'fr 10/25/2020 23:22:12'!
+PASSED!
+
+!testRun: #MarsRoverTests #test02MovingWorksProperlyFacingSouth stamp: 'fr 10/25/2020 23:22:12'!
+PASSED!
+
+!testRun: #MarsRoverTests #test03MovingWorksProperlyFacingNorth stamp: 'fr 10/25/2020 23:22:12'!
+PASSED!
+
+!testRun: #MarsRoverTests #test04MovingWorksProperlyFacingEast stamp: 'fr 10/25/2020 23:22:12'!
+PASSED!
+
+!testRun: #MarsRoverTests #test05MovingWorksProperlyFacingWest stamp: 'fr 10/25/2020 23:22:12'!
+PASSED!
+
+!testRun: #MarsRoverTests #test06RotatingLeftWorksProperlyForAllOrientations stamp: 'fr 10/25/2020 23:22:12'!
+PASSED!
+
+!testRun: #MarsRoverTests #test07RotatingRightWorksProperlyForAllOrientations stamp: 'fr 10/25/2020 23:22:12'!
+PASSED!
+
+!testRun: #MarsRoverTests #test08CommandListWithMoreThanOneCommandExecutesProperly stamp: 'fr 10/25/2020 23:22:12'!
+PASSED!
+
+!testRun: #MarsRoverTests #test09CreatingAMarsRoverWithAnInvalidCardinalPointShouldFail stamp: 'fr 10/25/2020 23:22:12'!
+PASSED!
+
+!testRun: #MarsRoverTests #test10CommandListWithAnInvalidCommandShouldExecuteUntilItsFoundAndNoFurther stamp: 'fr 10/25/2020 23:22:12'!
+PASSED!
+!MarsRoverTests methodsFor: 'tests' stamp: 'fr 10/25/2020 23:22:22' prior: 50874378!
+test04MovingWorksProperlyFacingEast
+
+	| marsRover |
+	
+	marsRover _ MarsRover at: 1@1 facing: east.
+	
+	self execute: 'f' assert: marsRover isAt: 2@1 facing: east.	
+	self execute: 'b' assert: marsRover isAt: 1@1 facing: east.
+	
+	self assertGoingAndComingBackFrom: 1@0 worksProperlyWhenFacing: south ! !
+!MarsRoverTests methodsFor: 'tests' stamp: 'fr 10/25/2020 23:22:39' prior: 50874964!
+test04MovingWorksProperlyFacingEast
+	
+	self assertGoingAndComingBackFrom: 2@1 worksProperlyWhenFacing: east ! !
+!MarsRoverTests methodsFor: 'tests' stamp: 'fr 10/25/2020 23:22:56' prior: 50874761!
+test05MovingWorksProperlyFacingWest
+
+	| marsRover |
+	
+	marsRover _ MarsRover at: 1@1 facing: west.
+	
+	self execute: 'f' assert: marsRover isAt: 0@1 facing: west.
+	self execute: 'b' assert: marsRover isAt: 1@1 facing: west.
+	
+	self assertGoingAndComingBackFrom: 0@1 worksProperlyWhenFacing: west ! !
+
+!testRun: #MarsRoverTests #test05MovingWorksProperlyFacingWest stamp: 'fr 10/25/2020 23:22:57'!
+PASSED!
+
+!testRun: #MarsRoverTests #test01EmptyCommandListDoesNothing stamp: 'fr 10/25/2020 23:22:57'!
+PASSED!
+
+!testRun: #MarsRoverTests #test02MovingWorksProperlyFacingSouth stamp: 'fr 10/25/2020 23:22:57'!
+PASSED!
+
+!testRun: #MarsRoverTests #test03MovingWorksProperlyFacingNorth stamp: 'fr 10/25/2020 23:22:57'!
+PASSED!
+
+!testRun: #MarsRoverTests #test04MovingWorksProperlyFacingEast stamp: 'fr 10/25/2020 23:22:57'!
+PASSED!
+
+!testRun: #MarsRoverTests #test05MovingWorksProperlyFacingWest stamp: 'fr 10/25/2020 23:22:57'!
+PASSED!
+
+!testRun: #MarsRoverTests #test06RotatingLeftWorksProperlyForAllOrientations stamp: 'fr 10/25/2020 23:22:57'!
+PASSED!
+
+!testRun: #MarsRoverTests #test07RotatingRightWorksProperlyForAllOrientations stamp: 'fr 10/25/2020 23:22:57'!
+PASSED!
+
+!testRun: #MarsRoverTests #test08CommandListWithMoreThanOneCommandExecutesProperly stamp: 'fr 10/25/2020 23:22:57'!
+PASSED!
+
+!testRun: #MarsRoverTests #test09CreatingAMarsRoverWithAnInvalidCardinalPointShouldFail stamp: 'fr 10/25/2020 23:22:57'!
+PASSED!
+
+!testRun: #MarsRoverTests #test10CommandListWithAnInvalidCommandShouldExecuteUntilItsFoundAndNoFurther stamp: 'fr 10/25/2020 23:22:57'!
+PASSED!
+!MarsRoverTests methodsFor: 'tests' stamp: 'fr 10/25/2020 23:23:02' prior: 50874984!
+test05MovingWorksProperlyFacingWest
+	
+	self assertGoingAndComingBackFrom: 0@1 worksProperlyWhenFacing: west ! !
+
+!testRun: #MarsRoverTests #test05MovingWorksProperlyFacingWest stamp: 'fr 10/25/2020 23:23:03'!
+PASSED!
+
+!testRun: #MarsRoverTests #test01EmptyCommandListDoesNothing stamp: 'fr 10/25/2020 23:23:03'!
+PASSED!
+
+!testRun: #MarsRoverTests #test02MovingWorksProperlyFacingSouth stamp: 'fr 10/25/2020 23:23:03'!
+PASSED!
+
+!testRun: #MarsRoverTests #test03MovingWorksProperlyFacingNorth stamp: 'fr 10/25/2020 23:23:03'!
+PASSED!
+
+!testRun: #MarsRoverTests #test04MovingWorksProperlyFacingEast stamp: 'fr 10/25/2020 23:23:03'!
+PASSED!
+
+!testRun: #MarsRoverTests #test05MovingWorksProperlyFacingWest stamp: 'fr 10/25/2020 23:23:03'!
+PASSED!
+
+!testRun: #MarsRoverTests #test06RotatingLeftWorksProperlyForAllOrientations stamp: 'fr 10/25/2020 23:23:03'!
+PASSED!
+
+!testRun: #MarsRoverTests #test07RotatingRightWorksProperlyForAllOrientations stamp: 'fr 10/25/2020 23:23:03'!
+PASSED!
+
+!testRun: #MarsRoverTests #test08CommandListWithMoreThanOneCommandExecutesProperly stamp: 'fr 10/25/2020 23:23:03'!
+PASSED!
+
+!testRun: #MarsRoverTests #test09CreatingAMarsRoverWithAnInvalidCardinalPointShouldFail stamp: 'fr 10/25/2020 23:23:03'!
+PASSED!
+
+!testRun: #MarsRoverTests #test10CommandListWithAnInvalidCommandShouldExecuteUntilItsFoundAndNoFurther stamp: 'fr 10/25/2020 23:23:03'!
+PASSED!
+!MarsRoverTests methodsFor: 'tests' stamp: 'fr 10/25/2020 23:27:20' prior: 50874662!
+test06RotatingLeftWorksProperlyForAllOrientations
+
+	| marsRover |
+	
+	marsRover _ MarsRover at: 1@1 facing: south.
+		
+	self execute: 'l' assert: marsRover isAt: 1@1 facing: east.
+	self execute: 'l' assert: marsRover isAt: 1@1 facing: north.
+	self execute: 'l' assert: marsRover isAt: 1@1 facing: west.
+	self execute: 'l' assert: marsRover isAt: 1@1 facing: south.
+	
+	self assertRotating: 'l' worksProperlyWithLeft: east andRight: west.! !
+!MarsRoverTests methodsFor: 'tests' stamp: 'fr 10/25/2020 23:28:19'!
+assertRotating: aRotationCommand worksProperlyWithLeft: aLeftCardinalPoint andRight: aRightCardinalPoint
+
+	| marsRover |
+	
+	marsRover _ MarsRover at: 1@1 facing: south.
+		
+	self execute: 'l' assert: marsRover isAt: 1@1 facing: east.
+	self execute: 'l' assert: marsRover isAt: 1@1 facing: north.
+	self execute: 'l' assert: marsRover isAt: 1@1 facing: west.
+	self execute: 'l' assert: marsRover isAt: 1@1 facing: south.
+	
+! !
+!MarsRoverTests methodsFor: 'tests' stamp: 'fr 10/25/2020 23:30:12'!
+assertRotating: aRotationCommand worksProperlyPassingFirst: aLeftCardinalPoint andThen: aRightCardinalPoint
+
+	| marsRover |
+	
+	marsRover _ MarsRover at: 1@1 facing: south.
+		
+	self execute: 'l' assert: marsRover isAt: 1@1 facing: east.
+	self execute: 'l' assert: marsRover isAt: 1@1 facing: north.
+	self execute: 'l' assert: marsRover isAt: 1@1 facing: west.
+	self execute: 'l' assert: marsRover isAt: 1@1 facing: south.
+	
+! !
+!MarsRoverTests methodsFor: 'as yet unclassified' stamp: 'fr 10/25/2020 23:30:12' prior: 50875082!
+test06RotatingLeftWorksProperlyForAllOrientations
+
+	| marsRover |
+	
+	marsRover _ MarsRover at: 1@1 facing: south.
+		
+	self execute: 'l' assert: marsRover isAt: 1@1 facing: east.
+	self execute: 'l' assert: marsRover isAt: 1@1 facing: north.
+	self execute: 'l' assert: marsRover isAt: 1@1 facing: west.
+	self execute: 'l' assert: marsRover isAt: 1@1 facing: south.
+	
+	self assertRotating: 'l' worksProperlyPassingFirst: east andThen: west.! !
+
+!methodRemoval: MarsRoverTests #assertRotating:worksProperlyWithLeft:andRight: stamp: 'fr 10/25/2020 23:30:12'!
+assertRotating: aRotationCommand worksProperlyWithLeft: aLeftCardinalPoint andRight: aRightCardinalPoint
+
+	| marsRover |
+	
+	marsRover _ MarsRover at: 1@1 facing: south.
+		
+	self execute: 'l' assert: marsRover isAt: 1@1 facing: east.
+	self execute: 'l' assert: marsRover isAt: 1@1 facing: north.
+	self execute: 'l' assert: marsRover isAt: 1@1 facing: west.
+	self execute: 'l' assert: marsRover isAt: 1@1 facing: south.
+	
+!
+!MarsRoverTests methodsFor: 'tests' stamp: 'fr 10/25/2020 23:31:03' prior: 50875114!
+assertRotating: aRotationCommand worksProperlyPassingFirst: firstCardinalPoint andThen: secondCardinalPoint
+
+	| marsRover |
+	
+	marsRover _ MarsRover at: 1@1 facing: south.
+		
+	self execute: aRotationCommand assert: marsRover isAt: 1@1 facing: firstCardinalPoint.
+	self execute: aRotationCommand assert: marsRover isAt: 1@1 facing: north.
+	self execute: aRotationCommand assert: marsRover isAt: 1@1 facing: secondCardinalPoint.
+	self execute: aRotationCommand assert: marsRover isAt: 1@1 facing: south.
+	
+! !
+!MarsRoverTests methodsFor: 'tests' stamp: 'fr 10/25/2020 23:31:11' prior: 50875131!
+test06RotatingLeftWorksProperlyForAllOrientations
+	
+	self assertRotating: 'l' worksProperlyPassingFirst: east andThen: west.! !
+
+!testRun: #MarsRoverTests #test06RotatingLeftWorksProperlyForAllOrientations stamp: 'fr 10/25/2020 23:31:12'!
+PASSED!
+
+!testRun: #MarsRoverTests #test01EmptyCommandListDoesNothing stamp: 'fr 10/25/2020 23:31:12'!
+PASSED!
+
+!testRun: #MarsRoverTests #test02MovingWorksProperlyFacingSouth stamp: 'fr 10/25/2020 23:31:12'!
+PASSED!
+
+!testRun: #MarsRoverTests #test03MovingWorksProperlyFacingNorth stamp: 'fr 10/25/2020 23:31:12'!
+PASSED!
+
+!testRun: #MarsRoverTests #test04MovingWorksProperlyFacingEast stamp: 'fr 10/25/2020 23:31:12'!
+PASSED!
+
+!testRun: #MarsRoverTests #test05MovingWorksProperlyFacingWest stamp: 'fr 10/25/2020 23:31:12'!
+PASSED!
+
+!testRun: #MarsRoverTests #test06RotatingLeftWorksProperlyForAllOrientations stamp: 'fr 10/25/2020 23:31:12'!
+PASSED!
+
+!testRun: #MarsRoverTests #test07RotatingRightWorksProperlyForAllOrientations stamp: 'fr 10/25/2020 23:31:12'!
+PASSED!
+
+!testRun: #MarsRoverTests #test08CommandListWithMoreThanOneCommandExecutesProperly stamp: 'fr 10/25/2020 23:31:12'!
+PASSED!
+
+!testRun: #MarsRoverTests #test09CreatingAMarsRoverWithAnInvalidCardinalPointShouldFail stamp: 'fr 10/25/2020 23:31:12'!
+PASSED!
+
+!testRun: #MarsRoverTests #test10CommandListWithAnInvalidCommandShouldExecuteUntilItsFoundAndNoFurther stamp: 'fr 10/25/2020 23:31:12'!
+PASSED!
+!MarsRoverTests methodsFor: 'tests' stamp: 'fr 10/25/2020 23:31:30' prior: 50874691!
+test07RotatingRightWorksProperlyForAllOrientations
+	
+	self assertRotating: 'r' worksProperlyPassingFirst: west andThen: east.! !
+
+!testRun: #MarsRoverTests #test07RotatingRightWorksProperlyForAllOrientations stamp: 'fr 10/25/2020 23:31:31'!
+PASSED!
+
+!testRun: #MarsRoverTests #test01EmptyCommandListDoesNothing stamp: 'fr 10/25/2020 23:31:31'!
+PASSED!
+
+!testRun: #MarsRoverTests #test02MovingWorksProperlyFacingSouth stamp: 'fr 10/25/2020 23:31:31'!
+PASSED!
+
+!testRun: #MarsRoverTests #test03MovingWorksProperlyFacingNorth stamp: 'fr 10/25/2020 23:31:31'!
+PASSED!
+
+!testRun: #MarsRoverTests #test04MovingWorksProperlyFacingEast stamp: 'fr 10/25/2020 23:31:31'!
+PASSED!
+
+!testRun: #MarsRoverTests #test05MovingWorksProperlyFacingWest stamp: 'fr 10/25/2020 23:31:31'!
+PASSED!
+
+!testRun: #MarsRoverTests #test06RotatingLeftWorksProperlyForAllOrientations stamp: 'fr 10/25/2020 23:31:31'!
+PASSED!
+
+!testRun: #MarsRoverTests #test07RotatingRightWorksProperlyForAllOrientations stamp: 'fr 10/25/2020 23:31:31'!
+PASSED!
+
+!testRun: #MarsRoverTests #test08CommandListWithMoreThanOneCommandExecutesProperly stamp: 'fr 10/25/2020 23:31:31'!
+PASSED!
+
+!testRun: #MarsRoverTests #test09CreatingAMarsRoverWithAnInvalidCardinalPointShouldFail stamp: 'fr 10/25/2020 23:31:31'!
+PASSED!
+
+!testRun: #MarsRoverTests #test10CommandListWithAnInvalidCommandShouldExecuteUntilItsFoundAndNoFurther stamp: 'fr 10/25/2020 23:31:31'!
+PASSED!
+
+!classDefinition: #MarsRoverTests category: 'MarsRover - Exercise' stamp: 'fr 10/25/2020 23:44:45'!
+TestCase subclass: #MarsRoverTests
+	instanceVariableNames: 'south north east west marsRoverTest'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'MarsRover - Exercise'!
+!MarsRoverTests methodsFor: 'tests - invalid entries' stamp: 'fr 10/25/2020 23:44:43'!
+restartMarsRoverFacing: aCardinalPoint
+	
+	marsRoverTest _ MarsRover at: 1@1 facing: north! !
+!MarsRoverTests methodsFor: 'tests - multiple and empty' stamp: 'fr 10/25/2020 23:46:08' prior: 50874613!
+test08CommandListWithMoreThanOneCommandExecutesProperly
+
+	self startMarsRoverFacing: north.
+	
+	self execute: 'flf' assert: marsRoverTest isAt: 0@2 facing: west! !
+!MarsRoverTests methodsFor: 'tests - private' stamp: 'fr 10/25/2020 23:48:50'!
+startMarsRoverFacing: aCardinalPoint
+	
+	marsRoverTest _ MarsRover at: 1@1 facing: north! !
+
+!methodRemoval: MarsRoverTests #restartMarsRoverFacing: stamp: 'fr 10/25/2020 23:48:50'!
+restartMarsRoverFacing: aCardinalPoint
+	
+	marsRoverTest _ MarsRover at: 1@1 facing: north!
+!MarsRoverTests methodsFor: 'tests - private' stamp: 'fr 10/25/2020 23:49:20' prior: 50875165!
+assertRotating: aRotationCommand worksProperlyPassingFirst: firstCardinalPoint andThen: secondCardinalPoint
+
+	self startMarsRoverFacing: south.
+		
+	self execute: aRotationCommand assert: marsRoverTest isAt: 1@1 facing: firstCardinalPoint.
+	self execute: aRotationCommand assert: marsRoverTest isAt: 1@1 facing: north.
+	self execute: aRotationCommand assert: marsRoverTest isAt: 1@1 facing: secondCardinalPoint.
+	self execute: aRotationCommand assert: marsRoverTest isAt: 1@1 facing: south.
+	
+! !
+!MarsRoverTests methodsFor: 'tests - private' stamp: 'fr 10/25/2020 23:49:52' prior: 50874886!
+assertGoingAndComingBackFrom: aPosition worksProperlyWhenFacing: aCardinalPoint
+	
+	self startMarsRoverFacing: aCardinalPoint.
+	
+	self execute: 'f' assert: marsRoverTest isAt: aPosition facing: aCardinalPoint.
+	self execute: 'b' assert: marsRoverTest isAt: 1@1 facing: aCardinalPoint! !
+
+!testRun: #MarsRoverTests #test06RotatingLeftWorksProperlyForAllOrientations stamp: 'fr 10/25/2020 23:50:03'!
+FAILURE!
+
+!testRun: #MarsRoverTests #test07RotatingRightWorksProperlyForAllOrientations stamp: 'fr 10/25/2020 23:50:03'!
+FAILURE!
+
+!testRun: #MarsRoverTests #test02MovingWorksProperlyFacingSouth stamp: 'fr 10/25/2020 23:50:09'!
+FAILURE!
+
+!testRun: #MarsRoverTests #test03MovingWorksProperlyFacingNorth stamp: 'fr 10/25/2020 23:50:09'!
+PASSED!
+
+!testRun: #MarsRoverTests #test04MovingWorksProperlyFacingEast stamp: 'fr 10/25/2020 23:50:09'!
+FAILURE!
+
+!testRun: #MarsRoverTests #test05MovingWorksProperlyFacingWest stamp: 'fr 10/25/2020 23:50:09'!
+FAILURE!
+
+!testRun: #MarsRoverTests #test01EmptyCommandListDoesNothing stamp: 'fr 10/25/2020 23:50:13'!
+PASSED!
+
+!testRun: #MarsRoverTests #test08CommandListWithMoreThanOneCommandExecutesProperly stamp: 'fr 10/25/2020 23:50:13'!
+PASSED!
+
+!testRun: #MarsRoverTests #test09CreatingAMarsRoverWithAnInvalidCardinalPointShouldFail stamp: 'fr 10/25/2020 23:50:16'!
+PASSED!
+
+!testRun: #MarsRoverTests #test10CommandListWithAnInvalidCommandShouldExecuteUntilItsFoundAndNoFurther stamp: 'fr 10/25/2020 23:50:16'!
+PASSED!
+
+!testRun: #MarsRoverTests #test02MovingWorksProperlyFacingSouth stamp: 'fr 10/25/2020 23:51:29'!
+FAILURE!
+
+!testRun: #MarsRoverTests #test03MovingWorksProperlyFacingNorth stamp: 'fr 10/25/2020 23:51:29'!
+PASSED!
+
+!testRun: #MarsRoverTests #test04MovingWorksProperlyFacingEast stamp: 'fr 10/25/2020 23:51:29'!
+FAILURE!
+
+!testRun: #MarsRoverTests #test05MovingWorksProperlyFacingWest stamp: 'fr 10/25/2020 23:51:29'!
+FAILURE!
+!MarsRoverTests methodsFor: 'tests - private' stamp: 'fr 10/25/2020 23:52:17' prior: 50875302!
+startMarsRoverFacing: aCardinalPoint
+	
+	marsRoverTest _ MarsRover at: 1@1 facing: aCardinalPoint ! !
+
+!testRun: #MarsRoverTests #test06RotatingLeftWorksProperlyForAllOrientations stamp: 'fr 10/25/2020 23:52:19'!
+PASSED!
+
+!testRun: #MarsRoverTests #test07RotatingRightWorksProperlyForAllOrientations stamp: 'fr 10/25/2020 23:52:19'!
+PASSED!
+
+!testRun: #MarsRoverTests #test02MovingWorksProperlyFacingSouth stamp: 'fr 10/25/2020 23:52:20'!
+PASSED!
+
+!testRun: #MarsRoverTests #test03MovingWorksProperlyFacingNorth stamp: 'fr 10/25/2020 23:52:20'!
+PASSED!
+
+!testRun: #MarsRoverTests #test04MovingWorksProperlyFacingEast stamp: 'fr 10/25/2020 23:52:20'!
+PASSED!
+
+!testRun: #MarsRoverTests #test05MovingWorksProperlyFacingWest stamp: 'fr 10/25/2020 23:52:20'!
+PASSED!
+
+!testRun: #MarsRoverTests #test01EmptyCommandListDoesNothing stamp: 'fr 10/25/2020 23:52:21'!
+PASSED!
+
+!testRun: #MarsRoverTests #test08CommandListWithMoreThanOneCommandExecutesProperly stamp: 'fr 10/25/2020 23:52:21'!
+PASSED!
+
+!testRun: #MarsRoverTests #test09CreatingAMarsRoverWithAnInvalidCardinalPointShouldFail stamp: 'fr 10/25/2020 23:52:22'!
+PASSED!
+
+!testRun: #MarsRoverTests #test10CommandListWithAnInvalidCommandShouldExecuteUntilItsFoundAndNoFurther stamp: 'fr 10/25/2020 23:52:22'!
+PASSED!
+
+!testRun: #MarsRoverTests #test01EmptyCommandListDoesNothing stamp: 'fr 10/25/2020 23:52:35'!
+PASSED!
+
+!testRun: #MarsRoverTests #test01EmptyCommandListDoesNothing stamp: 'fr 10/25/2020 23:52:38'!
+PASSED!
+
+!testRun: #MarsRoverTests #test01EmptyCommandListDoesNothing stamp: 'fr 10/25/2020 23:52:38'!
+PASSED!
+
+!testRun: #MarsRoverTests #test02MovingWorksProperlyFacingSouth stamp: 'fr 10/25/2020 23:52:38'!
+PASSED!
+
+!testRun: #MarsRoverTests #test03MovingWorksProperlyFacingNorth stamp: 'fr 10/25/2020 23:52:38'!
+PASSED!
+
+!testRun: #MarsRoverTests #test04MovingWorksProperlyFacingEast stamp: 'fr 10/25/2020 23:52:38'!
+PASSED!
+
+!testRun: #MarsRoverTests #test05MovingWorksProperlyFacingWest stamp: 'fr 10/25/2020 23:52:38'!
+PASSED!
+
+!testRun: #MarsRoverTests #test06RotatingLeftWorksProperlyForAllOrientations stamp: 'fr 10/25/2020 23:52:38'!
+PASSED!
+
+!testRun: #MarsRoverTests #test07RotatingRightWorksProperlyForAllOrientations stamp: 'fr 10/25/2020 23:52:38'!
+PASSED!
+
+!testRun: #MarsRoverTests #test08CommandListWithMoreThanOneCommandExecutesProperly stamp: 'fr 10/25/2020 23:52:38'!
+PASSED!
+
+!testRun: #MarsRoverTests #test09CreatingAMarsRoverWithAnInvalidCardinalPointShouldFail stamp: 'fr 10/25/2020 23:52:38'!
+PASSED!
+
+!testRun: #MarsRoverTests #test10CommandListWithAnInvalidCommandShouldExecuteUntilItsFoundAndNoFurther stamp: 'fr 10/25/2020 23:52:38'!
+PASSED!
+!MarsRoverTests methodsFor: 'tests - multiple and empty' stamp: 'fr 10/25/2020 23:55:17' prior: 50874782!
+test01EmptyCommandListDoesNothing
+
+	self startMarsRoverFacing: south.
+	
+	self execute: '' assert: marsRoverTest isAt: 1@1 facing: south ! !
+
+!testRun: #MarsRoverTests #test06RotatingLeftWorksProperlyForAllOrientations stamp: 'fr 10/25/2020 23:55:25'!
+PASSED!
+
+!testRun: #MarsRoverTests #test07RotatingRightWorksProperlyForAllOrientations stamp: 'fr 10/25/2020 23:55:25'!
+PASSED!
+
+!testRun: #MarsRoverTests #test02MovingWorksProperlyFacingSouth stamp: 'fr 10/25/2020 23:55:26'!
+PASSED!
+
+!testRun: #MarsRoverTests #test03MovingWorksProperlyFacingNorth stamp: 'fr 10/25/2020 23:55:26'!
+PASSED!
+
+!testRun: #MarsRoverTests #test04MovingWorksProperlyFacingEast stamp: 'fr 10/25/2020 23:55:26'!
+PASSED!
+
+!testRun: #MarsRoverTests #test05MovingWorksProperlyFacingWest stamp: 'fr 10/25/2020 23:55:26'!
+PASSED!
+
+!testRun: #MarsRoverTests #test01EmptyCommandListDoesNothing stamp: 'fr 10/25/2020 23:55:27'!
+PASSED!
+
+!testRun: #MarsRoverTests #test08CommandListWithMoreThanOneCommandExecutesProperly stamp: 'fr 10/25/2020 23:55:27'!
+PASSED!
+
+!testRun: #MarsRoverTests #test09CreatingAMarsRoverWithAnInvalidCardinalPointShouldFail stamp: 'fr 10/25/2020 23:55:28'!
+PASSED!
+
+!testRun: #MarsRoverTests #test10CommandListWithAnInvalidCommandShouldExecuteUntilItsFoundAndNoFurther stamp: 'fr 10/25/2020 23:55:28'!
+PASSED!
+
+!testRun: #MarsRoverTests #test01EmptyCommandListDoesNothing stamp: 'fr 10/25/2020 23:55:31'!
+PASSED!
+
+!testRun: #MarsRoverTests #test02MovingWorksProperlyFacingSouth stamp: 'fr 10/25/2020 23:55:31'!
+PASSED!
+
+!testRun: #MarsRoverTests #test03MovingWorksProperlyFacingNorth stamp: 'fr 10/25/2020 23:55:31'!
+PASSED!
+
+!testRun: #MarsRoverTests #test04MovingWorksProperlyFacingEast stamp: 'fr 10/25/2020 23:55:31'!
+PASSED!
+
+!testRun: #MarsRoverTests #test05MovingWorksProperlyFacingWest stamp: 'fr 10/25/2020 23:55:31'!
+PASSED!
+
+!testRun: #MarsRoverTests #test06RotatingLeftWorksProperlyForAllOrientations stamp: 'fr 10/25/2020 23:55:31'!
+PASSED!
+
+!testRun: #MarsRoverTests #test07RotatingRightWorksProperlyForAllOrientations stamp: 'fr 10/25/2020 23:55:31'!
+PASSED!
+
+!testRun: #MarsRoverTests #test08CommandListWithMoreThanOneCommandExecutesProperly stamp: 'fr 10/25/2020 23:55:31'!
+PASSED!
+
+!testRun: #MarsRoverTests #test09CreatingAMarsRoverWithAnInvalidCardinalPointShouldFail stamp: 'fr 10/25/2020 23:55:31'!
+PASSED!
+
+!testRun: #MarsRoverTests #test10CommandListWithAnInvalidCommandShouldExecuteUntilItsFoundAndNoFurther stamp: 'fr 10/25/2020 23:55:31'!
+PASSED!
+!MarsRoverTests methodsFor: 'tests - private' stamp: 'fr 10/25/2020 23:58:57'!
+execute: aCommandList assertMarsRoverisAt: aPosition facing: aCardinalPoint
+
+	marsRoverTest move: aCommandList.
+	
+	self assert: (marsRoverTest isAt: aPosition facing: aCardinalPoint)! !
+!MarsRoverTests methodsFor: 'tests - private' stamp: 'fr 10/26/2020 00:00:13' prior: 50875333!
+assertGoingAndComingBackFrom: aPosition worksProperlyWhenFacing: aCardinalPoint
+	
+	self startMarsRoverFacing: aCardinalPoint.
+	
+	self execute: 'f' assertMarsRoverisAt: aPosition facing: aCardinalPoint.
+	self execute: 'b' assertMarsRoverisAt: 1@1 facing: aCardinalPoint! !
+!MarsRoverTests methodsFor: 'tests - private' stamp: 'fr 10/26/2020 00:00:43' prior: 50875314!
+assertRotating: aRotationCommand worksProperlyPassingFirst: firstCardinalPoint andThen: secondCardinalPoint
+
+	self startMarsRoverFacing: south.
+		
+	self execute: aRotationCommand assertMarsRoverisAt: 1@1 facing: firstCardinalPoint.
+	self execute: aRotationCommand assertMarsRoverisAt: 1@1 facing: north.
+	self execute: aRotationCommand assertMarsRoverisAt: 1@1 facing: secondCardinalPoint.
+	self execute: aRotationCommand assertMarsRoverisAt: 1@1 facing: south.
+	
+! !
+!MarsRoverTests methodsFor: 'tests - multiple and empty' stamp: 'fr 10/26/2020 00:00:51' prior: 50875481!
+test01EmptyCommandListDoesNothing
+
+	self startMarsRoverFacing: south.
+	
+	self execute: '' assertMarsRoverisAt: 1@1 facing: south ! !
+!MarsRoverTests methodsFor: 'tests - multiple and empty' stamp: 'fr 10/26/2020 00:00:59' prior: 50875294!
+test08CommandListWithMoreThanOneCommandExecutesProperly
+
+	self startMarsRoverFacing: north.
+	
+	self execute: 'flf' assertMarsRoverisAt: 0@2 facing: west! !
+
+!testRun: #MarsRoverTests #test01EmptyCommandListDoesNothing stamp: 'fr 10/26/2020 00:01:02'!
+PASSED!
+
+!testRun: #MarsRoverTests #test02MovingWorksProperlyFacingSouth stamp: 'fr 10/26/2020 00:01:02'!
+PASSED!
+
+!testRun: #MarsRoverTests #test03MovingWorksProperlyFacingNorth stamp: 'fr 10/26/2020 00:01:02'!
+PASSED!
+
+!testRun: #MarsRoverTests #test04MovingWorksProperlyFacingEast stamp: 'fr 10/26/2020 00:01:02'!
+PASSED!
+
+!testRun: #MarsRoverTests #test05MovingWorksProperlyFacingWest stamp: 'fr 10/26/2020 00:01:02'!
+PASSED!
+
+!testRun: #MarsRoverTests #test06RotatingLeftWorksProperlyForAllOrientations stamp: 'fr 10/26/2020 00:01:02'!
+PASSED!
+
+!testRun: #MarsRoverTests #test07RotatingRightWorksProperlyForAllOrientations stamp: 'fr 10/26/2020 00:01:02'!
+PASSED!
+
+!testRun: #MarsRoverTests #test08CommandListWithMoreThanOneCommandExecutesProperly stamp: 'fr 10/26/2020 00:01:02'!
+PASSED!
+
+!testRun: #MarsRoverTests #test09CreatingAMarsRoverWithAnInvalidCardinalPointShouldFail stamp: 'fr 10/26/2020 00:01:02'!
+PASSED!
+
+!testRun: #MarsRoverTests #test10CommandListWithAnInvalidCommandShouldExecuteUntilItsFoundAndNoFurther stamp: 'fr 10/26/2020 00:01:02'!
+PASSED!
+
+!methodRemoval: MarsRoverTests #execute:assert:isAt:facing: stamp: 'fr 10/26/2020 00:01:07'!
+execute: aCommandList assert: marsRover isAt: aPosition facing: aCardinalPoint
+
+	marsRover move: aCommandList.
+	
+	self assert: (marsRover isAt: aPosition facing: aCardinalPoint)!
+!MarsRoverTests methodsFor: 'tests - invalid entries' stamp: 'fr 10/26/2020 00:02:03' prior: 50872635!
+test10CommandListWithAnInvalidCommandShouldExecuteUntilItsFoundAndNoFurther
+	
+	self startMarsRoverFacing: north.
+	
+	self should: [marsRoverTest move: 'flbzfr'] raise: Error withMessageText: MarsRover invalidCommandErrorDescription.
+	self assert: (marsRoverTest isAt: 2@2 facing: west)! !
+
+!testRun: #MarsRoverTests #test01EmptyCommandListDoesNothing stamp: 'fr 10/26/2020 00:02:05'!
+PASSED!
+
+!testRun: #MarsRoverTests #test02MovingWorksProperlyFacingSouth stamp: 'fr 10/26/2020 00:02:05'!
+PASSED!
+
+!testRun: #MarsRoverTests #test03MovingWorksProperlyFacingNorth stamp: 'fr 10/26/2020 00:02:05'!
+PASSED!
+
+!testRun: #MarsRoverTests #test04MovingWorksProperlyFacingEast stamp: 'fr 10/26/2020 00:02:05'!
+PASSED!
+
+!testRun: #MarsRoverTests #test05MovingWorksProperlyFacingWest stamp: 'fr 10/26/2020 00:02:05'!
+PASSED!
+
+!testRun: #MarsRoverTests #test06RotatingLeftWorksProperlyForAllOrientations stamp: 'fr 10/26/2020 00:02:05'!
+PASSED!
+
+!testRun: #MarsRoverTests #test07RotatingRightWorksProperlyForAllOrientations stamp: 'fr 10/26/2020 00:02:05'!
+PASSED!
+
+!testRun: #MarsRoverTests #test08CommandListWithMoreThanOneCommandExecutesProperly stamp: 'fr 10/26/2020 00:02:05'!
+PASSED!
+
+!testRun: #MarsRoverTests #test09CreatingAMarsRoverWithAnInvalidCardinalPointShouldFail stamp: 'fr 10/26/2020 00:02:05'!
+PASSED!
+
+!testRun: #MarsRoverTests #test10CommandListWithAnInvalidCommandShouldExecuteUntilItsFoundAndNoFurther stamp: 'fr 10/26/2020 00:02:05'!
+PASSED!
+
+!classDefinition: #MarsRoverTests category: 'MarsRover - Exercise' stamp: 'fr 10/26/2020 00:02:21'!
+TestCase subclass: #MarsRoverTests
+	instanceVariableNames: 'south north east west marsRover'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'MarsRover - Exercise'!
+!MarsRoverTests methodsFor: 'as yet unclassified' stamp: 'fr 10/26/2020 00:02:21' prior: 50875561!
+execute: aCommandList assertMarsRoverisAt: aPosition facing: aCardinalPoint
+
+	marsRover move: aCommandList.
+	
+	self assert: (marsRover isAt: aPosition facing: aCardinalPoint)! !
+!MarsRoverTests methodsFor: 'as yet unclassified' stamp: 'fr 10/26/2020 00:02:21' prior: 50875661!
+test10CommandListWithAnInvalidCommandShouldExecuteUntilItsFoundAndNoFurther
+	
+	self startMarsRoverFacing: north.
+	
+	self should: [marsRover move: 'flbzfr'] raise: Error withMessageText: MarsRover invalidCommandErrorDescription.
+	self assert: (marsRover isAt: 2@2 facing: west)! !
+!MarsRoverTests methodsFor: 'as yet unclassified' stamp: 'fr 10/26/2020 00:02:21' prior: 50875395!
+startMarsRoverFacing: aCardinalPoint
+	
+	marsRover _ MarsRover at: 1@1 facing: aCardinalPoint ! !
+!MarsRoverTests methodsFor: 'tests - multiple and empty' stamp: 'fr 10/26/2020 00:04:59'!
+assertRoverFacing: aCardinalPoint executes: aCommandList andFinishesAt: anEndingPosition facing: anEndingCardinalPoint
+
+	self startMarsRoverFacing: aCardinalPoint .
+	
+	self execute: aCommandList assertMarsRoverisAt: anEndingPosition facing: anEndingCardinalPoint ! !
+!MarsRoverTests methodsFor: 'tests - multiple and empty' stamp: 'fr 10/26/2020 00:05:08'!
+assertMarsRoverFacing: aCardinalPoint executes: aCommandList andFinishesAt: anEndingPosition facing: anEndingCardinalPoint
+
+	self startMarsRoverFacing: aCardinalPoint .
+	
+	self execute: aCommandList assertMarsRoverisAt: anEndingPosition facing: anEndingCardinalPoint ! !
+
+!methodRemoval: MarsRoverTests #assertRoverFacing:executes:andFinishesAt:facing: stamp: 'fr 10/26/2020 00:05:11'!
+assertRoverFacing: aCardinalPoint executes: aCommandList andFinishesAt: anEndingPosition facing: anEndingCardinalPoint
+
+	self startMarsRoverFacing: aCardinalPoint .
+	
+	self execute: aCommandList assertMarsRoverisAt: anEndingPosition facing: anEndingCardinalPoint !
+!MarsRoverTests methodsFor: 'tests - multiple and empty' stamp: 'fr 10/26/2020 00:05:56'!
+assertMarsRoverExecutes: aCommandList andFinishesAt: anEndingPosition facing: anEndingCardinalPoint
+
+	self startMarsRoverFacing: south .
+	
+	self execute: aCommandList assertMarsRoverisAt: anEndingPosition facing: anEndingCardinalPoint ! !
+
+!methodRemoval: MarsRoverTests #assertMarsRoverFacing:executes:andFinishesAt:facing: stamp: 'fr 10/26/2020 00:05:59'!
+assertMarsRoverFacing: aCardinalPoint executes: aCommandList andFinishesAt: anEndingPosition facing: anEndingCardinalPoint
+
+	self startMarsRoverFacing: aCardinalPoint .
+	
+	self execute: aCommandList assertMarsRoverisAt: anEndingPosition facing: anEndingCardinalPoint !
+!MarsRoverTests methodsFor: 'tests - multiple and empty' stamp: 'fr 10/26/2020 00:06:40' prior: 50875608!
+test08CommandListWithMoreThanOneCommandExecutesProperly
+
+	self startMarsRoverFacing: south.
+	
+	self execute: 'flf' assertMarsRoverisAt: 2@0 facing: west! !
+
+!testRun: #MarsRoverTests #test01EmptyCommandListDoesNothing stamp: 'fr 10/26/2020 00:06:41'!
+PASSED!
+
+!testRun: #MarsRoverTests #test02MovingWorksProperlyFacingSouth stamp: 'fr 10/26/2020 00:06:41'!
+PASSED!
+
+!testRun: #MarsRoverTests #test03MovingWorksProperlyFacingNorth stamp: 'fr 10/26/2020 00:06:41'!
+PASSED!
+
+!testRun: #MarsRoverTests #test04MovingWorksProperlyFacingEast stamp: 'fr 10/26/2020 00:06:41'!
+PASSED!
+
+!testRun: #MarsRoverTests #test05MovingWorksProperlyFacingWest stamp: 'fr 10/26/2020 00:06:41'!
+PASSED!
+
+!testRun: #MarsRoverTests #test06RotatingLeftWorksProperlyForAllOrientations stamp: 'fr 10/26/2020 00:06:41'!
+PASSED!
+
+!testRun: #MarsRoverTests #test07RotatingRightWorksProperlyForAllOrientations stamp: 'fr 10/26/2020 00:06:41'!
+PASSED!
+
+!testRun: #MarsRoverTests #test08CommandListWithMoreThanOneCommandExecutesProperly stamp: 'fr 10/26/2020 00:06:41'!
+FAILURE!
+
+!testRun: #MarsRoverTests #test09CreatingAMarsRoverWithAnInvalidCardinalPointShouldFail stamp: 'fr 10/26/2020 00:06:41'!
+PASSED!
+
+!testRun: #MarsRoverTests #test10CommandListWithAnInvalidCommandShouldExecuteUntilItsFoundAndNoFurther stamp: 'fr 10/26/2020 00:06:41'!
+PASSED!
+
+!testRun: #MarsRoverTests #test08CommandListWithMoreThanOneCommandExecutesProperly stamp: 'fr 10/26/2020 00:06:41'!
+FAILURE!
+!MarsRoverTests methodsFor: 'tests - multiple and empty' stamp: 'fr 10/26/2020 00:07:05' prior: 50875805!
+test08CommandListWithMoreThanOneCommandExecutesProperly
+
+	self startMarsRoverFacing: south.
+	
+	self execute: 'flf' assertMarsRoverisAt: 2@0 facing: east! !
+
+!testRun: #MarsRoverTests #test01EmptyCommandListDoesNothing stamp: 'fr 10/26/2020 00:07:06'!
+PASSED!
+
+!testRun: #MarsRoverTests #test02MovingWorksProperlyFacingSouth stamp: 'fr 10/26/2020 00:07:06'!
+PASSED!
+
+!testRun: #MarsRoverTests #test03MovingWorksProperlyFacingNorth stamp: 'fr 10/26/2020 00:07:06'!
+PASSED!
+
+!testRun: #MarsRoverTests #test04MovingWorksProperlyFacingEast stamp: 'fr 10/26/2020 00:07:06'!
+PASSED!
+
+!testRun: #MarsRoverTests #test05MovingWorksProperlyFacingWest stamp: 'fr 10/26/2020 00:07:06'!
+PASSED!
+
+!testRun: #MarsRoverTests #test06RotatingLeftWorksProperlyForAllOrientations stamp: 'fr 10/26/2020 00:07:06'!
+PASSED!
+
+!testRun: #MarsRoverTests #test07RotatingRightWorksProperlyForAllOrientations stamp: 'fr 10/26/2020 00:07:06'!
+PASSED!
+
+!testRun: #MarsRoverTests #test08CommandListWithMoreThanOneCommandExecutesProperly stamp: 'fr 10/26/2020 00:07:06'!
+PASSED!
+
+!testRun: #MarsRoverTests #test09CreatingAMarsRoverWithAnInvalidCardinalPointShouldFail stamp: 'fr 10/26/2020 00:07:06'!
+PASSED!
+
+!testRun: #MarsRoverTests #test10CommandListWithAnInvalidCommandShouldExecuteUntilItsFoundAndNoFurther stamp: 'fr 10/26/2020 00:07:06'!
+PASSED!
+!MarsRoverTests methodsFor: 'tests - multiple and empty' stamp: 'fr 10/26/2020 00:07:16' prior: 50875782!
+assertMarsRoverExecutes: aCommandList andFinishesAt: anEndingPosition facing: anEndingCardinalPoint
+
+	self startMarsRoverFacing: south.
+	
+	self execute: aCommandList assertMarsRoverisAt: anEndingPosition facing: anEndingCardinalPoint ! !
+!MarsRoverTests methodsFor: 'tests - multiple and empty' stamp: 'fr 10/26/2020 00:07:40' prior: 50875854!
+test08CommandListWithMoreThanOneCommandExecutesProperly
+	
+	self assertMarsRoverExecutes: 'flf' andFinishesAt: 2@0 facing: east! !
+
+!testRun: #MarsRoverTests #test08CommandListWithMoreThanOneCommandExecutesProperly stamp: 'fr 10/26/2020 00:07:41'!
+PASSED!
+
+!testRun: #MarsRoverTests #test01EmptyCommandListDoesNothing stamp: 'fr 10/26/2020 00:07:41'!
+PASSED!
+
+!testRun: #MarsRoverTests #test02MovingWorksProperlyFacingSouth stamp: 'fr 10/26/2020 00:07:41'!
+PASSED!
+
+!testRun: #MarsRoverTests #test03MovingWorksProperlyFacingNorth stamp: 'fr 10/26/2020 00:07:41'!
+PASSED!
+
+!testRun: #MarsRoverTests #test04MovingWorksProperlyFacingEast stamp: 'fr 10/26/2020 00:07:41'!
+PASSED!
+
+!testRun: #MarsRoverTests #test05MovingWorksProperlyFacingWest stamp: 'fr 10/26/2020 00:07:41'!
+PASSED!
+
+!testRun: #MarsRoverTests #test06RotatingLeftWorksProperlyForAllOrientations stamp: 'fr 10/26/2020 00:07:41'!
+PASSED!
+
+!testRun: #MarsRoverTests #test07RotatingRightWorksProperlyForAllOrientations stamp: 'fr 10/26/2020 00:07:41'!
+PASSED!
+
+!testRun: #MarsRoverTests #test08CommandListWithMoreThanOneCommandExecutesProperly stamp: 'fr 10/26/2020 00:07:41'!
+PASSED!
+
+!testRun: #MarsRoverTests #test09CreatingAMarsRoverWithAnInvalidCardinalPointShouldFail stamp: 'fr 10/26/2020 00:07:41'!
+PASSED!
+
+!testRun: #MarsRoverTests #test10CommandListWithAnInvalidCommandShouldExecuteUntilItsFoundAndNoFurther stamp: 'fr 10/26/2020 00:07:41'!
+PASSED!
+!MarsRoverTests methodsFor: 'tests - multiple and empty' stamp: 'fr 10/26/2020 00:08:03' prior: 50875600!
+test01EmptyCommandListDoesNothing
+	
+	self assertMarsRoverExecutes: '' andFinishesAt: 1@1 facing: south! !
+
+!testRun: #MarsRoverTests #test01EmptyCommandListDoesNothing stamp: 'fr 10/26/2020 00:08:04'!
+PASSED!
+
+!testRun: #MarsRoverTests #test01EmptyCommandListDoesNothing stamp: 'fr 10/26/2020 00:08:04'!
+PASSED!
+
+!testRun: #MarsRoverTests #test02MovingWorksProperlyFacingSouth stamp: 'fr 10/26/2020 00:08:04'!
+PASSED!
+
+!testRun: #MarsRoverTests #test03MovingWorksProperlyFacingNorth stamp: 'fr 10/26/2020 00:08:04'!
+PASSED!
+
+!testRun: #MarsRoverTests #test04MovingWorksProperlyFacingEast stamp: 'fr 10/26/2020 00:08:04'!
+PASSED!
+
+!testRun: #MarsRoverTests #test05MovingWorksProperlyFacingWest stamp: 'fr 10/26/2020 00:08:04'!
+PASSED!
+
+!testRun: #MarsRoverTests #test06RotatingLeftWorksProperlyForAllOrientations stamp: 'fr 10/26/2020 00:08:04'!
+PASSED!
+
+!testRun: #MarsRoverTests #test07RotatingRightWorksProperlyForAllOrientations stamp: 'fr 10/26/2020 00:08:04'!
+PASSED!
+
+!testRun: #MarsRoverTests #test08CommandListWithMoreThanOneCommandExecutesProperly stamp: 'fr 10/26/2020 00:08:04'!
+PASSED!
+
+!testRun: #MarsRoverTests #test09CreatingAMarsRoverWithAnInvalidCardinalPointShouldFail stamp: 'fr 10/26/2020 00:08:04'!
+PASSED!
+
+!testRun: #MarsRoverTests #test10CommandListWithAnInvalidCommandShouldExecuteUntilItsFoundAndNoFurther stamp: 'fr 10/26/2020 00:08:04'!
+PASSED!
+!MarsRoverTests methodsFor: 'tests - private' stamp: 'fr 10/26/2020 00:08:51'!
+execute: aCommandList andAssertMarsRoverisAt: aPosition facing: aCardinalPoint
+
+	marsRover move: aCommandList.
+	
+	self assert: (marsRover isAt: aPosition facing: aCardinalPoint)! !
+!MarsRoverTests methodsFor: 'as yet unclassified' stamp: 'fr 10/26/2020 00:08:51' prior: 50875582!
+assertRotating: aRotationCommand worksProperlyPassingFirst: firstCardinalPoint andThen: secondCardinalPoint
+
+	self startMarsRoverFacing: south.
+		
+	self execute: aRotationCommand andAssertMarsRoverisAt: 1@1 facing: firstCardinalPoint.
+	self execute: aRotationCommand andAssertMarsRoverisAt: 1@1 facing: north.
+	self execute: aRotationCommand andAssertMarsRoverisAt: 1@1 facing: secondCardinalPoint.
+	self execute: aRotationCommand andAssertMarsRoverisAt: 1@1 facing: south.
+	
+! !
+!MarsRoverTests methodsFor: 'as yet unclassified' stamp: 'fr 10/26/2020 00:08:51' prior: 50875899!
+assertMarsRoverExecutes: aCommandList andFinishesAt: anEndingPosition facing: anEndingCardinalPoint
+
+	self startMarsRoverFacing: south.
+	
+	self execute: aCommandList andAssertMarsRoverisAt: anEndingPosition facing: anEndingCardinalPoint ! !
+!MarsRoverTests methodsFor: 'as yet unclassified' stamp: 'fr 10/26/2020 00:08:51' prior: 50875570!
+assertGoingAndComingBackFrom: aPosition worksProperlyWhenFacing: aCardinalPoint
+	
+	self startMarsRoverFacing: aCardinalPoint.
+	
+	self execute: 'f' andAssertMarsRoverisAt: aPosition facing: aCardinalPoint.
+	self execute: 'b' andAssertMarsRoverisAt: 1@1 facing: aCardinalPoint! !
+
+!methodRemoval: MarsRoverTests #execute:assertMarsRoverisAt:facing: stamp: 'fr 10/26/2020 00:08:51'!
+execute: aCommandList assertMarsRoverisAt: aPosition facing: aCardinalPoint
+
+	marsRover move: aCommandList.
+	
+	self assert: (marsRover isAt: aPosition facing: aCardinalPoint)!
+
+!testRun: #MarsRoverTests #test01EmptyCommandListDoesNothing stamp: 'fr 10/26/2020 00:08:52'!
+PASSED!
+
+!testRun: #MarsRoverTests #test02MovingWorksProperlyFacingSouth stamp: 'fr 10/26/2020 00:08:52'!
+PASSED!
+
+!testRun: #MarsRoverTests #test03MovingWorksProperlyFacingNorth stamp: 'fr 10/26/2020 00:08:52'!
+PASSED!
+
+!testRun: #MarsRoverTests #test04MovingWorksProperlyFacingEast stamp: 'fr 10/26/2020 00:08:52'!
+PASSED!
+
+!testRun: #MarsRoverTests #test05MovingWorksProperlyFacingWest stamp: 'fr 10/26/2020 00:08:52'!
+PASSED!
+
+!testRun: #MarsRoverTests #test06RotatingLeftWorksProperlyForAllOrientations stamp: 'fr 10/26/2020 00:08:52'!
+PASSED!
+
+!testRun: #MarsRoverTests #test07RotatingRightWorksProperlyForAllOrientations stamp: 'fr 10/26/2020 00:08:52'!
+PASSED!
+
+!testRun: #MarsRoverTests #test08CommandListWithMoreThanOneCommandExecutesProperly stamp: 'fr 10/26/2020 00:08:52'!
+PASSED!
+
+!testRun: #MarsRoverTests #test09CreatingAMarsRoverWithAnInvalidCardinalPointShouldFail stamp: 'fr 10/26/2020 00:08:52'!
+PASSED!
+
+!testRun: #MarsRoverTests #test10CommandListWithAnInvalidCommandShouldExecuteUntilItsFoundAndNoFurther stamp: 'fr 10/26/2020 00:08:52'!
+PASSED!
+
+!testRun: #MarsRoverTests #test01EmptyCommandListDoesNothing stamp: 'fr 10/26/2020 00:09:47'!
+PASSED!
+
+!testRun: #MarsRoverTests #test02MovingWorksProperlyFacingSouth stamp: 'fr 10/26/2020 00:09:47'!
+PASSED!
+
+!testRun: #MarsRoverTests #test03MovingWorksProperlyFacingNorth stamp: 'fr 10/26/2020 00:09:47'!
+PASSED!
+
+!testRun: #MarsRoverTests #test04MovingWorksProperlyFacingEast stamp: 'fr 10/26/2020 00:09:47'!
+PASSED!
+
+!testRun: #MarsRoverTests #test05MovingWorksProperlyFacingWest stamp: 'fr 10/26/2020 00:09:47'!
+PASSED!
+
+!testRun: #MarsRoverTests #test06RotatingLeftWorksProperlyForAllOrientations stamp: 'fr 10/26/2020 00:09:47'!
+PASSED!
+
+!testRun: #MarsRoverTests #test07RotatingRightWorksProperlyForAllOrientations stamp: 'fr 10/26/2020 00:09:47'!
+PASSED!
+
+!testRun: #MarsRoverTests #test08CommandListWithMoreThanOneCommandExecutesProperly stamp: 'fr 10/26/2020 00:09:47'!
+PASSED!
+
+!testRun: #MarsRoverTests #test09CreatingAMarsRoverWithAnInvalidCardinalPointShouldFail stamp: 'fr 10/26/2020 00:09:47'!
+PASSED!
+
+!testRun: #MarsRoverTests #test10CommandListWithAnInvalidCommandShouldExecuteUntilItsFoundAndNoFurther stamp: 'fr 10/26/2020 00:09:47'!
+PASSED!
+
+----SNAPSHOT----(26 October 2020 00:09:51) CuisUniversity-4384.image priorSource: 17343293!
+
+----SNAPSHOT----(26 October 2020 00:15:19) CuisUniversity-4384.image priorSource: 17423523!
+
+!testRun: #MarsRoverTests #test01EmptyCommandListDoesNothing stamp: 'fr 10/26/2020 00:15:22'!
+PASSED!
+
+!testRun: #MarsRoverTests #test02MovingWorksProperlyFacingSouth stamp: 'fr 10/26/2020 00:15:22'!
+PASSED!
+
+!testRun: #MarsRoverTests #test03MovingWorksProperlyFacingNorth stamp: 'fr 10/26/2020 00:15:22'!
+PASSED!
+
+!testRun: #MarsRoverTests #test04MovingWorksProperlyFacingEast stamp: 'fr 10/26/2020 00:15:22'!
+PASSED!
+
+!testRun: #MarsRoverTests #test05MovingWorksProperlyFacingWest stamp: 'fr 10/26/2020 00:15:22'!
+PASSED!
+
+!testRun: #MarsRoverTests #test06RotatingLeftWorksProperlyForAllOrientations stamp: 'fr 10/26/2020 00:15:22'!
+PASSED!
+
+!testRun: #MarsRoverTests #test07RotatingRightWorksProperlyForAllOrientations stamp: 'fr 10/26/2020 00:15:22'!
+PASSED!
+
+!testRun: #MarsRoverTests #test08CommandListWithMoreThanOneCommandExecutesProperly stamp: 'fr 10/26/2020 00:15:22'!
+PASSED!
+
+!testRun: #MarsRoverTests #test09CreatingAMarsRoverWithAnInvalidCardinalPointShouldFail stamp: 'fr 10/26/2020 00:15:22'!
+PASSED!
+
+!testRun: #MarsRoverTests #test10CommandListWithAnInvalidCommandShouldExecuteUntilItsFoundAndNoFurther stamp: 'fr 10/26/2020 00:15:22'!
+PASSED!
