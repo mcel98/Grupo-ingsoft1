@@ -14,35 +14,36 @@ setUp
 	west _ #W! !
 
 
-!MarsRoverTests methodsFor: 'tests - private' stamp: 'fr 10/26/2020 00:08:51'!
+!MarsRoverTests methodsFor: 'tests - private' stamp: 'fr 10/26/2020 15:59:20'!
 assertGoingAndComingBackFrom: aPosition worksProperlyWhenFacing: aCardinalPoint
 	
 	self startMarsRoverFacing: aCardinalPoint.
 	
-	self execute: 'f' andAssertMarsRoverisAt: aPosition facing: aCardinalPoint.
-	self execute: 'b' andAssertMarsRoverisAt: 1@1 facing: aCardinalPoint! !
+	self execute: 'f' andAssertMarsRoverIsAt: aPosition facing: aCardinalPoint.
+	self execute: 'b' andAssertMarsRoverIsAt: 1@1 facing: aCardinalPoint! !
 
-!MarsRoverTests methodsFor: 'tests - private' stamp: 'fr 10/26/2020 00:08:51'!
+!MarsRoverTests methodsFor: 'tests - private' stamp: 'fr 10/26/2020 15:59:20'!
 assertMarsRoverExecutes: aCommandList andFinishesAt: anEndingPosition facing: anEndingCardinalPoint
 
 	self startMarsRoverFacing: south.
 	
-	self execute: aCommandList andAssertMarsRoverisAt: anEndingPosition facing: anEndingCardinalPoint ! !
+	self execute: aCommandList andAssertMarsRoverIsAt: anEndingPosition facing: anEndingCardinalPoint ! !
 
-!MarsRoverTests methodsFor: 'tests - private' stamp: 'fr 10/26/2020 00:08:51'!
+!MarsRoverTests methodsFor: 'tests - private' stamp: 'fr 10/26/2020 16:23:29'!
 assertRotating: aRotationCommand worksProperlyPassingFirst: firstCardinalPoint andThen: secondCardinalPoint
 
+	| cardinalPoints |
+
+	cardinalPoints _ OrderedCollection with: firstCardinalPoint with: north with: secondCardinalPoint with: south.
+
 	self startMarsRoverFacing: south.
-		
-	self execute: aRotationCommand andAssertMarsRoverisAt: 1@1 facing: firstCardinalPoint.
-	self execute: aRotationCommand andAssertMarsRoverisAt: 1@1 facing: north.
-	self execute: aRotationCommand andAssertMarsRoverisAt: 1@1 facing: secondCardinalPoint.
-	self execute: aRotationCommand andAssertMarsRoverisAt: 1@1 facing: south.
+	
+	cardinalPoints do: 	[:cardinalPoint | self execute: aRotationCommand andAssertMarsRoverIsAt: 1@1 facing: cardinalPoint ] 
 	
 ! !
 
-!MarsRoverTests methodsFor: 'tests - private' stamp: 'fr 10/26/2020 00:08:51'!
-execute: aCommandList andAssertMarsRoverisAt: aPosition facing: aCardinalPoint
+!MarsRoverTests methodsFor: 'tests - private' stamp: 'fr 10/26/2020 15:59:20'!
+execute: aCommandList andAssertMarsRoverIsAt: aPosition facing: aCardinalPoint
 
 	marsRover move: aCommandList.
 	
