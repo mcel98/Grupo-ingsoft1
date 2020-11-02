@@ -44,8 +44,8 @@ test04APlayerCanNotPlayTwoTimesInARow
 		withMessageText: TerniLapilli playerOTurnErrorDescription! !
 
 
-!TerniLapilliTests methodsFor: 'tests - put' stamp: 'fr 11/1/2020 19:51:39'!
-test05XPieceIsWhereHePutsIt
+!TerniLapilliTests methodsFor: 'tests - put' stamp: 'fr 11/2/2020 04:33:22'!
+test05APlayerPieceIsWhereHePutsIt
 
 	| terniLapilli |
 	terniLapilli _ TerniLapilli new.
@@ -53,18 +53,8 @@ test05XPieceIsWhereHePutsIt
 	
 	self assert: [terniLapilli hasXPieceAt: 1@1]! !
 
-!TerniLapilliTests methodsFor: 'tests - put' stamp: 'fr 11/1/2020 20:22:25'!
-test06OPieceIsWhereHePutsIt
-
-	| terniLapilli |
-	terniLapilli _ TerniLapilli new.
-	terniLapilli putXAt: 1 @ 1
-			 ;putOAt: 1 @ 2.
-	
-	self assert: [terniLapilli hasOPieceAt: 1@2]! !
-
-!TerniLapilliTests methodsFor: 'tests - put' stamp: 'fr 11/1/2020 19:52:11'!
-test07XPieceIsNotWhereHeDoesNotPutIt
+!TerniLapilliTests methodsFor: 'tests - put' stamp: 'fr 11/2/2020 04:33:38'!
+test06APlayerPieceIsNotWhereHeDoesNotPutIt
 
 	| terniLapilli |
 	terniLapilli _ TerniLapilli new.
@@ -72,18 +62,8 @@ test07XPieceIsNotWhereHeDoesNotPutIt
 	
 	self assert: [(terniLapilli hasXPieceAt: 1@1) not]! !
 
-!TerniLapilliTests methodsFor: 'tests - put' stamp: 'fr 11/1/2020 20:22:35'!
-test08OPieceIsNotWhereHeDoesNotPutIt
-
-	| terniLapilli |
-	terniLapilli _ TerniLapilli new.
-	terniLapilli putXAt: 1 @ 1
-			 ;putOAt: 1 @ 2.
-	
-	self assert: [(terniLapilli hasOPieceAt: 1@1) not]! !
-
-!TerniLapilliTests methodsFor: 'tests - put' stamp: 'fr 11/1/2020 20:22:53'!
-test09XCanPutMoreThanOnePieceCorrectly
+!TerniLapilliTests methodsFor: 'tests - put' stamp: 'fr 11/2/2020 04:33:46'!
+test07APlayerCanPutMoreThanOnePieceCorrectly
 
 	| terniLapilli |
 	terniLapilli _ TerniLapilli new.
@@ -93,31 +73,8 @@ test09XCanPutMoreThanOnePieceCorrectly
 	
 	self assert: [(terniLapilli hasXPieceAt: 1@1) and: [terniLapilli hasXPieceAt: 1@3]]! !
 
-!TerniLapilliTests methodsFor: 'tests - put' stamp: 'fr 11/1/2020 20:23:19'!
-test10OCanPutMoreThanOnePieceCorrectly
-
-	| terniLapilli |
-	terniLapilli _ TerniLapilli new.
-	terniLapilli putXAt: 1 @ 1
-			 ;putOAt: 1 @ 2
-			 ;putXAt: 1 @ 3
-			 ;putOAt: 2 @ 1.
-	
-	self assert: [(terniLapilli hasOPieceAt: 1@2) and: [terniLapilli hasOPieceAt: 2@1]]! !
-
-!TerniLapilliTests methodsFor: 'tests - put' stamp: 'fr 11/1/2020 20:23:31'!
-test11OCanNotPutAPieceInAnOccupiedPosition
-
-	| terniLapilli |
-	terniLapilli _ TerniLapilli new.	
-
-	self should: [			terniLapilli putXAt: 1 @ 1
-						 ;putOAt: 1 @ 1. ]
-		raise: Error
-		withMessageText: TerniLapilli positionAlreadyHoldsAPieceErrorDescription! !
-
-!TerniLapilliTests methodsFor: 'tests - put' stamp: 'fr 11/1/2020 20:23:50'!
-test12XCanNotPutAPieceInAnOccupiedPosition
+!TerniLapilliTests methodsFor: 'tests - put' stamp: 'fr 11/2/2020 04:34:04'!
+test08APlayerCanNotPutAPieceInAnOccupiedPosition
 
 	| terniLapilli |
 	terniLapilli _ TerniLapilli new.	
@@ -128,8 +85,8 @@ test12XCanNotPutAPieceInAnOccupiedPosition
 		raise: Error
 		withMessageText: TerniLapilli positionAlreadyHoldsAPieceErrorDescription! !
 
-!TerniLapilliTests methodsFor: 'tests - put' stamp: 'fr 11/1/2020 19:54:57'!
-test13XCanNotPutAPieceOutOfBounds
+!TerniLapilliTests methodsFor: 'tests - put' stamp: 'fr 11/2/2020 04:34:19'!
+test09APlayerCanNotPutAPieceOutOfBounds
 
 	| terniLapilli |
 	terniLapilli _ TerniLapilli new.
@@ -138,19 +95,8 @@ test13XCanNotPutAPieceOutOfBounds
 		raise: Error
 		withMessageText: TerniLapilli positionOutOfBoundsErrorDescription.! !
 
-!TerniLapilliTests methodsFor: 'tests - put' stamp: 'fr 11/1/2020 20:24:02'!
-test14OCanNotPutAPieceOutOfBounds
-
-	| terniLapilli |
-	terniLapilli _ TerniLapilli new.
-	self
-		should: [ 		terniLapilli putXAt: 1 @ 1
-						 ;putOAt: 1 @ 5. ]
-		raise: Error
-		withMessageText: TerniLapilli positionOutOfBoundsErrorDescription.! !
-
-!TerniLapilliTests methodsFor: 'tests - put' stamp: 'fr 11/1/2020 20:25:13'!
-test15XCanNotPutMoreThanThreePieces
+!TerniLapilliTests methodsFor: 'tests - put' stamp: 'fr 11/2/2020 04:34:30'!
+test10APlayerCanNotPutMoreThanThreePieces
 
 	| terniLapilli |
 	terniLapilli _ TerniLapilli new.
@@ -166,27 +112,9 @@ test15XCanNotPutMoreThanThreePieces
 		raise: Error
 		withMessageText: TerniLapilli piecesLimitExceededErrorDescription.! !
 
-!TerniLapilliTests methodsFor: 'tests - put' stamp: 'fr 11/1/2020 20:26:01'!
-test16OCanNotPutMoreThanThreePieces
 
-	| terniLapilli |
-	terniLapilli _ TerniLapilli new.
-	self
-		should: [ 		terniLapilli putXAt: 1 @ 1
-						 ;putOAt: 1 @ 3
-						 ;putXAt: 2 @ 1
-						 ;putOAt: 2 @ 2
-						 ;putXAt: 2 @ 3
-						 ;putOAt: 3 @ 2
-						 ;moveXFrom: 1@1 to: 1@2
-						 ;putOAt: 3 @ 3.
-				 ]
-		raise: Error
-		withMessageText: TerniLapilli piecesLimitExceededErrorDescription.! !
-
-
-!TerniLapilliTests methodsFor: 'tests - move' stamp: 'fr 11/1/2020 20:00:13'!
-test17WhenXMovesAPieceItIsAtTheNewPositionAndNotAtThePreviousOne
+!TerniLapilliTests methodsFor: 'tests - move' stamp: 'fr 11/2/2020 04:35:04'!
+test11WhenAPlayerMovesAPieceItIsAtTheNewPositionAndNotAtThePreviousOne
 
 	| terniLapilli |
 	terniLapilli _ TerniLapilli new.
@@ -200,24 +128,8 @@ test17WhenXMovesAPieceItIsAtTheNewPositionAndNotAtThePreviousOne
 			
 	self assert: [(terniLapilli hasXPieceAt: 1@2) and: [(terniLapilli hasXPieceAt: 1@1) not]]! !
 
-!TerniLapilliTests methodsFor: 'tests - move' stamp: 'fr 11/1/2020 20:00:46'!
-test18WhenOMovesAPieceItIsAtTheNewPositionAndNotAtThePreviousOne
-
-	| terniLapilli |
-	terniLapilli _ TerniLapilli new.
-	terniLapilli putXAt: 1 @ 1 
-			 ;putOAt: 1 @ 3
-			 ;putXAt: 2 @ 1
-			 ;putOAt: 2 @ 2
-			 ;putXAt: 2 @ 3
-			 ;putOAt: 3 @ 2
-			 ;moveXFrom: 1@1 to: 1@2
-			 ;moveOFrom: 3@2 to: 3@3.
-			
-	self assert: [(terniLapilli hasOPieceAt: 3@3) and: [(terniLapilli hasXPieceAt: 3@2) not]]! !
-
-!TerniLapilliTests methodsFor: 'tests - move' stamp: 'fr 11/1/2020 20:01:08'!
-test19XCanNotMoveBeforeAddingThreePieces
+!TerniLapilliTests methodsFor: 'tests - move' stamp: 'fr 11/2/2020 04:35:19'!
+test12APlayerCanNotMoveBeforeAddingThreePieces
 
 	| terniLapilli |
 	terniLapilli _ TerniLapilli new.
@@ -226,18 +138,8 @@ test19XCanNotMoveBeforeAddingThreePieces
 		raise: Error 
 		withMessageText: TerniLapilli canNotMoveBeforeAddingThreePiecesErrorDescription! !
 
-!TerniLapilliTests methodsFor: 'tests - move' stamp: 'fr 11/1/2020 20:01:21'!
-test20OCanNotMoveBeforeAddingThreePieces
-
-	| terniLapilli |
-	terniLapilli _ TerniLapilli new.
-		
-	self  should: [terniLapilli putXAt: 1@1 ;moveOFrom: 1@1 to: 1@2.] 
-		raise: Error 
-		withMessageText: TerniLapilli canNotMoveBeforeAddingThreePiecesErrorDescription! !
-
-!TerniLapilliTests methodsFor: 'tests - move' stamp: 'fr 11/1/2020 20:01:50'!
-test21XCanNotMoveFromAPositionThatIsNotUnderHisControl
+!TerniLapilliTests methodsFor: 'tests - move' stamp: 'fr 11/2/2020 04:35:45'!
+test13APlayerCanNotMoveFromAPositionThatIsNotUnderHisControl
 
 	| terniLapilli |
 	terniLapilli _ TerniLapilli new.
@@ -252,25 +154,8 @@ test21XCanNotMoveFromAPositionThatIsNotUnderHisControl
 		raise: Error 
 		withMessageText: TerniLapilli positionIsNotUnderPlayersControlErrorDescription ! !
 
-!TerniLapilliTests methodsFor: 'tests - move' stamp: 'fr 11/1/2020 20:02:12'!
-test22OCanNotMoveFromAPositionThatIsNotUnderHisControl
-
-	| terniLapilli |
-	terniLapilli _ TerniLapilli new.
-		
-	self  should: [			terniLapilli putXAt: 1 @ 1 
-						 ;putOAt: 1 @ 3
-						 ;putXAt: 2 @ 1
-						 ;putOAt: 2 @ 2
-						 ;putXAt: 2 @ 3
-						 ;putOAt: 3 @ 3
-						 ;moveXFrom: 1@1 to: 1@2
-						 ;moveOFrom: 3@2 to: 3@1.] 
-		raise: Error 
-		withMessageText: TerniLapilli positionIsNotUnderPlayersControlErrorDescription! !
-
-!TerniLapilliTests methodsFor: 'tests - move' stamp: 'fr 11/1/2020 20:04:00'!
-test23XCanNotMoveFromAnOutOfBoundsPosition
+!TerniLapilliTests methodsFor: 'tests - move' stamp: 'fr 11/2/2020 04:36:00'!
+test14APlayerCanNotMoveFromAnOutOfBoundsPosition
 
 	| terniLapilli |
 	terniLapilli _ TerniLapilli new.
@@ -285,25 +170,8 @@ test23XCanNotMoveFromAnOutOfBoundsPosition
 		raise: Error 
 		withMessageText: TerniLapilli positionOutOfBoundsErrorDescription ! !
 
-!TerniLapilliTests methodsFor: 'tests - move' stamp: 'fr 11/1/2020 20:04:04'!
-test24OCanNotMoveFromAnOutOfBoundsPosition
-
-	| terniLapilli |
-	terniLapilli _ TerniLapilli new.
-		
-	self  should: [			terniLapilli putXAt: 1 @ 1 
-						 ;putOAt: 1 @ 3
-						 ;putXAt: 2 @ 1
-						 ;putOAt: 2 @ 2
-						 ;putXAt: 2 @ 3
-						 ;putOAt: 3 @ 2
-						 ;moveXFrom: 1@1 to: 1@2
-						 ;moveOFrom: 2@6 to: 3@3.] 
-		raise: Error 
-		withMessageText: TerniLapilli positionOutOfBoundsErrorDescription ! !
-
-!TerniLapilliTests methodsFor: 'tests - move' stamp: 'fr 11/1/2020 20:04:08'!
-test25XCanNotMoveToAnOutOfBoundsPosition
+!TerniLapilliTests methodsFor: 'tests - move' stamp: 'fr 11/2/2020 04:36:38'!
+test15APlayerCanNotMoveToAnOutOfBoundsPosition
 
 	| terniLapilli |
 	terniLapilli _ TerniLapilli new.
@@ -318,25 +186,8 @@ test25XCanNotMoveToAnOutOfBoundsPosition
 		raise: Error 
 		withMessageText: TerniLapilli positionOutOfBoundsErrorDescription ! !
 
-!TerniLapilliTests methodsFor: 'tests - move' stamp: 'fr 11/1/2020 20:05:10'!
-test26OCanNotMoveToAnOutOfBoundsPosition
-
-	| terniLapilli |
-	terniLapilli _ TerniLapilli new.
-		
-	self  should: [			terniLapilli putXAt: 1 @ 1 
-						 ;putOAt: 1 @ 3
-						 ;putXAt: 2 @ 1
-						 ;putOAt: 2 @ 2
-						 ;putXAt: 2 @ 3
-						 ;putOAt: 3 @ 2
-						 ;moveXFrom: 1@1 to: 1@2
-						 ;moveOFrom: 3@2 to: 4@2.] 
-		raise: Error 
-		withMessageText: TerniLapilli positionOutOfBoundsErrorDescription ! !
-
-!TerniLapilliTests methodsFor: 'tests - move' stamp: 'fr 11/1/2020 20:05:18'!
-test27XCanNotMoveToAnOccupiedPosition
+!TerniLapilliTests methodsFor: 'tests - move' stamp: 'fr 11/2/2020 04:37:12'!
+test16APlayerCanNotMoveToAnOccupiedPosition
 
 	| terniLapilli |
 	terniLapilli _ TerniLapilli new.
@@ -351,25 +202,8 @@ test27XCanNotMoveToAnOccupiedPosition
 		raise: Error 
 		withMessageText: TerniLapilli positionAlreadyHoldsAPieceErrorDescription ! !
 
-!TerniLapilliTests methodsFor: 'tests - move' stamp: 'fr 11/1/2020 20:05:01'!
-test28OCanNotMoveToAnOccupiedPosition
-
-	| terniLapilli |
-	terniLapilli _ TerniLapilli new.
-		
-	self  should: [			terniLapilli putXAt: 1 @ 1 
-						 ;putOAt: 1 @ 3
-						 ;putXAt: 2 @ 1
-						 ;putOAt: 2 @ 2
-						 ;putXAt: 2 @ 3
-						 ;putOAt: 3 @ 2
-						 ;moveXFrom: 1@1 to: 1@2
-						 ;moveOFrom: 1@3 to: 1@2.] 
-		raise: Error 
-		withMessageText: TerniLapilli positionAlreadyHoldsAPieceErrorDescription ! !
-
-!TerniLapilliTests methodsFor: 'tests - move' stamp: 'fr 11/2/2020 02:49:51'!
-test29XCanNotMoveBetweenPositionsThatAreMoreThanOnePlaceAfar
+!TerniLapilliTests methodsFor: 'tests - move' stamp: 'fr 11/2/2020 04:37:46'!
+test17APlayerCanNotMoveToAnUnreachablePosition
 
 	| terniLapilli |
 	terniLapilli _ TerniLapilli new.
@@ -384,26 +218,9 @@ test29XCanNotMoveBetweenPositionsThatAreMoreThanOnePlaceAfar
 		raise: Error 
 		withMessageText: TerniLapilli positionIsNotReachableErrorDescription ! !
 
-!TerniLapilliTests methodsFor: 'tests - move' stamp: 'fr 11/2/2020 02:49:51'!
-test30OCanNotMoveBetweenPositionsThatAreMoreThanOnePlaceAfar
 
-	| terniLapilli |
-	terniLapilli _ TerniLapilli new.
-		
-	self  should: [			terniLapilli putXAt: 1 @ 1 
-						 ;putOAt: 2 @ 1
-						 ;putXAt: 1 @ 2
-						 ;putOAt: 2 @ 2
-						 ;putXAt: 3 @ 1
-						 ;putOAt: 1 @ 3
-						 ;moveXFrom: 3@1 to: 3@2
-						 ;moveOFrom: 1@3 to: 3@3.] 
-		raise: Error 
-		withMessageText: TerniLapilli positionIsNotReachableErrorDescription ! !
-
-
-!TerniLapilliTests methodsFor: 'tests - win' stamp: 'fr 11/1/2020 20:26:57'!
-test31NoPlayerHasWonIfNoneOfThemHasThreePiecesInLine
+!TerniLapilliTests methodsFor: 'tests - win' stamp: 'fr 11/2/2020 04:38:52'!
+test18NoPlayerHasWonIfNoneOfThemHasThreePiecesInLine
 
 	| terniLapilli |
 	terniLapilli _ TerniLapilli new.
@@ -412,8 +229,8 @@ test31NoPlayerHasWonIfNoneOfThemHasThreePiecesInLine
 			 ;putXAt: 1 @ 2.
 	self assert: [ terniLapilli hasXWon not and: [terniLapilli hasOWon not]].! !
 
-!TerniLapilliTests methodsFor: 'tests - win' stamp: 'fr 11/1/2020 20:27:25'!
-test32XWinsWhenHeGetsThreePiecesInTheSameRow
+!TerniLapilliTests methodsFor: 'tests - win' stamp: 'fr 11/2/2020 04:40:15'!
+test19APlayerWinsWhenHeGetsThreePiecesInTheSameRow
 
 	| terniLapilli |
 	terniLapilli _ TerniLapilli new.
@@ -424,8 +241,8 @@ test32XWinsWhenHeGetsThreePiecesInTheSameRow
 			 ;putXAt: 1 @ 3.
 	self assert: [ terniLapilli hasXWon ].! !
 
-!TerniLapilliTests methodsFor: 'tests - win' stamp: 'fr 11/1/2020 20:28:05'!
-test33XWinsWhenHeGetsThreePiecesInTheSameColumn
+!TerniLapilliTests methodsFor: 'tests - win' stamp: 'fr 11/2/2020 04:40:19'!
+test20APlayerWinsWhenHeGetsThreePiecesInTheSameColumn
 
 	| terniLapilli |
 	terniLapilli _ TerniLapilli new.
@@ -436,8 +253,8 @@ test33XWinsWhenHeGetsThreePiecesInTheSameColumn
 			 ;putXAt: 3 @ 1.
 	self assert: [ terniLapilli hasXWon ].! !
 
-!TerniLapilliTests methodsFor: 'tests - win' stamp: 'fr 11/1/2020 20:28:33'!
-test34XWinsWhenHeGetsThreePiecesInTheMainDiagonal
+!TerniLapilliTests methodsFor: 'tests - win' stamp: 'fr 11/2/2020 04:40:24'!
+test21APlayerWinsWhenHeGetsThreePiecesInTheMainDiagonal
 
 	| terniLapilli |
 	terniLapilli _ TerniLapilli new.
@@ -448,8 +265,8 @@ test34XWinsWhenHeGetsThreePiecesInTheMainDiagonal
 			 ;putXAt: 3 @ 3.
 	self assert: [ terniLapilli hasXWon ].! !
 
-!TerniLapilliTests methodsFor: 'tests - win' stamp: 'fr 11/1/2020 20:29:05'!
-test35XWinsWhenHeGetsThreePiecesInTheSecondaryDiagonal
+!TerniLapilliTests methodsFor: 'tests - win' stamp: 'fr 11/2/2020 04:40:29'!
+test22APlayerWinsWhenHeGetsThreePiecesInTheSecondaryDiagonal
 
 	| terniLapilli |
 	terniLapilli _ TerniLapilli new.
@@ -460,21 +277,8 @@ test35XWinsWhenHeGetsThreePiecesInTheSecondaryDiagonal
 			 ;putXAt: 3 @ 1.
 	self assert: [ terniLapilli hasXWon ].! !
 
-!TerniLapilliTests methodsFor: 'tests - win' stamp: 'fr 11/1/2020 20:29:45'!
-test36OWinsWhenHeGetsThreePiecesInLine
-
-	| terniLapilli |
-	terniLapilli _ TerniLapilli new.
-	terniLapilli putXAt: 1 @ 3
-			 ;putOAt: 2 @ 1
-			 ;putXAt: 3 @ 1
-			 ;putOAt: 2 @ 2
-			 ;putXAt: 3 @ 2
-			 ;putOAt: 2 @ 3.
-	self assert: [ terniLapilli hasOWon ].! !
-
-!TerniLapilliTests methodsFor: 'tests - win' stamp: 'fr 11/1/2020 20:30:18'!
-test37OCanNotPutAfterGameIsOver
+!TerniLapilliTests methodsFor: 'tests - win' stamp: 'fr 11/2/2020 04:46:30'!
+test23OCanNotPutAfterXHasWon
 
 	| terniLapilli |
 	terniLapilli _ TerniLapilli new.
@@ -488,8 +292,8 @@ test37OCanNotPutAfterGameIsOver
 		raise: Error
 		withMessageText: TerniLapilli gameIsOverErrorDescription ! !
 
-!TerniLapilliTests methodsFor: 'tests - win' stamp: 'fr 11/1/2020 20:30:49'!
-test38XCanNotMoveAfterGameIsOver 
+!TerniLapilliTests methodsFor: 'tests - win' stamp: 'fr 11/2/2020 04:46:33'!
+test24APlayerCanNotMoveAfterTheOtherPlayerHasWon 
 
 	| terniLapilli |
 	terniLapilli _ TerniLapilli new.
@@ -504,25 +308,8 @@ test38XCanNotMoveAfterGameIsOver
 		raise: Error
 		withMessageText: TerniLapilli gameIsOverErrorDescription ! !
 
-!TerniLapilliTests methodsFor: 'tests - win' stamp: 'fr 11/1/2020 20:31:48'!
-test39OCanNotMoveAfterGameIsOver
-
-	| terniLapilli |
-	terniLapilli _ TerniLapilli new.
-	
-	self should: [			terniLapilli putXAt: 1 @ 1
-						 ;putOAt: 1 @ 2
-						 ;putXAt: 2 @ 1
-						 ;putOAt: 2 @ 2
-						 ;putXAt: 3 @ 2
-						 ;putOAt: 3 @ 3
-						 ;moveXFrom: 3@2 to: 3@1
-						 ;moveOFrom: 3@3 to: 3@2.]  
-		raise: Error
-		withMessageText: TerniLapilli gameIsOverErrorDescription ! !
-
-!TerniLapilliTests methodsFor: 'tests - win' stamp: 'fr 11/1/2020 20:32:27'!
-test40ItIsNoOnesTurnAfterGameIsOver
+!TerniLapilliTests methodsFor: 'tests - win' stamp: 'fr 11/2/2020 04:46:38'!
+test25ItIsNoOnesTurnAfterAnyOfThePlayersHasWon
 
 	| terniLapilli |
 	terniLapilli _ TerniLapilli new.
@@ -631,7 +418,7 @@ safePutOAt: aPosition
 	self validate: aPosition andAddFor: #O
 	! !
 
-!TerniLapilli methodsFor: 'private - state safe actions' stamp: 'fr 11/1/2020 22:02:55'!
+!TerniLapilli methodsFor: 'private - state safe actions' stamp: 'fr 11/2/2020 04:46:14'!
 safePutXAt: aPosition 
 	
 	self validate: aPosition andAddFor: #X! !
@@ -1003,11 +790,6 @@ for: aTerniLapilli
 	
 	^(self subclasses detect: [:aTerniLapilliState | aTerniLapilliState canHandle: aTerniLapilli]) isFor: aTerniLapilli! !
 
-!TerniLapilliState class methodsFor: 'instance creation' stamp: 'fr 11/2/2020 02:32:35'!
-isFor: aTerniLapilli
-	
-	^self new initializeFor: aTerniLapilli ! !
-
 
 !TerniLapilliState class methodsFor: 'handling conditions' stamp: 'fr 11/2/2020 04:00:51'!
 handlingConditionForPieces: aBlockAboutPieces turn: aBlockAboutTurn for: aTerniLapilli
@@ -1032,6 +814,12 @@ isXsTimeToPlay: aTerniLapilli and: aBlockAboutPiecesToAdd
 noOneHasWonYet: aTerniLapilli
 
 	^(aTerniLapilli OHasThreeInLine not) and: [aTerniLapilli XHasThreeInLine not]! !
+
+
+!TerniLapilliState class methodsFor: 'subclass delegation' stamp: 'fr 11/2/2020 02:32:35'!
+isFor: aTerniLapilli
+	
+	^self new initializeFor: aTerniLapilli ! !
 
 
 !classDefinition: #OAdding category: 'TerniLapilli - Exercise'!
