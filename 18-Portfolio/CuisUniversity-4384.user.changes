@@ -44949,3 +44949,778 @@ PASSED!
 PASSED!
 
 ----SNAPSHOT----(9 November 2020 12:21:22) CuisUniversity-4384.image priorSource: 17936772!
+!Portfolio methodsFor: 'private - account management' stamp: 'fr 11/9/2020 12:28:26' prior: 50879928 overrides: 50880083!
+collectTransactions: aTransactionsList
+
+	"^accounts inject: aTransactionsList into: [:totalTransactions :anAccount | totalTransactions addAllLast: (anAccount collectTransactions: aTransactionsList)] "
+	
+	accounts do: [:anAccount | anAccount collectTransactions: aTransactionsList]
+	! !
+!ReceptiveAccount methodsFor: 'private - account management' stamp: 'fr 11/9/2020 12:28:50' prior: 50879832 overrides: 50880083!
+collectTransactions: aTransactionsList
+
+	^aTransactionsList addAllLast: self transactions
+! !
+
+!testRun: #PortfolioTest #test01EmptyPortfolioHasBalanceZero stamp: 'fr 11/9/2020 12:28:53'!
+PASSED!
+
+!testRun: #PortfolioTest #test02PortfolioWithASingleAccountWithNoTransactionsHasBalanceZero stamp: 'fr 11/9/2020 12:28:53'!
+PASSED!
+
+!testRun: #PortfolioTest #test03PortfolioWithASingleAccountReflectsItsTransactionsValuesInItsBalance stamp: 'fr 11/9/2020 12:28:53'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioWithMultipleAccountsAndPortfoliosReflectsTheirTransactionsValuesInItsBalance stamp: 'fr 11/9/2020 12:28:53'!
+PASSED!
+
+!testRun: #PortfolioTest #test05EmptyPortfolioHasNotRegisteredAnyTransaction stamp: 'fr 11/9/2020 12:28:53'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioWithASingleAccountRegistersItsTransactions stamp: 'fr 11/9/2020 12:28:53'!
+PASSED!
+
+!testRun: #PortfolioTest #test07PortfolioWithMulltipleAccountsAndPortfoliosRegistersAllTheirTransactions stamp: 'fr 11/9/2020 12:28:53'!
+PASSED!
+
+!testRun: #PortfolioTest #test08EmptyPortfolioDoesNotExhibitAnyTransaction stamp: 'fr 11/9/2020 12:28:53'!
+PASSED!
+
+!testRun: #PortfolioTest #test09PortfolioWithASingleAccountExhibitsItsTransactions stamp: 'fr 11/9/2020 12:28:53'!
+PASSED!
+
+!testRun: #PortfolioTest #test10PortfolioWithMultipleAccountsAndPortfoliosExhibitsAllTheirTransactionsCombined stamp: 'fr 11/9/2020 12:28:53'!
+PASSED!
+
+!testRun: #PortfolioTest #test11EmptyPortfolioDoesNotContainAnyAccount stamp: 'fr 11/9/2020 12:28:53'!
+PASSED!
+
+!testRun: #PortfolioTest #test12PortfolioContainsAnAccountAfterItIsAdded stamp: 'fr 11/9/2020 12:28:53'!
+PASSED!
+
+!testRun: #PortfolioTest #test13PortfolioContainsAnAccountAfterItIsAddedToAnyOfItsDecendents stamp: 'fr 11/9/2020 12:28:53'!
+PASSED!
+
+!testRun: #PortfolioTest #test14PortfolioDoesNotContainAnythingThatWasNotAddedToItself stamp: 'fr 11/9/2020 12:28:53'!
+PASSED!
+
+!testRun: #PortfolioTest #test15PortfolioCanNotAddItself stamp: 'fr 11/9/2020 12:28:53'!
+PASSED!
+
+!testRun: #PortfolioTest #test16PortfolioCanNotAddItsParent stamp: 'fr 11/9/2020 12:28:53'!
+PASSED!
+
+!testRun: #PortfolioTest #test17PortfolioCanNotAddAnyAncestor stamp: 'fr 11/9/2020 12:28:53'!
+PASSED!
+
+!testRun: #PortfolioTest #test18PortfolioCanNotAddAnyPreviousMemberOfTheTree stamp: 'fr 11/9/2020 12:28:53'!
+PASSED!
+
+!testRun: #PortfolioTest #test19PortfolioCanNotAddAnotherOneWhichSharesChild stamp: 'fr 11/9/2020 12:28:53'!
+PASSED!
+
+!testRun: #PortfolioTest #test20PortfolioCanNotAddDuplicateAccountIndirectly stamp: 'fr 11/9/2020 12:28:53'!
+PASSED!
+
+!testRun: #PortfolioTest #test21AddingShouldFailIdenticallyAsCreatingAPortfolioWithAccounts stamp: 'fr 11/9/2020 12:28:53'!
+PASSED!
+
+!testRun: #PortfolioTest #test22CreatingAPortfolioWithAccountsShouldFailIdenticallyAsWhenAddingThem stamp: 'fr 11/9/2020 12:28:53'!
+PASSED!
+!Portfolio methodsFor: 'private - account management' stamp: 'fr 11/9/2020 12:31:13' prior: 50893649 overrides: 50880083!
+collectTransactions: aTransactionsList
+	
+	accounts do: [:anAccount | anAccount collectTransactions: aTransactionsList]
+	! !
+!Account methodsFor: 'private' stamp: 'fr 11/9/2020 12:32:16'!
+collectTransactionsInto: aTransactionList
+
+	self subclassResponsibility ! !
+!Portfolio methodsFor: 'private - account management' stamp: 'fr 11/9/2020 12:32:16' overrides: 50893761!
+collectTransactionsInto: aTransactionsList
+	
+	accounts do: [:anAccount | anAccount collectTransactions: aTransactionsList]
+	! !
+!ReceptiveAccount methodsFor: 'private - account management' stamp: 'fr 11/9/2020 12:32:16' overrides: 50893761!
+collectTransactionsInto: aTransactionsList
+
+	^aTransactionsList addAllLast: self transactions
+! !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'fr 11/9/2020 12:32:16' prior: 50880023 overrides: 50880069!
+transactions
+	
+	| transactions |
+	transactions _ OrderedCollection new.
+	self collectTransactionsInto: transactions.
+	^transactions
+! !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'fr 11/9/2020 12:32:16' prior: 50893767 overrides: 50893761!
+collectTransactionsInto: aTransactionsList
+	
+	accounts do: [:anAccount | anAccount collectTransactions: aTransactionsList]
+	! !
+
+!methodRemoval: Account #collectTransactions: stamp: 'fr 11/9/2020 12:32:17'!
+collectTransactions: aTransactionList
+
+	self subclassResponsibility !
+
+!methodRemoval: Portfolio #collectTransactions: stamp: 'fr 11/9/2020 12:32:17'!
+collectTransactions: aTransactionsList
+	
+	accounts do: [:anAccount | anAccount collectTransactions: aTransactionsList]
+	!
+
+!methodRemoval: ReceptiveAccount #collectTransactions: stamp: 'fr 11/9/2020 12:32:17'!
+collectTransactions: aTransactionsList
+
+	^aTransactionsList addAllLast: self transactions
+!
+!Portfolio methodsFor: 'private - account management' stamp: 'fr 11/9/2020 12:32:20' prior: 50893790 overrides: 50893761!
+collectTransactionsInto: aTransactionsList
+	
+	accounts do: [:anAccount | anAccount collectTransactionsInto: aTransactionsList]
+	! !
+
+!testRun: #PortfolioTest #test01EmptyPortfolioHasBalanceZero stamp: 'fr 11/9/2020 12:32:27'!
+PASSED!
+
+!testRun: #PortfolioTest #test02PortfolioWithASingleAccountWithNoTransactionsHasBalanceZero stamp: 'fr 11/9/2020 12:32:27'!
+PASSED!
+
+!testRun: #PortfolioTest #test03PortfolioWithASingleAccountReflectsItsTransactionsValuesInItsBalance stamp: 'fr 11/9/2020 12:32:27'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioWithMultipleAccountsAndPortfoliosReflectsTheirTransactionsValuesInItsBalance stamp: 'fr 11/9/2020 12:32:28'!
+PASSED!
+
+!testRun: #PortfolioTest #test05EmptyPortfolioHasNotRegisteredAnyTransaction stamp: 'fr 11/9/2020 12:32:28'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioWithASingleAccountRegistersItsTransactions stamp: 'fr 11/9/2020 12:32:28'!
+PASSED!
+
+!testRun: #PortfolioTest #test07PortfolioWithMulltipleAccountsAndPortfoliosRegistersAllTheirTransactions stamp: 'fr 11/9/2020 12:32:28'!
+PASSED!
+
+!testRun: #PortfolioTest #test08EmptyPortfolioDoesNotExhibitAnyTransaction stamp: 'fr 11/9/2020 12:32:28'!
+PASSED!
+
+!testRun: #PortfolioTest #test09PortfolioWithASingleAccountExhibitsItsTransactions stamp: 'fr 11/9/2020 12:32:28'!
+PASSED!
+
+!testRun: #PortfolioTest #test10PortfolioWithMultipleAccountsAndPortfoliosExhibitsAllTheirTransactionsCombined stamp: 'fr 11/9/2020 12:32:28'!
+PASSED!
+
+!testRun: #PortfolioTest #test11EmptyPortfolioDoesNotContainAnyAccount stamp: 'fr 11/9/2020 12:32:28'!
+PASSED!
+
+!testRun: #PortfolioTest #test12PortfolioContainsAnAccountAfterItIsAdded stamp: 'fr 11/9/2020 12:32:28'!
+PASSED!
+
+!testRun: #PortfolioTest #test13PortfolioContainsAnAccountAfterItIsAddedToAnyOfItsDecendents stamp: 'fr 11/9/2020 12:32:28'!
+PASSED!
+
+!testRun: #PortfolioTest #test14PortfolioDoesNotContainAnythingThatWasNotAddedToItself stamp: 'fr 11/9/2020 12:32:28'!
+PASSED!
+
+!testRun: #PortfolioTest #test15PortfolioCanNotAddItself stamp: 'fr 11/9/2020 12:32:28'!
+PASSED!
+
+!testRun: #PortfolioTest #test16PortfolioCanNotAddItsParent stamp: 'fr 11/9/2020 12:32:28'!
+PASSED!
+
+!testRun: #PortfolioTest #test17PortfolioCanNotAddAnyAncestor stamp: 'fr 11/9/2020 12:32:28'!
+PASSED!
+
+!testRun: #PortfolioTest #test18PortfolioCanNotAddAnyPreviousMemberOfTheTree stamp: 'fr 11/9/2020 12:32:28'!
+PASSED!
+
+!testRun: #PortfolioTest #test19PortfolioCanNotAddAnotherOneWhichSharesChild stamp: 'fr 11/9/2020 12:32:28'!
+PASSED!
+
+!testRun: #PortfolioTest #test20PortfolioCanNotAddDuplicateAccountIndirectly stamp: 'fr 11/9/2020 12:32:28'!
+PASSED!
+
+!testRun: #PortfolioTest #test21AddingShouldFailIdenticallyAsCreatingAPortfolioWithAccounts stamp: 'fr 11/9/2020 12:32:28'!
+PASSED!
+
+!testRun: #PortfolioTest #test22CreatingAPortfolioWithAccountsShouldFailIdenticallyAsWhenAddingThem stamp: 'fr 11/9/2020 12:32:28'!
+PASSED!
+
+----SNAPSHOT----(9 November 2020 12:33:29) CuisUniversity-4384.image priorSource: 17983787!
+!Portfolio methodsFor: 'private - account management' stamp: 'fr 11/9/2020 12:35:04' prior: 50880031 overrides: 50880093!
+includes: anAccountToCheck 
+	
+	^self = anAccountToCheck 
+		or: [accounts 
+			anySatisfy: [:anAccount | 
+				self inclusionGoesEitherWay
+			]
+		]! !
+!Portfolio methodsFor: 'private - account management' stamp: 'fr 11/9/2020 12:35:41' prior: 50893912 overrides: 50880093!
+includes: anAccountToCheck 
+	
+	^self = anAccountToCheck 
+		or: [accounts 
+			anySatisfy: [:anAccount | 
+				(anAccount includes: anAccountToCheck) or: [anAccountToCheck includes: anAccount]
+			]
+		]! !
+!Portfolio methodsFor: 'private - account management' stamp: 'fr 11/9/2020 12:36:13' prior: 50893921 overrides: 50880093!
+includes: anAccountToCheck 
+	
+	^self = anAccountToCheck 
+		or: [accounts 
+			anySatisfy: [:anAccount | 
+				self inclusionGoesEitherWayFor: anAccount and: anAccountToCheck 
+			]
+		]! !
+!Portfolio methodsFor: 'private - account management' stamp: 'fr 11/9/2020 12:36:29'!
+inclusionGoesEitherWayFor: anAccount and: anAccountToCheck 
+	
+	^(anAccount includes: anAccountToCheck) or: [anAccountToCheck includes: anAccount]! !
+
+!testRun: #PortfolioTest #test01EmptyPortfolioHasBalanceZero stamp: 'fr 11/9/2020 12:36:32'!
+PASSED!
+
+!testRun: #PortfolioTest #test02PortfolioWithASingleAccountWithNoTransactionsHasBalanceZero stamp: 'fr 11/9/2020 12:36:32'!
+PASSED!
+
+!testRun: #PortfolioTest #test03PortfolioWithASingleAccountReflectsItsTransactionsValuesInItsBalance stamp: 'fr 11/9/2020 12:36:32'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioWithMultipleAccountsAndPortfoliosReflectsTheirTransactionsValuesInItsBalance stamp: 'fr 11/9/2020 12:36:32'!
+PASSED!
+
+!testRun: #PortfolioTest #test05EmptyPortfolioHasNotRegisteredAnyTransaction stamp: 'fr 11/9/2020 12:36:32'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioWithASingleAccountRegistersItsTransactions stamp: 'fr 11/9/2020 12:36:32'!
+PASSED!
+
+!testRun: #PortfolioTest #test07PortfolioWithMulltipleAccountsAndPortfoliosRegistersAllTheirTransactions stamp: 'fr 11/9/2020 12:36:32'!
+PASSED!
+
+!testRun: #PortfolioTest #test08EmptyPortfolioDoesNotExhibitAnyTransaction stamp: 'fr 11/9/2020 12:36:32'!
+PASSED!
+
+!testRun: #PortfolioTest #test09PortfolioWithASingleAccountExhibitsItsTransactions stamp: 'fr 11/9/2020 12:36:32'!
+PASSED!
+
+!testRun: #PortfolioTest #test10PortfolioWithMultipleAccountsAndPortfoliosExhibitsAllTheirTransactionsCombined stamp: 'fr 11/9/2020 12:36:32'!
+PASSED!
+
+!testRun: #PortfolioTest #test11EmptyPortfolioDoesNotContainAnyAccount stamp: 'fr 11/9/2020 12:36:32'!
+PASSED!
+
+!testRun: #PortfolioTest #test12PortfolioContainsAnAccountAfterItIsAdded stamp: 'fr 11/9/2020 12:36:32'!
+PASSED!
+
+!testRun: #PortfolioTest #test13PortfolioContainsAnAccountAfterItIsAddedToAnyOfItsDecendents stamp: 'fr 11/9/2020 12:36:32'!
+PASSED!
+
+!testRun: #PortfolioTest #test14PortfolioDoesNotContainAnythingThatWasNotAddedToItself stamp: 'fr 11/9/2020 12:36:32'!
+PASSED!
+
+!testRun: #PortfolioTest #test15PortfolioCanNotAddItself stamp: 'fr 11/9/2020 12:36:32'!
+PASSED!
+
+!testRun: #PortfolioTest #test16PortfolioCanNotAddItsParent stamp: 'fr 11/9/2020 12:36:32'!
+PASSED!
+
+!testRun: #PortfolioTest #test17PortfolioCanNotAddAnyAncestor stamp: 'fr 11/9/2020 12:36:32'!
+PASSED!
+
+!testRun: #PortfolioTest #test18PortfolioCanNotAddAnyPreviousMemberOfTheTree stamp: 'fr 11/9/2020 12:36:32'!
+PASSED!
+
+!testRun: #PortfolioTest #test19PortfolioCanNotAddAnotherOneWhichSharesChild stamp: 'fr 11/9/2020 12:36:32'!
+PASSED!
+
+!testRun: #PortfolioTest #test20PortfolioCanNotAddDuplicateAccountIndirectly stamp: 'fr 11/9/2020 12:36:32'!
+PASSED!
+
+!testRun: #PortfolioTest #test21AddingShouldFailIdenticallyAsCreatingAPortfolioWithAccounts stamp: 'fr 11/9/2020 12:36:32'!
+PASSED!
+
+!testRun: #PortfolioTest #test22CreatingAPortfolioWithAccountsShouldFailIdenticallyAsWhenAddingThem stamp: 'fr 11/9/2020 12:36:32'!
+PASSED!
+
+----SNAPSHOT----(9 November 2020 12:37:04) CuisUniversity-4384.image priorSource: 17992210!
+!Portfolio methodsFor: 'private - account management' stamp: 'fr 11/9/2020 12:37:44'!
+isComposedBy: anAccountToCheck 
+	
+	^self = anAccountToCheck 
+		or: [accounts 
+			anySatisfy: [:anAccount | 
+				self inclusionGoesEitherWayFor: anAccount and: anAccountToCheck 
+			]
+		]! !
+!ReceptiveAccount methodsFor: 'private - account management' stamp: 'fr 11/9/2020 12:37:44'!
+isComposedBy: anAccount 
+	
+	^self = anAccount ! !
+!Account methodsFor: 'private' stamp: 'fr 11/9/2020 12:37:44'!
+isComposedBy: anAccount
+
+	self subclassResponsibility ! !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'fr 11/9/2020 12:37:44' prior: 50893941!
+inclusionGoesEitherWayFor: anAccount and: anAccountToCheck 
+	
+	^(anAccount isComposedBy: anAccountToCheck) or: [anAccountToCheck isComposedBy: anAccount]! !
+
+!methodRemoval: Portfolio #includes: stamp: 'fr 11/9/2020 12:37:44'!
+includes: anAccountToCheck 
+	
+	^self = anAccountToCheck 
+		or: [accounts 
+			anySatisfy: [:anAccount | 
+				self inclusionGoesEitherWayFor: anAccount and: anAccountToCheck 
+			]
+		]!
+
+!methodRemoval: ReceptiveAccount #includes: stamp: 'fr 11/9/2020 12:37:44'!
+includes: anAccount 
+	
+	^self = anAccount !
+
+!methodRemoval: Account #includes: stamp: 'fr 11/9/2020 12:37:44'!
+includes: anAccount
+
+	self subclassResponsibility !
+!ReceptiveAccount methodsFor: 'private - account management' stamp: 'fr 11/9/2020 12:38:43'!
+includes: anAccount 
+	
+	^self = anAccount ! !
+!Account methodsFor: 'private' stamp: 'fr 11/9/2020 12:38:43'!
+includes: anAccount
+
+	self subclassResponsibility ! !
+!Portfolio methodsFor: 'private - account management' stamp: 'fr 11/9/2020 12:38:43' overrides: 50894083!
+includes: anAccountToCheck 
+	
+	^self = anAccountToCheck 
+		or: [accounts 
+			anySatisfy: [:anAccount | 
+				self inclusionGoesEitherWayFor: anAccount and: anAccountToCheck 
+			]
+		]! !
+
+!methodRemoval: ReceptiveAccount #isComposedBy: stamp: 'fr 11/9/2020 12:38:43'!
+isComposedBy: anAccount 
+	
+	^self = anAccount !
+
+!methodRemoval: Account #isComposedBy: stamp: 'fr 11/9/2020 12:38:43'!
+isComposedBy: anAccount
+
+	self subclassResponsibility !
+
+!methodRemoval: Portfolio #isComposedBy: stamp: 'fr 11/9/2020 12:38:43'!
+isComposedBy: anAccountToCheck 
+	
+	^self = anAccountToCheck 
+		or: [accounts 
+			anySatisfy: [:anAccount | 
+				self inclusionGoesEitherWayFor: anAccount and: anAccountToCheck 
+			]
+		]!
+
+----STARTUP---- (9 November 2020 12:39:09) as /home/fede/Documentos/Facultad/Inge1/Cuises/linux64/CuisUniversity-4384.image!
+
+
+!testRun: #PortfolioTest #test01EmptyPortfolioHasBalanceZero stamp: 'fr 11/9/2020 12:39:11'!
+PASSED!
+
+!testRun: #PortfolioTest #test02PortfolioWithASingleAccountWithNoTransactionsHasBalanceZero stamp: 'fr 11/9/2020 12:39:11'!
+PASSED!
+
+!testRun: #PortfolioTest #test03PortfolioWithASingleAccountReflectsItsTransactionsValuesInItsBalance stamp: 'fr 11/9/2020 12:39:11'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioWithMultipleAccountsAndPortfoliosReflectsTheirTransactionsValuesInItsBalance stamp: 'fr 11/9/2020 12:39:11'!
+PASSED!
+
+!testRun: #PortfolioTest #test05EmptyPortfolioHasNotRegisteredAnyTransaction stamp: 'fr 11/9/2020 12:39:11'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioWithASingleAccountRegistersItsTransactions stamp: 'fr 11/9/2020 12:39:11'!
+PASSED!
+
+!testRun: #PortfolioTest #test07PortfolioWithMulltipleAccountsAndPortfoliosRegistersAllTheirTransactions stamp: 'fr 11/9/2020 12:39:11'!
+PASSED!
+
+!testRun: #PortfolioTest #test08EmptyPortfolioDoesNotExhibitAnyTransaction stamp: 'fr 11/9/2020 12:39:11'!
+PASSED!
+
+!testRun: #PortfolioTest #test09PortfolioWithASingleAccountExhibitsItsTransactions stamp: 'fr 11/9/2020 12:39:11'!
+PASSED!
+
+!testRun: #PortfolioTest #test10PortfolioWithMultipleAccountsAndPortfoliosExhibitsAllTheirTransactionsCombined stamp: 'fr 11/9/2020 12:39:11'!
+PASSED!
+
+!testRun: #PortfolioTest #test11EmptyPortfolioDoesNotContainAnyAccount stamp: 'fr 11/9/2020 12:39:11'!
+PASSED!
+
+!testRun: #PortfolioTest #test12PortfolioContainsAnAccountAfterItIsAdded stamp: 'fr 11/9/2020 12:39:11'!
+PASSED!
+
+!testRun: #PortfolioTest #test13PortfolioContainsAnAccountAfterItIsAddedToAnyOfItsDecendents stamp: 'fr 11/9/2020 12:39:11'!
+PASSED!
+
+!testRun: #PortfolioTest #test14PortfolioDoesNotContainAnythingThatWasNotAddedToItself stamp: 'fr 11/9/2020 12:39:11'!
+PASSED!
+
+!testRun: #PortfolioTest #test15PortfolioCanNotAddItself stamp: 'fr 11/9/2020 12:39:11'!
+PASSED!
+
+!testRun: #PortfolioTest #test16PortfolioCanNotAddItsParent stamp: 'fr 11/9/2020 12:39:11'!
+PASSED!
+
+!testRun: #PortfolioTest #test17PortfolioCanNotAddAnyAncestor stamp: 'fr 11/9/2020 12:39:11'!
+PASSED!
+
+!testRun: #PortfolioTest #test18PortfolioCanNotAddAnyPreviousMemberOfTheTree stamp: 'fr 11/9/2020 12:39:11'!
+PASSED!
+
+!testRun: #PortfolioTest #test19PortfolioCanNotAddAnotherOneWhichSharesChild stamp: 'fr 11/9/2020 12:39:11'!
+PASSED!
+
+!testRun: #PortfolioTest #test20PortfolioCanNotAddDuplicateAccountIndirectly stamp: 'fr 11/9/2020 12:39:11'!
+PASSED!
+
+!testRun: #PortfolioTest #test21AddingShouldFailIdenticallyAsCreatingAPortfolioWithAccounts stamp: 'fr 11/9/2020 12:39:11'!
+PASSED!
+
+!testRun: #PortfolioTest #test22CreatingAPortfolioWithAccountsShouldFailIdenticallyAsWhenAddingThem stamp: 'fr 11/9/2020 12:39:11'!
+PASSED!
+!Portfolio methodsFor: 'private - account management' stamp: 'fr 11/9/2020 12:40:00'!
+isComposedBy: anAccountToCheck 
+	
+	^self = anAccountToCheck 
+		or: [accounts 
+			anySatisfy: [:anAccount | 
+				self inclusionGoesEitherWayFor: anAccount and: anAccountToCheck 
+			]
+		]! !
+
+!methodRemoval: Portfolio #includes: stamp: 'fr 11/9/2020 12:40:07'!
+includes: anAccountToCheck 
+	
+	^self = anAccountToCheck 
+		or: [accounts 
+			anySatisfy: [:anAccount | 
+				self inclusionGoesEitherWayFor: anAccount and: anAccountToCheck 
+			]
+		]!
+!Portfolio methodsFor: 'private - account management' stamp: 'fr 11/9/2020 12:40:38' prior: 50893941!
+inclusionGoesEitherWayFor: anAccount and: anAccountToCheck 
+	
+	^(anAccount isComposedBy: anAccountToCheck) or: [anAccountToCheck isComposedBy: anAccount]! !
+!Portfolio methodsFor: 'private - account management' stamp: 'fr 11/9/2020 12:41:04' prior: 50876134!
+isReachableFromRoots: aPortfolio 
+	
+	^self roots anySatisfy: [:aRootPortfolio | aRootPortfolio isComposedBy: aPortfolio]! !
+!ReceptiveAccount methodsFor: 'private - account management' stamp: 'fr 11/9/2020 12:42:56'!
+isComposedBy: anAccount 
+	
+	^self = anAccount ! !
+
+!testRun: #PortfolioTest #test01EmptyPortfolioHasBalanceZero stamp: 'fr 11/9/2020 12:43:01'!
+PASSED!
+
+!testRun: #PortfolioTest #test02PortfolioWithASingleAccountWithNoTransactionsHasBalanceZero stamp: 'fr 11/9/2020 12:43:01'!
+PASSED!
+
+!testRun: #PortfolioTest #test03PortfolioWithASingleAccountReflectsItsTransactionsValuesInItsBalance stamp: 'fr 11/9/2020 12:43:01'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioWithMultipleAccountsAndPortfoliosReflectsTheirTransactionsValuesInItsBalance stamp: 'fr 11/9/2020 12:43:01'!
+PASSED!
+
+!testRun: #PortfolioTest #test05EmptyPortfolioHasNotRegisteredAnyTransaction stamp: 'fr 11/9/2020 12:43:01'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioWithASingleAccountRegistersItsTransactions stamp: 'fr 11/9/2020 12:43:01'!
+PASSED!
+
+!testRun: #PortfolioTest #test07PortfolioWithMulltipleAccountsAndPortfoliosRegistersAllTheirTransactions stamp: 'fr 11/9/2020 12:43:01'!
+PASSED!
+
+!testRun: #PortfolioTest #test08EmptyPortfolioDoesNotExhibitAnyTransaction stamp: 'fr 11/9/2020 12:43:01'!
+PASSED!
+
+!testRun: #PortfolioTest #test09PortfolioWithASingleAccountExhibitsItsTransactions stamp: 'fr 11/9/2020 12:43:01'!
+PASSED!
+
+!testRun: #PortfolioTest #test10PortfolioWithMultipleAccountsAndPortfoliosExhibitsAllTheirTransactionsCombined stamp: 'fr 11/9/2020 12:43:01'!
+PASSED!
+
+!testRun: #PortfolioTest #test11EmptyPortfolioDoesNotContainAnyAccount stamp: 'fr 11/9/2020 12:43:01'!
+PASSED!
+
+!testRun: #PortfolioTest #test12PortfolioContainsAnAccountAfterItIsAdded stamp: 'fr 11/9/2020 12:43:01'!
+PASSED!
+
+!testRun: #PortfolioTest #test13PortfolioContainsAnAccountAfterItIsAddedToAnyOfItsDecendents stamp: 'fr 11/9/2020 12:43:01'!
+PASSED!
+
+!testRun: #PortfolioTest #test14PortfolioDoesNotContainAnythingThatWasNotAddedToItself stamp: 'fr 11/9/2020 12:43:01'!
+PASSED!
+
+!testRun: #PortfolioTest #test15PortfolioCanNotAddItself stamp: 'fr 11/9/2020 12:43:01'!
+PASSED!
+
+!testRun: #PortfolioTest #test16PortfolioCanNotAddItsParent stamp: 'fr 11/9/2020 12:43:01'!
+PASSED!
+
+!testRun: #PortfolioTest #test17PortfolioCanNotAddAnyAncestor stamp: 'fr 11/9/2020 12:43:01'!
+PASSED!
+
+!testRun: #PortfolioTest #test18PortfolioCanNotAddAnyPreviousMemberOfTheTree stamp: 'fr 11/9/2020 12:43:01'!
+PASSED!
+
+!testRun: #PortfolioTest #test19PortfolioCanNotAddAnotherOneWhichSharesChild stamp: 'fr 11/9/2020 12:43:01'!
+PASSED!
+
+!testRun: #PortfolioTest #test20PortfolioCanNotAddDuplicateAccountIndirectly stamp: 'fr 11/9/2020 12:43:01'!
+PASSED!
+
+!testRun: #PortfolioTest #test21AddingShouldFailIdenticallyAsCreatingAPortfolioWithAccounts stamp: 'fr 11/9/2020 12:43:01'!
+PASSED!
+
+!testRun: #PortfolioTest #test22CreatingAPortfolioWithAccountsShouldFailIdenticallyAsWhenAddingThem stamp: 'fr 11/9/2020 12:43:01'!
+PASSED!
+
+!methodRemoval: ReceptiveAccount #includes: stamp: 'fr 11/9/2020 12:43:12'!
+includes: anAccount 
+	
+	^self = anAccount !
+
+!testRun: #PortfolioTest #test01EmptyPortfolioHasBalanceZero stamp: 'fr 11/9/2020 12:43:14'!
+PASSED!
+
+!testRun: #PortfolioTest #test02PortfolioWithASingleAccountWithNoTransactionsHasBalanceZero stamp: 'fr 11/9/2020 12:43:14'!
+PASSED!
+
+!testRun: #PortfolioTest #test03PortfolioWithASingleAccountReflectsItsTransactionsValuesInItsBalance stamp: 'fr 11/9/2020 12:43:14'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioWithMultipleAccountsAndPortfoliosReflectsTheirTransactionsValuesInItsBalance stamp: 'fr 11/9/2020 12:43:14'!
+PASSED!
+
+!testRun: #PortfolioTest #test05EmptyPortfolioHasNotRegisteredAnyTransaction stamp: 'fr 11/9/2020 12:43:14'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioWithASingleAccountRegistersItsTransactions stamp: 'fr 11/9/2020 12:43:14'!
+PASSED!
+
+!testRun: #PortfolioTest #test07PortfolioWithMulltipleAccountsAndPortfoliosRegistersAllTheirTransactions stamp: 'fr 11/9/2020 12:43:14'!
+PASSED!
+
+!testRun: #PortfolioTest #test08EmptyPortfolioDoesNotExhibitAnyTransaction stamp: 'fr 11/9/2020 12:43:14'!
+PASSED!
+
+!testRun: #PortfolioTest #test09PortfolioWithASingleAccountExhibitsItsTransactions stamp: 'fr 11/9/2020 12:43:14'!
+PASSED!
+
+!testRun: #PortfolioTest #test10PortfolioWithMultipleAccountsAndPortfoliosExhibitsAllTheirTransactionsCombined stamp: 'fr 11/9/2020 12:43:14'!
+PASSED!
+
+!testRun: #PortfolioTest #test11EmptyPortfolioDoesNotContainAnyAccount stamp: 'fr 11/9/2020 12:43:14'!
+PASSED!
+
+!testRun: #PortfolioTest #test12PortfolioContainsAnAccountAfterItIsAdded stamp: 'fr 11/9/2020 12:43:14'!
+PASSED!
+
+!testRun: #PortfolioTest #test13PortfolioContainsAnAccountAfterItIsAddedToAnyOfItsDecendents stamp: 'fr 11/9/2020 12:43:14'!
+PASSED!
+
+!testRun: #PortfolioTest #test14PortfolioDoesNotContainAnythingThatWasNotAddedToItself stamp: 'fr 11/9/2020 12:43:14'!
+PASSED!
+
+!testRun: #PortfolioTest #test15PortfolioCanNotAddItself stamp: 'fr 11/9/2020 12:43:14'!
+PASSED!
+
+!testRun: #PortfolioTest #test16PortfolioCanNotAddItsParent stamp: 'fr 11/9/2020 12:43:14'!
+PASSED!
+
+!testRun: #PortfolioTest #test17PortfolioCanNotAddAnyAncestor stamp: 'fr 11/9/2020 12:43:15'!
+PASSED!
+
+!testRun: #PortfolioTest #test18PortfolioCanNotAddAnyPreviousMemberOfTheTree stamp: 'fr 11/9/2020 12:43:15'!
+PASSED!
+
+!testRun: #PortfolioTest #test19PortfolioCanNotAddAnotherOneWhichSharesChild stamp: 'fr 11/9/2020 12:43:15'!
+PASSED!
+
+!testRun: #PortfolioTest #test20PortfolioCanNotAddDuplicateAccountIndirectly stamp: 'fr 11/9/2020 12:43:15'!
+PASSED!
+
+!testRun: #PortfolioTest #test21AddingShouldFailIdenticallyAsCreatingAPortfolioWithAccounts stamp: 'fr 11/9/2020 12:43:15'!
+PASSED!
+
+!testRun: #PortfolioTest #test22CreatingAPortfolioWithAccountsShouldFailIdenticallyAsWhenAddingThem stamp: 'fr 11/9/2020 12:43:15'!
+PASSED!
+
+!methodRemoval: Account #includes: stamp: 'fr 11/9/2020 12:43:20'!
+includes: anAccount
+
+	self subclassResponsibility !
+!Account methodsFor: 'transactions' stamp: 'fr 11/9/2020 12:43:29'!
+isComposedBy: anAccount
+	
+	self subclassResponsibility ! !
+
+!testRun: #PortfolioTest #test01EmptyPortfolioHasBalanceZero stamp: 'fr 11/9/2020 12:43:55'!
+PASSED!
+
+!testRun: #PortfolioTest #test02PortfolioWithASingleAccountWithNoTransactionsHasBalanceZero stamp: 'fr 11/9/2020 12:43:55'!
+PASSED!
+
+!testRun: #PortfolioTest #test03PortfolioWithASingleAccountReflectsItsTransactionsValuesInItsBalance stamp: 'fr 11/9/2020 12:43:55'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioWithMultipleAccountsAndPortfoliosReflectsTheirTransactionsValuesInItsBalance stamp: 'fr 11/9/2020 12:43:55'!
+PASSED!
+
+!testRun: #PortfolioTest #test05EmptyPortfolioHasNotRegisteredAnyTransaction stamp: 'fr 11/9/2020 12:43:55'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioWithASingleAccountRegistersItsTransactions stamp: 'fr 11/9/2020 12:43:55'!
+PASSED!
+
+!testRun: #PortfolioTest #test07PortfolioWithMulltipleAccountsAndPortfoliosRegistersAllTheirTransactions stamp: 'fr 11/9/2020 12:43:55'!
+PASSED!
+
+!testRun: #PortfolioTest #test08EmptyPortfolioDoesNotExhibitAnyTransaction stamp: 'fr 11/9/2020 12:43:55'!
+PASSED!
+
+!testRun: #PortfolioTest #test09PortfolioWithASingleAccountExhibitsItsTransactions stamp: 'fr 11/9/2020 12:43:55'!
+PASSED!
+
+!testRun: #PortfolioTest #test10PortfolioWithMultipleAccountsAndPortfoliosExhibitsAllTheirTransactionsCombined stamp: 'fr 11/9/2020 12:43:55'!
+PASSED!
+
+!testRun: #PortfolioTest #test11EmptyPortfolioDoesNotContainAnyAccount stamp: 'fr 11/9/2020 12:43:55'!
+PASSED!
+
+!testRun: #PortfolioTest #test12PortfolioContainsAnAccountAfterItIsAdded stamp: 'fr 11/9/2020 12:43:55'!
+PASSED!
+
+!testRun: #PortfolioTest #test13PortfolioContainsAnAccountAfterItIsAddedToAnyOfItsDecendents stamp: 'fr 11/9/2020 12:43:55'!
+PASSED!
+
+!testRun: #PortfolioTest #test14PortfolioDoesNotContainAnythingThatWasNotAddedToItself stamp: 'fr 11/9/2020 12:43:55'!
+PASSED!
+
+!testRun: #PortfolioTest #test15PortfolioCanNotAddItself stamp: 'fr 11/9/2020 12:43:55'!
+PASSED!
+
+!testRun: #PortfolioTest #test16PortfolioCanNotAddItsParent stamp: 'fr 11/9/2020 12:43:55'!
+PASSED!
+
+!testRun: #PortfolioTest #test17PortfolioCanNotAddAnyAncestor stamp: 'fr 11/9/2020 12:43:55'!
+PASSED!
+
+!testRun: #PortfolioTest #test18PortfolioCanNotAddAnyPreviousMemberOfTheTree stamp: 'fr 11/9/2020 12:43:55'!
+PASSED!
+
+!testRun: #PortfolioTest #test19PortfolioCanNotAddAnotherOneWhichSharesChild stamp: 'fr 11/9/2020 12:43:55'!
+PASSED!
+
+!testRun: #PortfolioTest #test20PortfolioCanNotAddDuplicateAccountIndirectly stamp: 'fr 11/9/2020 12:43:55'!
+PASSED!
+
+!testRun: #PortfolioTest #test21AddingShouldFailIdenticallyAsCreatingAPortfolioWithAccounts stamp: 'fr 11/9/2020 12:43:55'!
+PASSED!
+
+!testRun: #PortfolioTest #test22CreatingAPortfolioWithAccountsShouldFailIdenticallyAsWhenAddingThem stamp: 'fr 11/9/2020 12:43:55'!
+PASSED!
+!Portfolio methodsFor: 'private - account management' stamp: 'fr 11/9/2020 12:44:12'!
+compositionGoesEitherWayFor: anAccount and: anAccountToCheck 
+	
+	^(anAccount isComposedBy: anAccountToCheck) or: [anAccountToCheck isComposedBy: anAccount]! !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'fr 11/9/2020 12:44:12' prior: 50894127 overrides: 50894343!
+isComposedBy: anAccountToCheck 
+	
+	^self = anAccountToCheck 
+		or: [accounts 
+			anySatisfy: [:anAccount | 
+				self compositionGoesEitherWayFor: anAccount and: anAccountToCheck 
+			]
+		]! !
+
+!methodRemoval: Portfolio #inclusionGoesEitherWayFor:and: stamp: 'fr 11/9/2020 12:44:12'!
+inclusionGoesEitherWayFor: anAccount and: anAccountToCheck 
+	
+	^(anAccount isComposedBy: anAccountToCheck) or: [anAccountToCheck isComposedBy: anAccount]!
+
+!testRun: #PortfolioTest #test01EmptyPortfolioHasBalanceZero stamp: 'fr 11/9/2020 12:44:14'!
+PASSED!
+
+!testRun: #PortfolioTest #test02PortfolioWithASingleAccountWithNoTransactionsHasBalanceZero stamp: 'fr 11/9/2020 12:44:14'!
+PASSED!
+
+!testRun: #PortfolioTest #test03PortfolioWithASingleAccountReflectsItsTransactionsValuesInItsBalance stamp: 'fr 11/9/2020 12:44:14'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioWithMultipleAccountsAndPortfoliosReflectsTheirTransactionsValuesInItsBalance stamp: 'fr 11/9/2020 12:44:14'!
+PASSED!
+
+!testRun: #PortfolioTest #test05EmptyPortfolioHasNotRegisteredAnyTransaction stamp: 'fr 11/9/2020 12:44:14'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioWithASingleAccountRegistersItsTransactions stamp: 'fr 11/9/2020 12:44:14'!
+PASSED!
+
+!testRun: #PortfolioTest #test07PortfolioWithMulltipleAccountsAndPortfoliosRegistersAllTheirTransactions stamp: 'fr 11/9/2020 12:44:14'!
+PASSED!
+
+!testRun: #PortfolioTest #test08EmptyPortfolioDoesNotExhibitAnyTransaction stamp: 'fr 11/9/2020 12:44:14'!
+PASSED!
+
+!testRun: #PortfolioTest #test09PortfolioWithASingleAccountExhibitsItsTransactions stamp: 'fr 11/9/2020 12:44:14'!
+PASSED!
+
+!testRun: #PortfolioTest #test10PortfolioWithMultipleAccountsAndPortfoliosExhibitsAllTheirTransactionsCombined stamp: 'fr 11/9/2020 12:44:14'!
+PASSED!
+
+!testRun: #PortfolioTest #test11EmptyPortfolioDoesNotContainAnyAccount stamp: 'fr 11/9/2020 12:44:14'!
+PASSED!
+
+!testRun: #PortfolioTest #test12PortfolioContainsAnAccountAfterItIsAdded stamp: 'fr 11/9/2020 12:44:14'!
+PASSED!
+
+!testRun: #PortfolioTest #test13PortfolioContainsAnAccountAfterItIsAddedToAnyOfItsDecendents stamp: 'fr 11/9/2020 12:44:14'!
+PASSED!
+
+!testRun: #PortfolioTest #test14PortfolioDoesNotContainAnythingThatWasNotAddedToItself stamp: 'fr 11/9/2020 12:44:14'!
+PASSED!
+
+!testRun: #PortfolioTest #test15PortfolioCanNotAddItself stamp: 'fr 11/9/2020 12:44:14'!
+PASSED!
+
+!testRun: #PortfolioTest #test16PortfolioCanNotAddItsParent stamp: 'fr 11/9/2020 12:44:14'!
+PASSED!
+
+!testRun: #PortfolioTest #test17PortfolioCanNotAddAnyAncestor stamp: 'fr 11/9/2020 12:44:14'!
+PASSED!
+
+!testRun: #PortfolioTest #test18PortfolioCanNotAddAnyPreviousMemberOfTheTree stamp: 'fr 11/9/2020 12:44:14'!
+PASSED!
+
+!testRun: #PortfolioTest #test19PortfolioCanNotAddAnotherOneWhichSharesChild stamp: 'fr 11/9/2020 12:44:14'!
+PASSED!
+
+!testRun: #PortfolioTest #test20PortfolioCanNotAddDuplicateAccountIndirectly stamp: 'fr 11/9/2020 12:44:14'!
+PASSED!
+
+!testRun: #PortfolioTest #test21AddingShouldFailIdenticallyAsCreatingAPortfolioWithAccounts stamp: 'fr 11/9/2020 12:44:14'!
+PASSED!
+
+!testRun: #PortfolioTest #test22CreatingAPortfolioWithAccountsShouldFailIdenticallyAsWhenAddingThem stamp: 'fr 11/9/2020 12:44:14'!
+PASSED!
+
+----SNAPSHOT----(9 November 2020 12:45:00) CuisUniversity-4384.image priorSource: 17996259!

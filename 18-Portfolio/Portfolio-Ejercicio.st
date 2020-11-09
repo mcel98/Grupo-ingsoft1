@@ -349,14 +349,14 @@ hasRegistered: aTransaction
 	self subclassResponsibility ! !
 
 
-!Account methodsFor: 'private' stamp: 'fr 11/8/2020 22:22:10'!
-collectTransactions: aTransactionList
+!Account methodsFor: 'private' stamp: 'fr 11/9/2020 12:32:16'!
+collectTransactionsInto: aTransactionList
 
 	self subclassResponsibility ! !
 
-!Account methodsFor: 'private' stamp: 'fr 11/8/2020 22:25:41'!
-includes: anAccount
-
+!Account methodsFor: 'private' stamp: 'fr 11/9/2020 12:43:29'!
+isComposedBy: anAccount
+	
 	self subclassResponsibility ! !
 
 
@@ -415,12 +415,12 @@ balance
 	^accounts sum: [:anAccount | anAccount balance] ifEmpty: [0]! !
 
 
-!Portfolio methodsFor: 'transactions' stamp: 'fr 11/8/2020 22:15:19'!
+!Portfolio methodsFor: 'transactions' stamp: 'fr 11/9/2020 12:32:16'!
 transactions
 	
 	| transactions |
 	transactions _ OrderedCollection new.
-	self collectTransactions: transactions.
+	self collectTransactionsInto: transactions.
 	^transactions
 ! !
 
@@ -431,26 +431,31 @@ signalCanNotAddAccountError
 	^self error: self class canNotAddAccountErrorDescription! !
 
 
-!Portfolio methodsFor: 'private - account management' stamp: 'fr 11/8/2020 22:14:58'!
-collectTransactions: aTransactionsList
-
-	^accounts inject: aTransactionsList into: [:totalTransactions :anAccount | totalTransactions addAllLast: (anAccount collectTransactions: aTransactionsList)] 
+!Portfolio methodsFor: 'private - account management' stamp: 'fr 11/9/2020 12:32:20'!
+collectTransactionsInto: aTransactionsList
+	
+	accounts do: [:anAccount | anAccount collectTransactionsInto: aTransactionsList]
 	! !
 
-!Portfolio methodsFor: 'private - account management' stamp: 'fr 11/8/2020 22:16:21'!
-includes: anAccountToCheck 
+!Portfolio methodsFor: 'private - account management' stamp: 'fr 11/9/2020 12:44:12'!
+compositionGoesEitherWayFor: anAccount and: anAccountToCheck 
+	
+	^(anAccount isComposedBy: anAccountToCheck) or: [anAccountToCheck isComposedBy: anAccount]! !
+
+!Portfolio methodsFor: 'private - account management' stamp: 'fr 11/9/2020 12:44:12'!
+isComposedBy: anAccountToCheck 
 	
 	^self = anAccountToCheck 
 		or: [accounts 
 			anySatisfy: [:anAccount | 
-				(anAccount includes: anAccountToCheck) or: [anAccountToCheck includes: anAccount]
+				self compositionGoesEitherWayFor: anAccount and: anAccountToCheck 
 			]
 		]! !
 
-!Portfolio methodsFor: 'private - account management' stamp: 'fr 11/8/2020 18:59:18'!
+!Portfolio methodsFor: 'private - account management' stamp: 'fr 11/9/2020 12:41:04'!
 isReachableFromRoots: aPortfolio 
 	
-	^self roots anySatisfy: [:aRootPortfolio | aRootPortfolio includes: aPortfolio]! !
+	^self roots anySatisfy: [:aRootPortfolio | aRootPortfolio isComposedBy: aPortfolio]! !
 
 !Portfolio methodsFor: 'private - account management' stamp: 'fr 11/8/2020 18:58:29'!
 roots
@@ -521,10 +526,10 @@ hasRegistered: aTransaction
 ! !
 
 
-!ReceptiveAccount methodsFor: 'private - account management' stamp: 'fr 11/8/2020 22:14:46'!
-collectTransactions: aTransactionsList
+!ReceptiveAccount methodsFor: 'private - account management' stamp: 'fr 11/9/2020 12:32:16'!
+collectTransactionsInto: aTransactionsList
 
-	^self transactions
+	^aTransactionsList addAllLast: self transactions
 ! !
 
 !ReceptiveAccount methodsFor: 'private - account management' stamp: 'fr 11/8/2020 08:35:05'!
@@ -536,8 +541,8 @@ contains: aReceptiveAccount
 hasBeenAddedBy: aPortfolio
 ! !
 
-!ReceptiveAccount methodsFor: 'private - account management' stamp: 'fr 11/8/2020 22:22:39'!
-includes: anAccount 
+!ReceptiveAccount methodsFor: 'private - account management' stamp: 'fr 11/9/2020 12:42:56'!
+isComposedBy: anAccount 
 	
 	^self = anAccount ! !
 
