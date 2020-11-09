@@ -347,12 +347,6 @@ Account subclass: #Portfolio
 	poolDictionaries: ''
 	category: 'Portfolio-Ejercicio'!
 
-!Portfolio methodsFor: 'balance' stamp: 'fr 11/7/2020 22:52:52'!
-balance
-	
-	^accounts sum: [:anAccount | anAccount balance] ifEmpty: [0]! !
-
-
 !Portfolio methodsFor: 'initialization' stamp: 'fr 11/8/2020 08:59:50'!
 initialize
 
@@ -366,59 +360,78 @@ initializeWith: aReceptiveAccountList
 	aReceptiveAccountList do: [:anAccount | self add: anAccount]! !
 
 
-!Portfolio methodsFor: 'transactions' stamp: 'fr 11/7/2020 23:03:15'!
-hasRegistered: aDeposit 
+!Portfolio methodsFor: 'accounts management' stamp: 'fr 11/8/2020 21:09:27'!
+add: anAccount 
 	
-	^accounts anySatisfy: [:anAccount | anAccount hasRegistered: aDeposit]! !
+	self validateAdding: anAccount.
+	accounts add: anAccount.
+	anAccount hasBeenAddedBy: self! !
 
-!Portfolio methodsFor: 'transactions' stamp: 'fr 11/7/2020 23:09:12'!
+!Portfolio methodsFor: 'accounts management' stamp: 'fr 11/8/2020 21:09:48'!
+contains: anAccountToCheck 
+	
+	^(accounts includes: anAccountToCheck) or: [accounts anySatisfy: [:anAccount | anAccount contains: anAccountToCheck]]! !
+
+!Portfolio methodsFor: 'accounts management' stamp: 'fr 11/8/2020 22:17:56'!
+hasBeenAddedBy: aPortfolio
+	
+	parents add: aPortfolio! !
+
+!Portfolio methodsFor: 'accounts management' stamp: 'fr 11/8/2020 21:10:09'!
+validateAdding: anAccountToValidate
+
+	^(self isReachableFromRoots: anAccountToValidate) ifTrue: [self signalCanNotAddAccountError]! !
+
+
+!Portfolio methodsFor: 'balance' stamp: 'fr 11/7/2020 22:52:52'!
+balance
+	
+	^accounts sum: [:anAccount | anAccount balance] ifEmpty: [0]! !
+
+
+!Portfolio methodsFor: 'transactions' stamp: 'fr 11/8/2020 21:08:37'!
+hasRegistered: aTransaction 
+	
+	^accounts anySatisfy: [:anAccount | anAccount hasRegistered: aTransaction]! !
+
+!Portfolio methodsFor: 'transactions' stamp: 'fr 11/8/2020 22:15:19'!
 transactions
 	
 	| transactions |
 	transactions _ OrderedCollection new.
-	accounts do: [:anAccount | transactions addAllLast: anAccount transactions].
-	^transactions! !
+	self collectTransactions: transactions.
+	^transactions
+! !
 
 
-!Portfolio methodsFor: 'accounts management' stamp: 'fr 11/8/2020 19:33:14'!
-add: aReceptiveAccount 
-	
-	self validateAdding: aReceptiveAccount.
-	accounts add: aReceptiveAccount.
-	aReceptiveAccount hasBeenAddedBy: self! !
-
-!Portfolio methodsFor: 'accounts management' stamp: 'fr 11/8/2020 08:29:12'!
-contains: aReceptiveAccount 
-	
-	^(accounts includes: aReceptiveAccount) or: [accounts anySatisfy: [:anAccount | anAccount contains: aReceptiveAccount]]! !
-
-!Portfolio methodsFor: 'accounts management' stamp: 'fr 11/8/2020 18:57:05'!
+!Portfolio methodsFor: 'error' stamp: 'fr 11/8/2020 18:57:05'!
 signalCanNotAddAccountError
 
 	^ self error: self class canNotAddAccountErrorDescription! !
 
-!Portfolio methodsFor: 'accounts management' stamp: 'fr 11/8/2020 18:57:05'!
-validateAdding: aReceptiveAccount
 
-	^(self isReachableFromRoots: aReceptiveAccount) ifTrue: [self signalCanNotAddAccountError]! !
+!Portfolio methodsFor: 'private - account management' stamp: 'fr 11/8/2020 22:14:58'!
+collectTransactions: aTransactionsList
 
+	^accounts inject: aTransactionsList into: [:totalTransactions :anAccount | totalTransactions addAllLast: (anAccount collectTransactions: aTransactionsList)] 
+	! !
 
-!Portfolio methodsFor: 'private - account lineage' stamp: 'fr 11/8/2020 08:58:40'!
-hasBeenAddedBy: aPortfolio 
+!Portfolio methodsFor: 'private - account management' stamp: 'fr 11/8/2020 22:16:21'!
+includes: anAccountToCheck 
 	
-	parents add: aPortfolio! !
+	^self = anAccountToCheck 
+		or: [accounts 
+			anySatisfy: [:anAccount | 
+				(anAccount includes: anAccountToCheck) or: [anAccountToCheck includes: anAccount]
+			]
+		]! !
 
-!Portfolio methodsFor: 'private - account lineage' stamp: 'fr 11/8/2020 20:40:15'!
-includes: aPortfolio 
-	
-	^self = aPortfolio or: [accounts anySatisfy: [:anAccount | (anAccount includes: aPortfolio) or: [aPortfolio includes: anAccount]]]! !
-
-!Portfolio methodsFor: 'private - account lineage' stamp: 'fr 11/8/2020 18:59:18'!
+!Portfolio methodsFor: 'private - account management' stamp: 'fr 11/8/2020 18:59:18'!
 isReachableFromRoots: aPortfolio 
 	
 	^self roots anySatisfy: [:aRootPortfolio | aRootPortfolio includes: aPortfolio]! !
 
-!Portfolio methodsFor: 'private - account lineage' stamp: 'fr 11/8/2020 18:58:29'!
+!Portfolio methodsFor: 'private - account management' stamp: 'fr 11/8/2020 18:58:29'!
 roots
 	
 	| roots |
@@ -465,10 +478,10 @@ register: aTransaction
 	transactions add: aTransaction 
 ! !
 
-!ReceptiveAccount methodsFor: 'transactions' stamp: 'HernanWilkinson 7/13/2011 18:37'!
+!ReceptiveAccount methodsFor: 'transactions' stamp: 'fr 11/8/2020 21:15:12'!
 transactions 
 
-	^ transactions copy! !
+	^transactions copy! !
 
 
 !ReceptiveAccount methodsFor: 'balance' stamp: 'fr 11/8/2020 19:34:11'!
@@ -487,16 +500,22 @@ hasRegistered: aTransaction
 ! !
 
 
-!ReceptiveAccount methodsFor: 'private' stamp: 'fr 11/8/2020 08:35:05'!
+!ReceptiveAccount methodsFor: 'private - account management' stamp: 'fr 11/8/2020 22:14:46'!
+collectTransactions: aTransactionsList
+
+	^self transactions
+! !
+
+!ReceptiveAccount methodsFor: 'private - account management' stamp: 'fr 11/8/2020 08:35:05'!
 contains: aReceptiveAccount 
 	
 	^false! !
 
-!ReceptiveAccount methodsFor: 'private' stamp: 'fr 11/8/2020 19:33:37'!
+!ReceptiveAccount methodsFor: 'private - account management' stamp: 'fr 11/8/2020 19:33:37'!
 hasBeenAddedBy: aPortfolio
 ! !
 
-!ReceptiveAccount methodsFor: 'private' stamp: 'fr 11/8/2020 18:51:35'!
+!ReceptiveAccount methodsFor: 'private - account management' stamp: 'fr 11/8/2020 18:51:35'!
 includes: aPortfolio 
 	
 	^self = aPortfolio ! !
