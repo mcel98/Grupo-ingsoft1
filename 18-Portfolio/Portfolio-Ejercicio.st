@@ -1,248 +1,216 @@
 !classDefinition: #PortfolioTest category: 'Portfolio-Ejercicio'!
 TestCase subclass: #PortfolioTest
-	instanceVariableNames: ''
+	instanceVariableNames: 'emptyPortfolio account portfolioWithAccount anotherAccount portfolioWithAccountAndPortfolio deposit anotherDeposit portfolioWithEmptyPortfolio anotherPortfolioWithEmptyPortfolio portfolioWithPortfolioWithEmptyPortfolio'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Portfolio-Ejercicio'!
 
-!PortfolioTest methodsFor: 'tests - balance' stamp: 'fr 11/7/2020 23:19:37'!
+!PortfolioTest methodsFor: 'tests - balance' stamp: 'fr 11/9/2020 09:40:34'!
 test01EmptyPortfolioHasBalanceZero
 
-	| portfolio |
-	portfolio _ Portfolio new.
-	self assert: [portfolio balance = 0]! !
+	self assert: emptyPortfolio balance equals: 0! !
 
-!PortfolioTest methodsFor: 'tests - balance' stamp: 'fr 11/7/2020 23:45:08'!
+!PortfolioTest methodsFor: 'tests - balance' stamp: 'fr 11/9/2020 09:40:44'!
 test02PortfolioWithASingleAccountWithNoTransactionsHasBalanceZero
 
-	| portfolio account |
-	account _ ReceptiveAccount new.
-	portfolio _ Portfolio with: (OrderedCollection with: account).
-	self assert: [portfolio balance = 0]! !
+	self assert: portfolioWithAccount balance equals: 0! !
 
-!PortfolioTest methodsFor: 'tests - balance' stamp: 'fr 11/7/2020 23:45:25'!
+!PortfolioTest methodsFor: 'tests - balance' stamp: 'fr 11/9/2020 09:40:54'!
 test03PortfolioWithASingleAccountReflectsItsTransactionsValuesInItsBalance
 
-	| portfolio account |
-	account _ ReceptiveAccount new.
-	Deposit register: 100 on: account. 
-	portfolio _ Portfolio with: (OrderedCollection with: account).
-	self assert: [portfolio balance = 100]! !
+	self deposit100OnAccount.
+	self assert: portfolioWithAccount balance equals: 100! !
 
-!PortfolioTest methodsFor: 'tests - balance' stamp: 'fr 11/7/2020 23:45:58'!
+!PortfolioTest methodsFor: 'tests - balance' stamp: 'fr 11/9/2020 09:41:04'!
 test04PortfolioWithMultipleAccountsAndPortfoliosReflectsTheirTransactionsValuesInItsBalance
 
-	| portfolio account anotherAccount innerPortfolio |
-	account _ ReceptiveAccount new.
-	anotherAccount _ ReceptiveAccount new.
-	
-	Deposit register: 100 on: account. 
-	Deposit register: 50 on: anotherAccount.
-	 
-	innerPortfolio _ Portfolio with: (OrderedCollection with: account).
-	portfolio _ Portfolio with: (OrderedCollection with: anotherAccount with: innerPortfolio).
-	self assert: [portfolio balance = 150]! !
+	self deposit100OnAccount.
+	self deposit50OnAnotherAccount.
+
+	self assert: portfolioWithAccountAndPortfolio balance equals: 150! !
 
 
-!PortfolioTest methodsFor: 'tests - hasRegistered' stamp: 'fr 11/7/2020 23:22:56'!
+!PortfolioTest methodsFor: 'tests - hasRegistered' stamp: 'fr 11/9/2020 09:41:18'!
 test05EmptyPortfolioHasNotRegisteredAnyTransaction
 
-	| portfolio account deposit |
-	account _ ReceptiveAccount new.
-	deposit _ Deposit register: 100 on: account.	
-	portfolio _ Portfolio new.
-	self assert: [(portfolio hasRegistered: deposit) not]! !
+	self deposit100OnAccountAndStore.
+	self deny: (emptyPortfolio hasRegistered: deposit)! !
 
-!PortfolioTest methodsFor: 'tests - hasRegistered' stamp: 'fr 11/7/2020 23:46:16'!
+!PortfolioTest methodsFor: 'tests - hasRegistered' stamp: 'fr 11/9/2020 09:41:34'!
 test06PortfolioWithASingleAccountRegistersItsTransactions
 
-	| portfolio account deposit |
-	account _ ReceptiveAccount new.
-	deposit _ Deposit register: 100 on: account.	
-	portfolio _ Portfolio with: (OrderedCollection with: account).
-	self assert: [portfolio hasRegistered: deposit]! !
+	self deposit100OnAccountAndStore.
+	self assert: (portfolioWithAccount hasRegistered: deposit)! !
 
-!PortfolioTest methodsFor: 'tests - hasRegistered' stamp: 'fr 11/7/2020 23:46:52'!
+!PortfolioTest methodsFor: 'tests - hasRegistered' stamp: 'fr 11/9/2020 09:41:51'!
 test07PortfolioWithMulltipleAccountsAndPortfoliosRegistersAllTheirTransactions
-
-	| portfolio account anotherAccount innerPortfolio anotherDeposit deposit |
-	account _ ReceptiveAccount new.
-	anotherAccount _ ReceptiveAccount new.
-	
-	deposit _ Deposit register: 100 on: account. 
-	anotherDeposit _ Deposit register: 50 on: anotherAccount.
+		
+	self deposit100OnAccount50OnAnotherAccountAndStore.
 	 
-	innerPortfolio _ Portfolio with: (OrderedCollection with: account).
-	portfolio _ Portfolio with: (OrderedCollection with: anotherAccount with: innerPortfolio).
-	self assert: [
-		(portfolio hasRegistered: deposit) and: 
-		[portfolio hasRegistered: anotherDeposit]
-	]! !
+	self assert: (
+		(portfolioWithAccountAndPortfolio hasRegistered: deposit) and: 
+		[portfolioWithAccountAndPortfolio hasRegistered: anotherDeposit]
+	)! !
 
 
-!PortfolioTest methodsFor: 'tests - transactions' stamp: 'fr 11/7/2020 23:25:03'!
+!PortfolioTest methodsFor: 'tests - transactions' stamp: 'fr 11/9/2020 09:42:11'!
 test08EmptyPortfolioDoesNotExhibitAnyTransaction
 
-	| portfolio |
-	portfolio _ Portfolio new.
-	self assert: [portfolio transactions = OrderedCollection new]! !
+	self assert: (emptyPortfolio transactions isEmpty)! !
 
-!PortfolioTest methodsFor: 'tests - transactions' stamp: 'fr 11/7/2020 23:47:02'!
+!PortfolioTest methodsFor: 'tests - transactions' stamp: 'fr 11/9/2020 09:42:29'!
 test09PortfolioWithASingleAccountExhibitsItsTransactions
 
-	| portfolio account deposit |
-	account _ ReceptiveAccount new.
-	deposit _ Deposit register: 100 on: account.	
-	portfolio _ Portfolio with: (OrderedCollection with: account).
-	self assert: [portfolio transactions = (OrderedCollection with: deposit)]! !
+	self deposit100OnAccountAndStore.	
+	self assert: portfolioWithAccount transactions equals: (OrderedCollection with: deposit)! !
 
-!PortfolioTest methodsFor: 'tests - transactions' stamp: 'fr 11/7/2020 23:47:19'!
+!PortfolioTest methodsFor: 'tests - transactions' stamp: 'fr 11/9/2020 09:42:41'!
 test10PortfolioWithMultipleAccountsAndPortfoliosExhibitsAllTheirTransactionsCombined
-
-	| portfolio account anotherAccount innerPortfolio anotherDeposit deposit |
-	account _ ReceptiveAccount new.
-	anotherAccount _ ReceptiveAccount new.
-	
-	deposit _ Deposit register: 100 on: account. 
-	anotherDeposit _ Deposit register: 50 on: anotherAccount.
-	 
-	innerPortfolio _ Portfolio with: (OrderedCollection with: account).
-	portfolio _ Portfolio with: (OrderedCollection with: anotherAccount with: innerPortfolio).
-	self assert: [portfolio transactions = (OrderedCollection with: anotherDeposit with: deposit	)]! !
+		
+	self deposit100OnAccount50OnAnotherAccountAndStore.
+	self assert: portfolioWithAccountAndPortfolio transactions equals: (OrderedCollection with: anotherDeposit with: deposit	)! !
 
 
-!PortfolioTest methodsFor: 'tests - add' stamp: 'fr 11/7/2020 23:47:52'!
+!PortfolioTest methodsFor: 'tests - add' stamp: 'fr 11/9/2020 09:43:00'!
 test11EmptyPortfolioDoesNotContainAnyAccount
 
-	| portfolio account |
-	account _ ReceptiveAccount new.
-	portfolio _ Portfolio new.
-	self assert: [(portfolio contains: account) not]! !
+	self deny: (emptyPortfolio contains: account)! !
 
-!PortfolioTest methodsFor: 'tests - add' stamp: 'fr 11/7/2020 23:48:51'!
+!PortfolioTest methodsFor: 'tests - add' stamp: 'fr 11/9/2020 09:59:59'!
 test12PortfolioContainsAnAccountAfterItIsAdded
 
-	| portfolio account |
-	account _ ReceptiveAccount new.
-	portfolio _ Portfolio new.
-	portfolio add: account.
-	self assert: [portfolio contains: account]! !
+	self addAccountToEmptyPortfolio.
+	self assert: (emptyPortfolio contains: account)! !
 
-!PortfolioTest methodsFor: 'tests - add' stamp: 'fr 11/8/2020 08:31:07'!
-test13PortfolioContainsAnAccountAfterItIsAddedToItselfOrAnyOfItsDecendents
+!PortfolioTest methodsFor: 'tests - add' stamp: 'fr 11/9/2020 09:59:52'!
+test13PortfolioContainsAnAccountAfterItIsAddedToAnyOfItsDecendents
 
-	| portfolio account anotherPortfolio |
-	account _ ReceptiveAccount new.
-	portfolio _ Portfolio new.
-	anotherPortfolio _ Portfolio with: (OrderedCollection with: portfolio).
-	portfolio add: account.
-	self assert: [anotherPortfolio contains: account]! !
+	self addAccountToEmptyPortfolio.
+	self assert: (portfolioWithEmptyPortfolio contains: account)! !
 
-!PortfolioTest methodsFor: 'tests - add' stamp: 'fr 11/8/2020 08:35:36'!
+!PortfolioTest methodsFor: 'tests - add' stamp: 'fr 11/9/2020 10:00:33'!
 test14PortfolioDoesNotContainAnythingThatWasNotAddedToItself
 
-	| portfolio account anotherAccount |
-	account _ ReceptiveAccount new.
-	anotherAccount _ ReceptiveAccount new.
-	portfolio _ Portfolio new.
-	portfolio add: account.
-	self assert: [(portfolio contains: anotherAccount) not]! !
+	self addAccountToEmptyPortfolio.
+	self deny: (emptyPortfolio contains: anotherAccount)! !
 
 
-!PortfolioTest methodsFor: 'tests - tree structure' stamp: 'fr 11/8/2020 08:36:24'!
+!PortfolioTest methodsFor: 'tests - tree structure' stamp: 'fr 11/9/2020 08:45:33'!
 test15PortfolioCanNotAddItself
-
-	| portfolio |
-	portfolio _ Portfolio new.
 	
-	self  should: [portfolio add: portfolio] 
+	self  should: [emptyPortfolio add: emptyPortfolio] 
 		raise: Error 
 		withMessageText: Portfolio canNotAddAccountErrorDescription! !
 
-!PortfolioTest methodsFor: 'tests - tree structure' stamp: 'fr 11/8/2020 08:36:52'!
+!PortfolioTest methodsFor: 'tests - tree structure' stamp: 'fr 11/9/2020 09:49:33'!
 test16PortfolioCanNotAddItsParent
-
-	| portfolio anotherPortfolio |
-	portfolio _ Portfolio new.
-	anotherPortfolio _ Portfolio with: (OrderedCollection with: portfolio).
 	
-	self  should: [portfolio add: anotherPortfolio] 
+	self  should: [emptyPortfolio add: portfolioWithEmptyPortfolio] 
 		raise: Error 
 		withMessageText: Portfolio canNotAddAccountErrorDescription! !
 
-!PortfolioTest methodsFor: 'tests - tree structure' stamp: 'fr 11/8/2020 08:37:25'!
+!PortfolioTest methodsFor: 'tests - tree structure' stamp: 'fr 11/9/2020 09:57:30'!
 test17PortfolioCanNotAddAnyAncestor
-
-	| leafPortfolio middlePortfolio rootPortfolio |
-	leafPortfolio _ Portfolio new.
-	middlePortfolio _ Portfolio with: (OrderedCollection with: leafPortfolio).
-	rootPortfolio _ Portfolio with: (OrderedCollection with: middlePortfolio).
 	
-	self  should: [leafPortfolio add: rootPortfolio] 
+	self  should: [emptyPortfolio add: portfolioWithPortfolioWithEmptyPortfolio] 
 		raise: Error 
 		withMessageText: Portfolio canNotAddAccountErrorDescription! !
 
-!PortfolioTest methodsFor: 'tests - tree structure' stamp: 'fr 11/8/2020 20:40:48'!
+!PortfolioTest methodsFor: 'tests - tree structure' stamp: 'fr 11/9/2020 09:58:33'!
 test18PortfolioCanNotAddAnyPreviousMemberOfTheTree
 
-	| leafPortfolio middlePortfolio rootPortfolio anotherLeafPortfolio |
-	leafPortfolio _ Portfolio new.
-	anotherLeafPortfolio _ Portfolio new.
-	middlePortfolio _ Portfolio with: (OrderedCollection with: leafPortfolio).
-	rootPortfolio _ Portfolio with: (OrderedCollection with: middlePortfolio with: anotherLeafPortfolio).
+	| rootPortfolio anotherEmptyPortfolio |
 	
-	self  should: [leafPortfolio add: anotherLeafPortfolio] 
+	anotherEmptyPortfolio _ Portfolio new.
+	rootPortfolio _ Portfolio with: (OrderedCollection with: portfolioWithEmptyPortfolio with: anotherEmptyPortfolio).
+	
+	self  should: [emptyPortfolio add: anotherEmptyPortfolio] 
 		raise: Error 
 		withMessageText: Portfolio canNotAddAccountErrorDescription! !
 
-!PortfolioTest methodsFor: 'tests - tree structure' stamp: 'fr 11/8/2020 18:53:16'!
+!PortfolioTest methodsFor: 'tests - tree structure' stamp: 'fr 11/9/2020 09:53:16'!
 test19PortfolioCanNotAddAnotherOneWhichSharesChild
-
-	| portfolio anotherParentPortfolio parentPortfolio |
-	portfolio _ Portfolio new.
-	parentPortfolio _ Portfolio with: (OrderedCollection with: portfolio).
-	anotherParentPortfolio _ Portfolio with: (OrderedCollection with: portfolio).
 	
-	self  should: [parentPortfolio add: anotherParentPortfolio] 
+	self  should: [portfolioWithEmptyPortfolio add: anotherPortfolioWithEmptyPortfolio] 
 		raise: Error 
 		withMessageText: Portfolio canNotAddAccountErrorDescription! !
 
-!PortfolioTest methodsFor: 'tests - tree structure' stamp: 'fr 11/8/2020 22:26:28'!
+!PortfolioTest methodsFor: 'tests - tree structure' stamp: 'fr 11/9/2020 09:57:30'!
 test20PortfolioCanNotAddDuplicateAccountIndirectly
-
-	| portfolio parentPortfolio rootPortfolio |
-	portfolio _ Portfolio new.
-	parentPortfolio _ Portfolio with: (OrderedCollection with: portfolio).
-	rootPortfolio _ Portfolio with: (OrderedCollection with: parentPortfolio).
 	
-	self  should: [rootPortfolio add: portfolio] 
+	self  should: [portfolioWithPortfolioWithEmptyPortfolio add: emptyPortfolio] 
 		raise: Error 
 		withMessageText: Portfolio canNotAddAccountErrorDescription! !
 
-!PortfolioTest methodsFor: 'tests - tree structure' stamp: 'fr 11/8/2020 22:26:37'!
-test21AddingShouldBehaveIdenticallyAsCreatingAPortfolioWithAccounts
+!PortfolioTest methodsFor: 'tests - tree structure' stamp: 'fr 11/9/2020 09:59:18'!
+test21AddingShouldFailIdenticallyAsCreatingAPortfolioWithAccounts
 
-	| portfolio parentPortfolio |
-	portfolio _ Portfolio new.
+	| parentPortfolio |
+	
 	parentPortfolio _ Portfolio new.
+	parentPortfolio add: emptyPortfolio.
 	
-	parentPortfolio add: portfolio.
-	
-	self  should: [portfolio add: parentPortfolio] 
+	self  should: [emptyPortfolio add: parentPortfolio] 
 		raise: Error 
 		withMessageText: Portfolio canNotAddAccountErrorDescription! !
 
-!PortfolioTest methodsFor: 'tests - tree structure' stamp: 'fr 11/8/2020 22:27:16'!
+!PortfolioTest methodsFor: 'tests - tree structure' stamp: 'fr 11/9/2020 09:53:34'!
 test22CreatingAPortfolioWithAccountsShouldFailIdenticallyAsWhenAddingThem
-
-	| portfolio parentPortfolio anotherParentPortfolio |
-	portfolio _ Portfolio new. 
-	parentPortfolio _ Portfolio with: (OrderedCollection with: portfolio).
-	anotherParentPortfolio _ Portfolio with: (OrderedCollection with: portfolio). 
 	
-	self  should: [Portfolio with: (OrderedCollection with: parentPortfolio with: anotherParentPortfolio)] 
+	self  should: [Portfolio with: (OrderedCollection with: portfolioWithEmptyPortfolio with: anotherPortfolioWithEmptyPortfolio)] 
 		raise: Error 
 		withMessageText: Portfolio canNotAddAccountErrorDescription! !
+
+
+!PortfolioTest methodsFor: 'tests - private' stamp: 'fr 11/9/2020 09:59:52'!
+addAccountToEmptyPortfolio
+
+	^ emptyPortfolio add: account! !
+
+!PortfolioTest methodsFor: 'tests - private' stamp: 'fr 11/9/2020 09:25:00'!
+deposit100OnAccount
+
+	^ Deposit register: 100 on: account! !
+
+!PortfolioTest methodsFor: 'tests - private' stamp: 'fr 11/9/2020 09:39:05'!
+deposit100OnAccount50OnAnotherAccountAndStore
+
+	self deposit100OnAccountAndStore.
+	anotherDeposit _ self deposit50OnAnotherAccount! !
+
+!PortfolioTest methodsFor: 'tests - private' stamp: 'fr 11/9/2020 09:39:05'!
+deposit100OnAccountAndStore
+
+	^ deposit _ self deposit100OnAccount! !
+
+!PortfolioTest methodsFor: 'tests - private' stamp: 'fr 11/9/2020 09:30:00'!
+deposit50OnAnotherAccount
+
+	^ Deposit register: 50 on: anotherAccount! !
+
+
+!PortfolioTest methodsFor: 'setup' stamp: 'fr 11/9/2020 09:57:30'!
+setUp
+
+	emptyPortfolio _ Portfolio new. 
+
+	account _ ReceptiveAccount new.
+	
+	portfolioWithAccount _ Portfolio with: (OrderedCollection with: account).
+	
+	anotherAccount _ ReceptiveAccount new.
+	
+	portfolioWithAccountAndPortfolio _ Portfolio with: (OrderedCollection with: anotherAccount with: portfolioWithAccount).
+
+	portfolioWithEmptyPortfolio _ Portfolio with: (OrderedCollection with: emptyPortfolio).
+	
+	anotherPortfolioWithEmptyPortfolio _ Portfolio with: (OrderedCollection with: emptyPortfolio).
+
+	portfolioWithPortfolioWithEmptyPortfolio _ Portfolio with: (OrderedCollection with: portfolioWithEmptyPortfolio).
+
+
+
+! !
 
 
 !classDefinition: #ReceptiveAccountTest category: 'Portfolio-Ejercicio'!
