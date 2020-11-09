@@ -34813,3 +34813,137 @@ hasBeenAddedBy: aPortfolio
 	parents add: aPortfolio! !
 
 ----SNAPSHOT----(8 November 2020 22:18:29) CuisUniversity-4384.image priorSource: 17540448!
+!Portfolio class methodsFor: 'error descriptions' stamp: 'fr 11/8/2020 22:19:41' prior: 50872986!
+canNotAddAccountErrorDescription
+	
+	^'Can not add account twice'! !
+!Portfolio class methodsFor: 'error descriptions' stamp: 'fr 11/8/2020 22:20:02' prior: 50880054!
+canNotAddAccountErrorDescription
+	
+	^'Can not add an account twice'! !
+!Account methodsFor: 'no messages' stamp: 'fr 11/8/2020 22:20:26'!
+balance
+	
+	self subclassResponsibility ! !
+!Account methodsFor: 'as yet unclassified' stamp: 'fr 11/8/2020 22:20:29'!
+transactions
+	
+	self subclassResponsibility ! !
+!Account methodsFor: 'as yet unclassified' stamp: 'fr 11/8/2020 22:20:40'!
+hasRegistered: aTransaction
+	
+	self subclassResponsibility ! !
+!Account methodsFor: 'as yet unclassified' stamp: 'fr 11/8/2020 22:21:25'!
+contains: anAccount 
+
+	self subclassResponsibility ! !
+!Account methodsFor: 'as yet unclassified' stamp: 'fr 11/8/2020 22:22:10'!
+collectTransactions: aTransactionList
+
+	self subclassResponsibility ! !
+!ReceptiveAccount methodsFor: 'private - account management' stamp: 'fr 11/8/2020 22:22:39' prior: 50875863!
+includes: anAccount 
+	
+	^self = anAccount ! !
+!Account methodsFor: 'private' stamp: 'fr 11/8/2020 22:25:41'!
+includes: anAccount
+
+	self subclassResponsibility ! !
+
+----SNAPSHOT----(8 November 2020 22:25:55) CuisUniversity-4384.image priorSource: 17548792!
+!PortfolioTest methodsFor: 'tests' stamp: 'fr 11/8/2020 22:26:28'!
+test20PortfolioCanNotAddDuplicateAccountIndirectly
+
+	| portfolio parentPortfolio rootPortfolio |
+	portfolio _ Portfolio new.
+	parentPortfolio _ Portfolio with: (OrderedCollection with: portfolio).
+	rootPortfolio _ Portfolio with: (OrderedCollection with: parentPortfolio).
+	
+	self  should: [rootPortfolio add: portfolio] 
+		raise: Error 
+		withMessageText: Portfolio canNotAddAccountErrorDescription! !
+
+!methodRemoval: PortfolioTest #test22PortfolioCanNotAddDuplicateAccountIndirectly stamp: 'fr 11/8/2020 22:26:28'!
+test22PortfolioCanNotAddDuplicateAccountIndirectly
+
+	| portfolio parentPortfolio rootPortfolio |
+	portfolio _ Portfolio new.
+	parentPortfolio _ Portfolio with: (OrderedCollection with: portfolio).
+	rootPortfolio _ Portfolio with: (OrderedCollection with: parentPortfolio).
+	
+	self  should: [rootPortfolio add: portfolio] 
+		raise: Error 
+		withMessageText: Portfolio canNotAddAccountErrorDescription!
+!PortfolioTest methodsFor: 'tests' stamp: 'fr 11/8/2020 22:26:37'!
+test21AddingShouldBehaveIdenticallyAsCreatingAPortfolioWithAccounts
+
+	| portfolio parentPortfolio |
+	portfolio _ Portfolio new.
+	parentPortfolio _ Portfolio new.
+	
+	parentPortfolio add: portfolio.
+	
+	self  should: [portfolio add: parentPortfolio] 
+		raise: Error 
+		withMessageText: Portfolio canNotAddAccountErrorDescription! !
+
+!methodRemoval: PortfolioTest #test20AddingShouldBehaveIdenticallyAsCreatingAPortfolioWithAccounts stamp: 'fr 11/8/2020 22:26:37'!
+test20AddingShouldBehaveIdenticallyAsCreatingAPortfolioWithAccounts
+
+	| portfolio parentPortfolio |
+	portfolio _ Portfolio new.
+	parentPortfolio _ Portfolio new.
+	
+	parentPortfolio add: portfolio.
+	
+	self  should: [portfolio add: parentPortfolio] 
+		raise: Error 
+		withMessageText: Portfolio canNotAddAccountErrorDescription!
+!PortfolioTest methodsFor: 'tests' stamp: 'fr 11/8/2020 22:26:42'!
+test22CreatingAPortfolioWithAccountsShouldBehaveIdenticallyAsAddingThem
+
+	| portfolio parentPortfolio anotherParentPortfolio |
+	portfolio _ Portfolio new. 
+	parentPortfolio _ Portfolio with: (OrderedCollection with: portfolio).
+	anotherParentPortfolio _ Portfolio with: (OrderedCollection with: portfolio). 
+	
+	self  should: [Portfolio with: (OrderedCollection with: parentPortfolio with: anotherParentPortfolio)] 
+		raise: Error 
+		withMessageText: Portfolio canNotAddAccountErrorDescription! !
+
+!methodRemoval: PortfolioTest #test21CreatingAPortfolioWithAccountsShouldBehaveIdenticallyAsAddingThem stamp: 'fr 11/8/2020 22:26:42'!
+test21CreatingAPortfolioWithAccountsShouldBehaveIdenticallyAsAddingThem
+
+	| portfolio parentPortfolio anotherParentPortfolio |
+	portfolio _ Portfolio new. 
+	parentPortfolio _ Portfolio with: (OrderedCollection with: portfolio).
+	anotherParentPortfolio _ Portfolio with: (OrderedCollection with: portfolio). 
+	
+	self  should: [Portfolio with: (OrderedCollection with: parentPortfolio with: anotherParentPortfolio)] 
+		raise: Error 
+		withMessageText: Portfolio canNotAddAccountErrorDescription!
+!PortfolioTest methodsFor: 'tests' stamp: 'fr 11/8/2020 22:27:16'!
+test22CreatingAPortfolioWithAccountsShouldFailIdenticallyAsWhenAddingThem
+
+	| portfolio parentPortfolio anotherParentPortfolio |
+	portfolio _ Portfolio new. 
+	parentPortfolio _ Portfolio with: (OrderedCollection with: portfolio).
+	anotherParentPortfolio _ Portfolio with: (OrderedCollection with: portfolio). 
+	
+	self  should: [Portfolio with: (OrderedCollection with: parentPortfolio with: anotherParentPortfolio)] 
+		raise: Error 
+		withMessageText: Portfolio canNotAddAccountErrorDescription! !
+
+!methodRemoval: PortfolioTest #test22CreatingAPortfolioWithAccountsShouldBehaveIdenticallyAsAddingThem stamp: 'fr 11/8/2020 22:27:16'!
+test22CreatingAPortfolioWithAccountsShouldBehaveIdenticallyAsAddingThem
+
+	| portfolio parentPortfolio anotherParentPortfolio |
+	portfolio _ Portfolio new. 
+	parentPortfolio _ Portfolio with: (OrderedCollection with: portfolio).
+	anotherParentPortfolio _ Portfolio with: (OrderedCollection with: portfolio). 
+	
+	self  should: [Portfolio with: (OrderedCollection with: parentPortfolio with: anotherParentPortfolio)] 
+		raise: Error 
+		withMessageText: Portfolio canNotAddAccountErrorDescription!
+
+----SNAPSHOT----(8 November 2020 22:34:36) CuisUniversity-4384.image priorSource: 17550293!
