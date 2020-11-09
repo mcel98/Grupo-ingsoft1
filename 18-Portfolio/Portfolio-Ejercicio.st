@@ -139,10 +139,11 @@ test21AddingShouldFailIdenticallyAsCreatingAPortfolioWithAccounts
 	
 	self emptyPortfolioShouldFailWhileTryingToAdd: parentPortfolio.! !
 
-!PortfolioTest methodsFor: 'tests - tree structure' stamp: 'fr 11/9/2020 09:53:34'!
+!PortfolioTest methodsFor: 'tests - tree structure' stamp: 'fr 11/9/2020 13:45:47'!
 test22CreatingAPortfolioWithAccountsShouldFailIdenticallyAsWhenAddingThem
 	
-	self  should: [Portfolio with: (OrderedCollection with: portfolioWithEmptyPortfolio with: anotherPortfolioWithEmptyPortfolio)] 
+	self  should: 
+			[Portfolio with: (OrderedCollection with: portfolioWithEmptyPortfolio with: anotherPortfolioWithEmptyPortfolio)] 
 		raise: Error 
 		withMessageText: Portfolio canNotAddAccountErrorDescription! !
 
@@ -337,6 +338,11 @@ balance
 	
 	self subclassResponsibility ! !
 
+!Account methodsFor: 'balance' stamp: 'fr 11/9/2020 13:45:05'!
+hasBeenAddedBy: aPortfolio
+	
+	self subclassResponsibility ! !
+
 
 !Account methodsFor: 'testing' stamp: 'fr 11/8/2020 22:21:25'!
 contains: anAccount 
@@ -398,16 +404,6 @@ add: anAccount
 	accounts add: anAccount.
 	anAccount hasBeenAddedBy: self! !
 
-!Portfolio methodsFor: 'accounts management' stamp: 'fr 11/8/2020 22:17:56'!
-hasBeenAddedBy: aPortfolio
-	
-	parents add: aPortfolio! !
-
-!Portfolio methodsFor: 'accounts management' stamp: 'fr 11/8/2020 21:10:09'!
-validateAdding: anAccountToValidate
-
-	^(self isReachableFromRoots: anAccountToValidate) ifTrue: [self signalCanNotAddAccountError]! !
-
 
 !Portfolio methodsFor: 'balance' stamp: 'fr 11/7/2020 22:52:52'!
 balance
@@ -431,18 +427,23 @@ signalCanNotAddAccountError
 	^self error: self class canNotAddAccountErrorDescription! !
 
 
-!Portfolio methodsFor: 'private - account management' stamp: 'fr 11/9/2020 12:32:20'!
+!Portfolio methodsFor: 'private' stamp: 'fr 11/9/2020 12:32:20'!
 collectTransactionsInto: aTransactionsList
 	
 	accounts do: [:anAccount | anAccount collectTransactionsInto: aTransactionsList]
 	! !
 
-!Portfolio methodsFor: 'private - account management' stamp: 'fr 11/9/2020 12:44:12'!
+!Portfolio methodsFor: 'private' stamp: 'fr 11/9/2020 12:44:12'!
 compositionGoesEitherWayFor: anAccount and: anAccountToCheck 
 	
 	^(anAccount isComposedBy: anAccountToCheck) or: [anAccountToCheck isComposedBy: anAccount]! !
 
-!Portfolio methodsFor: 'private - account management' stamp: 'fr 11/9/2020 12:44:12'!
+!Portfolio methodsFor: 'private' stamp: 'fr 11/8/2020 22:17:56'!
+hasBeenAddedBy: aPortfolio
+	
+	parents add: aPortfolio! !
+
+!Portfolio methodsFor: 'private' stamp: 'fr 11/9/2020 12:44:12'!
 isComposedBy: anAccountToCheck 
 	
 	^self = anAccountToCheck 
@@ -452,12 +453,12 @@ isComposedBy: anAccountToCheck
 			]
 		]! !
 
-!Portfolio methodsFor: 'private - account management' stamp: 'fr 11/9/2020 12:41:04'!
+!Portfolio methodsFor: 'private' stamp: 'fr 11/9/2020 12:41:04'!
 isReachableFromRoots: aPortfolio 
 	
 	^self roots anySatisfy: [:aRootPortfolio | aRootPortfolio isComposedBy: aPortfolio]! !
 
-!Portfolio methodsFor: 'private - account management' stamp: 'fr 11/8/2020 18:58:29'!
+!Portfolio methodsFor: 'private' stamp: 'fr 11/8/2020 18:58:29'!
 roots
 	
 	| roots |
@@ -466,6 +467,11 @@ roots
 		ifEmpty: [roots add: self] 
 		ifNotEmpty: [parents do: [:aParent | roots addAllLast: aParent roots]].
 	^roots! !
+
+!Portfolio methodsFor: 'private' stamp: 'fr 11/8/2020 21:10:09'!
+validateAdding: anAccountToValidate
+
+	^(self isReachableFromRoots: anAccountToValidate) ifTrue: [self signalCanNotAddAccountError]! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
@@ -519,6 +525,11 @@ balance
 	^balance! !
 
 
+!ReceptiveAccount methodsFor: 'testing' stamp: 'fr 11/8/2020 08:35:05'!
+contains: aReceptiveAccount 
+	
+	^false! !
+
 !ReceptiveAccount methodsFor: 'testing' stamp: 'fr 11/8/2020 19:34:17'!
 hasRegistered: aTransaction
 
@@ -526,22 +537,17 @@ hasRegistered: aTransaction
 ! !
 
 
-!ReceptiveAccount methodsFor: 'private - account management' stamp: 'fr 11/9/2020 12:32:16'!
+!ReceptiveAccount methodsFor: 'private' stamp: 'fr 11/9/2020 12:32:16'!
 collectTransactionsInto: aTransactionsList
 
 	^aTransactionsList addAllLast: self transactions
 ! !
 
-!ReceptiveAccount methodsFor: 'private - account management' stamp: 'fr 11/8/2020 08:35:05'!
-contains: aReceptiveAccount 
-	
-	^false! !
-
-!ReceptiveAccount methodsFor: 'private - account management' stamp: 'fr 11/8/2020 19:33:37'!
+!ReceptiveAccount methodsFor: 'private' stamp: 'fr 11/8/2020 19:33:37'!
 hasBeenAddedBy: aPortfolio
 ! !
 
-!ReceptiveAccount methodsFor: 'private - account management' stamp: 'fr 11/9/2020 12:42:56'!
+!ReceptiveAccount methodsFor: 'private' stamp: 'fr 11/9/2020 12:42:56'!
 isComposedBy: anAccount 
 	
 	^self = anAccount ! !
