@@ -34947,3 +34947,9 @@ test22CreatingAPortfolioWithAccountsShouldBehaveIdenticallyAsAddingThem
 		withMessageText: Portfolio canNotAddAccountErrorDescription!
 
 ----SNAPSHOT----(8 November 2020 22:34:36) CuisUniversity-4384.image priorSource: 17550293!
+!Portfolio methodsFor: 'error' stamp: 'fr 11/8/2020 22:36:30' prior: 50876059!
+signalCanNotAddAccountError
+
+	^self error: self class canNotAddAccountErrorDescription! !
+
+----SNAPSHOT----(8 November 2020 22:37:06) CuisUniversity-4384.image priorSource: 17554663!

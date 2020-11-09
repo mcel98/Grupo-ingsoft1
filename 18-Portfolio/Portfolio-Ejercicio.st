@@ -442,10 +442,10 @@ transactions
 ! !
 
 
-!Portfolio methodsFor: 'error' stamp: 'fr 11/8/2020 18:57:05'!
+!Portfolio methodsFor: 'error' stamp: 'fr 11/8/2020 22:36:30'!
 signalCanNotAddAccountError
 
-	^ self error: self class canNotAddAccountErrorDescription! !
+	^self error: self class canNotAddAccountErrorDescription! !
 
 
 !Portfolio methodsFor: 'private - account management' stamp: 'fr 11/8/2020 22:14:58'!
