@@ -61649,3 +61649,723 @@ PASSED!
 PASSED!
 
 ----SNAPSHOT----(16 November 2020 14:07:36) CuisUniversity-4384.image priorSource: 18567272!
+
+----QUIT----(16 November 2020 14:09:54) CuisUniversity-4384.image priorSource: 18583657!
+
+----STARTUP---- (16 November 2020 15:29:18) as /home/fede/Documentos/Facultad/Inge1/Cuises/linux64/CuisUniversity-4384.image!
+
+
+!testRun: #AccountReporterTest #test01AccountSummaryForAccountWithNoTransactionsShouldJustShowBalanceZero stamp: 'fr 11/16/2020 15:31:33'!
+PASSED!
+
+!testRun: #AccountReporterTest #test02AccountSummaryShouldReflectDepositsOnAccounts stamp: 'fr 11/16/2020 15:31:33'!
+PASSED!
+
+!testRun: #AccountReporterTest #test03AccountSummaryShouldReflectWithdrawsOnAccounts stamp: 'fr 11/16/2020 15:31:33'!
+PASSED!
+
+!testRun: #AccountReporterTest #test04AccountSummaryShouldReflectOutgoingTransfersOnAccounts stamp: 'fr 11/16/2020 15:31:33'!
+PASSED!
+
+!testRun: #AccountReporterTest #test05AccountSummaryShouldReflectIncomingTransfersOnAccounts stamp: 'fr 11/16/2020 15:31:33'!
+PASSED!
+
+!testRun: #AccountReporterTest #test06AccountSummaryForPortfolioWithNoTransactionsShouldJustShowBalanceZero stamp: 'fr 11/16/2020 15:31:33'!
+PASSED!
+
+!testRun: #AccountReporterTest #test07AccountSummaryShouldReflectDepositsOnPortfoliosWithAccounts stamp: 'fr 11/16/2020 15:31:33'!
+PASSED!
+
+!testRun: #AccountReporterTest #test08AccountSummaryShouldReflectWithdrawsOnPortfoliosWithAccounts stamp: 'fr 11/16/2020 15:31:33'!
+PASSED!
+
+!testRun: #AccountReporterTest #test09AccountSummaryShouldReflectOutgoingAndIncomingTransfersOnPortfoliosWithAccounts stamp: 'fr 11/16/2020 15:31:33'!
+PASSED!
+
+!testRun: #AccountReporterTest #test10AccountSummaryShouldReflectDepositsOnPortfoliosWithPortfolios stamp: 'fr 11/16/2020 15:31:33'!
+PASSED!
+
+!testRun: #AccountReporterTest #test11AccountSummaryShouldReflectWithdrawsOnPortfoliosWithPortfolios stamp: 'fr 11/16/2020 15:31:33'!
+PASSED!
+
+!testRun: #AccountReporterTest #test12AccountSummaryShouldReflectOutgoingAndIncomingTransfersOnPortfoliosWithPortfoliosAndAccounts stamp: 'fr 11/16/2020 15:31:33'!
+PASSED!
+
+!testRun: #AccountReporterTest #test13NetTransferForAccountWithNoTransactionsShouldBeZero stamp: 'fr 11/16/2020 15:31:33'!
+PASSED!
+
+!testRun: #AccountReporterTest #test14NetTransferForAccountWithAnOutgoingTransferShouldReflectItsValue stamp: 'fr 11/16/2020 15:31:33'!
+PASSED!
+
+!testRun: #AccountReporterTest #test15NetTransferForAccountWithAnIncomingTransferShouldReflectItsValue stamp: 'fr 11/16/2020 15:31:33'!
+PASSED!
+
+!testRun: #AccountReporterTest #test16NetTransferForAccountShouldNotReflectDeposits stamp: 'fr 11/16/2020 15:31:33'!
+PASSED!
+
+!testRun: #AccountReporterTest #test17NetTransferForAccountShouldNotReflectWithdraws stamp: 'fr 11/16/2020 15:31:33'!
+PASSED!
+
+!testRun: #AccountReporterTest #test18NetTransferForPortfolioWithNoTransactionsShouldBeZero stamp: 'fr 11/16/2020 15:31:33'!
+PASSED!
+
+!testRun: #AccountReporterTest #test19NetTransferForPortfolioWithAccountWithAnOutgoingTransferShouldReflectItsValue stamp: 'fr 11/16/2020 15:31:33'!
+PASSED!
+
+!testRun: #AccountReporterTest #test20NetTransferForPortfolioWithAccountWithAnIncomingTransferShouldReflectItsValue stamp: 'fr 11/16/2020 15:31:33'!
+PASSED!
+
+!testRun: #AccountReporterTest #test21NetTransferForPortfolioWithAccountShouldNotReflectDeposits stamp: 'fr 11/16/2020 15:31:33'!
+PASSED!
+
+!testRun: #AccountReporterTest #test22NetTransferForPortfolioWithAccountShouldNotReflectWithdraws stamp: 'fr 11/16/2020 15:31:33'!
+PASSED!
+
+!testRun: #AccountReporterTest #test23NetTransferForPortfoliosWithPortfoliosShouldReflectOutgoingAndIncomingTransfers stamp: 'fr 11/16/2020 15:31:33'!
+PASSED!
+
+!testRun: #AccountReporterTest #test24NetTransferForPortfoliosWithPortfoliosShouldNotRelfectDepositsOrWithdraws stamp: 'fr 11/16/2020 15:31:33'!
+PASSED!
+
+!testRun: #PortfolioReporterTest #test01TreeStructureReportForEmptyPortfolioWorksAsExpected stamp: 'fr 11/16/2020 15:31:33'!
+PASSED!
+
+!testRun: #PortfolioReporterTest #test02TreeStructureReportForPortfolioWithAccountsWorksAsExpected stamp: 'fr 11/16/2020 15:31:33'!
+PASSED!
+
+!testRun: #PortfolioReporterTest #test03TreeStructureReportForPortfolioWithAccountsAndPortfoliosWorksAsExpected stamp: 'fr 11/16/2020 15:31:33'!
+PASSED!
+
+!testRun: #PortfolioReporterTest #test04AccountsShouldUseADefaultNameIfNoneIsSpecified stamp: 'fr 11/16/2020 15:31:33'!
+PASSED!
+
+!testRun: #PortfolioReporterTest #test05SpecialReportForEmptyPortfolioWorksAsExpected stamp: 'fr 11/16/2020 15:31:33'!
+PASSED!
+
+!testRun: #PortfolioReporterTest #test06SpecialReportForPortfolioWithAccountsWithAnyKindOfTransactionsWorksAsExpected stamp: 'fr 11/16/2020 15:31:33'!
+PASSED!
+
+!testRun: #PortfolioReporterTest #test07SpecialReportForPortfolioWithAccountsAndPortfoliosWithAnyKindOfTransactionsWorksAsExpected stamp: 'fr 11/16/2020 15:31:33'!
+PASSED!
+
+!testRun: #PortfolioTest #test01BalanceOfPortfolioWithoutAccountsIsZero stamp: 'fr 11/16/2020 15:31:33'!
+PASSED!
+
+!testRun: #PortfolioTest #test02BalanceOfPortfolioWithOneAccountIsAccountBalance stamp: 'fr 11/16/2020 15:31:33'!
+PASSED!
+
+!testRun: #PortfolioTest #test03BalanceOfPortfolioIsCalculatedRecursivelyOnPortfolios stamp: 'fr 11/16/2020 15:31:33'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioWithoutAccountsHasNoRegisteredTransaction stamp: 'fr 11/16/2020 15:31:33'!
+PASSED!
+
+!testRun: #PortfolioTest #test05PortfolioHasRegisteredItsAccountsTransactions stamp: 'fr 11/16/2020 15:31:33'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioLooksForRegisteredTransactionsRecursively stamp: 'fr 11/16/2020 15:31:33'!
+PASSED!
+
+!testRun: #PortfolioTest #test07PortfolioHasNoTransactionWhenHasNoAccounts stamp: 'fr 11/16/2020 15:31:33'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioTransactionsIncludesAllItsAccountsTransactions stamp: 'fr 11/16/2020 15:31:33'!
+PASSED!
+
+!testRun: #PortfolioTest #test09PortfolioTransactionsAreCalculatedRecursively stamp: 'fr 11/16/2020 15:31:33'!
+PASSED!
+
+!testRun: #PortfolioTest #test10PortfolioCanNotIncludeTheSameAccountMoreThanOnce stamp: 'fr 11/16/2020 15:31:33'!
+PASSED!
+
+!testRun: #PortfolioTest #test11PortfolioCanNotIncludeAccountOfItsPortfolios stamp: 'fr 11/16/2020 15:31:33'!
+PASSED!
+
+!testRun: #PortfolioTest #test12PortfolioCanNotIncludeItself stamp: 'fr 11/16/2020 15:31:33'!
+PASSED!
+
+!testRun: #PortfolioTest #test13ComposedPortfolioCanNotHaveParentPortfolioAccount stamp: 'fr 11/16/2020 15:31:33'!
+PASSED!
+
+!testRun: #PortfolioTest #test14ComposedPortfolioCanNotHaveAccountOfAnyRootParentRecursively stamp: 'fr 11/16/2020 15:31:33'!
+PASSED!
+
+!testRun: #PortfolioTest #test15PortfolioCanNotIncludeAnyOfTheComposedAccountOfPortfolioToAdd stamp: 'fr 11/16/2020 15:31:33'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test01ReceptiveAccountHaveZeroAsBalanceWhenCreated stamp: 'fr 11/16/2020 15:31:33'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test02DepositIncreasesBalanceOnTransactionValue stamp: 'fr 11/16/2020 15:31:33'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test03WithdrawDecreasesBalanceOnTransactionValue stamp: 'fr 11/16/2020 15:31:33'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test04WithdrawValueMustBePositive stamp: 'fr 11/16/2020 15:31:33'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test05ReceptiveAccountKnowsRegisteredTransactions stamp: 'fr 11/16/2020 15:31:33'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test06ReceptiveAccountDoNotKnowNotRegisteredTransactions stamp: 'fr 11/16/2020 15:31:33'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test07AccountKnowsItsTransactions stamp: 'fr 11/16/2020 15:31:33'!
+PASSED!
+
+!testRun: #TransferTest #test01TransferMovesMoneyAffectingBalancesAsExpected stamp: 'fr 11/16/2020 15:31:33'!
+PASSED!
+
+!testRun: #TransferTest #test02AccountsThatParticipateInTheTransferRegisterTheCorrespondingLeg stamp: 'fr 11/16/2020 15:31:33'!
+PASSED!
+
+!testRun: #TransferTest #test03LegsKnowTheirComplementaryLegThroughTheTransfer stamp: 'fr 11/16/2020 15:31:33'!
+PASSED!
+
+!testRun: #TransferTest #test04TransferValueCanNotBeZero stamp: 'fr 11/16/2020 15:31:33'!
+PASSED!
+
+!testRun: #TransferTest #test05TransferValueCanNotBeNegative stamp: 'fr 11/16/2020 15:31:33'!
+PASSED!
+
+!testRun: #TransferTest #test06TransferCanNotMoveMoneyFromAnAccountToItself stamp: 'fr 11/16/2020 15:31:33'!
+PASSED!
+
+----QUIT----(16 November 2020 15:56:44) CuisUniversity-4384.image priorSource: 18583751!
+
+----STARTUP---- (16 November 2020 16:07:19) as /home/fede/Documentos/Facultad/Inge1/Cuises/linux64/CuisUniversity-4384.image!
+
+!AccountReporterTest methodsFor: 'tests - account summary' stamp: 'fr 11/16/2020 16:09:51'!
+assertTransfersAreReflectedThroughReporterCreatedBy: aCreationBlock
+
+	aCreationBlock value.
+
+	Transfer move: 100 from: account to: anotherAccount.
+
+		
+	self  assert: reporter accountSummary 
+		equals: (OrderedCollection with: 'Salida por transferencia de 100.' with: 'Entrada por transferencia de 100.' with: 'Balance = 0')! !
+!AccountReporterTest methodsFor: 'tests - account summary' stamp: 'fr 11/16/2020 16:10:13' prior: 50905724!
+test12AccountSummaryShouldReflectOutgoingAndIncomingTransfersOnPortfoliosWithPortfoliosAndAccounts
+
+	self assertTransfersAreReflectedThroughReporterCreatedBy:[self createPortfolioWithPortfolioWithAccount.
+	self createAnotherNewAccount.
+	anotherPortfolio add: anotherAccount.
+	reporter _ SummaryReporter for: anotherPortfolio]! !
+
+!testRun: #AccountReporterTest #test12AccountSummaryShouldReflectOutgoingAndIncomingTransfersOnPortfoliosWithPortfoliosAndAccounts stamp: 'fr 11/16/2020 16:10:14'!
+PASSED!
+
+!testRun: #AccountReporterTest #test01AccountSummaryForAccountWithNoTransactionsShouldJustShowBalanceZero stamp: 'fr 11/16/2020 16:10:14'!
+PASSED!
+
+!testRun: #AccountReporterTest #test02AccountSummaryShouldReflectDepositsOnAccounts stamp: 'fr 11/16/2020 16:10:14'!
+PASSED!
+
+!testRun: #AccountReporterTest #test03AccountSummaryShouldReflectWithdrawsOnAccounts stamp: 'fr 11/16/2020 16:10:14'!
+PASSED!
+
+!testRun: #AccountReporterTest #test04AccountSummaryShouldReflectOutgoingTransfersOnAccounts stamp: 'fr 11/16/2020 16:10:14'!
+PASSED!
+
+!testRun: #AccountReporterTest #test05AccountSummaryShouldReflectIncomingTransfersOnAccounts stamp: 'fr 11/16/2020 16:10:14'!
+PASSED!
+
+!testRun: #AccountReporterTest #test06AccountSummaryForPortfolioWithNoTransactionsShouldJustShowBalanceZero stamp: 'fr 11/16/2020 16:10:14'!
+PASSED!
+
+!testRun: #AccountReporterTest #test07AccountSummaryShouldReflectDepositsOnPortfoliosWithAccounts stamp: 'fr 11/16/2020 16:10:14'!
+PASSED!
+
+!testRun: #AccountReporterTest #test08AccountSummaryShouldReflectWithdrawsOnPortfoliosWithAccounts stamp: 'fr 11/16/2020 16:10:14'!
+PASSED!
+
+!testRun: #AccountReporterTest #test09AccountSummaryShouldReflectOutgoingAndIncomingTransfersOnPortfoliosWithAccounts stamp: 'fr 11/16/2020 16:10:14'!
+PASSED!
+
+!testRun: #AccountReporterTest #test10AccountSummaryShouldReflectDepositsOnPortfoliosWithPortfolios stamp: 'fr 11/16/2020 16:10:14'!
+PASSED!
+
+!testRun: #AccountReporterTest #test11AccountSummaryShouldReflectWithdrawsOnPortfoliosWithPortfolios stamp: 'fr 11/16/2020 16:10:14'!
+PASSED!
+
+!testRun: #AccountReporterTest #test12AccountSummaryShouldReflectOutgoingAndIncomingTransfersOnPortfoliosWithPortfoliosAndAccounts stamp: 'fr 11/16/2020 16:10:14'!
+PASSED!
+
+!testRun: #AccountReporterTest #test13NetTransferForAccountWithNoTransactionsShouldBeZero stamp: 'fr 11/16/2020 16:10:14'!
+PASSED!
+
+!testRun: #AccountReporterTest #test14NetTransferForAccountWithAnOutgoingTransferShouldReflectItsValue stamp: 'fr 11/16/2020 16:10:14'!
+PASSED!
+
+!testRun: #AccountReporterTest #test15NetTransferForAccountWithAnIncomingTransferShouldReflectItsValue stamp: 'fr 11/16/2020 16:10:14'!
+PASSED!
+
+!testRun: #AccountReporterTest #test16NetTransferForAccountShouldNotReflectDeposits stamp: 'fr 11/16/2020 16:10:14'!
+PASSED!
+
+!testRun: #AccountReporterTest #test17NetTransferForAccountShouldNotReflectWithdraws stamp: 'fr 11/16/2020 16:10:14'!
+PASSED!
+
+!testRun: #AccountReporterTest #test18NetTransferForPortfolioWithNoTransactionsShouldBeZero stamp: 'fr 11/16/2020 16:10:14'!
+PASSED!
+
+!testRun: #AccountReporterTest #test19NetTransferForPortfolioWithAccountWithAnOutgoingTransferShouldReflectItsValue stamp: 'fr 11/16/2020 16:10:14'!
+PASSED!
+
+!testRun: #AccountReporterTest #test20NetTransferForPortfolioWithAccountWithAnIncomingTransferShouldReflectItsValue stamp: 'fr 11/16/2020 16:10:14'!
+PASSED!
+
+!testRun: #AccountReporterTest #test21NetTransferForPortfolioWithAccountShouldNotReflectDeposits stamp: 'fr 11/16/2020 16:10:14'!
+PASSED!
+
+!testRun: #AccountReporterTest #test22NetTransferForPortfolioWithAccountShouldNotReflectWithdraws stamp: 'fr 11/16/2020 16:10:14'!
+PASSED!
+
+!testRun: #AccountReporterTest #test23NetTransferForPortfoliosWithPortfoliosShouldReflectOutgoingAndIncomingTransfers stamp: 'fr 11/16/2020 16:10:14'!
+PASSED!
+
+!testRun: #AccountReporterTest #test24NetTransferForPortfoliosWithPortfoliosShouldNotRelfectDepositsOrWithdraws stamp: 'fr 11/16/2020 16:10:14'!
+PASSED!
+!AccountReporterTest methodsFor: 'tests - account summary' stamp: 'fr 11/16/2020 16:10:29' prior: 50905547!
+test09AccountSummaryShouldReflectOutgoingAndIncomingTransfersOnPortfoliosWithAccounts
+
+	self createNewAccount.	
+	self createAnotherNewAccount.
+	portfolio _ Portfolio with: account with: anotherAccount.
+	reporter _ SummaryReporter for: portfolio.
+
+	Transfer move: 100 from: account to: anotherAccount.
+		
+	self  assert: reporter accountSummary 
+		equals: (OrderedCollection with: 'Salida por transferencia de 100.' with: 'Entrada por transferencia de 100.' with: 'Balance = 0')! !
+
+!testRun: #AccountReporterTest #test09AccountSummaryShouldReflectOutgoingAndIncomingTransfersOnPortfoliosWithAccounts stamp: 'fr 11/16/2020 16:10:29'!
+PASSED!
+
+!testRun: #AccountReporterTest #test01AccountSummaryForAccountWithNoTransactionsShouldJustShowBalanceZero stamp: 'fr 11/16/2020 16:10:29'!
+PASSED!
+
+!testRun: #AccountReporterTest #test02AccountSummaryShouldReflectDepositsOnAccounts stamp: 'fr 11/16/2020 16:10:29'!
+PASSED!
+
+!testRun: #AccountReporterTest #test03AccountSummaryShouldReflectWithdrawsOnAccounts stamp: 'fr 11/16/2020 16:10:29'!
+PASSED!
+
+!testRun: #AccountReporterTest #test04AccountSummaryShouldReflectOutgoingTransfersOnAccounts stamp: 'fr 11/16/2020 16:10:29'!
+PASSED!
+
+!testRun: #AccountReporterTest #test05AccountSummaryShouldReflectIncomingTransfersOnAccounts stamp: 'fr 11/16/2020 16:10:29'!
+PASSED!
+
+!testRun: #AccountReporterTest #test06AccountSummaryForPortfolioWithNoTransactionsShouldJustShowBalanceZero stamp: 'fr 11/16/2020 16:10:29'!
+PASSED!
+
+!testRun: #AccountReporterTest #test07AccountSummaryShouldReflectDepositsOnPortfoliosWithAccounts stamp: 'fr 11/16/2020 16:10:29'!
+PASSED!
+
+!testRun: #AccountReporterTest #test08AccountSummaryShouldReflectWithdrawsOnPortfoliosWithAccounts stamp: 'fr 11/16/2020 16:10:29'!
+PASSED!
+
+!testRun: #AccountReporterTest #test09AccountSummaryShouldReflectOutgoingAndIncomingTransfersOnPortfoliosWithAccounts stamp: 'fr 11/16/2020 16:10:29'!
+PASSED!
+
+!testRun: #AccountReporterTest #test10AccountSummaryShouldReflectDepositsOnPortfoliosWithPortfolios stamp: 'fr 11/16/2020 16:10:29'!
+PASSED!
+
+!testRun: #AccountReporterTest #test11AccountSummaryShouldReflectWithdrawsOnPortfoliosWithPortfolios stamp: 'fr 11/16/2020 16:10:29'!
+PASSED!
+
+!testRun: #AccountReporterTest #test12AccountSummaryShouldReflectOutgoingAndIncomingTransfersOnPortfoliosWithPortfoliosAndAccounts stamp: 'fr 11/16/2020 16:10:29'!
+PASSED!
+
+!testRun: #AccountReporterTest #test13NetTransferForAccountWithNoTransactionsShouldBeZero stamp: 'fr 11/16/2020 16:10:29'!
+PASSED!
+
+!testRun: #AccountReporterTest #test14NetTransferForAccountWithAnOutgoingTransferShouldReflectItsValue stamp: 'fr 11/16/2020 16:10:29'!
+PASSED!
+
+!testRun: #AccountReporterTest #test15NetTransferForAccountWithAnIncomingTransferShouldReflectItsValue stamp: 'fr 11/16/2020 16:10:29'!
+PASSED!
+
+!testRun: #AccountReporterTest #test16NetTransferForAccountShouldNotReflectDeposits stamp: 'fr 11/16/2020 16:10:29'!
+PASSED!
+
+!testRun: #AccountReporterTest #test17NetTransferForAccountShouldNotReflectWithdraws stamp: 'fr 11/16/2020 16:10:29'!
+PASSED!
+
+!testRun: #AccountReporterTest #test18NetTransferForPortfolioWithNoTransactionsShouldBeZero stamp: 'fr 11/16/2020 16:10:29'!
+PASSED!
+
+!testRun: #AccountReporterTest #test19NetTransferForPortfolioWithAccountWithAnOutgoingTransferShouldReflectItsValue stamp: 'fr 11/16/2020 16:10:29'!
+PASSED!
+
+!testRun: #AccountReporterTest #test20NetTransferForPortfolioWithAccountWithAnIncomingTransferShouldReflectItsValue stamp: 'fr 11/16/2020 16:10:29'!
+PASSED!
+
+!testRun: #AccountReporterTest #test21NetTransferForPortfolioWithAccountShouldNotReflectDeposits stamp: 'fr 11/16/2020 16:10:29'!
+PASSED!
+
+!testRun: #AccountReporterTest #test22NetTransferForPortfolioWithAccountShouldNotReflectWithdraws stamp: 'fr 11/16/2020 16:10:29'!
+PASSED!
+
+!testRun: #AccountReporterTest #test23NetTransferForPortfoliosWithPortfoliosShouldReflectOutgoingAndIncomingTransfers stamp: 'fr 11/16/2020 16:10:29'!
+PASSED!
+
+!testRun: #AccountReporterTest #test24NetTransferForPortfoliosWithPortfoliosShouldNotRelfectDepositsOrWithdraws stamp: 'fr 11/16/2020 16:10:29'!
+PASSED!
+!AccountReporterTest methodsFor: 'tests - account summary' stamp: 'fr 11/16/2020 16:10:39' prior: 50912793!
+test09AccountSummaryShouldReflectOutgoingAndIncomingTransfersOnPortfoliosWithAccounts
+
+	self assertTransfersAreReflectedThroughReporterCreatedBy:[self createNewAccount.	
+	self createAnotherNewAccount.
+	portfolio _ Portfolio with: account with: anotherAccount.
+	reporter _ SummaryReporter for: portfolio]! !
+
+!testRun: #AccountReporterTest #test09AccountSummaryShouldReflectOutgoingAndIncomingTransfersOnPortfoliosWithAccounts stamp: 'fr 11/16/2020 16:10:40'!
+PASSED!
+
+!testRun: #AccountReporterTest #test01AccountSummaryForAccountWithNoTransactionsShouldJustShowBalanceZero stamp: 'fr 11/16/2020 16:10:40'!
+PASSED!
+
+!testRun: #AccountReporterTest #test02AccountSummaryShouldReflectDepositsOnAccounts stamp: 'fr 11/16/2020 16:10:40'!
+PASSED!
+
+!testRun: #AccountReporterTest #test03AccountSummaryShouldReflectWithdrawsOnAccounts stamp: 'fr 11/16/2020 16:10:40'!
+PASSED!
+
+!testRun: #AccountReporterTest #test04AccountSummaryShouldReflectOutgoingTransfersOnAccounts stamp: 'fr 11/16/2020 16:10:40'!
+PASSED!
+
+!testRun: #AccountReporterTest #test05AccountSummaryShouldReflectIncomingTransfersOnAccounts stamp: 'fr 11/16/2020 16:10:40'!
+PASSED!
+
+!testRun: #AccountReporterTest #test06AccountSummaryForPortfolioWithNoTransactionsShouldJustShowBalanceZero stamp: 'fr 11/16/2020 16:10:40'!
+PASSED!
+
+!testRun: #AccountReporterTest #test07AccountSummaryShouldReflectDepositsOnPortfoliosWithAccounts stamp: 'fr 11/16/2020 16:10:40'!
+PASSED!
+
+!testRun: #AccountReporterTest #test08AccountSummaryShouldReflectWithdrawsOnPortfoliosWithAccounts stamp: 'fr 11/16/2020 16:10:40'!
+PASSED!
+
+!testRun: #AccountReporterTest #test09AccountSummaryShouldReflectOutgoingAndIncomingTransfersOnPortfoliosWithAccounts stamp: 'fr 11/16/2020 16:10:40'!
+PASSED!
+
+!testRun: #AccountReporterTest #test10AccountSummaryShouldReflectDepositsOnPortfoliosWithPortfolios stamp: 'fr 11/16/2020 16:10:40'!
+PASSED!
+
+!testRun: #AccountReporterTest #test11AccountSummaryShouldReflectWithdrawsOnPortfoliosWithPortfolios stamp: 'fr 11/16/2020 16:10:40'!
+PASSED!
+
+!testRun: #AccountReporterTest #test12AccountSummaryShouldReflectOutgoingAndIncomingTransfersOnPortfoliosWithPortfoliosAndAccounts stamp: 'fr 11/16/2020 16:10:40'!
+PASSED!
+
+!testRun: #AccountReporterTest #test13NetTransferForAccountWithNoTransactionsShouldBeZero stamp: 'fr 11/16/2020 16:10:40'!
+PASSED!
+
+!testRun: #AccountReporterTest #test14NetTransferForAccountWithAnOutgoingTransferShouldReflectItsValue stamp: 'fr 11/16/2020 16:10:40'!
+PASSED!
+
+!testRun: #AccountReporterTest #test15NetTransferForAccountWithAnIncomingTransferShouldReflectItsValue stamp: 'fr 11/16/2020 16:10:40'!
+PASSED!
+
+!testRun: #AccountReporterTest #test16NetTransferForAccountShouldNotReflectDeposits stamp: 'fr 11/16/2020 16:10:40'!
+PASSED!
+
+!testRun: #AccountReporterTest #test17NetTransferForAccountShouldNotReflectWithdraws stamp: 'fr 11/16/2020 16:10:40'!
+PASSED!
+
+!testRun: #AccountReporterTest #test18NetTransferForPortfolioWithNoTransactionsShouldBeZero stamp: 'fr 11/16/2020 16:10:40'!
+PASSED!
+
+!testRun: #AccountReporterTest #test19NetTransferForPortfolioWithAccountWithAnOutgoingTransferShouldReflectItsValue stamp: 'fr 11/16/2020 16:10:40'!
+PASSED!
+
+!testRun: #AccountReporterTest #test20NetTransferForPortfolioWithAccountWithAnIncomingTransferShouldReflectItsValue stamp: 'fr 11/16/2020 16:10:40'!
+PASSED!
+
+!testRun: #AccountReporterTest #test21NetTransferForPortfolioWithAccountShouldNotReflectDeposits stamp: 'fr 11/16/2020 16:10:40'!
+PASSED!
+
+!testRun: #AccountReporterTest #test22NetTransferForPortfolioWithAccountShouldNotReflectWithdraws stamp: 'fr 11/16/2020 16:10:40'!
+PASSED!
+
+!testRun: #AccountReporterTest #test23NetTransferForPortfoliosWithPortfoliosShouldReflectOutgoingAndIncomingTransfers stamp: 'fr 11/16/2020 16:10:40'!
+PASSED!
+
+!testRun: #AccountReporterTest #test24NetTransferForPortfoliosWithPortfoliosShouldNotRelfectDepositsOrWithdraws stamp: 'fr 11/16/2020 16:10:40'!
+PASSED!
+!AccountReporterTest methodsFor: 'tests - account summary' stamp: 'fr 11/16/2020 16:10:55' prior: 50912924!
+test09AccountSummaryShouldReflectOutgoingAndIncomingTransfersOnPortfoliosWithAccounts
+
+	self assertTransfersAreReflectedThroughReporterCreatedBy:[					self createNewAccount.	
+													self createAnotherNewAccount.
+													portfolio _ Portfolio with: account with: anotherAccount.
+													reporter _ SummaryReporter for: portfolio
+												     ]! !
+!AccountReporterTest methodsFor: 'tests - account summary' stamp: 'fr 11/16/2020 16:11:12' prior: 50912666!
+test12AccountSummaryShouldReflectOutgoingAndIncomingTransfersOnPortfoliosWithPortfoliosAndAccounts
+
+	self assertTransfersAreReflectedThroughReporterCreatedBy:[					self createPortfolioWithPortfolioWithAccount.
+													self createAnotherNewAccount.
+													anotherPortfolio add: anotherAccount.
+													reporter _ SummaryReporter for: anotherPortfolio
+												     ]! !
+
+!testRun: #AccountReporterTest #test12AccountSummaryShouldReflectOutgoingAndIncomingTransfersOnPortfoliosWithPortfoliosAndAccounts stamp: 'fr 11/16/2020 16:12:40'!
+PASSED!
+
+!testRun: #AccountReporterTest #test01AccountSummaryForAccountWithNoTransactionsShouldJustShowBalanceZero stamp: 'fr 11/16/2020 16:12:40'!
+PASSED!
+
+!testRun: #AccountReporterTest #test02AccountSummaryShouldReflectDepositsOnAccounts stamp: 'fr 11/16/2020 16:12:40'!
+PASSED!
+
+!testRun: #AccountReporterTest #test03AccountSummaryShouldReflectWithdrawsOnAccounts stamp: 'fr 11/16/2020 16:12:40'!
+PASSED!
+
+!testRun: #AccountReporterTest #test04AccountSummaryShouldReflectOutgoingTransfersOnAccounts stamp: 'fr 11/16/2020 16:12:40'!
+PASSED!
+
+!testRun: #AccountReporterTest #test05AccountSummaryShouldReflectIncomingTransfersOnAccounts stamp: 'fr 11/16/2020 16:12:40'!
+PASSED!
+
+!testRun: #AccountReporterTest #test06AccountSummaryForPortfolioWithNoTransactionsShouldJustShowBalanceZero stamp: 'fr 11/16/2020 16:12:40'!
+PASSED!
+
+!testRun: #AccountReporterTest #test07AccountSummaryShouldReflectDepositsOnPortfoliosWithAccounts stamp: 'fr 11/16/2020 16:12:40'!
+PASSED!
+
+!testRun: #AccountReporterTest #test08AccountSummaryShouldReflectWithdrawsOnPortfoliosWithAccounts stamp: 'fr 11/16/2020 16:12:40'!
+PASSED!
+
+!testRun: #AccountReporterTest #test09AccountSummaryShouldReflectOutgoingAndIncomingTransfersOnPortfoliosWithAccounts stamp: 'fr 11/16/2020 16:12:40'!
+PASSED!
+
+!testRun: #AccountReporterTest #test10AccountSummaryShouldReflectDepositsOnPortfoliosWithPortfolios stamp: 'fr 11/16/2020 16:12:40'!
+PASSED!
+
+!testRun: #AccountReporterTest #test11AccountSummaryShouldReflectWithdrawsOnPortfoliosWithPortfolios stamp: 'fr 11/16/2020 16:12:40'!
+PASSED!
+
+!testRun: #AccountReporterTest #test12AccountSummaryShouldReflectOutgoingAndIncomingTransfersOnPortfoliosWithPortfoliosAndAccounts stamp: 'fr 11/16/2020 16:12:40'!
+PASSED!
+
+!testRun: #AccountReporterTest #test13NetTransferForAccountWithNoTransactionsShouldBeZero stamp: 'fr 11/16/2020 16:12:40'!
+PASSED!
+
+!testRun: #AccountReporterTest #test14NetTransferForAccountWithAnOutgoingTransferShouldReflectItsValue stamp: 'fr 11/16/2020 16:12:40'!
+PASSED!
+
+!testRun: #AccountReporterTest #test15NetTransferForAccountWithAnIncomingTransferShouldReflectItsValue stamp: 'fr 11/16/2020 16:12:40'!
+PASSED!
+
+!testRun: #AccountReporterTest #test16NetTransferForAccountShouldNotReflectDeposits stamp: 'fr 11/16/2020 16:12:40'!
+PASSED!
+
+!testRun: #AccountReporterTest #test17NetTransferForAccountShouldNotReflectWithdraws stamp: 'fr 11/16/2020 16:12:40'!
+PASSED!
+
+!testRun: #AccountReporterTest #test18NetTransferForPortfolioWithNoTransactionsShouldBeZero stamp: 'fr 11/16/2020 16:12:40'!
+PASSED!
+
+!testRun: #AccountReporterTest #test19NetTransferForPortfolioWithAccountWithAnOutgoingTransferShouldReflectItsValue stamp: 'fr 11/16/2020 16:12:40'!
+PASSED!
+
+!testRun: #AccountReporterTest #test20NetTransferForPortfolioWithAccountWithAnIncomingTransferShouldReflectItsValue stamp: 'fr 11/16/2020 16:12:40'!
+PASSED!
+
+!testRun: #AccountReporterTest #test21NetTransferForPortfolioWithAccountShouldNotReflectDeposits stamp: 'fr 11/16/2020 16:12:40'!
+PASSED!
+
+!testRun: #AccountReporterTest #test22NetTransferForPortfolioWithAccountShouldNotReflectWithdraws stamp: 'fr 11/16/2020 16:12:40'!
+PASSED!
+
+!testRun: #AccountReporterTest #test23NetTransferForPortfoliosWithPortfoliosShouldReflectOutgoingAndIncomingTransfers stamp: 'fr 11/16/2020 16:12:40'!
+PASSED!
+
+!testRun: #AccountReporterTest #test24NetTransferForPortfoliosWithPortfoliosShouldNotRelfectDepositsOrWithdraws stamp: 'fr 11/16/2020 16:12:40'!
+PASSED!
+
+----SNAPSHOT----(16 November 2020 16:12:52) CuisUniversity-4384.image priorSource: 18591813!
+
+!testRun: #AccountReporterTest #test01AccountSummaryForAccountWithNoTransactionsShouldJustShowBalanceZero stamp: 'fr 11/16/2020 16:13:40'!
+PASSED!
+
+!testRun: #AccountReporterTest #test02AccountSummaryShouldReflectDepositsOnAccounts stamp: 'fr 11/16/2020 16:13:40'!
+PASSED!
+
+!testRun: #AccountReporterTest #test03AccountSummaryShouldReflectWithdrawsOnAccounts stamp: 'fr 11/16/2020 16:13:40'!
+PASSED!
+
+!testRun: #AccountReporterTest #test04AccountSummaryShouldReflectOutgoingTransfersOnAccounts stamp: 'fr 11/16/2020 16:13:40'!
+PASSED!
+
+!testRun: #AccountReporterTest #test05AccountSummaryShouldReflectIncomingTransfersOnAccounts stamp: 'fr 11/16/2020 16:13:40'!
+PASSED!
+
+!testRun: #AccountReporterTest #test06AccountSummaryForPortfolioWithNoTransactionsShouldJustShowBalanceZero stamp: 'fr 11/16/2020 16:13:40'!
+PASSED!
+
+!testRun: #AccountReporterTest #test07AccountSummaryShouldReflectDepositsOnPortfoliosWithAccounts stamp: 'fr 11/16/2020 16:13:40'!
+PASSED!
+
+!testRun: #AccountReporterTest #test08AccountSummaryShouldReflectWithdrawsOnPortfoliosWithAccounts stamp: 'fr 11/16/2020 16:13:40'!
+PASSED!
+
+!testRun: #AccountReporterTest #test09AccountSummaryShouldReflectOutgoingAndIncomingTransfersOnPortfoliosWithAccounts stamp: 'fr 11/16/2020 16:13:40'!
+PASSED!
+
+!testRun: #AccountReporterTest #test10AccountSummaryShouldReflectDepositsOnPortfoliosWithPortfolios stamp: 'fr 11/16/2020 16:13:40'!
+PASSED!
+
+!testRun: #AccountReporterTest #test11AccountSummaryShouldReflectWithdrawsOnPortfoliosWithPortfolios stamp: 'fr 11/16/2020 16:13:40'!
+PASSED!
+
+!testRun: #AccountReporterTest #test12AccountSummaryShouldReflectOutgoingAndIncomingTransfersOnPortfoliosWithPortfoliosAndAccounts stamp: 'fr 11/16/2020 16:13:40'!
+PASSED!
+
+!testRun: #AccountReporterTest #test13NetTransferForAccountWithNoTransactionsShouldBeZero stamp: 'fr 11/16/2020 16:13:40'!
+PASSED!
+
+!testRun: #AccountReporterTest #test14NetTransferForAccountWithAnOutgoingTransferShouldReflectItsValue stamp: 'fr 11/16/2020 16:13:40'!
+PASSED!
+
+!testRun: #AccountReporterTest #test15NetTransferForAccountWithAnIncomingTransferShouldReflectItsValue stamp: 'fr 11/16/2020 16:13:40'!
+PASSED!
+
+!testRun: #AccountReporterTest #test16NetTransferForAccountShouldNotReflectDeposits stamp: 'fr 11/16/2020 16:13:40'!
+PASSED!
+
+!testRun: #AccountReporterTest #test17NetTransferForAccountShouldNotReflectWithdraws stamp: 'fr 11/16/2020 16:13:40'!
+PASSED!
+
+!testRun: #AccountReporterTest #test18NetTransferForPortfolioWithNoTransactionsShouldBeZero stamp: 'fr 11/16/2020 16:13:40'!
+PASSED!
+
+!testRun: #AccountReporterTest #test19NetTransferForPortfolioWithAccountWithAnOutgoingTransferShouldReflectItsValue stamp: 'fr 11/16/2020 16:13:40'!
+PASSED!
+
+!testRun: #AccountReporterTest #test20NetTransferForPortfolioWithAccountWithAnIncomingTransferShouldReflectItsValue stamp: 'fr 11/16/2020 16:13:40'!
+PASSED!
+
+!testRun: #AccountReporterTest #test21NetTransferForPortfolioWithAccountShouldNotReflectDeposits stamp: 'fr 11/16/2020 16:13:40'!
+PASSED!
+
+!testRun: #AccountReporterTest #test22NetTransferForPortfolioWithAccountShouldNotReflectWithdraws stamp: 'fr 11/16/2020 16:13:40'!
+PASSED!
+
+!testRun: #AccountReporterTest #test23NetTransferForPortfoliosWithPortfoliosShouldReflectOutgoingAndIncomingTransfers stamp: 'fr 11/16/2020 16:13:40'!
+PASSED!
+
+!testRun: #AccountReporterTest #test24NetTransferForPortfoliosWithPortfoliosShouldNotRelfectDepositsOrWithdraws stamp: 'fr 11/16/2020 16:13:40'!
+PASSED!
+
+!testRun: #PortfolioReporterTest #test01TreeStructureReportForEmptyPortfolioWorksAsExpected stamp: 'fr 11/16/2020 16:13:40'!
+PASSED!
+
+!testRun: #PortfolioReporterTest #test02TreeStructureReportForPortfolioWithAccountsWorksAsExpected stamp: 'fr 11/16/2020 16:13:40'!
+PASSED!
+
+!testRun: #PortfolioReporterTest #test03TreeStructureReportForPortfolioWithAccountsAndPortfoliosWorksAsExpected stamp: 'fr 11/16/2020 16:13:40'!
+PASSED!
+
+!testRun: #PortfolioReporterTest #test04AccountsShouldUseADefaultNameIfNoneIsSpecified stamp: 'fr 11/16/2020 16:13:40'!
+PASSED!
+
+!testRun: #PortfolioReporterTest #test05SpecialReportForEmptyPortfolioWorksAsExpected stamp: 'fr 11/16/2020 16:13:40'!
+PASSED!
+
+!testRun: #PortfolioReporterTest #test06SpecialReportForPortfolioWithAccountsWithAnyKindOfTransactionsWorksAsExpected stamp: 'fr 11/16/2020 16:13:40'!
+PASSED!
+
+!testRun: #PortfolioReporterTest #test07SpecialReportForPortfolioWithAccountsAndPortfoliosWithAnyKindOfTransactionsWorksAsExpected stamp: 'fr 11/16/2020 16:13:40'!
+PASSED!
+
+!testRun: #PortfolioTest #test01BalanceOfPortfolioWithoutAccountsIsZero stamp: 'fr 11/16/2020 16:13:40'!
+PASSED!
+
+!testRun: #PortfolioTest #test02BalanceOfPortfolioWithOneAccountIsAccountBalance stamp: 'fr 11/16/2020 16:13:40'!
+PASSED!
+
+!testRun: #PortfolioTest #test03BalanceOfPortfolioIsCalculatedRecursivelyOnPortfolios stamp: 'fr 11/16/2020 16:13:40'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioWithoutAccountsHasNoRegisteredTransaction stamp: 'fr 11/16/2020 16:13:40'!
+PASSED!
+
+!testRun: #PortfolioTest #test05PortfolioHasRegisteredItsAccountsTransactions stamp: 'fr 11/16/2020 16:13:41'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioLooksForRegisteredTransactionsRecursively stamp: 'fr 11/16/2020 16:13:41'!
+PASSED!
+
+!testRun: #PortfolioTest #test07PortfolioHasNoTransactionWhenHasNoAccounts stamp: 'fr 11/16/2020 16:13:41'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioTransactionsIncludesAllItsAccountsTransactions stamp: 'fr 11/16/2020 16:13:41'!
+PASSED!
+
+!testRun: #PortfolioTest #test09PortfolioTransactionsAreCalculatedRecursively stamp: 'fr 11/16/2020 16:13:41'!
+PASSED!
+
+!testRun: #PortfolioTest #test10PortfolioCanNotIncludeTheSameAccountMoreThanOnce stamp: 'fr 11/16/2020 16:13:41'!
+PASSED!
+
+!testRun: #PortfolioTest #test11PortfolioCanNotIncludeAccountOfItsPortfolios stamp: 'fr 11/16/2020 16:13:41'!
+PASSED!
+
+!testRun: #PortfolioTest #test12PortfolioCanNotIncludeItself stamp: 'fr 11/16/2020 16:13:41'!
+PASSED!
+
+!testRun: #PortfolioTest #test13ComposedPortfolioCanNotHaveParentPortfolioAccount stamp: 'fr 11/16/2020 16:13:41'!
+PASSED!
+
+!testRun: #PortfolioTest #test14ComposedPortfolioCanNotHaveAccountOfAnyRootParentRecursively stamp: 'fr 11/16/2020 16:13:41'!
+PASSED!
+
+!testRun: #PortfolioTest #test15PortfolioCanNotIncludeAnyOfTheComposedAccountOfPortfolioToAdd stamp: 'fr 11/16/2020 16:13:41'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test01ReceptiveAccountHaveZeroAsBalanceWhenCreated stamp: 'fr 11/16/2020 16:13:41'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test02DepositIncreasesBalanceOnTransactionValue stamp: 'fr 11/16/2020 16:13:41'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test03WithdrawDecreasesBalanceOnTransactionValue stamp: 'fr 11/16/2020 16:13:41'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test04WithdrawValueMustBePositive stamp: 'fr 11/16/2020 16:13:41'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test05ReceptiveAccountKnowsRegisteredTransactions stamp: 'fr 11/16/2020 16:13:41'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test06ReceptiveAccountDoNotKnowNotRegisteredTransactions stamp: 'fr 11/16/2020 16:13:41'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test07AccountKnowsItsTransactions stamp: 'fr 11/16/2020 16:13:41'!
+PASSED!
+
+!testRun: #TransferTest #test01TransferMovesMoneyAffectingBalancesAsExpected stamp: 'fr 11/16/2020 16:13:41'!
+PASSED!
+
+!testRun: #TransferTest #test02AccountsThatParticipateInTheTransferRegisterTheCorrespondingLeg stamp: 'fr 11/16/2020 16:13:41'!
+PASSED!
+
+!testRun: #TransferTest #test03LegsKnowTheirComplementaryLegThroughTheTransfer stamp: 'fr 11/16/2020 16:13:41'!
+PASSED!
+
+!testRun: #TransferTest #test04TransferValueCanNotBeZero stamp: 'fr 11/16/2020 16:13:41'!
+PASSED!
+
+!testRun: #TransferTest #test05TransferValueCanNotBeNegative stamp: 'fr 11/16/2020 16:13:41'!
+PASSED!
+
+!testRun: #TransferTest #test06TransferCanNotMoveMoneyFromAnAccountToItself stamp: 'fr 11/16/2020 16:13:41'!
+PASSED!
+
+----SNAPSHOT----(16 November 2020 16:13:44) CuisUniversity-4384.image priorSource: 18609342!

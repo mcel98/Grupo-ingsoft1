@@ -70,18 +70,14 @@ test08AccountSummaryShouldReflectWithdrawsOnPortfoliosWithAccounts
 		assertTransactionIsReflectedWith: 'Extracción por 100.' 
 		and: 'Balance = -100'! !
 
-!AccountReporterTest methodsFor: 'tests - account summary' stamp: 'fr 11/16/2020 02:53:16'!
+!AccountReporterTest methodsFor: 'tests - account summary' stamp: 'fr 11/16/2020 16:10:55'!
 test09AccountSummaryShouldReflectOutgoingAndIncomingTransfersOnPortfoliosWithAccounts
 
-	self createNewAccount.	
-	self createAnotherNewAccount.
-	portfolio _ Portfolio with: account with: anotherAccount.
-	reporter _ SummaryReporter for: portfolio.
-
-	Transfer move: 10 from: account to: anotherAccount.
-		
-	self  assert: reporter accountSummary 
-		equals: (OrderedCollection with: 'Salida por transferencia de 10.' with: 'Entrada por transferencia de 10.' with: 'Balance = 0')! !
+	self assertTransfersAreReflectedThroughReporterCreatedBy:[					self createNewAccount.	
+													self createAnotherNewAccount.
+													portfolio _ Portfolio with: account with: anotherAccount.
+													reporter _ SummaryReporter for: portfolio
+												     ]! !
 
 !AccountReporterTest methodsFor: 'tests - account summary' stamp: 'fr 11/16/2020 13:17:12'!
 test10AccountSummaryShouldReflectDepositsOnPortfoliosWithPortfolios
@@ -99,19 +95,14 @@ test11AccountSummaryShouldReflectWithdrawsOnPortfoliosWithPortfolios
 		assertTransactionIsReflectedWith: 'Extracción por 100.' 
 		and: 'Balance = -100'! !
 
-!AccountReporterTest methodsFor: 'tests - account summary' stamp: 'fr 11/16/2020 02:53:20'!
+!AccountReporterTest methodsFor: 'tests - account summary' stamp: 'fr 11/16/2020 16:11:12'!
 test12AccountSummaryShouldReflectOutgoingAndIncomingTransfersOnPortfoliosWithPortfoliosAndAccounts
 
-	self createPortfolioWithPortfolioWithAccount.
-	self createAnotherNewAccount.
-	anotherPortfolio add: anotherAccount.
-	reporter _ SummaryReporter for: anotherPortfolio.
-
-	Transfer move: 100 from: account to: anotherAccount.
-
-		
-	self  assert: reporter accountSummary 
-		equals: (OrderedCollection with: 'Salida por transferencia de 100.' with: 'Entrada por transferencia de 100.' with: 'Balance = 0')! !
+	self assertTransfersAreReflectedThroughReporterCreatedBy:[					self createPortfolioWithPortfolioWithAccount.
+													self createAnotherNewAccount.
+													anotherPortfolio add: anotherAccount.
+													reporter _ SummaryReporter for: anotherPortfolio
+												     ]! !
 
 
 !AccountReporterTest methodsFor: 'tests - net transfer' stamp: 'fr 11/16/2020 13:25:58'!
@@ -222,6 +213,17 @@ test24NetTransferForPortfoliosWithPortfoliosShouldNotRelfectDepositsOrWithdraws
 			      ] 
 		assertTransactionIsReflectedWithValue: 0! !
 
+
+!AccountReporterTest methodsFor: 'private' stamp: 'fr 11/16/2020 16:09:51'!
+assertTransfersAreReflectedThroughReporterCreatedBy: aCreationBlock
+
+	aCreationBlock value.
+
+	Transfer move: 100 from: account to: anotherAccount.
+
+		
+	self  assert: reporter accountSummary 
+		equals: (OrderedCollection with: 'Salida por transferencia de 100.' with: 'Entrada por transferencia de 100.' with: 'Balance = 0')! !
 
 !AccountReporterTest methodsFor: 'private' stamp: 'fr 11/16/2020 02:53:26'!
 createAnotherNewAccount
@@ -404,7 +406,7 @@ test07SpecialReportForPortfolioWithAccountsAndPortfoliosWithAnyKindOfTransaction
 	self assert: reporter specialReport equals: self expectedReportForPortfolioWithAccountsAndPortfolios! !
 
 
-!PortfolioReporterTest methodsFor: 'private - special tree' stamp: 'fr 11/16/2020 01:44:58'!
+!PortfolioReporterTest methodsFor: 'private' stamp: 'fr 11/16/2020 01:44:58'!
 expectedReportForPortfolioWithAccounts
 	
 	| expectedReport |
@@ -421,7 +423,7 @@ expectedReportForPortfolioWithAccounts
 	^expectedReport
 	! !
 
-!PortfolioReporterTest methodsFor: 'private - special tree' stamp: 'fr 11/16/2020 01:45:50'!
+!PortfolioReporterTest methodsFor: 'private' stamp: 'fr 11/16/2020 01:45:50'!
 expectedReportForPortfolioWithAccountsAndPortfolios
 
 	| expectedReport |
@@ -443,7 +445,7 @@ expectedReportForPortfolioWithAccountsAndPortfolios
 	
 	^expectedReport! !
 
-!PortfolioReporterTest methodsFor: 'private - special tree' stamp: 'fr 11/16/2020 01:43:07'!
+!PortfolioReporterTest methodsFor: 'private' stamp: 'fr 11/16/2020 01:43:07'!
 performRegularTransactionsWith: anAccount asWellAsTransferTransactionsWithItAnd: anotherAccount
 
 	Deposit register: 100 on: anAccount.
@@ -883,7 +885,6 @@ transactions
 addedTo: aPortfolio
 
 	self subclassResponsibility ! !
-
 
 
 !classDefinition: #Portfolio category: 'Portfolio-Part-II-Exercise'!
