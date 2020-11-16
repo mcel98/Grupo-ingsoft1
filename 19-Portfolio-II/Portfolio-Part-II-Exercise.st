@@ -1,325 +1,312 @@
 !classDefinition: #AccountReporterTest category: 'Portfolio-Part-II-Exercise'!
 TestCase subclass: #AccountReporterTest
-	instanceVariableNames: ''
+	instanceVariableNames: 'account reporter anotherAccount portfolio anotherPortfolio'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Portfolio-Part-II-Exercise'!
 
-!AccountReporterTest methodsFor: 'tests - account summary' stamp: 'fr 11/13/2020 17:45:43'!
+!AccountReporterTest methodsFor: 'tests - account summary' stamp: 'fr 11/16/2020 02:53:09'!
 test01AccountSummaryForAccountWithNoTransactionsShouldJustShowBalanceZero
 
-	| account reporter |
+	self createNewAccountAndSummaryReporterForIt.
 	
-	account _ ReceptiveAccount new.
-	reporter _ SummaryReporter for: account.
-	
-	self assert: [reporter accountSummary = (OrderedCollection with: 'Balance = 0')]! !
+	self  assert: reporter accountSummary 
+		equals: (OrderedCollection with: 'Balance = 0').! !
 
-!AccountReporterTest methodsFor: 'tests - account summary' stamp: 'fr 11/13/2020 17:46:09'!
+!AccountReporterTest methodsFor: 'tests - account summary' stamp: 'fr 11/16/2020 02:53:09'!
 test02AccountSummaryShouldReflectDepositsOnAccounts
 
-	| account reporter |
+	self createNewAccountAndSummaryReporterForIt.
 	
-	account _ ReceptiveAccount new.
 	Deposit register: 100 on: account. 
-	reporter _ SummaryReporter for: account.
 	
-	self assert: [reporter accountSummary = (OrderedCollection with: 'Depósito por 100.' with: 'Balance = 100')]! !
+	self  assert: reporter accountSummary 
+		equals: (OrderedCollection with: 'Depósito por 100.' with: 'Balance = 100')! !
 
-!AccountReporterTest methodsFor: 'tests - account summary' stamp: 'fr 11/13/2020 17:46:32'!
+!AccountReporterTest methodsFor: 'tests - account summary' stamp: 'fr 11/16/2020 02:53:09'!
 test03AccountSummaryShouldReflectWithdrawsOnAccounts
-
-	| account reporter |
 	
-	account _ ReceptiveAccount new.
+	self createNewAccountAndSummaryReporterForIt.
+	
 	Withdraw register: 100 on: account. 
-	reporter _ SummaryReporter for: account.
 	
-	self assert: [reporter accountSummary = (OrderedCollection with: 'Extracción por 100.' with: 'Balance = -100')]! !
+	self  assert: reporter accountSummary 
+		equals: (OrderedCollection with: 'Extracción por 100.' with: 'Balance = -100')! !
 
-!AccountReporterTest methodsFor: 'tests - account summary' stamp: 'fr 11/13/2020 17:47:08'!
+!AccountReporterTest methodsFor: 'tests - account summary' stamp: 'fr 11/16/2020 02:53:13'!
 test04AccountSummaryShouldReflectOutgoingTransfersOnAccounts
 
-	| account anotherAccount reporter |
-	
-	account _ ReceptiveAccount new.
-	anotherAccount _ ReceptiveAccount new.
-	reporter _ SummaryReporter for: account.
+	self createNewAccountsAndSummaryReporterForOne.
 	
 	Transfer move: 100 from: account to: anotherAccount.
 	
-	self assert: [reporter accountSummary = (OrderedCollection with: 'Salida por transferencia de 100.' with: 'Balance = -100')]! !
+	self  assert: reporter accountSummary 
+		equals: (OrderedCollection with: 'Salida por transferencia de 100.' with: 'Balance = -100')! !
 
-!AccountReporterTest methodsFor: 'tests - account summary' stamp: 'fr 11/13/2020 17:47:28'!
+!AccountReporterTest methodsFor: 'tests - account summary' stamp: 'fr 11/16/2020 02:53:13'!
 test05AccountSummaryShouldReflectIncomingTransfersOnAccounts
 
-	| account anotherAccount reporter |
-	
-	account _ ReceptiveAccount new.
-	anotherAccount _ ReceptiveAccount new.
-	reporter _ SummaryReporter for: account.
-	
+	self createNewAccountsAndSummaryReporterForOne.
+
 	Transfer move: 100 from: anotherAccount to: account.
 	
-	self assert: [reporter accountSummary = (OrderedCollection with: 'Entrada por transferencia de 100.' with: 'Balance = 100')]! !
+	self  assert: reporter accountSummary 
+		equals: (OrderedCollection with: 'Entrada por transferencia de 100.' with: 'Balance = 100')! !
 
-!AccountReporterTest methodsFor: 'tests - account summary' stamp: 'fr 11/13/2020 17:47:45'!
+!AccountReporterTest methodsFor: 'tests - account summary' stamp: 'fr 11/16/2020 02:53:16'!
 test06AccountSummaryForPortfolioWithNoTransactionsShouldJustShowBalanceZero
-
-	| portfolio reporter |
 	
 	portfolio _ Portfolio new.
 	reporter _ SummaryReporter for: portfolio.
 	
-	self assert: [reporter accountSummary = (OrderedCollection with: 'Balance = 0')]! !
+	self  assert: reporter accountSummary 
+		equals: (OrderedCollection with: 'Balance = 0')! !
 
-!AccountReporterTest methodsFor: 'tests - account summary' stamp: 'fr 11/13/2020 17:48:13'!
+!AccountReporterTest methodsFor: 'tests - account summary' stamp: 'fr 11/16/2020 02:53:09'!
 test07AccountSummaryShouldReflectDepositsOnPortfoliosWithAccounts
 
-	| portfolio account reporter |
+	self createSummaryReporterForPortfolioWithAccount.
 	
-	portfolio _ Portfolio new.
-	account _ ReceptiveAccount new.
-	reporter _ SummaryReporter for: portfolio.
 	Deposit register: 100 on: account.
-	
-	portfolio add: account.
-		
-	self assert: [reporter accountSummary = (OrderedCollection with: 'Depósito por 100.' with: 'Balance = 100')]! !
+			
+	self  assert: reporter accountSummary 
+		equals: (OrderedCollection with: 'Depósito por 100.' with: 'Balance = 100')! !
 
-!AccountReporterTest methodsFor: 'tests - account summary' stamp: 'fr 11/13/2020 17:48:32'!
+!AccountReporterTest methodsFor: 'tests - account summary' stamp: 'fr 11/16/2020 02:53:09'!
 test08AccountSummaryShouldReflectWithdrawsOnPortfoliosWithAccounts
 
-	| portfolio account reporter |
+	self createSummaryReporterForPortfolioWithAccount.
 	
-	portfolio _ Portfolio new.
-	account _ ReceptiveAccount new.
-	reporter _ SummaryReporter for: portfolio.
 	Withdraw register: 100 on: account.
-	
-	portfolio add: account.
-		
-	self assert: [reporter accountSummary = (OrderedCollection with: 'Extracción por 100.' with: 'Balance = -100')]! !
+			
+	self  assert: reporter accountSummary 
+		equals: (OrderedCollection with: 'Extracción por 100.' with: 'Balance = -100')! !
 
-!AccountReporterTest methodsFor: 'tests - account summary' stamp: 'fr 11/13/2020 17:48:53'!
+!AccountReporterTest methodsFor: 'tests - account summary' stamp: 'fr 11/16/2020 02:53:16'!
 test09AccountSummaryShouldReflectOutgoingAndIncomingTransfersOnPortfoliosWithAccounts
 
-	| portfolio account anotherAccount reporter |
-	
-	portfolio _ Portfolio new.
-	account _ ReceptiveAccount new.
-	anotherAccount _ ReceptiveAccount new.
+	self createNewAccount.	
+	self createAnotherNewAccount.
+	portfolio _ Portfolio with: account with: anotherAccount.
 	reporter _ SummaryReporter for: portfolio.
 
 	Transfer move: 10 from: account to: anotherAccount.
 		
-	portfolio add: account.
-	portfolio add: anotherAccount.
-		
-	self assert: [reporter accountSummary = (OrderedCollection with: 'Salida por transferencia de 10.' with: 'Entrada por transferencia de 10.' with: 'Balance = 0')]! !
+	self  assert: reporter accountSummary 
+		equals: (OrderedCollection with: 'Salida por transferencia de 10.' with: 'Entrada por transferencia de 10.' with: 'Balance = 0')! !
 
-!AccountReporterTest methodsFor: 'tests - account summary' stamp: 'fr 11/13/2020 17:49:15'!
+!AccountReporterTest methodsFor: 'tests - account summary' stamp: 'fr 11/16/2020 02:53:10'!
 test10AccountSummaryShouldReflectDepositsOnPortfoliosWithPortfolios
-
-	| portfolio account anotherPortfolio reporter |
 	
-	account _ ReceptiveAccount new.		
-	portfolio _ Portfolio with: account.
-	anotherPortfolio _ Portfolio with: portfolio.
-	reporter _ SummaryReporter for: anotherPortfolio.
+	self createSummaryReporterForPortfolioWithPortfolioWithAccount.
 
 	Deposit register: 100 on: account.
 
 		
-	self assert: [reporter accountSummary = (OrderedCollection with: 'Depósito por 100.' with: 'Balance = 100')]! !
+	self  assert: reporter accountSummary 
+		equals: (OrderedCollection with: 'Depósito por 100.' with: 'Balance = 100')! !
 
-!AccountReporterTest methodsFor: 'tests - account summary' stamp: 'fr 11/13/2020 17:49:32'!
+!AccountReporterTest methodsFor: 'tests - account summary' stamp: 'fr 11/16/2020 02:53:09'!
 test11AccountSummaryShouldReflectWithdrawsOnPortfoliosWithPortfolios
-
-	| portfolio account anotherPortfolio reporter |
 	
-	account _ ReceptiveAccount new.		
-	portfolio _ Portfolio with: account.
-	anotherPortfolio _ Portfolio with: portfolio.
-	reporter _ SummaryReporter for: anotherPortfolio.
+	self createSummaryReporterForPortfolioWithPortfolioWithAccount.
 
 	Withdraw register: 100 on: account.
 
 		
-	self assert: [reporter accountSummary = (OrderedCollection with: 'Extracción por 100.' with: 'Balance = -100')]! !
+	self  assert: reporter accountSummary 
+		equals: (OrderedCollection with: 'Extracción por 100.' with: 'Balance = -100')! !
 
-!AccountReporterTest methodsFor: 'tests - account summary' stamp: 'fr 11/13/2020 17:49:52'!
-test12AccountSummaryShouldReflectOutgoingAndIncomingTransfersOnPortfoliosWithPortfolios
+!AccountReporterTest methodsFor: 'tests - account summary' stamp: 'fr 11/16/2020 02:53:20'!
+test12AccountSummaryShouldReflectOutgoingAndIncomingTransfersOnPortfoliosWithPortfoliosAndAccounts
 
-	| portfolio account anotherPortfolio anotherAccount reporter |
-	
-	account _ ReceptiveAccount new.		
-	anotherAccount _ ReceptiveAccount new.		
-	portfolio _ Portfolio with: account.
-	anotherPortfolio _ Portfolio with: portfolio.
+	self createPortfolioWithPortfolioWithAccount.
+	self createAnotherNewAccount.
 	anotherPortfolio add: anotherAccount.
 	reporter _ SummaryReporter for: anotherPortfolio.
 
 	Transfer move: 100 from: account to: anotherAccount.
 
 		
-	self assert: [reporter accountSummary = (OrderedCollection with: 'Salida por transferencia de 100.' with: 'Entrada por transferencia de 100.' with: 'Balance = 0')]! !
+	self  assert: reporter accountSummary 
+		equals: (OrderedCollection with: 'Salida por transferencia de 100.' with: 'Entrada por transferencia de 100.' with: 'Balance = 0')! !
 
 
-!AccountReporterTest methodsFor: 'tests - net transfer' stamp: 'fr 11/13/2020 18:31:57'!
+!AccountReporterTest methodsFor: 'tests - net transfer' stamp: 'fr 11/16/2020 02:54:59'!
 test13NetTransferForAccountWithNoTransactionsShouldBeZero
 
-	| account reporter |
-	
-	account _ ReceptiveAccount new.
-	reporter _ 	TransferNetReporter for: account .
+	self createNewAccountAndTransferNetReporterForIt.
+	self assert: reporter transferNet equals: 0! !
 
-	self assert: [reporter transferNet = 0]! !
-
-!AccountReporterTest methodsFor: 'tests - net transfer' stamp: 'fr 11/13/2020 18:32:17'!
+!AccountReporterTest methodsFor: 'tests - net transfer' stamp: 'fr 11/16/2020 02:55:31'!
 test14NetTransferForAccountWithAnOutgoingTransferShouldReflectItsValue
 
-	| account anotherAccount reporter |
-	
-	account _ ReceptiveAccount new.
-	anotherAccount _ ReceptiveAccount new.
-	reporter _ 	TransferNetReporter for: account .
+	self createNewAccountAndTransferNetReporterForIt.
+	self createAnotherNewAccount.
 	
 	Transfer move: 100 from: account to: anotherAccount.
 	
-	self assert: [reporter transferNet = -100]! !
+	self assert: reporter transferNet equals: -100! !
 
-!AccountReporterTest methodsFor: 'tests - net transfer' stamp: 'fr 11/13/2020 18:32:30'!
+!AccountReporterTest methodsFor: 'tests - net transfer' stamp: 'fr 11/16/2020 02:55:39'!
 test15NetTransferForAccountWithAnIncomingTransferShouldReflectItsValue
 
-	| account anotherAccount reporter |
-	
-	account _ ReceptiveAccount new.
-	anotherAccount _ ReceptiveAccount new.
-	reporter _ 	TransferNetReporter for: account .
+	self createNewAccountAndTransferNetReporterForIt.
+	self createAnotherNewAccount.
 	
 	Transfer move: 100 from: anotherAccount to: account.
 	
-	self assert: [reporter transferNet = 100]! !
+	self assert: reporter transferNet equals: 100! !
 
-!AccountReporterTest methodsFor: 'tests - net transfer' stamp: 'fr 11/13/2020 18:32:41'!
+!AccountReporterTest methodsFor: 'tests - net transfer' stamp: 'fr 11/16/2020 02:55:54'!
 test16NetTransferForAccountShouldNotReflectDeposits
 
-	| account reporter |
-	
-	account _ ReceptiveAccount new.
-	reporter _ 	TransferNetReporter for: account .
+	self createNewAccountAndTransferNetReporterForIt.
 	
 	Deposit register: 100 on: account. 
 		
-	self assert: [reporter transferNet = 0]! !
+	self assert: reporter transferNet equals: 0! !
 
-!AccountReporterTest methodsFor: 'tests - net transfer' stamp: 'fr 11/13/2020 18:32:51'!
+!AccountReporterTest methodsFor: 'tests - net transfer' stamp: 'fr 11/16/2020 02:59:28'!
 test17NetTransferForAccountShouldNotReflectWithdraws
 
-	| account reporter |
-	
-	account _ ReceptiveAccount new.
-	reporter _ 	TransferNetReporter for: account .
+	self createNewAccountAndTransferNetReporterForIt.
 
 	Withdraw register: 100 on: account. 
 		
-	self assert: [reporter transferNet = 0]! !
+	self assert: reporter transferNet equals: 0! !
 
-!AccountReporterTest methodsFor: 'tests - net transfer' stamp: 'fr 11/13/2020 18:33:07'!
+!AccountReporterTest methodsFor: 'tests - net transfer' stamp: 'fr 11/16/2020 02:59:37'!
 test18NetTransferForPortfolioWithNoTransactionsShouldBeZero
 
-	| portfolio reporter |
-	
 	portfolio _ Portfolio new.
-	reporter _ 	TransferNetReporter for: portfolio .
+	reporter _ 	TransferNetReporter for: portfolio.
 
-	self assert: [reporter transferNet = 0]! !
+	self assert: reporter transferNet equals: 0! !
 
-!AccountReporterTest methodsFor: 'tests - net transfer' stamp: 'fr 11/13/2020 18:33:29'!
+!AccountReporterTest methodsFor: 'tests - net transfer' stamp: 'fr 11/16/2020 03:06:17'!
 test19NetTransferForPortfolioWithAnOutgoingTransferShouldReflectItsValue
 
-	| portfolio account anotherAccount reporter |
-	
-	account _ ReceptiveAccount new.
-	anotherAccount _ ReceptiveAccount new.
-	portfolio _ Portfolio with: account.
-	reporter _ TransferNetReporter for: portfolio.
+	self createTransferNetReporterForPortfolioWithAccount.
+	self createAnotherNewAccount.
 
 	Transfer move: 10 from: account to: anotherAccount.
 			
-	self assert: [reporter transferNet = -10]! !
+	self assert: reporter transferNet equals: -10! !
 
-!AccountReporterTest methodsFor: 'tests - net transfer' stamp: 'fr 11/13/2020 18:33:45'!
+!AccountReporterTest methodsFor: 'tests - net transfer' stamp: 'fr 11/16/2020 03:06:27'!
 test20NetTransferForPortfolioWithAnIncomingTransferShouldReflectItsValue
-
-	| portfolio account anotherAccount reporter |
 	
-	account _ ReceptiveAccount new.
-	anotherAccount _ ReceptiveAccount new.
-	portfolio _ Portfolio with: account.
-	reporter _ TransferNetReporter for: portfolio.
+	self createTransferNetReporterForPortfolioWithAccount.
+	self createAnotherNewAccount. 
 	
 	Transfer move: 10 from: anotherAccount to: account.
 			
-	self assert: [reporter transferNet = 10]! !
+	self assert: reporter transferNet equals: 10! !
 
-!AccountReporterTest methodsFor: 'tests - net transfer' stamp: 'fr 11/13/2020 18:33:57'!
+!AccountReporterTest methodsFor: 'tests - net transfer' stamp: 'fr 11/16/2020 03:06:34'!
 test21NetTransferForPortfolioShouldNotReflectDeposits
 
-	| portfolio account reporter |
-	
-	account _ ReceptiveAccount new.
-	portfolio _ Portfolio with: account.
-	reporter _ TransferNetReporter for: portfolio.
+	self createTransferNetReporterForPortfolioWithAccount.
 	
 	Deposit register: 100 on: account. 
 			
-	self assert: [reporter transferNet = 0]! !
+	self assert: reporter transferNet equals: 0! !
 
-!AccountReporterTest methodsFor: 'tests - net transfer' stamp: 'fr 11/13/2020 18:34:26'!
+!AccountReporterTest methodsFor: 'tests - net transfer' stamp: 'fr 11/16/2020 03:06:41'!
 test22NetTransferForPortfolioShouldNotReflectWithdraws
 
-	| portfolio account reporter |
-	
-	account _ ReceptiveAccount new.
-	portfolio _ Portfolio with: account.
-	reporter _ TransferNetReporter for: portfolio.
+	self createTransferNetReporterForPortfolioWithAccount.
 	
 	Withdraw register: 100 on: account. 
 			
-	self assert: [reporter transferNet = 0]! !
+	self assert: reporter transferNet equals: 0! !
 
-!AccountReporterTest methodsFor: 'tests - net transfer' stamp: 'fr 11/13/2020 18:34:51'!
+!AccountReporterTest methodsFor: 'tests - net transfer' stamp: 'fr 11/16/2020 03:01:21'!
 test23NetTransferForPortfoliosWithPortfoliosShouldReflectOutgoingAndIncomingTransfers
-
-	| portfolio account anotherPortfolio anotherAccount reporter |
 	
-	account _ ReceptiveAccount new.
-	anotherAccount _ ReceptiveAccount new.
-	portfolio _ Portfolio with: account.
-	anotherPortfolio _ Portfolio with: portfolio.
-	reporter _ TransferNetReporter for: anotherPortfolio.
+	self createTransferNetReporterForPortfolioWithPortfolioWithAccount.
+	self createAnotherNewAccount. 
 
 	Transfer 	move: 30 from: anotherAccount to: account. 
 	Transfer 	move: 10 from: account to: anotherAccount. 	
 				
-	self assert: [reporter transferNet = 20]! !
+	self assert: reporter transferNet equals: 20! !
 
-!AccountReporterTest methodsFor: 'tests - net transfer' stamp: 'fr 11/13/2020 18:35:07'!
+!AccountReporterTest methodsFor: 'tests - net transfer' stamp: 'fr 11/16/2020 03:06:54'!
 test24NetTransferForPortfoliosWithPortfoliosShouldNotRelfectDepositsOrWithdraws
 
-	| portfolio account anotherPortfolio reporter |
-		
-	account _ ReceptiveAccount new.
-	portfolio _ Portfolio with: account.
-	anotherPortfolio _ Portfolio with: portfolio.
-	reporter _ TransferNetReporter for: anotherPortfolio.
-	
+	self createTransferNetReporterForPortfolioWithPortfolioWithAccount.
+
 	Deposit register: 100 on: account.
 	Withdraw register: 50 on: account.
 				
-	self assert: [reporter transferNet = 0]! !
+	self assert: reporter transferNet equals: 0! !
+
+
+!AccountReporterTest methodsFor: 'private' stamp: 'fr 11/16/2020 02:53:26'!
+createAnotherNewAccount
+
+	anotherAccount _ ReceptiveAccount new! !
+
+!AccountReporterTest methodsFor: 'private' stamp: 'fr 11/16/2020 02:53:06'!
+createNewAccount
+
+	account _ ReceptiveAccount new! !
+
+!AccountReporterTest methodsFor: 'private' stamp: 'fr 11/16/2020 02:53:09'!
+createNewAccountAndSummaryReporterForIt
+	
+	self createNewAccount.
+	reporter _ SummaryReporter for: account.! !
+
+!AccountReporterTest methodsFor: 'private' stamp: 'fr 11/16/2020 02:54:27'!
+createNewAccountAndTransferNetReporterForIt
+	
+	self createNewAccount.
+	reporter _ TransferNetReporter for: account.! !
+
+!AccountReporterTest methodsFor: 'private' stamp: 'fr 11/16/2020 02:40:23'!
+createNewAccountsAndSummaryReporterForOne
+
+	self createNewAccountAndSummaryReporterForIt.
+	self createAnotherNewAccount! !
+
+!AccountReporterTest methodsFor: 'private' stamp: 'fr 11/16/2020 02:53:16'!
+createPortfolioWithAccount
+
+	self createNewAccount.
+	portfolio _ Portfolio with: account! !
+
+!AccountReporterTest methodsFor: 'private' stamp: 'fr 11/16/2020 02:53:20'!
+createPortfolioWithPortfolioWithAccount
+
+	self createPortfolioWithAccount.
+	anotherPortfolio _ Portfolio with: portfolio! !
+
+!AccountReporterTest methodsFor: 'private' stamp: 'fr 11/16/2020 02:57:08'!
+createSummaryReporterForPortfolioWithAccount
+
+	self createPortfolioWithAccount.
+	reporter _ SummaryReporter for: portfolio! !
+
+!AccountReporterTest methodsFor: 'private' stamp: 'fr 11/16/2020 02:53:20'!
+createSummaryReporterForPortfolioWithPortfolioWithAccount
+
+	self createPortfolioWithPortfolioWithAccount.
+	reporter _ SummaryReporter for: anotherPortfolio! !
+
+!AccountReporterTest methodsFor: 'private' stamp: 'fr 11/16/2020 02:57:23'!
+createTransferNetReporterForPortfolioWithAccount
+
+	self createPortfolioWithAccount.
+	reporter _ TransferNetReporter for: portfolio! !
+
+!AccountReporterTest methodsFor: 'private' stamp: 'fr 11/16/2020 03:00:48'!
+createTransferNetReporterForPortfolioWithPortfolioWithAccount
+
+	self createPortfolioWithPortfolioWithAccount.
+	reporter _ TransferNetReporter for: anotherPortfolio! !
 
 
 !classDefinition: #PortfolioReporterTest category: 'Portfolio-Part-II-Exercise'!
@@ -329,54 +316,142 @@ TestCase subclass: #PortfolioReporterTest
 	poolDictionaries: ''
 	category: 'Portfolio-Part-II-Exercise'!
 
-!PortfolioReporterTest methodsFor: 'as yet unclassified' stamp: 'fr 11/13/2020 20:05:39'!
-test01
+!PortfolioReporterTest methodsFor: 'tests - tree structure' stamp: 'fr 11/16/2020 01:52:10'!
+test01TreeStructureReportForEmptyPortfolioWorksAsExpected
 
-	| portfolio |
-	portfolio _ Portfolio named: 'Portfolio de la familia'.
+	| portfolio reporter |
 	
-	self assert: [portfolio treeStructure = (OrderedCollection with: 'Portfolio de la familia')]! !
+	portfolio _ Portfolio named: 'Portfolio de la familia'.
+	reporter _ TreeStructureReporter for: portfolio.
 
-!PortfolioReporterTest methodsFor: 'as yet unclassified' stamp: 'fr 11/13/2020 20:06:02'!
-test02
+	self assert: reporter treeStructure equals: (OrderedCollection with: 'Portfolio de la familia')! !
 
-	| portfolio account |
+!PortfolioReporterTest methodsFor: 'tests - tree structure' stamp: 'fr 11/16/2020 01:52:02'!
+test02TreeStructureReportForPortfolioWithAccountsWorksAsExpected
+
+	| portfolio account reporter |
+	
 	account _ ReceptiveAccount named: 'Cuenta de Juan'.
 	portfolio _ Portfolio named: 'Portfolio de la familia' with: account.
+	reporter _ TreeStructureReporter for: portfolio.
 
-	self assert: [portfolio treeStructure = (OrderedCollection with: 'Portfolio de la familia' with: ' Cuenta de Juan')]! !
+	self assert: reporter treeStructure equals: (OrderedCollection with: 'Portfolio de la familia' with: ' Cuenta de Juan')! !
 
-!PortfolioReporterTest methodsFor: 'as yet unclassified' stamp: 'fr 11/13/2020 20:13:58'!
-test03
+!PortfolioReporterTest methodsFor: 'tests - tree structure' stamp: 'fr 11/16/2020 01:51:32'!
+test03TreeStructureReportForPortfolioWithAccountsAndPortfoliosWorksAsExpected
 
-	| portfolio account anotherAccount anotherPortfolio |
+	| anotherPortfolio account anotherAccount portfolio reporter |
+	
 	account _ ReceptiveAccount named: 'Cuenta de Juan'.
 	anotherAccount _ ReceptiveAccount named: 'Cuenta de Angeles'.
-	portfolio _ Portfolio named: 'Portfolio de Angeles' with: anotherAccount.
-	anotherPortfolio _ Portfolio named: 'Portfolio de la familia' with: portfolio with: account.
 	
+	anotherPortfolio _ Portfolio named: 'Portfolio de Angeles' with: anotherAccount.
+	portfolio _ Portfolio named: 'Portfolio de la familia' with: anotherPortfolio with: account.
+	
+	reporter _ TreeStructureReporter for: portfolio.
 
-	self assert: [anotherPortfolio treeStructure = (OrderedCollection with: 'Portfolio de la familia' with: ' Portfolio de Angeles' with: '  Cuenta de Angeles' with: ' Cuenta de Juan')]! !
+	self assert: reporter treeStructure equals: (OrderedCollection with: 'Portfolio de la familia' with: ' Portfolio de Angeles' with: '  Cuenta de Angeles' with: ' Cuenta de Juan')! !
 
-!PortfolioReporterTest methodsFor: 'as yet unclassified' stamp: 'fr 11/13/2020 22:10:19'!
-test04
+!PortfolioReporterTest methodsFor: 'tests - tree structure' stamp: 'fr 11/16/2020 01:51:41'!
+test04AccountsShouldUseADefaultNameIfNoneIsSpecified
 
-	| portfolio account anotherAccount expected |
-	account _ ReceptiveAccount named: 'Cuenta de Fede'.
+	| portfolio account reporter |
+	account _ ReceptiveAccount new.
+	portfolio _ Portfolio with: account.
+	reporter _ TreeStructureReporter for: portfolio.
+
+
+	self assert: reporter treeStructure equals: (OrderedCollection with: 'Un portfolio' with: ' Una cuenta')! !
+
+
+!PortfolioReporterTest methodsFor: 'tests - special tree' stamp: 'fr 11/16/2020 01:48:19'!
+test05SpecialReportForEmptyPortfolioWorksAsExpected
+
+	| portfolio reporter |
+	
+	portfolio _ Portfolio named: 'Portfolio de la familia'.
+	reporter _ SpecialTreeReporter for: portfolio.
+
+	self assert: reporter specialReport equals: (OrderedCollection with: 'Portfolio de la familia' with: ' Balance = 0')! !
+
+!PortfolioReporterTest methodsFor: 'tests - special tree' stamp: 'fr 11/16/2020 01:51:08'!
+test06SpecialReportForPortfolioWithAccountsWithAnyKindOfTransactionsWorksAsExpected
+
+	| portfolio account anotherAccount reporter |
+	
+	account _ ReceptiveAccount named: 'Cuenta de la familia'.
 	anotherAccount _ ReceptiveAccount new.
-	Deposit register: 100 on: account.
-	Withdraw register: 50 on: account. 
-	Transfer move: 10 from: account to: anotherAccount.
-	Transfer move: 5 from: anotherAccount to: account.
-	portfolio _ Portfolio named: 'Portfolio de Fede' with: account.
-	expected _ OrderedCollection with: 'Portfolio de Fede'.
-	expected add: ' Cuenta de Fede'.
-	expected add: '  Depósito por 100.'.
-	expected add: '  Extracción por 50.'.
-	expected add: '  Salida por transferencia de 10.'.
-	expected add: '  Entrada por transferencia de 5'.
-	expected add: ' Balance = 45'.
-	self assert: [portfolio specialReport = expected]! !
+	
+	portfolio _ Portfolio named: 'Portfolio de la familia' with: account.
+	
+	reporter _ SpecialTreeReporter for: portfolio.
+	
+	self performRegularTransactionsWith: account asWellAsTransferTransactionsWithItAnd: anotherAccount.
+	self assert: reporter specialReport equals: self expectedReportForPortfolioWithAccounts! !
+
+!PortfolioReporterTest methodsFor: 'tests - special tree' stamp: 'fr 11/16/2020 01:51:01'!
+test07SpecialReportForPortfolioWithAccountsAndPortfoliosWithAnyKindOfTransactionsWorksAsExpected
+
+	| portfolio account anotherAccount anotherPortfolio reporter |
+	
+	account _ ReceptiveAccount named: 'Cuenta de la familia'.
+	anotherAccount _ ReceptiveAccount named: 'Cuenta de Juan'.
+	
+	anotherPortfolio _ Portfolio named: 'Portfolio de Juan' with: anotherAccount.
+	portfolio _ Portfolio named: 'Portfolio de la familia' with: account with: anotherPortfolio.
+	
+	reporter _ SpecialTreeReporter for: portfolio.
+	
+	self performRegularTransactionsWith: account asWellAsTransferTransactionsWithItAnd: anotherAccount.	
+	self assert: reporter specialReport equals: self expectedReportForPortfolioWithAccountsAndPortfolios! !
+
+
+!PortfolioReporterTest methodsFor: 'private - special tree' stamp: 'fr 11/16/2020 01:44:58'!
+expectedReportForPortfolioWithAccounts
+	
+	| expectedReport |
+	
+	expectedReport _ OrderedCollection with: 'Portfolio de la familia'.
+	expectedReport add: ' Cuenta de la familia'.
+	expectedReport add: '  Depósito por 100.'.
+	expectedReport add: '  Extracción por 50.'.
+	expectedReport add: '  Salida por transferencia de 10.'.
+	expectedReport add: '  Entrada por transferencia de 5.'.
+	expectedReport add: '  Balance = 45'.
+	expectedReport add: ' Balance = 45'.
+	
+	^expectedReport
+	! !
+
+!PortfolioReporterTest methodsFor: 'private - special tree' stamp: 'fr 11/16/2020 01:45:50'!
+expectedReportForPortfolioWithAccountsAndPortfolios
+
+	| expectedReport |
+	
+	expectedReport _ OrderedCollection with: 'Portfolio de la familia'.
+	expectedReport add: ' Cuenta de la familia'.
+	expectedReport add: '  Depósito por 100.'.
+	expectedReport add: '  Extracción por 50.'.
+	expectedReport add: '  Salida por transferencia de 10.'.
+	expectedReport add: '  Entrada por transferencia de 5.'.
+	expectedReport add: '  Balance = 45'.
+	expectedReport add: ' Portfolio de Juan'.
+	expectedReport add: '  Cuenta de Juan'.
+	expectedReport add: '   Entrada por transferencia de 10.'.
+	expectedReport add: '   Salida por transferencia de 5.'.
+	expectedReport add: '   Balance = 5'.
+	expectedReport add: '  Balance = 5'.
+	expectedReport add: ' Balance = 50'.
+	
+	^expectedReport! !
+
+!PortfolioReporterTest methodsFor: 'private - special tree' stamp: 'fr 11/16/2020 01:43:07'!
+performRegularTransactionsWith: anAccount asWellAsTransferTransactionsWithItAnd: anotherAccount
+
+	Deposit register: 100 on: anAccount.
+	Withdraw register: 50 on: anAccount.
+	Transfer move: 10 from: anAccount to: anotherAccount.
+	Transfer move: 5 from: anotherAccount to: anAccount! !
 
 
 !classDefinition: #PortfolioTest category: 'Portfolio-Part-II-Exercise'!
@@ -688,81 +763,87 @@ test07AccountKnowsItsTransactions
 
 !classDefinition: #TransferTest category: 'Portfolio-Part-II-Exercise'!
 TestCase subclass: #TransferTest
-	instanceVariableNames: ''
+	instanceVariableNames: 'account anotherAccount transfer'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Portfolio-Part-II-Exercise'!
 
-!TransferTest methodsFor: 'as yet unclassified' stamp: 'fr 11/11/2020 15:51:07'!
-test01
+!TransferTest methodsFor: 'tests' stamp: 'fr 11/16/2020 01:08:06'!
+test01TransferMovesMoneyAffectingBalancesAsExpected
+	
+	self  createAccountsTransfer: [:aTransfer | ] 
+		assert: [	self assert: account balance equals: -100] 
+		and: [	self assert: anotherAccount balance equals: 100]
+! !
 
-	| account anotherAccount |
+!TransferTest methodsFor: 'tests' stamp: 'fr 11/16/2020 01:05:58'!
+test02AccountsThatParticipateInTheTransferRegisterTheCorrespondingLeg
 	
-	account _ ReceptiveAccount new.
-	anotherAccount _ ReceptiveAccount new.
-	
-	Transfer move: 100 from: account to: anotherAccount.
-	
-	self assert: [account balance = -100 and: [anotherAccount balance = 100]]! !
+	self  createAccountsTransfer: [:aTransfer | transfer _ aTransfer] 
+		assert: [	self assert: (account hasRegistered: transfer withdrawLeg)] 
+		and: [	self assert: (anotherAccount hasRegistered: transfer depositLeg)]! !
 
-!TransferTest methodsFor: 'as yet unclassified' stamp: 'fr 11/11/2020 15:54:25'!
-test02
+!TransferTest methodsFor: 'tests' stamp: 'fr 11/16/2020 01:07:04'!
+test03LegsKnowTheirComplementaryLegThroughTheTransfer
 
-	| account anotherAccount transfer |
-	
-	account _ ReceptiveAccount new.
-	anotherAccount _ ReceptiveAccount new.
-	
-	transfer _ Transfer move: 100 from: account to: anotherAccount.
-	
-	self assert: [(account hasRegistered: transfer from) and: [anotherAccount hasRegistered: transfer to]]! !
+	self  createAccountsTransfer: [:aTransfer | transfer _ aTransfer] 
+		assert: [self assert: (transfer depositLeg isComplementedBy: transfer withdrawLeg)] 
+		and: [	self assert: (transfer withdrawLeg isComplementedBy: transfer depositLeg)]! !
 
-!TransferTest methodsFor: 'as yet unclassified' stamp: 'fr 11/11/2020 15:57:11'!
-test03
+!TransferTest methodsFor: 'tests' stamp: 'fr 11/16/2020 01:10:11'!
+test04TransferValueCanNotBeZero
 
-	| account anotherAccount transfer |
-	
-	account _ ReceptiveAccount new.
-	anotherAccount _ ReceptiveAccount new.
-	
-	transfer _ Transfer move: 100 from: account to: anotherAccount.
-	
-	self assert: [(transfer to isComplementedBy: transfer from) and: [transfer from isComplementedBy: transfer to]]! !
+	self createAccountsAndAssertTransferFailsForValue: 0! !
 
-!TransferTest methodsFor: 'as yet unclassified' stamp: 'fr 11/11/2020 16:07:13'!
-test04
+!TransferTest methodsFor: 'tests' stamp: 'fr 11/16/2020 01:10:25'!
+test05TransferValueCanNotBeNegative
 
-	| account anotherAccount |
-	
-	account _ ReceptiveAccount new.
-	anotherAccount _ ReceptiveAccount new.
-	
-	self  should: [Transfer move: 0 from: account to: anotherAccount] 
-		raise:  Error
-		withMessageText: Transfer invalidTransferAmountErrorDescription! !
+	self createAccountsAndAssertTransferFailsForValue: -1! !
 
-!TransferTest methodsFor: 'as yet unclassified' stamp: 'fr 11/11/2020 16:08:05'!
-test05
-
-	| account anotherAccount |
+!TransferTest methodsFor: 'tests' stamp: 'fr 11/16/2020 01:00:44'!
+test06TransferCanNotMoveMoneyFromAnAccountToItself
 	
-	account _ ReceptiveAccount new.
-	anotherAccount _ ReceptiveAccount new.
-	
-	self  should: [Transfer move: -1 from: account to: anotherAccount] 
-		raise:  Error
-		withMessageText: Transfer invalidTransferAmountErrorDescription! !
-
-!TransferTest methodsFor: 'as yet unclassified' stamp: 'fr 11/11/2020 16:09:26'!
-test06
-
-	| account |
-	
-	account _ ReceptiveAccount new.
-	
+	self createNewAccount.
+		
 	self  should: [Transfer move: 10 from: account to: account] 
-		raise:  Error
+		raise:  Error - MessageNotUnderstood 
 		withMessageText: Transfer canNotTransferToItselfErrorDescription! !
+
+
+!TransferTest methodsFor: 'private' stamp: 'fr 11/16/2020 01:09:26'!
+createAccountsAndAssertTransferFailsForValue: aTransferValue
+
+	self createNewAccounts.
+
+	self  should: [Transfer move: aTransferValue from: account to: anotherAccount] 
+		raise:  Error - MessageNotUnderstood 
+		withMessageText: Transfer invalidTransferAmountErrorDescription! !
+
+!TransferTest methodsFor: 'private' stamp: 'fr 11/16/2020 01:04:41'!
+createAccountsTransfer: aTransferBlock assert: aBlockToAssert and: anotherBlockToAssert
+
+	self createNewAccounts.
+	
+	aTransferBlock value: self transfer100FromAccountToAnotherAccount.
+	
+	aBlockToAssert value.
+	anotherBlockToAssert value! !
+
+!TransferTest methodsFor: 'private' stamp: 'fr 11/16/2020 01:07:47'!
+createNewAccount
+
+	account _ ReceptiveAccount new! !
+
+!TransferTest methodsFor: 'private' stamp: 'fr 11/16/2020 00:55:56'!
+createNewAccounts
+
+	self createNewAccount.
+	anotherAccount _ ReceptiveAccount new! !
+
+!TransferTest methodsFor: 'private' stamp: 'fr 11/16/2020 00:59:29'!
+transfer100FromAccountToAnotherAccount
+
+	^Transfer move: 100 from: account to: anotherAccount! !
 
 
 !classDefinition: #Account category: 'Portfolio-Part-II-Exercise'!
@@ -809,7 +890,7 @@ addedTo: aPortfolio
 
 !classDefinition: #Portfolio category: 'Portfolio-Part-II-Exercise'!
 Account subclass: #Portfolio
-	instanceVariableNames: 'accounts parents name'
+	instanceVariableNames: 'accounts parents name account'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Portfolio-Part-II-Exercise'!
@@ -849,11 +930,12 @@ rootParents
 	^ rootParents! !
 
 
-!Portfolio methodsFor: 'initialization' stamp: 'HAW 5/25/2019 12:03:18'!
+!Portfolio methodsFor: 'initialization' stamp: 'fr 11/16/2020 01:36:45'!
 initialize
 
-	accounts := OrderedCollection new.
-	parents := OrderedCollection new.! !
+	self defaultPortfolioName.
+	accounts _ OrderedCollection new.
+	parents _ OrderedCollection new.! !
 
 !Portfolio methodsFor: 'initialization' stamp: 'fr 11/12/2020 16:36:37'!
 initializeNamed: aName 
@@ -905,25 +987,6 @@ isComposedBy: anAccount
 	^ self = anAccount or: [ accounts anySatisfy: [ :composedAccount | (composedAccount isComposedBy: anAccount) or: [ anAccount isComposedBy: composedAccount ]]]! !
 
 
-!Portfolio methodsFor: 'account management - private' stamp: 'HAW 5/25/2019 12:17:31'!
-addRootParentsTo: rootParents
-
-	parents 
-		ifEmpty: [ rootParents add: self ] 
-		ifNotEmpty: [ parents do: [ :aParent | aParent addRootParentsTo: rootParents ]]! !
-
-!Portfolio methodsFor: 'account management - private' stamp: 'HAW 5/25/2019 12:20:36'!
-assertCanAdd: accountToAdd
-
-	(self anyRootParentIsComposedBy: accountToAdd) ifTrue: [ self signalCanNotAddAccount ].
-! !
-
-!Portfolio methodsFor: 'account management - private' stamp: 'HAW 5/25/2019 11:48:34'!
-signalCanNotAddAccount
-	
-	self error: self class canNotAddAccountErrorMessage! !
-
-
 !Portfolio methodsFor: 'report' stamp: 'fr 11/13/2020 21:36:32'!
 addToPortfolioReportWith: aPortfolioReporter 	
 	
@@ -943,26 +1006,35 @@ buildTransactionReportWith: aReporter
 		anAccount buildTransactionReportWith: aReporter 	
 	]! !
 
-!Portfolio methodsFor: 'report' stamp: 'fr 11/13/2020 21:21:21'!
+!Portfolio methodsFor: 'report' stamp: 'fr 11/15/2020 20:14:48'!
 name
 
-	^name! !
+	^name copy! !
 
-!Portfolio methodsFor: 'report' stamp: 'fr 11/13/2020 22:03:57'!
-specialReport
-	
-	^OrderedCollection with: 'Portfolio de Fede' with: ' Balance = 0'
-	! !
 
-!Portfolio methodsFor: 'report' stamp: 'fr 11/13/2020 21:35:21'!
-treeStructure
+!Portfolio methodsFor: 'private - account management' stamp: 'HAW 5/25/2019 12:17:31'!
+addRootParentsTo: rootParents
+
+	parents 
+		ifEmpty: [ rootParents add: self ] 
+		ifNotEmpty: [ parents do: [ :aParent | aParent addRootParentsTo: rootParents ]]! !
+
+!Portfolio methodsFor: 'private - account management' stamp: 'HAW 5/25/2019 12:20:36'!
+assertCanAdd: accountToAdd
+
+	(self anyRootParentIsComposedBy: accountToAdd) ifTrue: [ self signalCanNotAddAccount ].
+! !
+
+!Portfolio methodsFor: 'private - account management' stamp: 'HAW 5/25/2019 11:48:34'!
+signalCanNotAddAccount
 	
-	| reporter |
-	reporter _ TreeStructureReporter for: self.
+	self error: self class canNotAddAccountErrorMessage! !
+
+
+!Portfolio methodsFor: 'private - initialization' stamp: 'fr 11/15/2020 22:00:27'!
+defaultPortfolioName
 	
-	^reporter treeStructure
-	
-	! !
+	name _ 'Un portfolio'! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
@@ -975,19 +1047,21 @@ canNotAddAccountErrorMessage
 	
 	^'Can not add repeated account to a portfolio!!'! !
 
-!Portfolio class methodsFor: 'as yet unclassified' stamp: 'HAW 5/25/2019 11:18:21'!
+!Portfolio class methodsFor: 'as yet unclassified' stamp: 'fr 11/15/2020 22:00:10'!
 with: anAccount
 
 	^self new 
 		add: anAccount;
+		defaultPortfolioName;
 		yourself! !
 
-!Portfolio class methodsFor: 'as yet unclassified' stamp: 'HAW 5/25/2019 11:23:59'!
+!Portfolio class methodsFor: 'as yet unclassified' stamp: 'fr 11/16/2020 01:34:10'!
 with: anAccount with: anotherAccount
 
 	^self new 
 		add: anAccount;
 		add: anotherAccount;
+		defaultPortfolioName;
 		yourself! !
 
 
@@ -1014,11 +1088,12 @@ Account subclass: #ReceptiveAccount
 	poolDictionaries: ''
 	category: 'Portfolio-Part-II-Exercise'!
 
-!ReceptiveAccount methodsFor: 'initialization' stamp: 'HernanWilkinson 7/13/2011 18:35'!
+!ReceptiveAccount methodsFor: 'initialization' stamp: 'fr 11/15/2020 21:53:11'!
 initialize
 
 	super initialize.
-	transactions := OrderedCollection new.! !
+	name _ 'Una cuenta'.
+	transactions _ OrderedCollection new.! !
 
 !ReceptiveAccount methodsFor: 'initialization' stamp: 'fr 11/12/2020 16:41:03'!
 initializeNamed: aName 
@@ -1081,10 +1156,10 @@ buildTransactionReportWith: aReporter
 		aTransaction addToReportWith: aReporter 
 	]! !
 
-!ReceptiveAccount methodsFor: 'report' stamp: 'fr 11/13/2020 21:21:26'!
+!ReceptiveAccount methodsFor: 'report' stamp: 'fr 11/15/2020 20:14:53'!
 name
 
-	^name! !
+	^name copy! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
@@ -1105,16 +1180,36 @@ Object subclass: #AccountReporter
 	poolDictionaries: ''
 	category: 'Portfolio-Part-II-Exercise'!
 
+!AccountReporter methodsFor: 'transaction adding' stamp: 'fr 11/16/2020 00:33:07'!
+addDepositByTransferToReport: aDepositByTransfer
+
+	self subclassResponsibility ! !
+
+!AccountReporter methodsFor: 'transaction adding' stamp: 'fr 11/16/2020 00:33:18'!
+addDepositToReport: aDeposit
+	
+	self subclassResponsibility ! !
+
+!AccountReporter methodsFor: 'transaction adding' stamp: 'fr 11/16/2020 00:33:35'!
+addWithdrawByTransfeToReport: aWithdrawByTransfe
+	
+	self subclassResponsibility ! !
+
+!AccountReporter methodsFor: 'transaction adding' stamp: 'fr 11/16/2020 00:33:27'!
+addWithdrawToReport: aWithdraw
+	
+	self subclassResponsibility ! !
+
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
 !classDefinition: 'AccountReporter class' category: 'Portfolio-Part-II-Exercise'!
 AccountReporter class
 	instanceVariableNames: ''!
 
-!AccountReporter class methodsFor: 'instance creation' stamp: 'fr 11/13/2020 18:29:51'!
-for: aReceptiveAccount 
+!AccountReporter class methodsFor: 'instance creation' stamp: 'fr 11/16/2020 00:29:30'!
+for: anAccount 
 	
-	^self new initializeFor: aReceptiveAccount ! !
+	^self new initializeFor: anAccount ! !
 
 
 !classDefinition: #SummaryReporter category: 'Portfolio-Part-II-Exercise'!
@@ -1124,26 +1219,22 @@ AccountReporter subclass: #SummaryReporter
 	poolDictionaries: ''
 	category: 'Portfolio-Part-II-Exercise'!
 
-!SummaryReporter methodsFor: 'initialization' stamp: 'fr 11/13/2020 18:28:52'!
-initializeFor: aReceptiveAccount 
+!SummaryReporter methodsFor: 'initialization' stamp: 'fr 11/16/2020 00:29:56'!
+initializeFor: anAccount 
 
 	accountSummary _ OrderedCollection new.
-	account _ aReceptiveAccount.! !
+	account _ anAccount.! !
 
 
-!SummaryReporter methodsFor: 'summary' stamp: 'fr 11/13/2020 20:09:26'!
+!SummaryReporter methodsFor: 'report' stamp: 'fr 11/13/2020 20:09:26'!
 accountSummary
 	
 	account buildTransactionReportWith: self.
 	self addAccountBalance.
 	^accountSummary! !
 
-!SummaryReporter methodsFor: 'summary' stamp: 'fr 11/13/2020 18:28:52'!
-addAccountBalance
 
-	accountSummary add: 'Balance = ',account balance asString! !
-
-!SummaryReporter methodsFor: 'summary' stamp: 'fr 11/13/2020 18:28:52'!
+!SummaryReporter methodsFor: 'transaction adding' stamp: 'fr 11/13/2020 18:28:52'!
 addDepositByTransferToReport: aDepositByTransfer
 
 	accountSummary add: 'Entrada por transferencia de ',aDepositByTransfer value asString,'.'
@@ -1151,22 +1242,28 @@ addDepositByTransferToReport: aDepositByTransfer
 
 	 ! !
 
-!SummaryReporter methodsFor: 'summary' stamp: 'fr 11/13/2020 18:28:52'!
+!SummaryReporter methodsFor: 'transaction adding' stamp: 'fr 11/13/2020 18:28:52'!
 addDepositToReport: aDeposit
 
 	 accountSummary add: 'Depósito por ',aDeposit value asString,'.'! !
 
-!SummaryReporter methodsFor: 'summary' stamp: 'fr 11/13/2020 18:28:52'!
+!SummaryReporter methodsFor: 'transaction adding' stamp: 'fr 11/13/2020 18:28:52'!
 addWithdrawByTransferToReport: aWithdrawByTransfer
 
 	accountSummary add: 'Salida por transferencia de ',aWithdrawByTransfer value asString,'.'
 
 	 ! !
 
-!SummaryReporter methodsFor: 'summary' stamp: 'fr 11/13/2020 18:28:52'!
+!SummaryReporter methodsFor: 'transaction adding' stamp: 'fr 11/13/2020 18:28:52'!
 addWithdrawToReport: aWithdraw
 
 	 accountSummary add: 'Extracción por ',aWithdraw value asString,'.'! !
+
+
+!SummaryReporter methodsFor: 'private - balance' stamp: 'fr 11/13/2020 18:28:52'!
+addAccountBalance
+
+	accountSummary add: 'Balance = ',account balance asString! !
 
 
 !classDefinition: #TransferNetReporter category: 'Portfolio-Part-II-Exercise'!
@@ -1176,25 +1273,14 @@ AccountReporter subclass: #TransferNetReporter
 	poolDictionaries: ''
 	category: 'Portfolio-Part-II-Exercise'!
 
-!TransferNetReporter methodsFor: 'as yet unclassified' stamp: 'fr 11/13/2020 18:08:57'!
-addDepositByTransferToReport: aDepositByTransfer
+!TransferNetReporter methodsFor: 'initialization' stamp: 'fr 11/16/2020 00:30:03'!
+initializeFor: anAccount 
+	
+	transferNetBalance _ 0.
+	account _ anAccount.! !
 
-	transferNetBalance _ aDepositByTransfer affectBalance: transferNetBalance ! !
 
-!TransferNetReporter methodsFor: 'as yet unclassified' stamp: 'fr 11/13/2020 18:10:03'!
-addDepositToReport: aDeposit
-! !
-
-!TransferNetReporter methodsFor: 'as yet unclassified' stamp: 'fr 11/13/2020 18:09:11'!
-addWithdrawByTransferToReport: aDepositByTransfer
-
-	transferNetBalance _ aDepositByTransfer affectBalance: transferNetBalance ! !
-
-!TransferNetReporter methodsFor: 'as yet unclassified' stamp: 'fr 11/13/2020 18:09:56'!
-addWithdrawToReport: aWithdraw
-! !
-
-!TransferNetReporter methodsFor: 'as yet unclassified' stamp: 'fr 11/13/2020 20:09:30'!
+!TransferNetReporter methodsFor: 'report' stamp: 'fr 11/13/2020 20:09:30'!
 transferNet
 
 	account buildTransactionReportWith: self.
@@ -1203,11 +1289,23 @@ transferNet
 	! !
 
 
-!TransferNetReporter methodsFor: 'initialization' stamp: 'fr 11/13/2020 18:24:37'!
-initializeFor: aReceptiveAccount 
-	
-	transferNetBalance _ 0.
-	account _ aReceptiveAccount.! !
+!TransferNetReporter methodsFor: 'transaction adding' stamp: 'fr 11/13/2020 18:08:57'!
+addDepositByTransferToReport: aDepositByTransfer
+
+	transferNetBalance _ aDepositByTransfer affectBalance: transferNetBalance ! !
+
+!TransferNetReporter methodsFor: 'transaction adding' stamp: 'fr 11/13/2020 18:10:03'!
+addDepositToReport: aDeposit
+! !
+
+!TransferNetReporter methodsFor: 'transaction adding' stamp: 'fr 11/15/2020 21:13:57'!
+addWithdrawByTransferToReport: aWithdrawByTransfer
+
+	transferNetBalance _ aWithdrawByTransfer affectBalance: transferNetBalance ! !
+
+!TransferNetReporter methodsFor: 'transaction adding' stamp: 'fr 11/13/2020 18:09:56'!
+addWithdrawToReport: aWithdraw
+! !
 
 
 !classDefinition: #AccountTransaction category: 'Portfolio-Part-II-Exercise'!
@@ -1219,6 +1317,12 @@ Object subclass: #AccountTransaction
 
 !AccountTransaction methodsFor: 'value' stamp: 'HernanWilkinson 9/12/2011 12:25'!
 value 
+
+	self subclassResponsibility ! !
+
+
+!AccountTransaction methodsFor: 'report' stamp: 'fr 11/16/2020 00:36:22'!
+addToReportWith: aReporter
 
 	self subclassResponsibility ! !
 
@@ -1258,11 +1362,6 @@ initializeFor: aValue
 	value := aValue ! !
 
 
-!Deposit methodsFor: 'value' stamp: 'fr 11/12/2020 21:53:00'!
-addToReportWith: aReporter 
-
-	^aReporter addDepositToReport: self! !
-
 !Deposit methodsFor: 'value' stamp: 'HernanWilkinson 7/13/2011 18:38'!
 value
 
@@ -1273,6 +1372,12 @@ value
 affectBalance: aBalance
 
 	^aBalance + value ! !
+
+
+!Deposit methodsFor: 'report' stamp: 'fr 11/12/2020 21:53:00'!
+addToReportWith: aReporter 
+
+	^aReporter addDepositToReport: self! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
@@ -1288,7 +1393,7 @@ for: aValue
 
 !classDefinition: #TransferTransaction category: 'Portfolio-Part-II-Exercise'!
 AccountTransaction subclass: #TransferTransaction
-	instanceVariableNames: ''
+	instanceVariableNames: 'transfer'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Portfolio-Part-II-Exercise'!
@@ -1312,7 +1417,7 @@ register: transferAmount on: aReceptiveAccount for: aTransfer
 
 !classDefinition: #DepositByTransference category: 'Portfolio-Part-II-Exercise'!
 TransferTransaction subclass: #DepositByTransference
-	instanceVariableNames: 'transfer'
+	instanceVariableNames: ''
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Portfolio-Part-II-Exercise'!
@@ -1323,10 +1428,10 @@ forTransfer: aTransfer
 	transfer _ aTransfer ! !
 
 
-!DepositByTransference methodsFor: 'complementary leg' stamp: 'fr 11/11/2020 16:03:44'!
+!DepositByTransference methodsFor: 'complementary leg' stamp: 'fr 11/15/2020 22:27:40'!
 isComplementedBy: aWithdrawByTransference 
 	
-	^transfer from = aWithdrawByTransference ! !
+	^transfer withdrawLeg = aWithdrawByTransference ! !
 
 
 !DepositByTransference methodsFor: 'balance' stamp: 'fr 11/11/2020 16:05:35'!
@@ -1337,15 +1442,16 @@ affectBalance: aBalance
 	! !
 
 
-!DepositByTransference methodsFor: 'value' stamp: 'fr 11/13/2020 17:44:04'!
-addToReportWith: aReporter
-
-	^aReporter addDepositByTransferToReport: self ! !
-
 !DepositByTransference methodsFor: 'value' stamp: 'fr 11/11/2020 16:32:51'!
 value
 	
 	^transfer transferValue ! !
+
+
+!DepositByTransference methodsFor: 'report' stamp: 'fr 11/13/2020 17:44:04'!
+addToReportWith: aReporter
+
+	^aReporter addDepositByTransferToReport: self ! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
@@ -1361,7 +1467,7 @@ for: transferAmount
 
 !classDefinition: #WithdrawByTransference category: 'Portfolio-Part-II-Exercise'!
 TransferTransaction subclass: #WithdrawByTransference
-	instanceVariableNames: 'transfer'
+	instanceVariableNames: ''
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Portfolio-Part-II-Exercise'!
@@ -1372,10 +1478,10 @@ forTransfer: aTransfer
 	transfer _ aTransfer! !
 
 
-!WithdrawByTransference methodsFor: 'complementary leg' stamp: 'fr 11/11/2020 16:04:02'!
+!WithdrawByTransference methodsFor: 'complementary leg' stamp: 'fr 11/15/2020 22:27:49'!
 isComplementedBy: aDepositByTransference 
 	
-	^transfer to = aDepositByTransference ! !
+	^transfer depositLeg = aDepositByTransference ! !
 
 
 !WithdrawByTransference methodsFor: 'balance' stamp: 'fr 11/11/2020 16:04:38'!
@@ -1385,15 +1491,16 @@ affectBalance: aBalance
 	! !
 
 
-!WithdrawByTransference methodsFor: 'value' stamp: 'fr 11/12/2020 21:53:40'!
-addToReportWith: aReporter 
-
-	^aReporter addWithdrawByTransferToReport: self ! !
-
 !WithdrawByTransference methodsFor: 'value' stamp: 'fr 11/11/2020 16:29:16'!
 value
 	
 	^transfer transferValue ! !
+
+
+!WithdrawByTransference methodsFor: 'report' stamp: 'fr 11/12/2020 21:53:40'!
+addToReportWith: aReporter 
+
+	^aReporter addWithdrawByTransferToReport: self ! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
@@ -1421,11 +1528,6 @@ initializeFor: aValue
 	value := aValue ! !
 
 
-!Withdraw methodsFor: 'value' stamp: 'fr 11/12/2020 21:53:52'!
-addToReportWith: aReporter 
-
-	^aReporter addWithdrawToReport: self ! !
-
 !Withdraw methodsFor: 'value' stamp: 'HernanWilkinson 7/13/2011 18:33'!
 value
 
@@ -1436,6 +1538,12 @@ value
 affectBalance: aBalance
 
 	^aBalance - value! !
+
+
+!Withdraw methodsFor: 'report' stamp: 'fr 11/12/2020 21:53:52'!
+addToReportWith: aReporter 
+
+	^aReporter addWithdrawToReport: self ! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
@@ -1456,6 +1564,16 @@ Object subclass: #PortfolioReporter
 	poolDictionaries: ''
 	category: 'Portfolio-Part-II-Exercise'!
 
+!PortfolioReporter methodsFor: 'account adding' stamp: 'fr 11/16/2020 00:41:36'!
+addPortfolioToReport: aPortfolio
+
+	self subclassResponsibility ! !
+
+!PortfolioReporter methodsFor: 'account adding' stamp: 'fr 11/16/2020 00:41:46'!
+addReceptiveAccountToReport: aReceptiveAccount
+
+	self subclassResponsibility ! !
+
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
 !classDefinition: 'PortfolioReporter class' category: 'Portfolio-Part-II-Exercise'!
@@ -1468,47 +1586,52 @@ for: aPortfolio
 	^self new initializeFor: aPortfolio ! !
 
 
-!classDefinition: #TreeStructureReporter category: 'Portfolio-Part-II-Exercise'!
-PortfolioReporter subclass: #TreeStructureReporter
-	instanceVariableNames: 'tree indentationOffset'
+!classDefinition: #TreeReporter category: 'Portfolio-Part-II-Exercise'!
+PortfolioReporter subclass: #TreeReporter
+	instanceVariableNames: 'indentationOffset tree'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Portfolio-Part-II-Exercise'!
 
-!TreeStructureReporter methodsFor: 'as yet unclassified' stamp: 'fr 11/13/2020 21:09:48'!
+!TreeReporter methodsFor: 'private' stamp: 'fr 11/15/2020 20:55:47'!
 addNameWithIndentation: anAccount
 
 	tree add: (self nameWithIndentation: anAccount)! !
 
-!TreeStructureReporter methodsFor: 'as yet unclassified' stamp: 'fr 11/13/2020 21:32:50'!
-addPortfolioToReport: aPortfolio
+!TreeReporter methodsFor: 'private' stamp: 'fr 11/15/2020 21:26:36'!
+addPortfolioInformation: aPortfolio and: aPortfolioBalanceBlock
 	
 	self addNameWithIndentation: aPortfolio.
 	self increaseOffset.
 	aPortfolio buildPortfolioReportWith: self.
+	aPortfolioBalanceBlock value.
 	self decreaseOffset.! !
 
-!TreeStructureReporter methodsFor: 'as yet unclassified' stamp: 'fr 11/13/2020 21:05:52'!
-addReceptiveAccountToReport: aReceptiveAccount
+!TreeReporter methodsFor: 'private' stamp: 'fr 11/15/2020 21:25:03'!
+addReceptiveAccountName: aReceptiveAccount and: aReceptiveAccountBlock
 	
-	self addNameWithIndentation: aReceptiveAccount.! !
+	self addNameWithIndentation: aReceptiveAccount.
+	aReceptiveAccountBlock value 
 
-!TreeStructureReporter methodsFor: 'as yet unclassified' stamp: 'fr 11/13/2020 21:33:25'!
+	
+	! !
+
+!TreeReporter methodsFor: 'private' stamp: 'fr 11/15/2020 20:54:43'!
 changeOffset: aValueToAdd
 
-	^ indentationOffset _ indentationOffset + aValueToAdd ! !
+	indentationOffset _ indentationOffset + aValueToAdd ! !
 
-!TreeStructureReporter methodsFor: 'as yet unclassified' stamp: 'fr 11/13/2020 21:33:34'!
+!TreeReporter methodsFor: 'private' stamp: 'fr 11/15/2020 20:55:12'!
 decreaseOffset
 
-	^ self changeOffset: - 1! !
+	^ self changeOffset: -1! !
 
-!TreeStructureReporter methodsFor: 'as yet unclassified' stamp: 'fr 11/13/2020 21:33:47'!
+!TreeReporter methodsFor: 'private' stamp: 'fr 11/15/2020 20:55:16'!
 increaseOffset
 
 	^ self changeOffset: 1! !
 
-!TreeStructureReporter methodsFor: 'as yet unclassified' stamp: 'fr 11/13/2020 21:17:21'!
+!TreeReporter methodsFor: 'private' stamp: 'fr 11/15/2020 20:55:23'!
 indentation
 	
 	| indentation |
@@ -1516,50 +1639,147 @@ indentation
 	indentationOffset timesRepeat: [indentation _ indentation,' '].
 	^indentation! !
 
-!TreeStructureReporter methodsFor: 'as yet unclassified' stamp: 'fr 11/13/2020 21:12:19'!
+!TreeReporter methodsFor: 'private' stamp: 'fr 11/15/2020 21:05:12'!
+initializeVariablesWith: aPortfolio
+
+	indentationOffset _ 0.
+	tree _ OrderedCollection new.
+	portfolio _ aPortfolio! !
+
+!TreeReporter methodsFor: 'private' stamp: 'fr 11/15/2020 20:55:36'!
 nameWithIndentation: anAccount
 
 	^self indentation,anAccount name! !
 
-!TreeStructureReporter methodsFor: 'as yet unclassified' stamp: 'fr 11/13/2020 21:25:27'!
-treeStructure
-	
+!TreeReporter methodsFor: 'private' stamp: 'fr 11/15/2020 21:29:02'!
+report
+
 	self addPortfolioToReport: portfolio.
-	^tree! !
-
-
-!TreeStructureReporter methodsFor: 'initialization' stamp: 'fr 11/13/2020 21:25:36'!
-initializeFor: aPortfolio 
-	
-	indentationOffset _ 0.
-	tree _ OrderedCollection new.
-	portfolio _ aPortfolio.! !
+	^tree
+	! !
 
 
-!classDefinition: #Transfer category: 'Portfolio-Part-II-Exercise'!
-Object subclass: #Transfer
-	instanceVariableNames: 'value withdraw deposit'
+!classDefinition: #SpecialTreeReporter category: 'Portfolio-Part-II-Exercise'!
+TreeReporter subclass: #SpecialTreeReporter
+	instanceVariableNames: ''
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Portfolio-Part-II-Exercise'!
 
-!Transfer methodsFor: 'initialization' stamp: 'fr 11/11/2020 16:05:14'!
+!SpecialTreeReporter methodsFor: 'initialization' stamp: 'fr 11/15/2020 21:05:06'!
+initializeFor: aPortfolio 
+	
+	self initializeVariablesWith: aPortfolio.! !
+
+
+!SpecialTreeReporter methodsFor: 'account adding' stamp: 'fr 11/15/2020 21:27:02'!
+addPortfolioToReport: aPortfolio
+	
+	self addPortfolioInformation: aPortfolio and: [	self addBalanceWithIndentation: aPortfolio]! !
+
+!SpecialTreeReporter methodsFor: 'account adding' stamp: 'fr 11/15/2020 21:24:46'!
+addReceptiveAccountToReport: aReceptiveAccount
+	
+	self addReceptiveAccountName: aReceptiveAccount and: [self addSummaryReportWithIndentation: aReceptiveAccount]
+
+	
+	! !
+
+
+!SpecialTreeReporter methodsFor: 'report' stamp: 'fr 11/15/2020 21:29:33'!
+specialReport
+
+	^self report
+	! !
+
+
+!SpecialTreeReporter methodsFor: 'private' stamp: 'fr 11/15/2020 20:30:01'!
+accountSummaryForAccount: aReceptiveAccount
+	
+	| accountReporter |
+	accountReporter _ SummaryReporter for: aReceptiveAccount.
+	^accountReporter accountSummary.
+	
+	! !
+
+!SpecialTreeReporter methodsFor: 'private' stamp: 'fr 11/15/2020 20:32:12'!
+addBalanceWithIndentation: aPortfolio.
+
+	tree add: (self balanceWithIndentation: aPortfolio)! !
+
+!SpecialTreeReporter methodsFor: 'private' stamp: 'fr 11/15/2020 20:31:35'!
+addSummaryReportWithIndentation: aReceptiveAccount
+	
+	tree addAllLast: (self summaryReportWithIndentation: aReceptiveAccount).
+	
+	! !
+
+!SpecialTreeReporter methodsFor: 'private' stamp: 'fr 11/15/2020 20:34:50'!
+balanceWithIndentation: aPortfolio
+
+	^ self indentation,'Balance = ',aPortfolio balance asString! !
+
+!SpecialTreeReporter methodsFor: 'private' stamp: 'fr 11/15/2020 20:31:13'!
+summaryReportWithIndentation: aReceptiveAccount
+
+	^ (self accountSummaryForAccount: aReceptiveAccount) collect: [:aReportElement | self indentation,' ',aReportElement]! !
+
+
+!classDefinition: #TreeStructureReporter category: 'Portfolio-Part-II-Exercise'!
+TreeReporter subclass: #TreeStructureReporter
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Part-II-Exercise'!
+
+!TreeStructureReporter methodsFor: 'initialization' stamp: 'fr 11/15/2020 21:05:22'!
+initializeFor: aPortfolio 
+	
+	self initializeVariablesWith: aPortfolio.! !
+
+
+!TreeStructureReporter methodsFor: 'account adding' stamp: 'fr 11/15/2020 21:27:40'!
+addPortfolioToReport: aPortfolio
+	
+	self addPortfolioInformation: aPortfolio and: []! !
+
+!TreeStructureReporter methodsFor: 'account adding' stamp: 'fr 11/15/2020 21:25:29'!
+addReceptiveAccountToReport: aReceptiveAccount
+	
+	self addReceptiveAccountName: aReceptiveAccount and: []
+! !
+
+
+!TreeStructureReporter methodsFor: 'report' stamp: 'fr 11/15/2020 21:29:43'!
+treeStructure
+	
+	^self report! !
+
+
+!classDefinition: #Transfer category: 'Portfolio-Part-II-Exercise'!
+Object subclass: #Transfer
+	instanceVariableNames: 'value withdrawLeg depositLeg'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Part-II-Exercise'!
+
+!Transfer methodsFor: 'initialization' stamp: 'fr 11/16/2020 00:28:50'!
 initializeMove: transferValue from: aReceptiveAccountToMoveFrom to: aReceptiveAccountToMoveTo 
 		
 	value _ transferValue.
-	withdraw _ WithdrawByTransference register: transferValue on: aReceptiveAccountToMoveFrom for: self.
-	deposit _ DepositByTransference register: transferValue on: aReceptiveAccountToMoveTo for: self ! !
+	withdrawLeg _ WithdrawByTransference register: transferValue on: aReceptiveAccountToMoveFrom for: self.
+	depositLeg _ DepositByTransference register: transferValue on: aReceptiveAccountToMoveTo for: self ! !
 
 
-!Transfer methodsFor: 'transfer legs' stamp: 'fr 11/11/2020 15:55:41'!
-from
+!Transfer methodsFor: 'transfer legs' stamp: 'fr 11/16/2020 00:28:50'!
+depositLeg
 	
-	^withdraw ! !
+	^depositLeg ! !
 
-!Transfer methodsFor: 'transfer legs' stamp: 'fr 11/11/2020 15:56:29'!
-to
+!Transfer methodsFor: 'transfer legs' stamp: 'fr 11/16/2020 00:28:46'!
+withdrawLeg
 	
-	^deposit ! !
+	^withdrawLeg ! !
 
 
 !Transfer methodsFor: 'value' stamp: 'fr 11/11/2020 16:04:53'!
