@@ -58138,3 +58138,346 @@ PASSED!
 PASSED!
 
 ----SNAPSHOT----(16 November 2020 03:07:02) CuisUniversity-4384.image priorSource: 18411650!
+
+----QUIT----(16 November 2020 03:10:53) CuisUniversity-4384.image priorSource: 18425199!
+
+----STARTUP---- (16 November 2020 03:20:38) as /home/fede/Documentos/Facultad/Inge1/Cuises/linux64/CuisUniversity-4384.image!
+
+!Portfolio methodsFor: 'report' stamp: 'fr 11/16/2020 03:26:10'!
+buildAccountReportWith: aReporter
+
+	accounts do: [:anAccount | 
+		anAccount buildTransactionReportWith: aReporter 	
+	]! !
+!Portfolio methodsFor: 'report' stamp: 'fr 11/16/2020 03:26:23' prior: 50907448!
+buildAccountReportWith: aReporter
+
+	accounts do: [:anAccount | 
+		anAccount buildAccountReportWith: aReporter 	
+	]! !
+!Portfolio methodsFor: 'report' stamp: 'fr 11/16/2020 03:26:30' prior: 50907455!
+buildAccountReportWith: aReporter
+
+	accounts do: [:anAccount | 
+		anAccount buildTransactionReportWith: aReporter 	
+	]! !
+!Portfolio methodsFor: 'report' stamp: 'fr 11/16/2020 03:26:36' prior: 50907462!
+buildAccountReportWith: aReporter
+
+	accounts do: [:anAccount | 
+		anAccount buildAccountReportWith: aReporter 	
+	]! !
+!TransferNetReporter methodsFor: 'report' stamp: 'fr 11/16/2020 03:26:42' prior: 50882972!
+transferNet
+
+	account buildAccountReportWith: self.
+	^transferNetBalance
+
+	! !
+!SummaryReporter methodsFor: 'report' stamp: 'fr 11/16/2020 03:27:00' prior: 50882965!
+accountSummary
+	
+	account buildAccountReportWith: self.
+	self addAccountBalance.
+	^accountSummary! !
+!Portfolio methodsFor: 'report' stamp: 'fr 11/16/2020 03:27:06' prior: 50882977!
+buildTransactionReportWith: aReporter
+
+	accounts do: [:anAccount | 
+		anAccount buildAccountReportWith: aReporter 	
+	]! !
+
+!methodRemoval: Portfolio #buildTransactionReportWith: stamp: 'fr 11/16/2020 03:27:35'!
+buildTransactionReportWith: aReporter
+
+	accounts do: [:anAccount | 
+		anAccount buildAccountReportWith: aReporter 	
+	]!
+!ReceptiveAccount methodsFor: 'report' stamp: 'fr 11/16/2020 03:27:44'!
+buildAccountReportWith: aReporter
+
+	transactions do: [:aTransaction | 
+		aTransaction addToReportWith: aReporter 
+	]! !
+
+!methodRemoval: ReceptiveAccount #buildTransactionReportWith: stamp: 'fr 11/16/2020 03:27:46'!
+buildTransactionReportWith: aReporter
+
+	transactions do: [:aTransaction | 
+		aTransaction addToReportWith: aReporter 
+	]!
+
+!testRun: #AccountReporterTest #test01AccountSummaryForAccountWithNoTransactionsShouldJustShowBalanceZero stamp: 'fr 11/16/2020 03:27:49'!
+PASSED!
+
+!testRun: #AccountReporterTest #test02AccountSummaryShouldReflectDepositsOnAccounts stamp: 'fr 11/16/2020 03:27:49'!
+PASSED!
+
+!testRun: #AccountReporterTest #test03AccountSummaryShouldReflectWithdrawsOnAccounts stamp: 'fr 11/16/2020 03:27:49'!
+PASSED!
+
+!testRun: #AccountReporterTest #test04AccountSummaryShouldReflectOutgoingTransfersOnAccounts stamp: 'fr 11/16/2020 03:27:49'!
+PASSED!
+
+!testRun: #AccountReporterTest #test05AccountSummaryShouldReflectIncomingTransfersOnAccounts stamp: 'fr 11/16/2020 03:27:49'!
+PASSED!
+
+!testRun: #AccountReporterTest #test06AccountSummaryForPortfolioWithNoTransactionsShouldJustShowBalanceZero stamp: 'fr 11/16/2020 03:27:49'!
+PASSED!
+
+!testRun: #AccountReporterTest #test07AccountSummaryShouldReflectDepositsOnPortfoliosWithAccounts stamp: 'fr 11/16/2020 03:27:49'!
+PASSED!
+
+!testRun: #AccountReporterTest #test08AccountSummaryShouldReflectWithdrawsOnPortfoliosWithAccounts stamp: 'fr 11/16/2020 03:27:49'!
+PASSED!
+
+!testRun: #AccountReporterTest #test09AccountSummaryShouldReflectOutgoingAndIncomingTransfersOnPortfoliosWithAccounts stamp: 'fr 11/16/2020 03:27:49'!
+PASSED!
+
+!testRun: #AccountReporterTest #test10AccountSummaryShouldReflectDepositsOnPortfoliosWithPortfolios stamp: 'fr 11/16/2020 03:27:49'!
+PASSED!
+
+!testRun: #AccountReporterTest #test11AccountSummaryShouldReflectWithdrawsOnPortfoliosWithPortfolios stamp: 'fr 11/16/2020 03:27:49'!
+PASSED!
+
+!testRun: #AccountReporterTest #test12AccountSummaryShouldReflectOutgoingAndIncomingTransfersOnPortfoliosWithPortfoliosAndAccounts stamp: 'fr 11/16/2020 03:27:49'!
+PASSED!
+
+!testRun: #AccountReporterTest #test13NetTransferForAccountWithNoTransactionsShouldBeZero stamp: 'fr 11/16/2020 03:27:49'!
+PASSED!
+
+!testRun: #AccountReporterTest #test14NetTransferForAccountWithAnOutgoingTransferShouldReflectItsValue stamp: 'fr 11/16/2020 03:27:49'!
+PASSED!
+
+!testRun: #AccountReporterTest #test15NetTransferForAccountWithAnIncomingTransferShouldReflectItsValue stamp: 'fr 11/16/2020 03:27:49'!
+PASSED!
+
+!testRun: #AccountReporterTest #test16NetTransferForAccountShouldNotReflectDeposits stamp: 'fr 11/16/2020 03:27:49'!
+PASSED!
+
+!testRun: #AccountReporterTest #test17NetTransferForAccountShouldNotReflectWithdraws stamp: 'fr 11/16/2020 03:27:49'!
+PASSED!
+
+!testRun: #AccountReporterTest #test18NetTransferForPortfolioWithNoTransactionsShouldBeZero stamp: 'fr 11/16/2020 03:27:49'!
+PASSED!
+
+!testRun: #AccountReporterTest #test19NetTransferForPortfolioWithAnOutgoingTransferShouldReflectItsValue stamp: 'fr 11/16/2020 03:27:49'!
+PASSED!
+
+!testRun: #AccountReporterTest #test20NetTransferForPortfolioWithAnIncomingTransferShouldReflectItsValue stamp: 'fr 11/16/2020 03:27:49'!
+PASSED!
+
+!testRun: #AccountReporterTest #test21NetTransferForPortfolioShouldNotReflectDeposits stamp: 'fr 11/16/2020 03:27:49'!
+PASSED!
+
+!testRun: #AccountReporterTest #test22NetTransferForPortfolioShouldNotReflectWithdraws stamp: 'fr 11/16/2020 03:27:49'!
+PASSED!
+
+!testRun: #AccountReporterTest #test23NetTransferForPortfoliosWithPortfoliosShouldReflectOutgoingAndIncomingTransfers stamp: 'fr 11/16/2020 03:27:49'!
+PASSED!
+
+!testRun: #AccountReporterTest #test24NetTransferForPortfoliosWithPortfoliosShouldNotRelfectDepositsOrWithdraws stamp: 'fr 11/16/2020 03:27:49'!
+PASSED!
+
+!testRun: #PortfolioReporterTest #test01TreeStructureReportForEmptyPortfolioWorksAsExpected stamp: 'fr 11/16/2020 03:27:49'!
+PASSED!
+
+!testRun: #PortfolioReporterTest #test02TreeStructureReportForPortfolioWithAccountsWorksAsExpected stamp: 'fr 11/16/2020 03:27:49'!
+PASSED!
+
+!testRun: #PortfolioReporterTest #test03TreeStructureReportForPortfolioWithAccountsAndPortfoliosWorksAsExpected stamp: 'fr 11/16/2020 03:27:49'!
+PASSED!
+
+!testRun: #PortfolioReporterTest #test04AccountsShouldUseADefaultNameIfNoneIsSpecified stamp: 'fr 11/16/2020 03:27:49'!
+PASSED!
+
+!testRun: #PortfolioReporterTest #test05SpecialReportForEmptyPortfolioWorksAsExpected stamp: 'fr 11/16/2020 03:27:49'!
+PASSED!
+
+!testRun: #PortfolioReporterTest #test06SpecialReportForPortfolioWithAccountsWithAnyKindOfTransactionsWorksAsExpected stamp: 'fr 11/16/2020 03:27:49'!
+PASSED!
+
+!testRun: #PortfolioReporterTest #test07SpecialReportForPortfolioWithAccountsAndPortfoliosWithAnyKindOfTransactionsWorksAsExpected stamp: 'fr 11/16/2020 03:27:49'!
+PASSED!
+
+!testRun: #PortfolioTest #test01BalanceOfPortfolioWithoutAccountsIsZero stamp: 'fr 11/16/2020 03:27:49'!
+PASSED!
+
+!testRun: #PortfolioTest #test02BalanceOfPortfolioWithOneAccountIsAccountBalance stamp: 'fr 11/16/2020 03:27:49'!
+PASSED!
+
+!testRun: #PortfolioTest #test03BalanceOfPortfolioIsCalculatedRecursivelyOnPortfolios stamp: 'fr 11/16/2020 03:27:49'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioWithoutAccountsHasNoRegisteredTransaction stamp: 'fr 11/16/2020 03:27:49'!
+PASSED!
+
+!testRun: #PortfolioTest #test05PortfolioHasRegisteredItsAccountsTransactions stamp: 'fr 11/16/2020 03:27:49'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioLooksForRegisteredTransactionsRecursively stamp: 'fr 11/16/2020 03:27:49'!
+PASSED!
+
+!testRun: #PortfolioTest #test07PortfolioHasNoTransactionWhenHasNoAccounts stamp: 'fr 11/16/2020 03:27:49'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioTransactionsIncludesAllItsAccountsTransactions stamp: 'fr 11/16/2020 03:27:49'!
+PASSED!
+
+!testRun: #PortfolioTest #test09PortfolioTransactionsAreCalculatedRecursively stamp: 'fr 11/16/2020 03:27:49'!
+PASSED!
+
+!testRun: #PortfolioTest #test10PortfolioCanNotIncludeTheSameAccountMoreThanOnce stamp: 'fr 11/16/2020 03:27:49'!
+PASSED!
+
+!testRun: #PortfolioTest #test11PortfolioCanNotIncludeAccountOfItsPortfolios stamp: 'fr 11/16/2020 03:27:49'!
+PASSED!
+
+!testRun: #PortfolioTest #test12PortfolioCanNotIncludeItself stamp: 'fr 11/16/2020 03:27:49'!
+PASSED!
+
+!testRun: #PortfolioTest #test13ComposedPortfolioCanNotHaveParentPortfolioAccount stamp: 'fr 11/16/2020 03:27:49'!
+PASSED!
+
+!testRun: #PortfolioTest #test14ComposedPortfolioCanNotHaveAccountOfAnyRootParentRecursively stamp: 'fr 11/16/2020 03:27:49'!
+PASSED!
+
+!testRun: #PortfolioTest #test15PortfolioCanNotIncludeAnyOfTheComposedAccountOfPortfolioToAdd stamp: 'fr 11/16/2020 03:27:49'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test01ReceptiveAccountHaveZeroAsBalanceWhenCreated stamp: 'fr 11/16/2020 03:27:49'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test02DepositIncreasesBalanceOnTransactionValue stamp: 'fr 11/16/2020 03:27:49'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test03WithdrawDecreasesBalanceOnTransactionValue stamp: 'fr 11/16/2020 03:27:49'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test04WithdrawValueMustBePositive stamp: 'fr 11/16/2020 03:27:49'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test05ReceptiveAccountKnowsRegisteredTransactions stamp: 'fr 11/16/2020 03:27:49'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test06ReceptiveAccountDoNotKnowNotRegisteredTransactions stamp: 'fr 11/16/2020 03:27:49'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test07AccountKnowsItsTransactions stamp: 'fr 11/16/2020 03:27:49'!
+PASSED!
+
+!testRun: #TransferTest #test01TransferMovesMoneyAffectingBalancesAsExpected stamp: 'fr 11/16/2020 03:27:49'!
+PASSED!
+
+!testRun: #TransferTest #test02AccountsThatParticipateInTheTransferRegisterTheCorrespondingLeg stamp: 'fr 11/16/2020 03:27:49'!
+PASSED!
+
+!testRun: #TransferTest #test03LegsKnowTheirComplementaryLegThroughTheTransfer stamp: 'fr 11/16/2020 03:27:49'!
+PASSED!
+
+!testRun: #TransferTest #test04TransferValueCanNotBeZero stamp: 'fr 11/16/2020 03:27:49'!
+PASSED!
+
+!testRun: #TransferTest #test05TransferValueCanNotBeNegative stamp: 'fr 11/16/2020 03:27:49'!
+PASSED!
+
+!testRun: #TransferTest #test06TransferCanNotMoveMoneyFromAnAccountToItself stamp: 'fr 11/16/2020 03:27:49'!
+PASSED!
+
+----QUIT----(16 November 2020 03:39:54) CuisUniversity-4384.image priorSource: 18425293!
+
+----STARTUP---- (16 November 2020 03:55:23) as /home/fede/Documentos/Facultad/Inge1/Cuises/linux64/CuisUniversity-4384.image!
+
+
+!classRenamed: #SpecialTreeReporter as: #Asd stamp: 'fr 11/16/2020 03:56:27'!
+Smalltalk renameClassNamed: #SpecialTreeReporter as: #Asd!
+!PortfolioReporterTest methodsFor: 'as yet unclassified' stamp: 'fr 11/16/2020 03:56:27' prior: 50894824!
+test05SpecialReportForEmptyPortfolioWorksAsExpected
+
+	| portfolio reporter |
+	
+	portfolio _ Portfolio named: 'Portfolio de la familia'.
+	reporter _ Asd for: portfolio.
+
+	self assert: reporter specialReport equals: (OrderedCollection with: 'Portfolio de la familia' with: ' Balance = 0')! !
+!PortfolioReporterTest methodsFor: 'as yet unclassified' stamp: 'fr 11/16/2020 03:56:27' prior: 50895301!
+test06SpecialReportForPortfolioWithAccountsWithAnyKindOfTransactionsWorksAsExpected
+
+	| portfolio account anotherAccount reporter |
+	
+	account _ ReceptiveAccount named: 'Cuenta de la familia'.
+	anotherAccount _ ReceptiveAccount new.
+	
+	portfolio _ Portfolio named: 'Portfolio de la familia' with: account.
+	
+	reporter _ Asd for: portfolio.
+	
+	self performRegularTransactionsWith: account asWellAsTransferTransactionsWithItAnd: anotherAccount.
+	self assert: reporter specialReport equals: self expectedReportForPortfolioWithAccounts! !
+!PortfolioReporterTest methodsFor: 'as yet unclassified' stamp: 'fr 11/16/2020 03:56:27' prior: 50895238!
+test07SpecialReportForPortfolioWithAccountsAndPortfoliosWithAnyKindOfTransactionsWorksAsExpected
+
+	| portfolio account anotherAccount anotherPortfolio reporter |
+	
+	account _ ReceptiveAccount named: 'Cuenta de la familia'.
+	anotherAccount _ ReceptiveAccount named: 'Cuenta de Juan'.
+	
+	anotherPortfolio _ Portfolio named: 'Portfolio de Juan' with: anotherAccount.
+	portfolio _ Portfolio named: 'Portfolio de la familia' with: account with: anotherPortfolio.
+	
+	reporter _ Asd for: portfolio.
+	
+	self performRegularTransactionsWith: account asWellAsTransferTransactionsWithItAnd: anotherAccount.	
+	self assert: reporter specialReport equals: self expectedReportForPortfolioWithAccountsAndPortfolios! !
+
+!classRenamed: #Asd as: #CompleteTreeReporter stamp: 'fr 11/16/2020 03:57:08'!
+Smalltalk renameClassNamed: #Asd as: #CompleteTreeReporter!
+!PortfolioReporterTest methodsFor: 'as yet unclassified' stamp: 'fr 11/16/2020 03:57:08' prior: 50907770!
+test05SpecialReportForEmptyPortfolioWorksAsExpected
+
+	| portfolio reporter |
+	
+	portfolio _ Portfolio named: 'Portfolio de la familia'.
+	reporter _ CompleteTreeReporter for: portfolio.
+
+	self assert: reporter specialReport equals: (OrderedCollection with: 'Portfolio de la familia' with: ' Balance = 0')! !
+!PortfolioReporterTest methodsFor: 'as yet unclassified' stamp: 'fr 11/16/2020 03:57:08' prior: 50907783!
+test06SpecialReportForPortfolioWithAccountsWithAnyKindOfTransactionsWorksAsExpected
+
+	| portfolio account anotherAccount reporter |
+	
+	account _ ReceptiveAccount named: 'Cuenta de la familia'.
+	anotherAccount _ ReceptiveAccount new.
+	
+	portfolio _ Portfolio named: 'Portfolio de la familia' with: account.
+	
+	reporter _ CompleteTreeReporter for: portfolio.
+	
+	self performRegularTransactionsWith: account asWellAsTransferTransactionsWithItAnd: anotherAccount.
+	self assert: reporter specialReport equals: self expectedReportForPortfolioWithAccounts! !
+!PortfolioReporterTest methodsFor: 'as yet unclassified' stamp: 'fr 11/16/2020 03:57:08' prior: 50907804!
+test07SpecialReportForPortfolioWithAccountsAndPortfoliosWithAnyKindOfTransactionsWorksAsExpected
+
+	| portfolio account anotherAccount anotherPortfolio reporter |
+	
+	account _ ReceptiveAccount named: 'Cuenta de la familia'.
+	anotherAccount _ ReceptiveAccount named: 'Cuenta de Juan'.
+	
+	anotherPortfolio _ Portfolio named: 'Portfolio de Juan' with: anotherAccount.
+	portfolio _ Portfolio named: 'Portfolio de la familia' with: account with: anotherPortfolio.
+	
+	reporter _ CompleteTreeReporter for: portfolio.
+	
+	self performRegularTransactionsWith: account asWellAsTransferTransactionsWithItAnd: anotherAccount.	
+	self assert: reporter specialReport equals: self expectedReportForPortfolioWithAccountsAndPortfolios! !
+!Portfolio methodsFor: 'report' stamp: 'fr 11/16/2020 03:57:52'!
+buildReportWith: aPortfolioReporter 
+
+	accounts do: [:anAccount |
+		anAccount addToPortfolioReportWith: aPortfolioReporter 	
+	]! !
+
+----STARTUP---- (16 November 2020 04:02:16) as /home/fede/Documentos/Facultad/Inge1/Cuises/linux64/CuisUniversity-4384.image!
+
+
+----SNAPSHOT----(16 November 2020 04:02:27) CuisUniversity-4384.image priorSource: 18435433!

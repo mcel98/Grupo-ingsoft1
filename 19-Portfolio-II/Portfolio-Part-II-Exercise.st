@@ -992,6 +992,13 @@ addToPortfolioReportWith: aPortfolioReporter
 	
 	aPortfolioReporter addPortfolioToReport: self! !
 
+!Portfolio methodsFor: 'report' stamp: 'fr 11/16/2020 03:26:36'!
+buildAccountReportWith: aReporter
+
+	accounts do: [:anAccount | 
+		anAccount buildAccountReportWith: aReporter 	
+	]! !
+
 !Portfolio methodsFor: 'report' stamp: 'fr 11/13/2020 21:36:11'!
 buildPortfolioReportWith: aPortfolioReporter 
 
@@ -999,14 +1006,8 @@ buildPortfolioReportWith: aPortfolioReporter
 		anAccount addToPortfolioReportWith: aPortfolioReporter 	
 	]! !
 
-!Portfolio methodsFor: 'report' stamp: 'fr 11/13/2020 20:09:37'!
-buildTransactionReportWith: aReporter
 
-	accounts do: [:anAccount | 
-		anAccount buildTransactionReportWith: aReporter 	
-	]! !
-
-!Portfolio methodsFor: 'report' stamp: 'fr 11/15/2020 20:14:48'!
+!Portfolio methodsFor: 'private' stamp: 'fr 11/15/2020 20:14:48'!
 name
 
 	^name copy! !
@@ -1149,14 +1150,15 @@ addToPortfolioReportWith: aPortfolioReporter
 	
 	aPortfolioReporter addReceptiveAccountToReport: self! !
 
-!ReceptiveAccount methodsFor: 'report' stamp: 'fr 11/14/2020 19:44:45'!
-buildTransactionReportWith: aReporter
+!ReceptiveAccount methodsFor: 'report' stamp: 'fr 11/16/2020 03:27:44'!
+buildAccountReportWith: aReporter
 
 	transactions do: [:aTransaction | 
 		aTransaction addToReportWith: aReporter 
 	]! !
 
-!ReceptiveAccount methodsFor: 'report' stamp: 'fr 11/15/2020 20:14:53'!
+
+!ReceptiveAccount methodsFor: 'private' stamp: 'fr 11/15/2020 20:14:53'!
 name
 
 	^name copy! !
@@ -1226,10 +1228,10 @@ initializeFor: anAccount
 	account _ anAccount.! !
 
 
-!SummaryReporter methodsFor: 'report' stamp: 'fr 11/13/2020 20:09:26'!
+!SummaryReporter methodsFor: 'report' stamp: 'fr 11/16/2020 03:27:00'!
 accountSummary
 	
-	account buildTransactionReportWith: self.
+	account buildAccountReportWith: self.
 	self addAccountBalance.
 	^accountSummary! !
 
@@ -1280,10 +1282,10 @@ initializeFor: anAccount
 	account _ anAccount.! !
 
 
-!TransferNetReporter methodsFor: 'report' stamp: 'fr 11/13/2020 20:09:30'!
+!TransferNetReporter methodsFor: 'report' stamp: 'fr 11/16/2020 03:26:42'!
 transferNet
 
-	account buildTransactionReportWith: self.
+	account buildAccountReportWith: self.
 	^transferNetBalance
 
 	! !
