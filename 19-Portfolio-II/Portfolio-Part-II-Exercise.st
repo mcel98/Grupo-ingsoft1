@@ -5,7 +5,7 @@ TestCase subclass: #AccountReporterTest
 	poolDictionaries: ''
 	category: 'Portfolio-Part-II-Exercise'!
 
-!AccountReporterTest methodsFor: 'tests - account summary' stamp: 'fr 11/16/2020 02:53:09'!
+!AccountReporterTest methodsFor: 'tests - account summary' stamp: 'fr 11/16/2020 13:08:48'!
 test01AccountSummaryForAccountWithNoTransactionsShouldJustShowBalanceZero
 
 	self createNewAccountAndSummaryReporterForIt.
@@ -13,45 +13,37 @@ test01AccountSummaryForAccountWithNoTransactionsShouldJustShowBalanceZero
 	self  assert: reporter accountSummary 
 		equals: (OrderedCollection with: 'Balance = 0').! !
 
-!AccountReporterTest methodsFor: 'tests - account summary' stamp: 'fr 11/16/2020 02:53:09'!
+!AccountReporterTest methodsFor: 'tests - account summary' stamp: 'fr 11/16/2020 13:09:36'!
 test02AccountSummaryShouldReflectDepositsOnAccounts
+		
+	self  createWith: [self createNewAccountAndSummaryReporterForIt] 
+		perform: [	Deposit register: 100 on: account] 
+		assertTransactionIsReflectedWith: 'Depósito por 100.' 
+		and: 'Balance = 100'! !
 
-	self createNewAccountAndSummaryReporterForIt.
-	
-	Deposit register: 100 on: account. 
-	
-	self  assert: reporter accountSummary 
-		equals: (OrderedCollection with: 'Depósito por 100.' with: 'Balance = 100')! !
-
-!AccountReporterTest methodsFor: 'tests - account summary' stamp: 'fr 11/16/2020 02:53:09'!
+!AccountReporterTest methodsFor: 'tests - account summary' stamp: 'fr 11/16/2020 13:09:36'!
 test03AccountSummaryShouldReflectWithdrawsOnAccounts
-	
-	self createNewAccountAndSummaryReporterForIt.
-	
-	Withdraw register: 100 on: account. 
-	
-	self  assert: reporter accountSummary 
-		equals: (OrderedCollection with: 'Extracción por 100.' with: 'Balance = -100')! !
+			
+	self  createWith: [self createNewAccountAndSummaryReporterForIt] 
+		perform: [	Withdraw register: 100 on: account] 
+		assertTransactionIsReflectedWith: 'Extracción por 100.' 
+		and: 'Balance = -100'! !
 
-!AccountReporterTest methodsFor: 'tests - account summary' stamp: 'fr 11/16/2020 02:53:13'!
-test04AccountSummaryShouldReflectOutgoingTransfersOnAccounts
+!AccountReporterTest methodsFor: 'tests - account summary' stamp: 'fr 11/16/2020 13:09:36'!
+test04AccountSummaryShouldReflectOutgoingTransfersOnAccounts	
+		
+	self  createWith: [self createNewAccountsAndSummaryReporterForOne] 
+		perform: [	Transfer move: 100 from: account to: anotherAccount] 
+		assertTransactionIsReflectedWith: 'Salida por transferencia de 100.' 
+		and: 'Balance = -100'! !
 
-	self createNewAccountsAndSummaryReporterForOne.
-	
-	Transfer move: 100 from: account to: anotherAccount.
-	
-	self  assert: reporter accountSummary 
-		equals: (OrderedCollection with: 'Salida por transferencia de 100.' with: 'Balance = -100')! !
-
-!AccountReporterTest methodsFor: 'tests - account summary' stamp: 'fr 11/16/2020 02:53:13'!
-test05AccountSummaryShouldReflectIncomingTransfersOnAccounts
-
-	self createNewAccountsAndSummaryReporterForOne.
-
-	Transfer move: 100 from: anotherAccount to: account.
-	
-	self  assert: reporter accountSummary 
-		equals: (OrderedCollection with: 'Entrada por transferencia de 100.' with: 'Balance = 100')! !
+!AccountReporterTest methodsFor: 'tests - account summary' stamp: 'fr 11/16/2020 13:09:36'!
+test05AccountSummaryShouldReflectIncomingTransfersOnAccounts		
+		
+	self  createWith: [self createNewAccountsAndSummaryReporterForOne] 
+		perform: [	Transfer move: 100 from: anotherAccount to: account] 
+		assertTransactionIsReflectedWith: 'Entrada por transferencia de 100.' 
+		and: 'Balance = 100'! !
 
 !AccountReporterTest methodsFor: 'tests - account summary' stamp: 'fr 11/16/2020 02:53:16'!
 test06AccountSummaryForPortfolioWithNoTransactionsShouldJustShowBalanceZero
@@ -62,25 +54,21 @@ test06AccountSummaryForPortfolioWithNoTransactionsShouldJustShowBalanceZero
 	self  assert: reporter accountSummary 
 		equals: (OrderedCollection with: 'Balance = 0')! !
 
-!AccountReporterTest methodsFor: 'tests - account summary' stamp: 'fr 11/16/2020 02:53:09'!
+!AccountReporterTest methodsFor: 'tests - account summary' stamp: 'fr 11/16/2020 13:11:08'!
 test07AccountSummaryShouldReflectDepositsOnPortfoliosWithAccounts
+		
+	self  createWith: [self createSummaryReporterForPortfolioWithAccount] 
+		perform: [Deposit register: 100 on: account] 
+		assertTransactionIsReflectedWith: 'Depósito por 100.' 
+		and: 'Balance = 100'! !
 
-	self createSummaryReporterForPortfolioWithAccount.
-	
-	Deposit register: 100 on: account.
-			
-	self  assert: reporter accountSummary 
-		equals: (OrderedCollection with: 'Depósito por 100.' with: 'Balance = 100')! !
-
-!AccountReporterTest methodsFor: 'tests - account summary' stamp: 'fr 11/16/2020 02:53:09'!
+!AccountReporterTest methodsFor: 'tests - account summary' stamp: 'fr 11/16/2020 13:14:59'!
 test08AccountSummaryShouldReflectWithdrawsOnPortfoliosWithAccounts
-
-	self createSummaryReporterForPortfolioWithAccount.
-	
-	Withdraw register: 100 on: account.
-			
-	self  assert: reporter accountSummary 
-		equals: (OrderedCollection with: 'Extracción por 100.' with: 'Balance = -100')! !
+		
+	self  createWith: [self createSummaryReporterForPortfolioWithAccount] 
+		perform: [Withdraw register: 100 on: account] 
+		assertTransactionIsReflectedWith: 'Extracción por 100.' 
+		and: 'Balance = -100'! !
 
 !AccountReporterTest methodsFor: 'tests - account summary' stamp: 'fr 11/16/2020 02:53:16'!
 test09AccountSummaryShouldReflectOutgoingAndIncomingTransfersOnPortfoliosWithAccounts
@@ -95,27 +83,21 @@ test09AccountSummaryShouldReflectOutgoingAndIncomingTransfersOnPortfoliosWithAcc
 	self  assert: reporter accountSummary 
 		equals: (OrderedCollection with: 'Salida por transferencia de 10.' with: 'Entrada por transferencia de 10.' with: 'Balance = 0')! !
 
-!AccountReporterTest methodsFor: 'tests - account summary' stamp: 'fr 11/16/2020 02:53:10'!
+!AccountReporterTest methodsFor: 'tests - account summary' stamp: 'fr 11/16/2020 13:17:12'!
 test10AccountSummaryShouldReflectDepositsOnPortfoliosWithPortfolios
-	
-	self createSummaryReporterForPortfolioWithPortfolioWithAccount.
+			
+	self  createWith: [self createSummaryReporterForPortfolioWithPortfolioWithAccount] 
+		perform: [Deposit register: 100 on: account] 
+		assertTransactionIsReflectedWith: 'Depósito por 100.' 
+		and: 'Balance = 100'! !
 
-	Deposit register: 100 on: account.
-
-		
-	self  assert: reporter accountSummary 
-		equals: (OrderedCollection with: 'Depósito por 100.' with: 'Balance = 100')! !
-
-!AccountReporterTest methodsFor: 'tests - account summary' stamp: 'fr 11/16/2020 02:53:09'!
+!AccountReporterTest methodsFor: 'tests - account summary' stamp: 'fr 11/16/2020 13:17:48'!
 test11AccountSummaryShouldReflectWithdrawsOnPortfoliosWithPortfolios
-	
-	self createSummaryReporterForPortfolioWithPortfolioWithAccount.
-
-	Withdraw register: 100 on: account.
-
 		
-	self  assert: reporter accountSummary 
-		equals: (OrderedCollection with: 'Extracción por 100.' with: 'Balance = -100')! !
+	self  createWith: [self createSummaryReporterForPortfolioWithPortfolioWithAccount] 
+		perform: [Withdraw register: 100 on: account] 
+		assertTransactionIsReflectedWith: 'Extracción por 100.' 
+		and: 'Balance = -100'! !
 
 !AccountReporterTest methodsFor: 'tests - account summary' stamp: 'fr 11/16/2020 02:53:20'!
 test12AccountSummaryShouldReflectOutgoingAndIncomingTransfersOnPortfoliosWithPortfoliosAndAccounts
@@ -132,116 +114,113 @@ test12AccountSummaryShouldReflectOutgoingAndIncomingTransfersOnPortfoliosWithPor
 		equals: (OrderedCollection with: 'Salida por transferencia de 100.' with: 'Entrada por transferencia de 100.' with: 'Balance = 0')! !
 
 
-!AccountReporterTest methodsFor: 'tests - net transfer' stamp: 'fr 11/16/2020 02:54:59'!
+!AccountReporterTest methodsFor: 'tests - net transfer' stamp: 'fr 11/16/2020 13:25:58'!
 test13NetTransferForAccountWithNoTransactionsShouldBeZero
+	
+	self  createWith: [self createNewAccountAndTransferNetReporterForIt] 
+		perform: [] 
+		assertTransactionIsReflectedWithValue: 0! !
 
-	self createNewAccountAndTransferNetReporterForIt.
-	self assert: reporter transferNet equals: 0! !
-
-!AccountReporterTest methodsFor: 'tests - net transfer' stamp: 'fr 11/16/2020 02:55:31'!
+!AccountReporterTest methodsFor: 'tests - net transfer' stamp: 'fr 11/16/2020 13:27:00'!
 test14NetTransferForAccountWithAnOutgoingTransferShouldReflectItsValue
-
-	self createNewAccountAndTransferNetReporterForIt.
-	self createAnotherNewAccount.
 	
-	Transfer move: 100 from: account to: anotherAccount.
-	
-	self assert: reporter transferNet equals: -100! !
+	self  createWith: [				
+					self createNewAccountAndTransferNetReporterForIt.
+					self createAnotherNewAccount.
+				  ] 
+		perform: [Transfer move: 100 from: account to: anotherAccount] 
+		assertTransactionIsReflectedWithValue: -100! !
 
-!AccountReporterTest methodsFor: 'tests - net transfer' stamp: 'fr 11/16/2020 02:55:39'!
+!AccountReporterTest methodsFor: 'tests - net transfer' stamp: 'fr 11/16/2020 13:27:35'!
 test15NetTransferForAccountWithAnIncomingTransferShouldReflectItsValue
-
-	self createNewAccountAndTransferNetReporterForIt.
-	self createAnotherNewAccount.
 	
-	Transfer move: 100 from: anotherAccount to: account.
+	self  createWith: [				
+					self createNewAccountAndTransferNetReporterForIt.
+					self createAnotherNewAccount.
+				  ] 
+		perform: [Transfer move: 100 from: anotherAccount to: account] 
+		assertTransactionIsReflectedWithValue: 100! !
+
+!AccountReporterTest methodsFor: 'tests - net transfer' stamp: 'fr 11/16/2020 13:28:58'!
+test16NetTransferForAccountShouldNotReflectDeposits	
 	
-	self assert: reporter transferNet equals: 100! !
+	self  createWith: [self createNewAccountAndTransferNetReporterForIt] 
+		perform: [Deposit register: 100 on: account] 
+		assertTransactionIsReflectedWithValue: 0! !
 
-!AccountReporterTest methodsFor: 'tests - net transfer' stamp: 'fr 11/16/2020 02:55:54'!
-test16NetTransferForAccountShouldNotReflectDeposits
-
-	self createNewAccountAndTransferNetReporterForIt.
-	
-	Deposit register: 100 on: account. 
-		
-	self assert: reporter transferNet equals: 0! !
-
-!AccountReporterTest methodsFor: 'tests - net transfer' stamp: 'fr 11/16/2020 02:59:28'!
+!AccountReporterTest methodsFor: 'tests - net transfer' stamp: 'fr 11/16/2020 13:29:23'!
 test17NetTransferForAccountShouldNotReflectWithdraws
+	
+	self  createWith: [self createNewAccountAndTransferNetReporterForIt] 
+		perform: [Withdraw register: 100 on: account] 
+		assertTransactionIsReflectedWithValue: 0! !
 
-	self createNewAccountAndTransferNetReporterForIt.
-
-	Withdraw register: 100 on: account. 
-		
-	self assert: reporter transferNet equals: 0! !
-
-!AccountReporterTest methodsFor: 'tests - net transfer' stamp: 'fr 11/16/2020 02:59:37'!
+!AccountReporterTest methodsFor: 'tests - net transfer' stamp: 'fr 11/16/2020 13:56:30'!
 test18NetTransferForPortfolioWithNoTransactionsShouldBeZero
-
-	portfolio _ Portfolio new.
-	reporter _ 	TransferNetReporter for: portfolio.
-
-	self assert: reporter transferNet equals: 0! !
-
-!AccountReporterTest methodsFor: 'tests - net transfer' stamp: 'fr 11/16/2020 03:06:17'!
-test19NetTransferForPortfolioWithAnOutgoingTransferShouldReflectItsValue
-
-	self createTransferNetReporterForPortfolioWithAccount.
-	self createAnotherNewAccount.
-
-	Transfer move: 10 from: account to: anotherAccount.
-			
-	self assert: reporter transferNet equals: -10! !
-
-!AccountReporterTest methodsFor: 'tests - net transfer' stamp: 'fr 11/16/2020 03:06:27'!
-test20NetTransferForPortfolioWithAnIncomingTransferShouldReflectItsValue
 	
-	self createTransferNetReporterForPortfolioWithAccount.
-	self createAnotherNewAccount. 
+	self createWith: [
+					portfolio _ Portfolio new.
+					reporter _ 	TransferNetReporter for: portfolio
+				 ] 
+		perform: [] 
+		assertTransactionIsReflectedWithValue: 0! !
+
+!AccountReporterTest methodsFor: 'tests - net transfer' stamp: 'fr 11/16/2020 13:33:34'!
+test19NetTransferForPortfolioWithAccountWithAnOutgoingTransferShouldReflectItsValue
 	
-	Transfer move: 10 from: anotherAccount to: account.
-			
-	self assert: reporter transferNet equals: 10! !
+	self  createWith: [
+					self createTransferNetReporterForPortfolioWithAccount.
+					self createAnotherNewAccount.	
+				  ] 
+		perform: [Transfer move: 10 from: account to: anotherAccount] 
+		assertTransactionIsReflectedWithValue: -10! !
 
-!AccountReporterTest methodsFor: 'tests - net transfer' stamp: 'fr 11/16/2020 03:06:34'!
-test21NetTransferForPortfolioShouldNotReflectDeposits
-
-	self createTransferNetReporterForPortfolioWithAccount.
+!AccountReporterTest methodsFor: 'tests - net transfer' stamp: 'fr 11/16/2020 13:33:25'!
+test20NetTransferForPortfolioWithAccountWithAnIncomingTransferShouldReflectItsValue
 	
-	Deposit register: 100 on: account. 
-			
-	self assert: reporter transferNet equals: 0! !
+	self  createWith: [
+					self createTransferNetReporterForPortfolioWithAccount.
+					self createAnotherNewAccount.	
+				  ] 
+		perform: [Transfer move: 10 from: anotherAccount to: account ] 
+		assertTransactionIsReflectedWithValue: 10! !
 
-!AccountReporterTest methodsFor: 'tests - net transfer' stamp: 'fr 11/16/2020 03:06:41'!
-test22NetTransferForPortfolioShouldNotReflectWithdraws
-
-	self createTransferNetReporterForPortfolioWithAccount.
+!AccountReporterTest methodsFor: 'tests - net transfer' stamp: 'fr 11/16/2020 13:32:58'!
+test21NetTransferForPortfolioWithAccountShouldNotReflectDeposits
 	
-	Withdraw register: 100 on: account. 
-			
-	self assert: reporter transferNet equals: 0! !
+	self  createWith: [self createTransferNetReporterForPortfolioWithAccount] 
+		perform: [Deposit register: 100 on: account] 
+		assertTransactionIsReflectedWithValue: 0! !
 
-!AccountReporterTest methodsFor: 'tests - net transfer' stamp: 'fr 11/16/2020 03:01:21'!
+!AccountReporterTest methodsFor: 'tests - net transfer' stamp: 'fr 11/16/2020 13:34:08'!
+test22NetTransferForPortfolioWithAccountShouldNotReflectWithdraws
+	
+	self  createWith: [self createTransferNetReporterForPortfolioWithAccount] 
+		perform: [Withdraw register: 100 on: account] 
+		assertTransactionIsReflectedWithValue: 0! !
+
+!AccountReporterTest methodsFor: 'tests - net transfer' stamp: 'fr 11/16/2020 13:35:16'!
 test23NetTransferForPortfoliosWithPortfoliosShouldReflectOutgoingAndIncomingTransfers
 	
-	self createTransferNetReporterForPortfolioWithPortfolioWithAccount.
-	self createAnotherNewAccount. 
+	self  createWith: [
+					self createTransferNetReporterForPortfolioWithPortfolioWithAccount.
+					self createAnotherNewAccount
+				  ] 
+		perform: [
+					Transfer 	move: 30 from: anotherAccount to: account. 
+					Transfer 	move: 10 from: account to: anotherAccount
+			      ] 
+		assertTransactionIsReflectedWithValue: 20! !
 
-	Transfer 	move: 30 from: anotherAccount to: account. 
-	Transfer 	move: 10 from: account to: anotherAccount. 	
-				
-	self assert: reporter transferNet equals: 20! !
-
-!AccountReporterTest methodsFor: 'tests - net transfer' stamp: 'fr 11/16/2020 03:06:54'!
+!AccountReporterTest methodsFor: 'tests - net transfer' stamp: 'fr 11/16/2020 13:54:47'!
 test24NetTransferForPortfoliosWithPortfoliosShouldNotRelfectDepositsOrWithdraws
-
-	self createTransferNetReporterForPortfolioWithPortfolioWithAccount.
-
-	Deposit register: 100 on: account.
-	Withdraw register: 50 on: account.
-				
-	self assert: reporter transferNet equals: 0! !
+	
+	self createWith: [self createTransferNetReporterForPortfolioWithPortfolioWithAccount] 
+		perform: [
+					Deposit register: 100 on: account.
+					Withdraw register: 50 on: account
+			      ] 
+		assertTransactionIsReflectedWithValue: 0! !
 
 
 !AccountReporterTest methodsFor: 'private' stamp: 'fr 11/16/2020 02:53:26'!
@@ -307,6 +286,25 @@ createTransferNetReporterForPortfolioWithPortfolioWithAccount
 
 	self createPortfolioWithPortfolioWithAccount.
 	reporter _ TransferNetReporter for: anotherPortfolio! !
+
+!AccountReporterTest methodsFor: 'private' stamp: 'fr 11/16/2020 13:09:59'!
+createWith: aCreationBlock perform: aTransactionBlock assertTransactionIsReflectedWith: aTransactionString and: aBalanceString
+
+	aCreationBlock value.	
+	
+	aTransactionBlock value.
+	
+	self  assert: reporter accountSummary 
+		equals: (OrderedCollection with: aTransactionString with: aBalanceString)! !
+
+!AccountReporterTest methodsFor: 'private' stamp: 'fr 11/16/2020 13:24:56'!
+createWith: aCreationBlock perform: aTransactionBlock		assertTransactionIsReflectedWithValue: aTransferNetValue 
+
+	aCreationBlock value.
+	
+	aTransactionBlock value.
+	
+	self assert: reporter transferNet equals: aTransferNetValue! !
 
 
 !classDefinition: #PortfolioReporterTest category: 'Portfolio-Part-II-Exercise'!
@@ -1411,10 +1409,10 @@ isComplementeBy: aTransferTransaction
 TransferTransaction class
 	instanceVariableNames: ''!
 
-!TransferTransaction class methodsFor: 'instance creation' stamp: 'fr 11/11/2020 16:11:11'!
-register: transferAmount on: aReceptiveAccount for: aTransfer 
+!TransferTransaction class methodsFor: 'instance creation' stamp: 'fr 11/16/2020 14:06:30'!
+register: aTransferValue on: aReceptiveAccount for: aTransfer 
 	
-	^(self register: transferAmount on: aReceptiveAccount) forTransfer: aTransfer ! !
+	^(self register: aTransferValue on: aReceptiveAccount) forTransfer: aTransfer ! !
 
 
 !classDefinition: #DepositByTransference category: 'Portfolio-Part-II-Exercise'!
@@ -1461,8 +1459,8 @@ addToReportWith: aReporter
 DepositByTransference class
 	instanceVariableNames: ''!
 
-!DepositByTransference class methodsFor: 'instance creation' stamp: 'fr 11/11/2020 16:02:40'!
-for: transferAmount 
+!DepositByTransference class methodsFor: 'instance creation' stamp: 'fr 11/16/2020 14:06:46'!
+for: aTransferValue 
 	
 	^self new ! !
 
@@ -1510,8 +1508,8 @@ addToReportWith: aReporter
 WithdrawByTransference class
 	instanceVariableNames: ''!
 
-!WithdrawByTransference class methodsFor: 'instance creation' stamp: 'fr 11/11/2020 16:01:07'!
-for: transferenceAmount 
+!WithdrawByTransference class methodsFor: 'instance creation' stamp: 'fr 11/16/2020 14:06:55'!
+for: aTransferValue 
 	
 	^self new
 ! !
