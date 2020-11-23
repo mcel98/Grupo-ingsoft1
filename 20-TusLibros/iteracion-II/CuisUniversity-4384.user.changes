@@ -35225,3 +35225,39 @@ PASSED!
 
 !testRun: #CashierTest #test08CheckoutTicketReflectsOnlyBoughtItemsAsExpected stamp: 'fr 11/23/2020 05:21:11'!
 PASSED!
+
+Date today!
+
+Date today!
+
+self month !
+
+self month < self month next !
+
+Date today!
+
+self < self !
+
+self month start !
+
+self month next !
+
+self month start !
+
+self month next start !
+
+self month start < self month next start !
+
+self month start > self month next start !
+
+self month start < self month next start !
+
+self month start !
+
+self month next start !
+
+----SNAPSHOT----(23 November 2020 05:29:04) CuisUniversity-4384.image priorSource: 17609463!
+
+DateAndTime today !
+
+----SNAPSHOT----(23 November 2020 05:43:05) CuisUniversity-4384.image priorSource: 17611601!
