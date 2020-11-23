@@ -125,73 +125,41 @@ TestCase subclass: #CashierTest
 	poolDictionaries: ''
 	category: 'TusLibros - Exercise - II'!
 
-!CashierTest methodsFor: 'tests' stamp: 'fr 11/23/2020 04:57:31'!
-assertCheckoutTotalForCartWith: aCartBlock isEqualTo: aCheckoutTotal
-
-	| cart cashier  |
-		
-	cart _ Cart acceptingItemsOf: self catalogue.
-	aCartBlock value.
-	cashier _ Cashier 
-				for: cart 
-				paymentMethod: self nonExpiredCard 
-				paymentProcessor: self 
-				registerOn: OrderedCollection new.	
-				
-	self assert: cashier checkout total equals: aCheckoutTotal 
-	
-! !
-
-!CashierTest methodsFor: 'tests' stamp: 'fr 11/23/2020 02:11:37'!
+!CashierTest methodsFor: 'tests' stamp: 'fr 11/23/2020 05:16:06'!
 test01CashierDoesNotAcceptAnEmptyCart
-
+	
+	| salesRegister |
+	salesRegister _ OrderedCollection new.
 	self  should: [
 				Cashier 
 					for: (Cart acceptingItemsOf: self catalogue)
 					paymentMethod: self nonExpiredCard 
-					paymentProcessor: self 
-					registerOn: OrderedCollection new.
+					merchantProcessor: self 
+					registerOn: salesRegister
 			   ]
 		raise: Error - MessageNotUnderstood 
-		withMessageText: Cashier canNotCheckoutWithEmptyCartErrorDescription
+		withExceptionDo: [:anError | 
+			self assert: anError messageText equals: Cashier canNotCheckoutWithEmptyCartErrorDescription.
+			self assert: salesRegister isEmpty
+		]
 	
 ! !
 
-!CashierTest methodsFor: 'tests' stamp: 'fr 11/23/2020 04:55:29'!
+!CashierTest methodsFor: 'tests' stamp: 'fr 11/23/2020 05:07:51'!
 test02CheckoutTotalIsCorrectForASingleItem
-
-	| cart cashier  |
-		
-	cart _ Cart acceptingItemsOf: self catalogue.
-	cart add: self itemInCatalogue.
-	cashier _ Cashier 
-				for: cart 
-				paymentMethod: self nonExpiredCard 
-				paymentProcessor: self 
-				registerOn: OrderedCollection new.
-				
-	self assert: cashier checkout total equals: self itemInCataloguePrice 
+	
+	self assertCheckoutTotalForCartWith: [:aCart | aCart add: self itemInCatalogue] isEqualTo: self itemInCataloguePrice
 	
 ! !
 
-!CashierTest methodsFor: 'tests' stamp: 'fr 11/23/2020 04:55:32'!
-test03CheckoutTotalIsCorrectForMultipleItems
-
-	| cart cashier  |
-		
-	cart _ Cart acceptingItemsOf: self catalogue.
-	cart add: 2 of: self itemInCatalogue.
-	cashier _ Cashier 
-				for: cart 
-				paymentMethod: self nonExpiredCard 
-				paymentProcessor: self 
-				registerOn: OrderedCollection new.	
-				
-	self assert: cashier checkout total equals: (self itemInCataloguePrice * 2)
+!CashierTest methodsFor: 'tests' stamp: 'fr 11/23/2020 05:08:00'!
+test03CheckoutTotalIsCorrectForMultipleItems		
+	
+	self assertCheckoutTotalForCartWith: [:aCart | aCart add: 2 of: self itemInCatalogue] isEqualTo: self itemInCataloguePrice * 2
 	
 ! !
 
-!CashierTest methodsFor: 'tests' stamp: 'fr 11/23/2020 02:10:20'!
+!CashierTest methodsFor: 'tests' stamp: 'fr 11/23/2020 05:04:59'!
 test04CashierDoesNotAcceptExpiredCards
 
 	| cart salesRegister |
@@ -202,7 +170,7 @@ test04CashierDoesNotAcceptExpiredCards
 	self  should: [	Cashier 
 					for: cart 
 					paymentMethod: self expiredCard 
-					paymentProcessor: self 
+					merchantProcessor: self 
 					registerOn: salesRegister.
 			    ] 
 		raise: Error - MessageNotUnderstood  
@@ -213,58 +181,22 @@ test04CashierDoesNotAcceptExpiredCards
 	
 ! !
 
-!CashierTest methodsFor: 'tests' stamp: 'fr 11/23/2020 02:10:12'!
+!CashierTest methodsFor: 'tests' stamp: 'fr 11/23/2020 05:10:37'!
 test05CanNotCheckoutWithACardWithoutCredit
 
-	| cart cashier salesRegister |
-
-	paymentResponse _ [self error: Cashier cardWithoutCreditErrorDescription].
-	
-	salesRegister _ OrderedCollection new.
-	cart _ Cart acceptingItemsOf: self catalogue.
-	cart add: self itemInCatalogue.	
-	cashier _ Cashier 
-				for: cart 
-				paymentMethod: self nonExpiredCard 
-				paymentProcessor: self 
-				registerOn: salesRegister.
-	
-	self  should: [cashier checkout] 
-		raise: Error - MessageNotUnderstood  
-		withExceptionDo: [:anError | 
-			self assert: anError messageText equals: Cashier cardWithoutCreditErrorDescription.
-			self assert: salesRegister isEmpty 
-		]
+	self assertCheckoutFailsWithError: Cashier cardWithoutCreditErrorDescription
 	
 ! !
 
-!CashierTest methodsFor: 'tests' stamp: 'fr 11/23/2020 02:10:29'!
+!CashierTest methodsFor: 'tests' stamp: 'fr 11/23/2020 05:11:02'!
 test06CanNotCheckoutWithAStolenCard
 
-	| cart cashier salesRegister |
-	
-	paymentResponse _ [self error: Cashier stolenCardErrorDescription].
-	
-	salesRegister _ OrderedCollection new.
-	cart _ Cart acceptingItemsOf: self catalogue.
-	cart add: self itemInCatalogue.	
-	cashier _ Cashier 
-				for: cart 
-				paymentMethod: self nonExpiredCard 
-				paymentProcessor: self 
-				registerOn: salesRegister.
-
-	self  should: [	cashier checkout] 
-		raise: Error - MessageNotUnderstood  
-		withExceptionDo: [:anError | 
-			self assert: anError messageText equals: Cashier stolenCardErrorDescription.
-			self assert: salesRegister isEmpty
-		]
+	self assertCheckoutFailsWithError: Cashier stolenCardErrorDescription
 	
 	
 ! !
 
-!CashierTest methodsFor: 'tests' stamp: 'fr 11/23/2020 04:41:01'!
+!CashierTest methodsFor: 'tests' stamp: 'fr 11/23/2020 05:04:59'!
 test07CashierRegistersSalesAsExpected
 
 	| cart cashier salesRegister total |
@@ -274,15 +206,15 @@ test07CashierRegistersSalesAsExpected
 	cashier _ Cashier 
 				for: cart 
 				paymentMethod: self nonExpiredCard 
-				paymentProcessor: self 
+				merchantProcessor: self 
 				registerOn: salesRegister.			
 	total _ cashier checkout total.
 	
 	self assert: salesRegister size equals: 1.
 	self assert: salesRegister first total equals: total.! !
 
-!CashierTest methodsFor: 'tests' stamp: 'fr 11/23/2020 04:55:58'!
-test08CheckoutTicketReflectsBoughtItemsAsExpected
+!CashierTest methodsFor: 'tests' stamp: 'fr 11/23/2020 05:11:30'!
+test08CheckoutTicketReflectsOnlyBoughtItemsAsExpected
 
 	| cart cashier  ticket |
 		
@@ -291,7 +223,7 @@ test08CheckoutTicketReflectsBoughtItemsAsExpected
 	cashier _ Cashier 
 				for: cart 
 				paymentMethod: self nonExpiredCard 
-				paymentProcessor: self 
+				merchantProcessor: self 
 				registerOn: OrderedCollection new.	
 	ticket _ cashier checkout.
 	
@@ -300,12 +232,55 @@ test08CheckoutTicketReflectsBoughtItemsAsExpected
 ! !
 
 
-!CashierTest methodsFor: 'payment processor' stamp: 'fr 11/22/2020 21:38:48'!
-charge: amountToCharge on: aCard 
+!CashierTest methodsFor: 'merchant processor' stamp: 'fr 11/23/2020 05:20:58'!
+charge: someAmountToCharge on: aCard 
 
 	paymentResponse value
 	
 	! !
+
+
+!CashierTest methodsFor: 'private' stamp: 'fr 11/23/2020 05:09:54'!
+assertCheckoutFailsWithError: anErrorMessage
+
+	| cart cashier salesRegister |
+	
+	paymentResponse _ [self error: anErrorMessage].
+		
+	salesRegister _ OrderedCollection new.
+	cart _ Cart acceptingItemsOf: self catalogue.
+	cart add: self itemInCatalogue.	
+	cashier _ Cashier 
+				for: cart 
+				paymentMethod: self nonExpiredCard 
+				merchantProcessor: self 
+				registerOn: salesRegister.
+	
+	self  should: [cashier checkout] 
+		raise: Error - MessageNotUnderstood  
+		withExceptionDo: [:anError | 
+			self assert: anError messageText equals: anErrorMessage.
+			self assert: salesRegister isEmpty 
+		]
+	
+! !
+
+!CashierTest methodsFor: 'private' stamp: 'fr 11/23/2020 05:07:02'!
+assertCheckoutTotalForCartWith: aCartBlock isEqualTo: aCheckoutTotal
+
+	| cart cashier  |
+		
+	cart _ Cart acceptingItemsOf: self catalogue.
+	aCartBlock value: cart.
+	cashier _ Cashier 
+				for: cart 
+				paymentMethod: self nonExpiredCard 
+				merchantProcessor: self 
+				registerOn: OrderedCollection new.	
+				
+	self assert: cashier checkout total equals: aCheckoutTotal 
+	
+! !
 
 
 !CashierTest methodsFor: 'utils' stamp: 'fr 11/23/2020 02:34:40'!
@@ -433,17 +408,17 @@ acceptingItemsOf: aCatalog
 
 !classDefinition: #Cashier category: 'TusLibros - Exercise - II'!
 Object subclass: #Cashier
-	instanceVariableNames: 'cart paymentMethod paymentProcessor salesRegister saleTicket'
+	instanceVariableNames: 'cart paymentMethod merchantProcessor salesRegister saleTicket'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'TusLibros - Exercise - II'!
 
-!Cashier methodsFor: 'initialization' stamp: 'fr 11/23/2020 02:17:27'!
-initializeFor: aCart paymentMethod: aCard paymentProcessor: aPaymentProcessor registerOn: aSalesRegister 
+!Cashier methodsFor: 'initialization' stamp: 'fr 11/23/2020 05:04:31'!
+initializeFor: aCart paymentMethod: aCard merchantProcessor: aMerchantProcessor registerOn: aSalesRegister 
 	
 	cart _ aCart.
 	paymentMethod _ aCard.
-	paymentProcessor _ aPaymentProcessor.
+	merchantProcessor _ aMerchantProcessor.
 	salesRegister _ aSalesRegister! !
 
 
@@ -471,10 +446,10 @@ obtainTicket
 	self collectTicketEntriesForTheCartInto: ticketEntries.
 	saleTicket _ SaleTicket for: ticketEntries! !
 
-!Cashier methodsFor: 'private' stamp: 'fr 11/23/2020 04:58:20'!
+!Cashier methodsFor: 'private' stamp: 'fr 11/23/2020 05:04:01'!
 proceedToPayment
 
-	^ paymentProcessor charge: saleTicket total on: paymentMethod! !
+	^ merchantProcessor charge: saleTicket total on: paymentMethod! !
 
 !Cashier methodsFor: 'private' stamp: 'fr 11/23/2020 04:58:20'!
 registerSale
@@ -508,13 +483,13 @@ stolenCardErrorDescription
 	^'Stolen card!!'! !
 
 
-!Cashier class methodsFor: 'instance creation' stamp: 'fr 11/22/2020 21:34:47'!
-for: aCart paymentMethod: aCard paymentProcessor: aPaymentProcessor registerOn: aSalesRegister 
+!Cashier class methodsFor: 'instance creation' stamp: 'fr 11/23/2020 05:04:59'!
+for: aCart paymentMethod: aCard merchantProcessor: aMerchantProcessor registerOn: aSalesRegister 
 	
 	self validateCart: aCart.
 	self validateCard: aCard.
 		
-	^self new initializeFor: aCart paymentMethod: aCard paymentProcessor: aPaymentProcessor registerOn: aSalesRegister ! !
+	^self new initializeFor: aCart paymentMethod: aCard merchantProcessor: aMerchantProcessor registerOn: aSalesRegister ! !
 
 !Cashier class methodsFor: 'instance creation' stamp: 'fr 11/20/2020 21:38:48'!
 signalCanNotCheckoutWithEmptyCardError
