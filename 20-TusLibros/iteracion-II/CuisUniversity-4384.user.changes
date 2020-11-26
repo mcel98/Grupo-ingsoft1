@@ -35261,3 +35261,736 @@ self month next start !
 DateAndTime today !
 
 ----SNAPSHOT----(23 November 2020 05:43:05) CuisUniversity-4384.image priorSource: 17611601!
+
+----QUIT----(23 November 2020 05:47:05) CuisUniversity-4384.image priorSource: 17611716!
+
+----STARTUP---- (26 November 2020 15:27:50) as /home/fede/Documentos/Facultad/Inge1/Cuises/linux64/CuisUniversity-4384.image!
+
+!CashierTest methodsFor: 'tests' stamp: 'fr 11/26/2020 15:28:57'!
+newCart
+
+	^ Cart acceptingItemsOf: self catalogue! !
+!CashierTest methodsFor: 'tests' stamp: 'fr 11/26/2020 15:28:57' prior: 50881348!
+test04CashierDoesNotAcceptExpiredCards
+
+	| cart salesRegister |
+	salesRegister _ OrderedCollection new.
+	cart _ self newCart.
+	cart add: 2 of: self itemInCatalogue.	
+
+	self  should: [	Cashier 
+					for: cart 
+					paymentMethod: self expiredCard 
+					merchantProcessor: self 
+					registerOn: salesRegister.
+			    ] 
+		raise: Error - MessageNotUnderstood  
+		withExceptionDo: [:anError | 
+			self assert: anError messageText equals: Cashier expiredCardErrorDescription.
+			self assert: salesRegister isEmpty
+		]
+	
+! !
+
+!testRun: #CashierTest #test04CashierDoesNotAcceptExpiredCards stamp: 'fr 11/26/2020 15:28:58'!
+PASSED!
+
+!testRun: #CashierTest #test01CashierDoesNotAcceptAnEmptyCart stamp: 'fr 11/26/2020 15:28:58'!
+PASSED!
+
+!testRun: #CashierTest #test02CheckoutTotalIsCorrectForASingleItem stamp: 'fr 11/26/2020 15:28:58'!
+PASSED!
+
+!testRun: #CashierTest #test03CheckoutTotalIsCorrectForMultipleItems stamp: 'fr 11/26/2020 15:28:58'!
+PASSED!
+
+!testRun: #CashierTest #test04CashierDoesNotAcceptExpiredCards stamp: 'fr 11/26/2020 15:28:58'!
+PASSED!
+
+!testRun: #CashierTest #test05CanNotCheckoutWithACardWithoutCredit stamp: 'fr 11/26/2020 15:28:58'!
+PASSED!
+
+!testRun: #CashierTest #test06CanNotCheckoutWithAStolenCard stamp: 'fr 11/26/2020 15:28:58'!
+PASSED!
+
+!testRun: #CashierTest #test07CashierRegistersSalesAsExpected stamp: 'fr 11/26/2020 15:28:58'!
+PASSED!
+
+!testRun: #CashierTest #test08CheckoutTicketReflectsOnlyBoughtItemsAsExpected stamp: 'fr 11/26/2020 15:28:58'!
+PASSED!
+!CashierTest methodsFor: 'tests' stamp: 'fr 11/26/2020 15:29:12' prior: 50881441!
+test07CashierRegistersSalesAsExpected
+
+	| cart cashier salesRegister total |
+	salesRegister _ OrderedCollection new.
+	cart _ self newCart.
+	cart add: self itemInCatalogue.	
+	cashier _ Cashier 
+				for: cart 
+				paymentMethod: self nonExpiredCard 
+				merchantProcessor: self 
+				registerOn: salesRegister.			
+	total _ cashier checkout total.
+	
+	self assert: salesRegister size equals: 1.
+	self assert: salesRegister first total equals: total.! !
+
+!testRun: #CashierTest #test07CashierRegistersSalesAsExpected stamp: 'fr 11/26/2020 15:29:13'!
+PASSED!
+
+!testRun: #CashierTest #test01CashierDoesNotAcceptAnEmptyCart stamp: 'fr 11/26/2020 15:29:13'!
+PASSED!
+
+!testRun: #CashierTest #test02CheckoutTotalIsCorrectForASingleItem stamp: 'fr 11/26/2020 15:29:13'!
+PASSED!
+
+!testRun: #CashierTest #test03CheckoutTotalIsCorrectForMultipleItems stamp: 'fr 11/26/2020 15:29:13'!
+PASSED!
+
+!testRun: #CashierTest #test04CashierDoesNotAcceptExpiredCards stamp: 'fr 11/26/2020 15:29:13'!
+PASSED!
+
+!testRun: #CashierTest #test05CanNotCheckoutWithACardWithoutCredit stamp: 'fr 11/26/2020 15:29:13'!
+PASSED!
+
+!testRun: #CashierTest #test06CanNotCheckoutWithAStolenCard stamp: 'fr 11/26/2020 15:29:13'!
+PASSED!
+
+!testRun: #CashierTest #test07CashierRegistersSalesAsExpected stamp: 'fr 11/26/2020 15:29:13'!
+PASSED!
+
+!testRun: #CashierTest #test08CheckoutTicketReflectsOnlyBoughtItemsAsExpected stamp: 'fr 11/26/2020 15:29:13'!
+PASSED!
+!CashierTest methodsFor: 'tests' stamp: 'fr 11/26/2020 15:29:19' prior: 50882081!
+test07CashierRegistersSalesAsExpected
+
+	| cart cashier salesRegister total |
+	salesRegister _ OrderedCollection new.
+	cart _ Cart acceptingItemsOf: self catalogue.
+	cart add: self itemInCatalogue.	
+	cashier _ Cashier 
+				for: cart 
+				paymentMethod: self nonExpiredCard 
+				merchantProcessor: self 
+				registerOn: salesRegister.			
+	total _ cashier checkout total.
+	
+	self assert: salesRegister size equals: 1.
+	self assert: salesRegister first total equals: total.! !
+!CashierTest methodsFor: 'tests' stamp: 'fr 11/26/2020 15:29:28' prior: 50882128!
+test07CashierRegistersSalesAsExpected
+
+	| cart cashier salesRegister total |
+	salesRegister _ OrderedCollection new.
+	cart _ self newCart.
+	cart add: self itemInCatalogue.	
+	cashier _ Cashier 
+				for: cart 
+				paymentMethod: self nonExpiredCard 
+				merchantProcessor: self 
+				registerOn: salesRegister.			
+	total _ cashier checkout total.
+	
+	self assert: salesRegister size equals: 1.
+	self assert: salesRegister first total equals: total.! !
+!CashierTest methodsFor: 'tests' stamp: 'fr 11/26/2020 15:29:36' prior: 50881796!
+test08CheckoutTicketReflectsOnlyBoughtItemsAsExpected
+
+	| cart cashier  ticket |
+		
+	cart _ self newCart.
+	cart add: 2 of: self itemInCatalogue.
+	cashier _ Cashier 
+				for: cart 
+				paymentMethod: self nonExpiredCard 
+				merchantProcessor: self 
+				registerOn: OrderedCollection new.	
+	ticket _ cashier checkout.
+	
+	self assert: (ticket quantityOf: self itemInCatalogue) equals: 2.
+	self assert: ticket totalItems equals: 2.	
+! !
+!CashierTest methodsFor: 'tests' stamp: 'fr 11/26/2020 15:29:59' prior: 50881831!
+test01CashierDoesNotAcceptAnEmptyCart
+	
+	| salesRegister |
+	salesRegister _ OrderedCollection new.
+	self  should: [
+				Cashier 
+					for: self newCart
+					paymentMethod: self nonExpiredCard 
+					merchantProcessor: self 
+					registerOn: salesRegister
+			   ]
+		raise: Error - MessageNotUnderstood 
+		withExceptionDo: [:anError | 
+			self assert: anError messageText equals: Cashier canNotCheckoutWithEmptyCartErrorDescription.
+			self assert: salesRegister isEmpty
+		]
+	
+! !
+
+!testRun: #CashierTest #test01CashierDoesNotAcceptAnEmptyCart stamp: 'fr 11/26/2020 15:29:59'!
+PASSED!
+
+!testRun: #CashierTest #test01CashierDoesNotAcceptAnEmptyCart stamp: 'fr 11/26/2020 15:29:59'!
+PASSED!
+
+!testRun: #CashierTest #test02CheckoutTotalIsCorrectForASingleItem stamp: 'fr 11/26/2020 15:29:59'!
+PASSED!
+
+!testRun: #CashierTest #test03CheckoutTotalIsCorrectForMultipleItems stamp: 'fr 11/26/2020 15:29:59'!
+PASSED!
+
+!testRun: #CashierTest #test04CashierDoesNotAcceptExpiredCards stamp: 'fr 11/26/2020 15:29:59'!
+PASSED!
+
+!testRun: #CashierTest #test05CanNotCheckoutWithACardWithoutCredit stamp: 'fr 11/26/2020 15:29:59'!
+PASSED!
+
+!testRun: #CashierTest #test06CanNotCheckoutWithAStolenCard stamp: 'fr 11/26/2020 15:29:59'!
+PASSED!
+
+!testRun: #CashierTest #test07CashierRegistersSalesAsExpected stamp: 'fr 11/26/2020 15:29:59'!
+PASSED!
+
+!testRun: #CashierTest #test08CheckoutTicketReflectsOnlyBoughtItemsAsExpected stamp: 'fr 11/26/2020 15:29:59'!
+PASSED!
+!CashierTest methodsFor: 'private' stamp: 'fr 11/26/2020 15:32:16' prior: 50881694!
+assertCheckoutFailsWithError: anErrorMessage
+
+	| cart cashier salesRegister |
+	
+	paymentResponse _ [self error: anErrorMessage].
+		
+	salesRegister _ OrderedCollection new.
+	cart _ self newCart.
+	cart add: self itemInCatalogue.	
+	cashier _ Cashier 
+				for: cart 
+				paymentMethod: self nonExpiredCard 
+				merchantProcessor: self 
+				registerOn: salesRegister.
+	
+	self  should: [cashier checkout] 
+		raise: Error - MessageNotUnderstood  
+		withExceptionDo: [:anError | 
+			self assert: anError messageText equals: anErrorMessage.
+			self assert: salesRegister isEmpty 
+		]
+	
+! !
+!CashierTest methodsFor: 'private' stamp: 'fr 11/26/2020 15:32:25' prior: 50881528!
+assertCheckoutTotalForCartWith: aCartBlock isEqualTo: aCheckoutTotal
+
+	| cart cashier  |
+		
+	cart _ self newCart.
+	aCartBlock value: cart.
+	cashier _ Cashier 
+				for: cart 
+				paymentMethod: self nonExpiredCard 
+				merchantProcessor: self 
+				registerOn: OrderedCollection new.	
+				
+	self assert: cashier checkout total equals: aCheckoutTotal 
+	
+! !
+!CashierTest methodsFor: 'tests' stamp: 'fr 11/26/2020 15:34:16'!
+test08CheckoutTicketReflectsBoughtItemsAsExpected
+
+	| cart cashier  ticket |
+		
+	cart _ self newCart.
+	cart add: 2 of: self itemInCatalogue.
+	cashier _ Cashier 
+				for: cart 
+				paymentMethod: self nonExpiredCard 
+				merchantProcessor: self 
+				registerOn: OrderedCollection new.	
+	ticket _ cashier checkout.
+	
+	self assert: (ticket quantityOf: self itemInCatalogue) equals: 2.
+	self assert: ticket totalItems equals: 2.	
+! !
+
+!methodRemoval: CashierTest #test08CheckoutTicketReflectsOnlyBoughtItemsAsExpected stamp: 'fr 11/26/2020 15:34:16'!
+test08CheckoutTicketReflectsOnlyBoughtItemsAsExpected
+
+	| cart cashier  ticket |
+		
+	cart _ self newCart.
+	cart add: 2 of: self itemInCatalogue.
+	cashier _ Cashier 
+				for: cart 
+				paymentMethod: self nonExpiredCard 
+				merchantProcessor: self 
+				registerOn: OrderedCollection new.	
+	ticket _ cashier checkout.
+	
+	self assert: (ticket quantityOf: self itemInCatalogue) equals: 2.
+	self assert: ticket totalItems equals: 2.	
+!
+!CashierTest methodsFor: 'tests' stamp: 'fr 11/26/2020 15:34:47' prior: 50882263!
+test08CheckoutTicketReflectsBoughtItemsAsExpected
+
+	| cart cashier ticket |
+		
+	cart _ self newCart.
+	cart add: 2 of: self itemInCatalogue.
+	cashier _ Cashier 
+				for: cart 
+				paymentMethod: self nonExpiredCard 
+				merchantProcessor: self 
+				registerOn: OrderedCollection new.	
+	ticket _ cashier checkout.
+	
+	self assert: (ticket quantityOf: self itemInCatalogue) equals: 2.
+	self assert: ticket totalItems equals: 2.	
+! !
+!CashierTest methodsFor: 'utils' stamp: 'fr 11/26/2020 15:35:11' prior: 50878541!
+itemInCatalogue
+	
+	^ 'an item'! !
+!CashierTest methodsFor: 'tests' stamp: 'fr 11/26/2020 15:35:22'!
+newSalesRegister
+
+	^ OrderedCollection new! !
+!CashierTest methodsFor: 'tests' stamp: 'fr 11/26/2020 15:35:22' prior: 50882180!
+test01CashierDoesNotAcceptAnEmptyCart
+	
+	| salesRegister |
+	salesRegister _ self newSalesRegister.
+	self  should: [
+				Cashier 
+					for: self newCart
+					paymentMethod: self nonExpiredCard 
+					merchantProcessor: self 
+					registerOn: salesRegister
+			   ]
+		raise: Error - MessageNotUnderstood 
+		withExceptionDo: [:anError | 
+			self assert: anError messageText equals: Cashier canNotCheckoutWithEmptyCartErrorDescription.
+			self assert: salesRegister isEmpty
+		]
+	
+! !
+!CashierTest methodsFor: 'tests' stamp: 'fr 11/26/2020 15:35:36' prior: 50882031!
+test04CashierDoesNotAcceptExpiredCards
+
+	| cart salesRegister |
+	salesRegister _ self newSalesRegister.
+	cart _ self newCart.
+	cart add: 2 of: self itemInCatalogue.	
+
+	self  should: [	Cashier 
+					for: cart 
+					paymentMethod: self expiredCard 
+					merchantProcessor: self 
+					registerOn: salesRegister.
+			    ] 
+		raise: Error - MessageNotUnderstood  
+		withExceptionDo: [:anError | 
+			self assert: anError messageText equals: Cashier expiredCardErrorDescription.
+			self assert: salesRegister isEmpty
+		]
+	
+! !
+!CashierTest methodsFor: 'tests' stamp: 'fr 11/26/2020 15:35:45' prior: 50882146!
+test07CashierRegistersSalesAsExpected
+
+	| cart cashier salesRegister total |
+	salesRegister _ self newSalesRegister.
+	cart _ self newCart.
+	cart add: self itemInCatalogue.	
+	cashier _ Cashier 
+				for: cart 
+				paymentMethod: self nonExpiredCard 
+				merchantProcessor: self 
+				registerOn: salesRegister.			
+	total _ cashier checkout total.
+	
+	self assert: salesRegister size equals: 1.
+	self assert: salesRegister first total equals: total.! !
+!CashierTest methodsFor: 'tests' stamp: 'fr 11/26/2020 15:35:58' prior: 50882297!
+test08CheckoutTicketReflectsBoughtItemsAsExpected
+
+	| cart cashier ticket |
+		
+	cart _ self newCart.
+	cart add: 2 of: self itemInCatalogue.
+	cashier _ Cashier 
+				for: cart 
+				paymentMethod: self nonExpiredCard 
+				merchantProcessor: self 
+				registerOn: self newSalesRegister.	
+	ticket _ cashier checkout.
+	
+	self assert: (ticket quantityOf: self itemInCatalogue) equals: 2.
+	self assert: ticket totalItems equals: 2.	
+! !
+
+!testRun: #CashierTest #test08CheckoutTicketReflectsBoughtItemsAsExpected stamp: 'fr 11/26/2020 15:36:01'!
+PASSED!
+
+!testRun: #CashierTest #test01CashierDoesNotAcceptAnEmptyCart stamp: 'fr 11/26/2020 15:36:01'!
+PASSED!
+
+!testRun: #CashierTest #test02CheckoutTotalIsCorrectForASingleItem stamp: 'fr 11/26/2020 15:36:01'!
+PASSED!
+
+!testRun: #CashierTest #test03CheckoutTotalIsCorrectForMultipleItems stamp: 'fr 11/26/2020 15:36:01'!
+PASSED!
+
+!testRun: #CashierTest #test04CashierDoesNotAcceptExpiredCards stamp: 'fr 11/26/2020 15:36:01'!
+PASSED!
+
+!testRun: #CashierTest #test05CanNotCheckoutWithACardWithoutCredit stamp: 'fr 11/26/2020 15:36:01'!
+PASSED!
+
+!testRun: #CashierTest #test06CanNotCheckoutWithAStolenCard stamp: 'fr 11/26/2020 15:36:01'!
+PASSED!
+
+!testRun: #CashierTest #test07CashierRegistersSalesAsExpected stamp: 'fr 11/26/2020 15:36:01'!
+PASSED!
+
+!testRun: #CashierTest #test08CheckoutTicketReflectsBoughtItemsAsExpected stamp: 'fr 11/26/2020 15:36:01'!
+PASSED!
+!SaleTicket methodsFor: 'total' stamp: 'fr 11/26/2020 15:38:29'!
+totalFor: aTicketEntryBlock
+	
+	^ticketEntries sum: [:aTicketEntry | aTicketEntryBlock value: aTicketEntry]! !
+!SaleTicket methodsFor: 'total' stamp: 'fr 11/26/2020 15:38:49' prior: 50879971!
+total
+	
+	^self totalFor: [:aTicketEntry | aTicketEntry subtotal]! !
+
+!testRun: #CartTest #test01NewCartsAreCreatedEmpty stamp: 'fr 11/26/2020 15:38:54'!
+PASSED!
+
+!testRun: #CartTest #test02CanNotAddItemsThatDoNotBelongToStore stamp: 'fr 11/26/2020 15:38:54'!
+PASSED!
+
+!testRun: #CartTest #test03AfterAddingAnItemTheCartIsNotEmptyAnymore stamp: 'fr 11/26/2020 15:38:54'!
+PASSED!
+
+!testRun: #CartTest #test04CanNotAddNonPositiveNumberOfItems stamp: 'fr 11/26/2020 15:38:54'!
+PASSED!
+
+!testRun: #CartTest #test05CanNotAddMoreThanOneItemNotSellByTheStore stamp: 'fr 11/26/2020 15:38:54'!
+PASSED!
+
+!testRun: #CartTest #test06CartRemembersAddedItems stamp: 'fr 11/26/2020 15:38:54'!
+PASSED!
+
+!testRun: #CartTest #test07CartDoesNotHoldNotAddedItems stamp: 'fr 11/26/2020 15:38:54'!
+PASSED!
+
+!testRun: #CartTest #test08CartRemembersTheNumberOfAddedItems stamp: 'fr 11/26/2020 15:38:54'!
+PASSED!
+
+!testRun: #CashierTest #test01CashierDoesNotAcceptAnEmptyCart stamp: 'fr 11/26/2020 15:38:54'!
+PASSED!
+
+!testRun: #CashierTest #test02CheckoutTotalIsCorrectForASingleItem stamp: 'fr 11/26/2020 15:38:54'!
+PASSED!
+
+!testRun: #CashierTest #test03CheckoutTotalIsCorrectForMultipleItems stamp: 'fr 11/26/2020 15:38:54'!
+PASSED!
+
+!testRun: #CashierTest #test04CashierDoesNotAcceptExpiredCards stamp: 'fr 11/26/2020 15:38:54'!
+PASSED!
+
+!testRun: #CashierTest #test05CanNotCheckoutWithACardWithoutCredit stamp: 'fr 11/26/2020 15:38:54'!
+PASSED!
+
+!testRun: #CashierTest #test06CanNotCheckoutWithAStolenCard stamp: 'fr 11/26/2020 15:38:54'!
+PASSED!
+
+!testRun: #CashierTest #test07CashierRegistersSalesAsExpected stamp: 'fr 11/26/2020 15:38:54'!
+PASSED!
+
+!testRun: #CashierTest #test08CheckoutTicketReflectsBoughtItemsAsExpected stamp: 'fr 11/26/2020 15:38:54'!
+PASSED!
+
+!methodRemoval: SaleTicket #totalFor: stamp: 'fr 11/26/2020 15:39:07'!
+totalFor: aTicketEntryBlock
+	
+	^ticketEntries sum: [:aTicketEntry | aTicketEntryBlock value: aTicketEntry]!
+!SaleTicket methodsFor: 'total' stamp: 'fr 11/26/2020 15:39:19' prior: 50882427!
+total
+	
+	^ticketEntries sum: [:aTicketEntry | aTicketEntry subtotal]! !
+
+!testRun: #CartTest #test01NewCartsAreCreatedEmpty stamp: 'fr 11/26/2020 15:39:21'!
+PASSED!
+
+!testRun: #CartTest #test02CanNotAddItemsThatDoNotBelongToStore stamp: 'fr 11/26/2020 15:39:21'!
+PASSED!
+
+!testRun: #CartTest #test03AfterAddingAnItemTheCartIsNotEmptyAnymore stamp: 'fr 11/26/2020 15:39:21'!
+PASSED!
+
+!testRun: #CartTest #test04CanNotAddNonPositiveNumberOfItems stamp: 'fr 11/26/2020 15:39:21'!
+PASSED!
+
+!testRun: #CartTest #test05CanNotAddMoreThanOneItemNotSellByTheStore stamp: 'fr 11/26/2020 15:39:21'!
+PASSED!
+
+!testRun: #CartTest #test06CartRemembersAddedItems stamp: 'fr 11/26/2020 15:39:21'!
+PASSED!
+
+!testRun: #CartTest #test07CartDoesNotHoldNotAddedItems stamp: 'fr 11/26/2020 15:39:21'!
+PASSED!
+
+!testRun: #CartTest #test08CartRemembersTheNumberOfAddedItems stamp: 'fr 11/26/2020 15:39:21'!
+PASSED!
+
+!testRun: #CashierTest #test01CashierDoesNotAcceptAnEmptyCart stamp: 'fr 11/26/2020 15:39:21'!
+PASSED!
+
+!testRun: #CashierTest #test02CheckoutTotalIsCorrectForASingleItem stamp: 'fr 11/26/2020 15:39:21'!
+PASSED!
+
+!testRun: #CashierTest #test03CheckoutTotalIsCorrectForMultipleItems stamp: 'fr 11/26/2020 15:39:21'!
+PASSED!
+
+!testRun: #CashierTest #test04CashierDoesNotAcceptExpiredCards stamp: 'fr 11/26/2020 15:39:21'!
+PASSED!
+
+!testRun: #CashierTest #test05CanNotCheckoutWithACardWithoutCredit stamp: 'fr 11/26/2020 15:39:21'!
+PASSED!
+
+!testRun: #CashierTest #test06CanNotCheckoutWithAStolenCard stamp: 'fr 11/26/2020 15:39:21'!
+PASSED!
+
+!testRun: #CashierTest #test07CashierRegistersSalesAsExpected stamp: 'fr 11/26/2020 15:39:21'!
+PASSED!
+
+!testRun: #CashierTest #test08CheckoutTicketReflectsBoughtItemsAsExpected stamp: 'fr 11/26/2020 15:39:21'!
+PASSED!
+!SaleTicket methodsFor: 'total' stamp: 'fr 11/26/2020 15:41:53'!
+totalFor: aSelector
+	
+	^ticketEntries sum: [:aTicketEntry | aSelector sendTo: aTicketEntry]! !
+!SaleTicket methodsFor: 'total' stamp: 'fr 11/26/2020 15:42:09' prior: 50882490!
+total
+	
+	^self totalFor: #subtotal! !
+
+!testRun: #CartTest #test01NewCartsAreCreatedEmpty stamp: 'fr 11/26/2020 15:42:13'!
+PASSED!
+
+!testRun: #CartTest #test02CanNotAddItemsThatDoNotBelongToStore stamp: 'fr 11/26/2020 15:42:13'!
+PASSED!
+
+!testRun: #CartTest #test03AfterAddingAnItemTheCartIsNotEmptyAnymore stamp: 'fr 11/26/2020 15:42:13'!
+PASSED!
+
+!testRun: #CartTest #test04CanNotAddNonPositiveNumberOfItems stamp: 'fr 11/26/2020 15:42:13'!
+PASSED!
+
+!testRun: #CartTest #test05CanNotAddMoreThanOneItemNotSellByTheStore stamp: 'fr 11/26/2020 15:42:13'!
+PASSED!
+
+!testRun: #CartTest #test06CartRemembersAddedItems stamp: 'fr 11/26/2020 15:42:13'!
+PASSED!
+
+!testRun: #CartTest #test07CartDoesNotHoldNotAddedItems stamp: 'fr 11/26/2020 15:42:13'!
+PASSED!
+
+!testRun: #CartTest #test08CartRemembersTheNumberOfAddedItems stamp: 'fr 11/26/2020 15:42:13'!
+PASSED!
+
+!testRun: #CashierTest #test01CashierDoesNotAcceptAnEmptyCart stamp: 'fr 11/26/2020 15:42:13'!
+PASSED!
+
+!testRun: #CashierTest #test02CheckoutTotalIsCorrectForASingleItem stamp: 'fr 11/26/2020 15:42:13'!
+PASSED!
+
+!testRun: #CashierTest #test03CheckoutTotalIsCorrectForMultipleItems stamp: 'fr 11/26/2020 15:42:13'!
+PASSED!
+
+!testRun: #CashierTest #test04CashierDoesNotAcceptExpiredCards stamp: 'fr 11/26/2020 15:42:13'!
+PASSED!
+
+!testRun: #CashierTest #test05CanNotCheckoutWithACardWithoutCredit stamp: 'fr 11/26/2020 15:42:13'!
+PASSED!
+
+!testRun: #CashierTest #test06CanNotCheckoutWithAStolenCard stamp: 'fr 11/26/2020 15:42:13'!
+PASSED!
+
+!testRun: #CashierTest #test07CashierRegistersSalesAsExpected stamp: 'fr 11/26/2020 15:42:13'!
+PASSED!
+
+!testRun: #CashierTest #test08CheckoutTicketReflectsBoughtItemsAsExpected stamp: 'fr 11/26/2020 15:42:13'!
+PASSED!
+!SaleTicket methodsFor: 'total' stamp: 'fr 11/26/2020 15:39:19' prior: 50882553!
+total
+	
+	^ticketEntries sum: [:aTicketEntry | aTicketEntry subtotal]! !
+
+!methodRemoval: SaleTicket #totalFor: stamp: 'fr 11/26/2020 15:43:10'!
+totalFor: aSelector
+	
+	^ticketEntries sum: [:aTicketEntry | aSelector sendTo: aTicketEntry]!
+
+!testRun: #CartTest #test01NewCartsAreCreatedEmpty stamp: 'fr 11/26/2020 15:43:12'!
+PASSED!
+
+!testRun: #CartTest #test02CanNotAddItemsThatDoNotBelongToStore stamp: 'fr 11/26/2020 15:43:12'!
+PASSED!
+
+!testRun: #CartTest #test03AfterAddingAnItemTheCartIsNotEmptyAnymore stamp: 'fr 11/26/2020 15:43:12'!
+PASSED!
+
+!testRun: #CartTest #test04CanNotAddNonPositiveNumberOfItems stamp: 'fr 11/26/2020 15:43:12'!
+PASSED!
+
+!testRun: #CartTest #test05CanNotAddMoreThanOneItemNotSellByTheStore stamp: 'fr 11/26/2020 15:43:12'!
+PASSED!
+
+!testRun: #CartTest #test06CartRemembersAddedItems stamp: 'fr 11/26/2020 15:43:12'!
+PASSED!
+
+!testRun: #CartTest #test07CartDoesNotHoldNotAddedItems stamp: 'fr 11/26/2020 15:43:12'!
+PASSED!
+
+!testRun: #CartTest #test08CartRemembersTheNumberOfAddedItems stamp: 'fr 11/26/2020 15:43:12'!
+PASSED!
+
+!testRun: #CashierTest #test01CashierDoesNotAcceptAnEmptyCart stamp: 'fr 11/26/2020 15:43:12'!
+PASSED!
+
+!testRun: #CashierTest #test02CheckoutTotalIsCorrectForASingleItem stamp: 'fr 11/26/2020 15:43:12'!
+PASSED!
+
+!testRun: #CashierTest #test03CheckoutTotalIsCorrectForMultipleItems stamp: 'fr 11/26/2020 15:43:12'!
+PASSED!
+
+!testRun: #CashierTest #test04CashierDoesNotAcceptExpiredCards stamp: 'fr 11/26/2020 15:43:12'!
+PASSED!
+
+!testRun: #CashierTest #test05CanNotCheckoutWithACardWithoutCredit stamp: 'fr 11/26/2020 15:43:12'!
+PASSED!
+
+!testRun: #CashierTest #test06CanNotCheckoutWithAStolenCard stamp: 'fr 11/26/2020 15:43:12'!
+PASSED!
+
+!testRun: #CashierTest #test07CashierRegistersSalesAsExpected stamp: 'fr 11/26/2020 15:43:12'!
+PASSED!
+
+!testRun: #CashierTest #test08CheckoutTicketReflectsBoughtItemsAsExpected stamp: 'fr 11/26/2020 15:43:12'!
+PASSED!
+!SaleTicket methodsFor: 'private' stamp: 'fr 11/26/2020 15:43:25' prior: 50880866!
+detectATicketEntryFor: anItem
+
+	^ticketEntries detect: [:aTicketEntry | aTicketEntry item = anItem]! !
+!Cashier methodsFor: 'private' stamp: 'fr 11/26/2020 15:45:06' prior: 50881168!
+proceedToPayment
+
+	merchantProcessor charge: saleTicket total on: paymentMethod! !
+
+!testRun: #CartTest #test01NewCartsAreCreatedEmpty stamp: 'fr 11/26/2020 15:45:07'!
+PASSED!
+
+!testRun: #CartTest #test02CanNotAddItemsThatDoNotBelongToStore stamp: 'fr 11/26/2020 15:45:07'!
+PASSED!
+
+!testRun: #CartTest #test03AfterAddingAnItemTheCartIsNotEmptyAnymore stamp: 'fr 11/26/2020 15:45:07'!
+PASSED!
+
+!testRun: #CartTest #test04CanNotAddNonPositiveNumberOfItems stamp: 'fr 11/26/2020 15:45:07'!
+PASSED!
+
+!testRun: #CartTest #test05CanNotAddMoreThanOneItemNotSellByTheStore stamp: 'fr 11/26/2020 15:45:07'!
+PASSED!
+
+!testRun: #CartTest #test06CartRemembersAddedItems stamp: 'fr 11/26/2020 15:45:07'!
+PASSED!
+
+!testRun: #CartTest #test07CartDoesNotHoldNotAddedItems stamp: 'fr 11/26/2020 15:45:07'!
+PASSED!
+
+!testRun: #CartTest #test08CartRemembersTheNumberOfAddedItems stamp: 'fr 11/26/2020 15:45:07'!
+PASSED!
+
+!testRun: #CashierTest #test01CashierDoesNotAcceptAnEmptyCart stamp: 'fr 11/26/2020 15:45:07'!
+PASSED!
+
+!testRun: #CashierTest #test02CheckoutTotalIsCorrectForASingleItem stamp: 'fr 11/26/2020 15:45:07'!
+PASSED!
+
+!testRun: #CashierTest #test03CheckoutTotalIsCorrectForMultipleItems stamp: 'fr 11/26/2020 15:45:07'!
+PASSED!
+
+!testRun: #CashierTest #test04CashierDoesNotAcceptExpiredCards stamp: 'fr 11/26/2020 15:45:07'!
+PASSED!
+
+!testRun: #CashierTest #test05CanNotCheckoutWithACardWithoutCredit stamp: 'fr 11/26/2020 15:45:07'!
+PASSED!
+
+!testRun: #CashierTest #test06CanNotCheckoutWithAStolenCard stamp: 'fr 11/26/2020 15:45:07'!
+PASSED!
+
+!testRun: #CashierTest #test07CashierRegistersSalesAsExpected stamp: 'fr 11/26/2020 15:45:07'!
+PASSED!
+
+!testRun: #CashierTest #test08CheckoutTicketReflectsBoughtItemsAsExpected stamp: 'fr 11/26/2020 15:45:07'!
+PASSED!
+!Cashier methodsFor: 'private' stamp: 'fr 11/26/2020 15:45:30' prior: 50880770!
+collectTicketEntriesForTheCartInto: ticketEntries
+
+	cart itemsQuantitiesAndPricesDo: [:anItem :aQuantity :aPrice | 
+		ticketEntries add: (SaleTicketEntry for: aQuantity of: anItem costing: aPrice)
+	]! !
+
+!testRun: #CartTest #test01NewCartsAreCreatedEmpty stamp: 'fr 11/26/2020 15:45:32'!
+PASSED!
+
+!testRun: #CartTest #test02CanNotAddItemsThatDoNotBelongToStore stamp: 'fr 11/26/2020 15:45:32'!
+PASSED!
+
+!testRun: #CartTest #test03AfterAddingAnItemTheCartIsNotEmptyAnymore stamp: 'fr 11/26/2020 15:45:32'!
+PASSED!
+
+!testRun: #CartTest #test04CanNotAddNonPositiveNumberOfItems stamp: 'fr 11/26/2020 15:45:32'!
+PASSED!
+
+!testRun: #CartTest #test05CanNotAddMoreThanOneItemNotSellByTheStore stamp: 'fr 11/26/2020 15:45:32'!
+PASSED!
+
+!testRun: #CartTest #test06CartRemembersAddedItems stamp: 'fr 11/26/2020 15:45:32'!
+PASSED!
+
+!testRun: #CartTest #test07CartDoesNotHoldNotAddedItems stamp: 'fr 11/26/2020 15:45:32'!
+PASSED!
+
+!testRun: #CartTest #test08CartRemembersTheNumberOfAddedItems stamp: 'fr 11/26/2020 15:45:32'!
+PASSED!
+
+!testRun: #CashierTest #test01CashierDoesNotAcceptAnEmptyCart stamp: 'fr 11/26/2020 15:45:32'!
+PASSED!
+
+!testRun: #CashierTest #test02CheckoutTotalIsCorrectForASingleItem stamp: 'fr 11/26/2020 15:45:32'!
+PASSED!
+
+!testRun: #CashierTest #test03CheckoutTotalIsCorrectForMultipleItems stamp: 'fr 11/26/2020 15:45:32'!
+PASSED!
+
+!testRun: #CashierTest #test04CashierDoesNotAcceptExpiredCards stamp: 'fr 11/26/2020 15:45:32'!
+PASSED!
+
+!testRun: #CashierTest #test05CanNotCheckoutWithACardWithoutCredit stamp: 'fr 11/26/2020 15:45:32'!
+PASSED!
+
+!testRun: #CashierTest #test06CanNotCheckoutWithAStolenCard stamp: 'fr 11/26/2020 15:45:32'!
+PASSED!
+
+!testRun: #CashierTest #test07CashierRegistersSalesAsExpected stamp: 'fr 11/26/2020 15:45:32'!
+PASSED!
+
+!testRun: #CashierTest #test08CheckoutTicketReflectsBoughtItemsAsExpected stamp: 'fr 11/26/2020 15:45:32'!
+PASSED!
+
+----SNAPSHOT----(26 November 2020 15:47:07) CuisUniversity-4384.image priorSource: 17611810!

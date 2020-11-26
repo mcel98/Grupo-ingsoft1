@@ -125,14 +125,14 @@ TestCase subclass: #CashierTest
 	poolDictionaries: ''
 	category: 'TusLibros - Exercise - II'!
 
-!CashierTest methodsFor: 'tests' stamp: 'fr 11/23/2020 05:16:06'!
+!CashierTest methodsFor: 'tests' stamp: 'fr 11/26/2020 15:35:22'!
 test01CashierDoesNotAcceptAnEmptyCart
 	
 	| salesRegister |
-	salesRegister _ OrderedCollection new.
+	salesRegister _ self newSalesRegister.
 	self  should: [
 				Cashier 
-					for: (Cart acceptingItemsOf: self catalogue)
+					for: self newCart
 					paymentMethod: self nonExpiredCard 
 					merchantProcessor: self 
 					registerOn: salesRegister
@@ -159,12 +159,12 @@ test03CheckoutTotalIsCorrectForMultipleItems
 	
 ! !
 
-!CashierTest methodsFor: 'tests' stamp: 'fr 11/23/2020 05:04:59'!
+!CashierTest methodsFor: 'tests' stamp: 'fr 11/26/2020 15:35:36'!
 test04CashierDoesNotAcceptExpiredCards
 
 	| cart salesRegister |
-	salesRegister _ OrderedCollection new.
-	cart _ Cart acceptingItemsOf: self catalogue.
+	salesRegister _ self newSalesRegister.
+	cart _ self newCart.
 	cart add: 2 of: self itemInCatalogue.	
 
 	self  should: [	Cashier 
@@ -196,12 +196,12 @@ test06CanNotCheckoutWithAStolenCard
 	
 ! !
 
-!CashierTest methodsFor: 'tests' stamp: 'fr 11/23/2020 05:04:59'!
+!CashierTest methodsFor: 'tests' stamp: 'fr 11/26/2020 15:35:45'!
 test07CashierRegistersSalesAsExpected
 
 	| cart cashier salesRegister total |
-	salesRegister _ OrderedCollection new.
-	cart _ Cart acceptingItemsOf: self catalogue.
+	salesRegister _ self newSalesRegister.
+	cart _ self newCart.
 	cart add: self itemInCatalogue.	
 	cashier _ Cashier 
 				for: cart 
@@ -213,18 +213,18 @@ test07CashierRegistersSalesAsExpected
 	self assert: salesRegister size equals: 1.
 	self assert: salesRegister first total equals: total.! !
 
-!CashierTest methodsFor: 'tests' stamp: 'fr 11/23/2020 05:11:30'!
-test08CheckoutTicketReflectsOnlyBoughtItemsAsExpected
+!CashierTest methodsFor: 'tests' stamp: 'fr 11/26/2020 15:35:58'!
+test08CheckoutTicketReflectsBoughtItemsAsExpected
 
-	| cart cashier  ticket |
+	| cart cashier ticket |
 		
-	cart _ Cart acceptingItemsOf: self catalogue.
+	cart _ self newCart.
 	cart add: 2 of: self itemInCatalogue.
 	cashier _ Cashier 
 				for: cart 
 				paymentMethod: self nonExpiredCard 
 				merchantProcessor: self 
-				registerOn: OrderedCollection new.	
+				registerOn: self newSalesRegister.	
 	ticket _ cashier checkout.
 	
 	self assert: (ticket quantityOf: self itemInCatalogue) equals: 2.
@@ -240,7 +240,7 @@ charge: someAmountToCharge on: aCard
 	! !
 
 
-!CashierTest methodsFor: 'private' stamp: 'fr 11/23/2020 05:09:54'!
+!CashierTest methodsFor: 'private' stamp: 'fr 11/26/2020 15:32:16'!
 assertCheckoutFailsWithError: anErrorMessage
 
 	| cart cashier salesRegister |
@@ -248,7 +248,7 @@ assertCheckoutFailsWithError: anErrorMessage
 	paymentResponse _ [self error: anErrorMessage].
 		
 	salesRegister _ OrderedCollection new.
-	cart _ Cart acceptingItemsOf: self catalogue.
+	cart _ self newCart.
 	cart add: self itemInCatalogue.	
 	cashier _ Cashier 
 				for: cart 
@@ -265,12 +265,12 @@ assertCheckoutFailsWithError: anErrorMessage
 	
 ! !
 
-!CashierTest methodsFor: 'private' stamp: 'fr 11/23/2020 05:07:02'!
+!CashierTest methodsFor: 'private' stamp: 'fr 11/26/2020 15:32:25'!
 assertCheckoutTotalForCartWith: aCartBlock isEqualTo: aCheckoutTotal
 
 	| cart cashier  |
 		
-	cart _ Cart acceptingItemsOf: self catalogue.
+	cart _ self newCart.
 	aCartBlock value: cart.
 	cashier _ Cashier 
 				for: cart 
@@ -293,15 +293,25 @@ expiredCard
 
 	^ CreditCard withExpiration: (GregorianMonthOfYear decemberOf: GregorianYear current previous)! !
 
-!CashierTest methodsFor: 'utils' stamp: 'fr 11/23/2020 01:50:22'!
+!CashierTest methodsFor: 'utils' stamp: 'fr 11/26/2020 15:35:11'!
 itemInCatalogue
 	
-	^'an item'! !
+	^ 'an item'! !
 
 !CashierTest methodsFor: 'utils' stamp: 'fr 11/22/2020 22:31:50'!
 itemInCataloguePrice
 
 	^ 50! !
+
+!CashierTest methodsFor: 'utils' stamp: 'fr 11/26/2020 15:28:57'!
+newCart
+
+	^ Cart acceptingItemsOf: self catalogue! !
+
+!CashierTest methodsFor: 'utils' stamp: 'fr 11/26/2020 15:35:22'!
+newSalesRegister
+
+	^ OrderedCollection new! !
 
 !CashierTest methodsFor: 'utils' stamp: 'fr 11/23/2020 04:54:24'!
 nonExpiredCard
@@ -431,10 +441,10 @@ checkout
 	^saleTicket! !
 
 
-!Cashier methodsFor: 'private' stamp: 'fr 11/23/2020 04:46:43'!
+!Cashier methodsFor: 'private' stamp: 'fr 11/26/2020 15:45:30'!
 collectTicketEntriesForTheCartInto: ticketEntries
 
-	^ cart itemsQuantitiesAndPricesDo: [:anItem :aQuantity :aPrice | 
+	cart itemsQuantitiesAndPricesDo: [:anItem :aQuantity :aPrice | 
 		ticketEntries add: (SaleTicketEntry for: aQuantity of: anItem costing: aPrice)
 	]! !
 
@@ -446,10 +456,10 @@ obtainTicket
 	self collectTicketEntriesForTheCartInto: ticketEntries.
 	saleTicket _ SaleTicket for: ticketEntries! !
 
-!Cashier methodsFor: 'private' stamp: 'fr 11/23/2020 05:04:01'!
+!Cashier methodsFor: 'private' stamp: 'fr 11/26/2020 15:45:06'!
 proceedToPayment
 
-	^ merchantProcessor charge: saleTicket total on: paymentMethod! !
+	merchantProcessor charge: saleTicket total on: paymentMethod! !
 
 !Cashier methodsFor: 'private' stamp: 'fr 11/23/2020 04:58:20'!
 registerSale
@@ -555,7 +565,7 @@ initializeFor: aListOfTicketEntries
 	ticketEntries _ aListOfTicketEntries.! !
 
 
-!SaleTicket methodsFor: 'total' stamp: 'fr 11/23/2020 04:05:54'!
+!SaleTicket methodsFor: 'total' stamp: 'fr 11/26/2020 15:39:19'!
 total
 	
 	^ticketEntries sum: [:aTicketEntry | aTicketEntry subtotal]! !
@@ -575,10 +585,10 @@ totalItems
 	^ticketEntries sum: [:aTicketEntry | aTicketEntry quantity]! !
 
 
-!SaleTicket methodsFor: 'private' stamp: 'fr 11/23/2020 04:49:06'!
+!SaleTicket methodsFor: 'private' stamp: 'fr 11/26/2020 15:43:25'!
 detectATicketEntryFor: anItem
 
-	^ ticketEntries detect: [:aTicketEntry | aTicketEntry item = anItem]! !
+	^ticketEntries detect: [:aTicketEntry | aTicketEntry item = anItem]! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
