@@ -259,7 +259,7 @@ TestCase subclass: #TusLibrosFacadeTest
 	poolDictionaries: ''
 	category: 'TusLibros - Exercise - III'!
 
-!TusLibrosFacadeTest methodsFor: 'tests' stamp: 'fr 12/3/2020 02:01:05'!
+!TusLibrosFacadeTest methodsFor: 'tests - create cart' stamp: 'fr 12/3/2020 02:01:05'!
 test01CanCreateNewCartWithValidCredentials
 
 	| cartId  |
@@ -267,96 +267,60 @@ test01CanCreateNewCartWithValidCredentials
 	
 	self assert: (facade listCart: cartId) isEmpty! !
 
-!TusLibrosFacadeTest methodsFor: 'tests' stamp: 'fr 12/3/2020 05:08:26'!
+!TusLibrosFacadeTest methodsFor: 'tests - create cart' stamp: 'fr 12/3/2020 05:08:26'!
 test02CanNotCreateNewCartForInvalidUser
 		
 	self assertCreatingACartFailsForUser: objectFactory invalidUser withPassword: objectFactory validPassword.
 		! !
 
-!TusLibrosFacadeTest methodsFor: 'tests' stamp: 'fr 12/3/2020 05:08:54'!
+!TusLibrosFacadeTest methodsFor: 'tests - create cart' stamp: 'fr 12/3/2020 05:08:54'!
 test03CanNotCreateNewCartForInvalidPassword
 		
 	self assertCreatingACartFailsForUser: objectFactory validUser withPassword: objectFactory invalidPassword.
 
 		! !
 
-!TusLibrosFacadeTest methodsFor: 'tests' stamp: 'fr 12/3/2020 05:10:47'!
+
+!TusLibrosFacadeTest methodsFor: 'tests - list cart' stamp: 'fr 12/3/2020 05:10:47'!
 test04CanNotListNonexistentCart
 		
 	self assertBlockFailsForInvalidCart: [facade listCart: objectFactory invalidCartId]! !
 
-!TusLibrosFacadeTest methodsFor: 'tests' stamp: 'fr 12/3/2020 05:24:00'!
+!TusLibrosFacadeTest methodsFor: 'tests - list cart' stamp: 'fr 12/3/2020 00:15:32'!
+test14CanNotListAnExpiredCart
+
+	| cartId |
+	cartId _ facade newCartForUser: objectFactory validUser andPassword: objectFactory validPassword.	
+	clock advanceHalfAnHour.
+	self  should: [facade listCart: cartId]
+		raise: Error - MessageNotUnderstood
+		description: TusLibrosFacade cartExpiredErrorDescription
+	
+	
+	
+	
+	! !
+
+
+!TusLibrosFacadeTest methodsFor: 'tests - add' stamp: 'fr 12/3/2020 05:24:00'!
 test05AddingAnItemIsReflectedWhenListingTheCart
 
 	self assertListingACartReflectsAddedProductsWithAmount: 1
 ! !
 
-!TusLibrosFacadeTest methodsFor: 'tests' stamp: 'fr 12/3/2020 05:24:36'!
+!TusLibrosFacadeTest methodsFor: 'tests - add' stamp: 'fr 12/3/2020 05:24:36'!
 test06AddingMultipleItemsIsReflectedWhenListingTheCart
 
 	self assertListingACartReflectsAddedProductsWithAmount: 2
 ! !
 
-!TusLibrosFacadeTest methodsFor: 'tests' stamp: 'fr 12/3/2020 05:24:40'!
+!TusLibrosFacadeTest methodsFor: 'tests - add' stamp: 'fr 12/3/2020 05:24:40'!
 test07CanNotAddItemsToNonexistentCarts
 		
 	self assertBlockFailsForInvalidCart: [facade add: 2 of: objectFactory itemSellByTheStore toCart: objectFactory invalidCartId]
 ! !
 
-!TusLibrosFacadeTest methodsFor: 'tests' stamp: 'fr 12/3/2020 07:39:35'!
-test08CanCheckoutAValidCart
-
-	| transactionId |
-	transactionId _ self createNewCartForValidCredentialsAndCheckoutAfterAddingProducts.
-	
-	self assert: (facade lastTransactionWas: transactionId)
-	! !
-
-!TusLibrosFacadeTest methodsFor: 'tests' stamp: 'fr 12/3/2020 05:17:53'!
-test09CanNotCheckoutANonexistentCart
-				
-	self should: [facade 
-			checkoutCart: objectFactory invalidCartId 
-			withCard: objectFactory cardNumber 
-			expiringOn: objectFactory cardExpirationDate 
-			forOwner: objectFactory cardOwner.] 
-		raise: Error - MessageNotUnderstood 
-		withExceptionDo: [:anError | 
-							self assert: anError messageText equals: TusLibrosFacade invalidCartIdErrorDescription.
-							self assert: salesBook isEmpty
-			]
-	! !
-
-!TusLibrosFacadeTest methodsFor: 'tests' stamp: 'fr 12/3/2020 05:31:28'!
-test10PurchaseListHasTheCorrectQuantityOfItemsAndTotal
-
-	| purchasesList |
-				
-	self createNewCartForValidCredentialsAndCheckoutAfterAddingProducts.
-	purchasesList _ facade listPurchasesOfUser: objectFactory validUser withPassword: objectFactory validPassword.
-	
-	self assert: (purchasesList first at: objectFactory itemSellByTheStore) equals: 2.
-	self assert: purchasesList second equals: objectFactory itemSellByTheStorePrice * 2
-	
-	! !
-
-!TusLibrosFacadeTest methodsFor: 'tests' stamp: 'fr 12/3/2020 05:33:30'!
-test11CanNotListPurchasesForInvalidUsername
-		
-	self  assertListingPurchasesAfterCheckingOutACartForAValidUserFailsForUser: objectFactory invalidUser 
-		andPassword: objectFactory validPassword 
-	
-	! !
-
-!TusLibrosFacadeTest methodsFor: 'tests' stamp: 'fr 12/3/2020 05:33:53'!
-test12CanNotListPurchasesForInvalidPassword
-		
-	self  assertListingPurchasesAfterCheckingOutACartForAValidUserFailsForUser: objectFactory validUser 
-		andPassword: objectFactory invalidPassword 
-	
-	! !
-
-!TusLibrosFacadeTest methodsFor: 'tests' stamp: 'fr 12/3/2020 11:19:21'!
+!TusLibrosFacadeTest methodsFor: 'tests - add' stamp: 'fr 12/3/2020 11:19:21'!
 test13CanNotAddItemsToAnExpiredCart
 
 	| cartId |
@@ -375,22 +339,32 @@ test13CanNotAddItemsToAnExpiredCart
 	
 	! !
 
-!TusLibrosFacadeTest methodsFor: 'tests' stamp: 'fr 12/3/2020 00:15:32'!
-test14CanNotListAnExpiredCart
 
-	| cartId |
-	cartId _ facade newCartForUser: objectFactory validUser andPassword: objectFactory validPassword.	
-	clock advanceHalfAnHour.
-	self  should: [facade listCart: cartId]
-		raise: Error - MessageNotUnderstood
-		description: TusLibrosFacade cartExpiredErrorDescription
+!TusLibrosFacadeTest methodsFor: 'tests - checkout' stamp: 'fr 12/3/2020 07:39:35'!
+test08CanCheckoutAValidCart
+
+	| transactionId |
+	transactionId _ self createNewCartForValidCredentialsAndCheckoutAfterAddingProducts.
 	
-	
-	
-	
+	self assert: (facade lastTransactionWas: transactionId)
 	! !
 
-!TusLibrosFacadeTest methodsFor: 'tests' stamp: 'fr 12/3/2020 03:46:21'!
+!TusLibrosFacadeTest methodsFor: 'tests - checkout' stamp: 'fr 12/3/2020 05:17:53'!
+test09CanNotCheckoutANonexistentCart
+				
+	self should: [facade 
+			checkoutCart: objectFactory invalidCartId 
+			withCard: objectFactory cardNumber 
+			expiringOn: objectFactory cardExpirationDate 
+			forOwner: objectFactory cardOwner.] 
+		raise: Error - MessageNotUnderstood 
+		withExceptionDo: [:anError | 
+							self assert: anError messageText equals: TusLibrosFacade invalidCartIdErrorDescription.
+							self assert: salesBook isEmpty
+			]
+	! !
+
+!TusLibrosFacadeTest methodsFor: 'tests - checkout' stamp: 'fr 12/3/2020 03:46:21'!
 test15CanNotCheckoutAnExpiredCart
 
 	| cartId |
@@ -413,7 +387,7 @@ test15CanNotCheckoutAnExpiredCart
 	
 	! !
 
-!TusLibrosFacadeTest methodsFor: 'tests' stamp: 'fr 12/3/2020 05:34:52'!
+!TusLibrosFacadeTest methodsFor: 'tests - checkout' stamp: 'fr 12/3/2020 05:34:52'!
 test16CanNotPerformAnyOperationWithACartAfterCheckout
 
 	| cartId |
@@ -430,6 +404,36 @@ test16CanNotPerformAnyOperationWithACartAfterCheckout
 		raise: Error - MessageNotUnderstood  
 		withMessageText: TusLibrosFacade invalidCartIdErrorDescription 
 		
+	
+	! !
+
+
+!TusLibrosFacadeTest methodsFor: 'tests - purchases list' stamp: 'fr 12/3/2020 05:31:28'!
+test10PurchaseListHasTheCorrectQuantityOfItemsAndTotal
+
+	| purchasesList |
+				
+	self createNewCartForValidCredentialsAndCheckoutAfterAddingProducts.
+	purchasesList _ facade listPurchasesOfUser: objectFactory validUser withPassword: objectFactory validPassword.
+	
+	self assert: (purchasesList first at: objectFactory itemSellByTheStore) equals: 2.
+	self assert: purchasesList second equals: objectFactory itemSellByTheStorePrice * 2
+	
+	! !
+
+!TusLibrosFacadeTest methodsFor: 'tests - purchases list' stamp: 'fr 12/3/2020 05:33:30'!
+test11CanNotListPurchasesForInvalidUsername
+		
+	self  assertListingPurchasesAfterCheckingOutACartForAValidUserFailsForUser: objectFactory invalidUser 
+		andPassword: objectFactory validPassword 
+	
+	! !
+
+!TusLibrosFacadeTest methodsFor: 'tests - purchases list' stamp: 'fr 12/3/2020 05:33:53'!
+test12CanNotListPurchasesForInvalidPassword
+		
+	self  assertListingPurchasesAfterCheckingOutACartForAValidUserFailsForUser: objectFactory validUser 
+		andPassword: objectFactory invalidPassword 
 	
 	! !
 
@@ -1170,12 +1174,6 @@ checkoutCart: aCartId withCard: aCardNumber expiringOn: anExpirationDate forOwne
 		! !
 
 !TusLibrosFacade methodsFor: 'cart management' stamp: 'fr 12/3/2020 16:37:33'!
-do: aBlock forCartSessionFor: aCartId
-	
-	^aBlock value: (self cartSessionForCartId: aCartId) 
-	! !
-
-!TusLibrosFacade methodsFor: 'cart management' stamp: 'fr 12/3/2020 16:37:33'!
 listCart: aCartId 
 	
 	^self do: [:aCartSession | aCartSession listCart] forCartSessionFor: aCartId 
@@ -1274,6 +1272,12 @@ validateUsername: aPassword withPassword: aUsername
 cartSessionForCartId: aCartId
 
 	^cartsSessions at: aCartId ifAbsent: [self error: self class invalidCartIdErrorDescription]! !
+
+!TusLibrosFacade methodsFor: 'cart session management' stamp: 'fr 12/3/2020 16:37:33'!
+do: aBlock forCartSessionFor: aCartId
+	
+	^aBlock value: (self cartSessionForCartId: aCartId) 
+	! !
 
 !TusLibrosFacade methodsFor: 'cart session management' stamp: 'fr 12/3/2020 03:32:31'!
 newCartSessionFor: aUsername 
