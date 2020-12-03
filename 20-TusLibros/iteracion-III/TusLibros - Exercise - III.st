@@ -259,13 +259,6 @@ TestCase subclass: #TusLibrosFacadeTest
 	poolDictionaries: ''
 	category: 'TusLibros - Exercise - III'!
 
-!TusLibrosFacadeTest methodsFor: 'tests' stamp: 'fr 12/3/2020 05:37:02'!
-notas
-			
-	"Después de la expiración de la sesión habría que borrar el cart -> test para verificar que luego de un timeout el cartId es inválido => Paso bloque que se ejecute si la condición de expiración es verdadera"
-				
-! !
-
 !TusLibrosFacadeTest methodsFor: 'tests' stamp: 'fr 12/3/2020 02:01:05'!
 test01CanCreateNewCartWithValidCredentials
 
@@ -363,7 +356,7 @@ test12CanNotListPurchasesForInvalidPassword
 	
 	! !
 
-!TusLibrosFacadeTest methodsFor: 'tests' stamp: 'fr 12/2/2020 23:57:50'!
+!TusLibrosFacadeTest methodsFor: 'tests' stamp: 'fr 12/3/2020 11:19:21'!
 test13CanNotAddItemsToAnExpiredCart
 
 	| cartId |
@@ -371,7 +364,11 @@ test13CanNotAddItemsToAnExpiredCart
 	clock advanceHalfAnHour.
 	self  should: [facade add: 1 of: objectFactory itemSellByTheStore toCart: cartId]
 		raise: Error - MessageNotUnderstood
-		description: TusLibrosFacade cartExpiredErrorDescription
+		withExceptionDo: [:anError |
+				self assert: anError messageText equals: TusLibrosFacade cartExpiredErrorDescription.
+				clock goBackHalfAnHour.
+				self assert: (facade listCart: cartId) isEmpty
+			]
 	
 	
 	
@@ -654,10 +651,10 @@ initializeFor: aCart on: aFacade user: aUsername
 	lastUsed _ facade now! !
 
 
-!CartSession methodsFor: 'validation' stamp: 'fr 12/3/2020 00:01:06'!
+!CartSession methodsFor: 'validation' stamp: 'fr 12/3/2020 11:20:41'!
 assertCartHasNotExpired
 
-	^ (facade now - lastUsed >= 30 minutes) ifTrue: [self error: TusLibrosFacade cartExpiredErrorDescription]! !
+	^ (facade now - lastUsed >= facade sessionDuration) ifTrue: [self error: TusLibrosFacade cartExpiredErrorDescription]! !
 
 
 !CartSession methodsFor: 'cart management' stamp: 'fr 12/3/2020 03:01:42'!
@@ -822,6 +819,11 @@ Object subclass: #Clock
 currentMonth
 	
 	^self now month ! !
+
+!Clock methodsFor: 'time' stamp: 'fr 12/3/2020 11:19:42'!
+goBackHalfAnHour
+	
+	now _ now - 30 minutes! !
 
 !Clock methodsFor: 'time' stamp: 'fr 12/3/2020 01:58:26'!
 now
@@ -1055,6 +1057,11 @@ defaultCatalog
 		at: self itemSellByTheStore put: self itemSellByTheStorePrice;
 		yourself ! !
 
+!StoreTestObjectsFactory methodsFor: 'cart' stamp: 'fr 12/3/2020 05:10:58'!
+invalidCartId
+	
+	^Object new! !
+
 
 !StoreTestObjectsFactory methodsFor: 'credit card' stamp: 'fr 11/30/2020 02:45:01'!
 cardExpirationDate
@@ -1135,12 +1142,6 @@ validUser
 	
 	^'validUsername'! !
 
-
-!StoreTestObjectsFactory methodsFor: 'as yet unclassified' stamp: 'fr 12/3/2020 05:10:58'!
-invalidCartId
-	
-	^Object new! !
-
 
 !classDefinition: #TusLibrosFacade category: 'TusLibros - Exercise - III'!
 Object subclass: #TusLibrosFacade
@@ -1179,16 +1180,17 @@ newCart
 
 	^ Cart acceptingItemsOf: catalogue! !
 
-!TusLibrosFacade methodsFor: 'cart management' stamp: 'fr 12/3/2020 07:42:08'!
+!TusLibrosFacade methodsFor: 'cart management' stamp: 'fr 12/3/2020 11:16:32'!
 newCartForUser: aUsername andPassword: aPassword 
 	
 	self validateUsername: aPassword withPassword: aUsername.
 	self updateCartId.
 	cartsSessions add: currentCartId -> (self newCartSessionFor: aUsername).
-	^currentCartId ! !
+	^currentCartId .
+ ! !
 
 
-!TusLibrosFacade methodsFor: 'initialization' stamp: 'fr 12/3/2020 07:42:08'!
+!TusLibrosFacade methodsFor: 'initialization' stamp: 'fr 12/3/2020 11:15:05'!
 initializeAcceptingItemsOf: aCatalogue validatingUsersThrough: anAuthenticator registeringSalesOn: aSalesBook chargingThrough: aMerchantProcessor withClock: aClock 
 	
 	catalogue _ aCatalogue.
@@ -1198,8 +1200,8 @@ initializeAcceptingItemsOf: aCatalogue validatingUsersThrough: anAuthenticator r
 	clock _ aClock.
 	
 	cartsSessions _ Dictionary new.
-	currentCartId _ 0.
-	currentTransactionId _ 0
+	currentCartId _ 1.
+	currentTransactionId _ 1
 ! !
 
 
@@ -1213,6 +1215,11 @@ currentMonth
 now
 	
 	^clock now! !
+
+!TusLibrosFacade methodsFor: 'time' stamp: 'fr 12/3/2020 11:21:01'!
+sessionDuration
+	
+	^30 minutes! !
 
 
 !TusLibrosFacade methodsFor: 'purchase listing - private' stamp: 'fr 12/3/2020 04:39:14'!
@@ -1279,11 +1286,6 @@ removeCart: aCartId
 	
 	! !
 
-!TusLibrosFacade methodsFor: 'cart session management' stamp: 'fr 12/3/2020 07:42:08'!
-updateCartId
-	
-	currentCartId _ currentCartId + 1! !
-
 
 !TusLibrosFacade methodsFor: 'testing' stamp: 'fr 12/3/2020 07:40:41'!
 lastTransactionWas: aTransactionId 
@@ -1298,6 +1300,12 @@ newTransactionId
 	
 	currentTransactionId _ currentTransactionId + 1.
 	^currentTransactionId ! !
+
+!TusLibrosFacade methodsFor: 'id' stamp: 'fr 12/3/2020 11:16:32'!
+updateCartId
+	
+	currentCartId _ currentCartId + 1.
+! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
