@@ -46761,3 +46761,107 @@ PASSED!
 PASSED!
 
 ----SNAPSHOT----(3 December 2020 11:21:14) CuisUniversity-4384.image priorSource: 17953729!
+
+!methodRemoval: TusLibrosFacade #newCartSession stamp: 'fr 12/3/2020 11:23:49'!
+newCartSession
+
+	^ CartSession for: self newCart facade: self!
+
+!methodRemoval: CartSession class #for:facade: stamp: 'fr 12/3/2020 11:23:56'!
+for: aCart facade: aFacade 
+	
+	^self new initializeFor: aCart facade: aFacade !
+
+!testRun: #CartTest #test01NewCartsAreCreatedEmpty stamp: 'fr 12/3/2020 11:23:58'!
+PASSED!
+
+!testRun: #CartTest #test02CanNotAddItemsThatDoNotBelongToStore stamp: 'fr 12/3/2020 11:23:58'!
+PASSED!
+
+!testRun: #CartTest #test03AfterAddingAnItemTheCartIsNotEmptyAnymore stamp: 'fr 12/3/2020 11:23:58'!
+PASSED!
+
+!testRun: #CartTest #test04CanNotAddNonPositiveNumberOfItems stamp: 'fr 12/3/2020 11:23:58'!
+PASSED!
+
+!testRun: #CartTest #test05CanNotAddMoreThanOneItemNotSellByTheStore stamp: 'fr 12/3/2020 11:23:58'!
+PASSED!
+
+!testRun: #CartTest #test06CartRemembersAddedItems stamp: 'fr 12/3/2020 11:23:58'!
+PASSED!
+
+!testRun: #CartTest #test07CartDoesNotHoldNotAddedItems stamp: 'fr 12/3/2020 11:23:58'!
+PASSED!
+
+!testRun: #CartTest #test08CartRemembersTheNumberOfAddedItems stamp: 'fr 12/3/2020 11:23:58'!
+PASSED!
+
+!testRun: #CashierTest #test01CanNotCheckoutAnEmptyCart stamp: 'fr 12/3/2020 11:23:58'!
+PASSED!
+
+!testRun: #CashierTest #test02CalculatedTotalIsCorrect stamp: 'fr 12/3/2020 11:23:58'!
+PASSED!
+
+!testRun: #CashierTest #test03CanNotCheckoutWithAnExpiredCreditCart stamp: 'fr 12/3/2020 11:23:58'!
+PASSED!
+
+!testRun: #CashierTest #test04CheckoutRegistersASale stamp: 'fr 12/3/2020 11:23:58'!
+PASSED!
+
+!testRun: #CashierTest #test05CashierChargesCreditCardUsingMerchantProcessor stamp: 'fr 12/3/2020 11:23:58'!
+PASSED!
+
+!testRun: #CashierTest #test06CashierDoesNotSaleWhenTheCreditCardHasNoCredit stamp: 'fr 12/3/2020 11:23:58'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test01CanCreateNewCartWithValidCredentials stamp: 'fr 12/3/2020 11:23:58'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test02CanNotCreateNewCartForInvalidUser stamp: 'fr 12/3/2020 11:23:58'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test03CanNotCreateNewCartForInvalidPassword stamp: 'fr 12/3/2020 11:23:58'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test04CanNotListNonexistentCart stamp: 'fr 12/3/2020 11:23:58'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test05AddingAnItemIsReflectedWhenListingTheCart stamp: 'fr 12/3/2020 11:23:58'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test06AddingMultipleItemsIsReflectedWhenListingTheCart stamp: 'fr 12/3/2020 11:23:58'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test07CanNotAddItemsToNonexistentCarts stamp: 'fr 12/3/2020 11:23:58'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test08CanCheckoutAValidCart stamp: 'fr 12/3/2020 11:23:58'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test09CanNotCheckoutANonexistentCart stamp: 'fr 12/3/2020 11:23:58'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test10PurchaseListHasTheCorrectQuantityOfItemsAndTotal stamp: 'fr 12/3/2020 11:23:58'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test11CanNotListPurchasesForInvalidUsername stamp: 'fr 12/3/2020 11:23:58'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test12CanNotListPurchasesForInvalidPassword stamp: 'fr 12/3/2020 11:23:58'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test13CanNotAddItemsToAnExpiredCart stamp: 'fr 12/3/2020 11:23:58'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test14CanNotListAnExpiredCart stamp: 'fr 12/3/2020 11:23:58'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test15CanNotCheckoutAnExpiredCart stamp: 'fr 12/3/2020 11:23:58'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test16CanNotPerformAnyOperationWithACartAfterCheckout stamp: 'fr 12/3/2020 11:23:58'!
+PASSED!
+
+----SNAPSHOT----(3 December 2020 11:25:52) CuisUniversity-4384.image priorSource: 17982399!
+
+----SNAPSHOT----(3 December 2020 11:26:22) CuisUniversity-4384.image priorSource: 17986070!

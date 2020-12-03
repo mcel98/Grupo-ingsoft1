@@ -696,11 +696,6 @@ listCart
 CartSession class
 	instanceVariableNames: ''!
 
-!CartSession class methodsFor: 'instance creation' stamp: 'fr 11/30/2020 19:24:46'!
-for: aCart facade: aFacade 
-	
-	^self new initializeFor: aCart facade: aFacade ! !
-
 !CartSession class methodsFor: 'instance creation' stamp: 'fr 12/3/2020 03:32:52'!
 for: aCart on: aFacade user: aUsername 
 	
@@ -1268,11 +1263,6 @@ validateUsername: aPassword withPassword: aUsername
 cartSessionForCartId: aCartId
 
 	^cartsSessions at: aCartId ifAbsent: [self error: self class invalidCartIdErrorDescription]! !
-
-!TusLibrosFacade methodsFor: 'cart session management' stamp: 'fr 12/3/2020 00:18:55'!
-newCartSession
-
-	^ CartSession for: self newCart facade: self! !
 
 !TusLibrosFacade methodsFor: 'cart session management' stamp: 'fr 12/3/2020 03:32:31'!
 newCartSessionFor: aUsername 
