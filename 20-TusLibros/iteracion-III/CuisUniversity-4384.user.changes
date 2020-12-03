@@ -47021,3 +47021,1028 @@ PASSED!
 
 !testRun: #TusLibrosFacadeTest #test16CanNotPerformAnyOperationWithACartAfterCheckout stamp: 'fr 12/3/2020 16:26:31'!
 PASSED!
+
+----QUIT----(3 December 2020 16:29:21) CuisUniversity-4384.image priorSource: 17989491!
+
+----STARTUP---- (3 December 2020 16:32:37) as /home/fede/Documentos/Facultad/Inge1/Cuises/linux64/CuisUniversity-4384.image!
+
+!TusLibrosFacade methodsFor: 'cart management' stamp: 'fr 12/3/2020 16:33:48'!
+do: aBlock forCartSession: aCartId
+	
+	aBlock value: (self cartSessionForCartId: aCartId) 
+	! !
+!TusLibrosFacade methodsFor: 'cart management' stamp: 'fr 12/3/2020 16:34:25' prior: 50885449!
+listCart: aCartId 
+	
+	"^(self cartSessionForCartId: aCartId) listCart"
+	^self do: [:aCartSession | aCartSession listCart] forCartSession: aCartId 
+	! !
+
+!testRun: #CartTest #test01NewCartsAreCreatedEmpty stamp: 'fr 12/3/2020 16:34:27'!
+PASSED!
+
+!testRun: #CartTest #test02CanNotAddItemsThatDoNotBelongToStore stamp: 'fr 12/3/2020 16:34:27'!
+PASSED!
+
+!testRun: #CartTest #test03AfterAddingAnItemTheCartIsNotEmptyAnymore stamp: 'fr 12/3/2020 16:34:27'!
+PASSED!
+
+!testRun: #CartTest #test04CanNotAddNonPositiveNumberOfItems stamp: 'fr 12/3/2020 16:34:27'!
+PASSED!
+
+!testRun: #CartTest #test05CanNotAddMoreThanOneItemNotSellByTheStore stamp: 'fr 12/3/2020 16:34:27'!
+PASSED!
+
+!testRun: #CartTest #test06CartRemembersAddedItems stamp: 'fr 12/3/2020 16:34:27'!
+PASSED!
+
+!testRun: #CartTest #test07CartDoesNotHoldNotAddedItems stamp: 'fr 12/3/2020 16:34:27'!
+PASSED!
+
+!testRun: #CartTest #test08CartRemembersTheNumberOfAddedItems stamp: 'fr 12/3/2020 16:34:27'!
+PASSED!
+
+!testRun: #CashierTest #test01CanNotCheckoutAnEmptyCart stamp: 'fr 12/3/2020 16:34:27'!
+PASSED!
+
+!testRun: #CashierTest #test02CalculatedTotalIsCorrect stamp: 'fr 12/3/2020 16:34:27'!
+PASSED!
+
+!testRun: #CashierTest #test03CanNotCheckoutWithAnExpiredCreditCart stamp: 'fr 12/3/2020 16:34:27'!
+PASSED!
+
+!testRun: #CashierTest #test04CheckoutRegistersASale stamp: 'fr 12/3/2020 16:34:27'!
+PASSED!
+
+!testRun: #CashierTest #test05CashierChargesCreditCardUsingMerchantProcessor stamp: 'fr 12/3/2020 16:34:27'!
+PASSED!
+
+!testRun: #CashierTest #test06CashierDoesNotSaleWhenTheCreditCardHasNoCredit stamp: 'fr 12/3/2020 16:34:27'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test01CanCreateNewCartWithValidCredentials stamp: 'fr 12/3/2020 16:34:27'!
+ERROR!
+
+!testRun: #TusLibrosFacadeTest #test02CanNotCreateNewCartForInvalidUser stamp: 'fr 12/3/2020 16:34:27'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test03CanNotCreateNewCartForInvalidPassword stamp: 'fr 12/3/2020 16:34:27'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test04CanNotListNonexistentCart stamp: 'fr 12/3/2020 16:34:27'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test05AddingAnItemIsReflectedWhenListingTheCart stamp: 'fr 12/3/2020 16:34:27'!
+ERROR!
+
+!testRun: #TusLibrosFacadeTest #test06AddingMultipleItemsIsReflectedWhenListingTheCart stamp: 'fr 12/3/2020 16:34:27'!
+ERROR!
+
+!testRun: #TusLibrosFacadeTest #test07CanNotAddItemsToNonexistentCarts stamp: 'fr 12/3/2020 16:34:27'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test08CanCheckoutAValidCart stamp: 'fr 12/3/2020 16:34:27'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test09CanNotCheckoutANonexistentCart stamp: 'fr 12/3/2020 16:34:27'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test10PurchaseListHasTheCorrectQuantityOfItemsAndTotal stamp: 'fr 12/3/2020 16:34:27'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test11CanNotListPurchasesForInvalidUsername stamp: 'fr 12/3/2020 16:34:27'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test12CanNotListPurchasesForInvalidPassword stamp: 'fr 12/3/2020 16:34:27'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test13CanNotAddItemsToAnExpiredCart stamp: 'fr 12/3/2020 16:34:27'!
+ERROR!
+
+!testRun: #TusLibrosFacadeTest #test14CanNotListAnExpiredCart stamp: 'fr 12/3/2020 16:34:27'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test15CanNotCheckoutAnExpiredCart stamp: 'fr 12/3/2020 16:34:27'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test16CanNotPerformAnyOperationWithACartAfterCheckout stamp: 'fr 12/3/2020 16:34:27'!
+PASSED!
+!TusLibrosFacade methodsFor: 'cart management' stamp: 'fr 12/3/2020 16:34:34' prior: 50893935!
+do: aBlock forCartSession: aCartId
+	
+	^aBlock value: (self cartSessionForCartId: aCartId) 
+	! !
+
+!testRun: #CartTest #test01NewCartsAreCreatedEmpty stamp: 'fr 12/3/2020 16:34:36'!
+PASSED!
+
+!testRun: #CartTest #test02CanNotAddItemsThatDoNotBelongToStore stamp: 'fr 12/3/2020 16:34:36'!
+PASSED!
+
+!testRun: #CartTest #test03AfterAddingAnItemTheCartIsNotEmptyAnymore stamp: 'fr 12/3/2020 16:34:36'!
+PASSED!
+
+!testRun: #CartTest #test04CanNotAddNonPositiveNumberOfItems stamp: 'fr 12/3/2020 16:34:36'!
+PASSED!
+
+!testRun: #CartTest #test05CanNotAddMoreThanOneItemNotSellByTheStore stamp: 'fr 12/3/2020 16:34:36'!
+PASSED!
+
+!testRun: #CartTest #test06CartRemembersAddedItems stamp: 'fr 12/3/2020 16:34:36'!
+PASSED!
+
+!testRun: #CartTest #test07CartDoesNotHoldNotAddedItems stamp: 'fr 12/3/2020 16:34:36'!
+PASSED!
+
+!testRun: #CartTest #test08CartRemembersTheNumberOfAddedItems stamp: 'fr 12/3/2020 16:34:36'!
+PASSED!
+
+!testRun: #CashierTest #test01CanNotCheckoutAnEmptyCart stamp: 'fr 12/3/2020 16:34:36'!
+PASSED!
+
+!testRun: #CashierTest #test02CalculatedTotalIsCorrect stamp: 'fr 12/3/2020 16:34:36'!
+PASSED!
+
+!testRun: #CashierTest #test03CanNotCheckoutWithAnExpiredCreditCart stamp: 'fr 12/3/2020 16:34:36'!
+PASSED!
+
+!testRun: #CashierTest #test04CheckoutRegistersASale stamp: 'fr 12/3/2020 16:34:36'!
+PASSED!
+
+!testRun: #CashierTest #test05CashierChargesCreditCardUsingMerchantProcessor stamp: 'fr 12/3/2020 16:34:36'!
+PASSED!
+
+!testRun: #CashierTest #test06CashierDoesNotSaleWhenTheCreditCardHasNoCredit stamp: 'fr 12/3/2020 16:34:36'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test01CanCreateNewCartWithValidCredentials stamp: 'fr 12/3/2020 16:34:36'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test02CanNotCreateNewCartForInvalidUser stamp: 'fr 12/3/2020 16:34:36'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test03CanNotCreateNewCartForInvalidPassword stamp: 'fr 12/3/2020 16:34:36'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test04CanNotListNonexistentCart stamp: 'fr 12/3/2020 16:34:36'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test05AddingAnItemIsReflectedWhenListingTheCart stamp: 'fr 12/3/2020 16:34:36'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test06AddingMultipleItemsIsReflectedWhenListingTheCart stamp: 'fr 12/3/2020 16:34:36'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test07CanNotAddItemsToNonexistentCarts stamp: 'fr 12/3/2020 16:34:36'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test08CanCheckoutAValidCart stamp: 'fr 12/3/2020 16:34:36'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test09CanNotCheckoutANonexistentCart stamp: 'fr 12/3/2020 16:34:36'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test10PurchaseListHasTheCorrectQuantityOfItemsAndTotal stamp: 'fr 12/3/2020 16:34:36'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test11CanNotListPurchasesForInvalidUsername stamp: 'fr 12/3/2020 16:34:36'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test12CanNotListPurchasesForInvalidPassword stamp: 'fr 12/3/2020 16:34:36'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test13CanNotAddItemsToAnExpiredCart stamp: 'fr 12/3/2020 16:34:36'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test14CanNotListAnExpiredCart stamp: 'fr 12/3/2020 16:34:36'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test15CanNotCheckoutAnExpiredCart stamp: 'fr 12/3/2020 16:34:36'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test16CanNotPerformAnyOperationWithACartAfterCheckout stamp: 'fr 12/3/2020 16:34:36'!
+PASSED!
+!TusLibrosFacade methodsFor: 'cart management' stamp: 'fr 12/3/2020 16:34:43' prior: 50893941!
+listCart: aCartId 
+	
+	^self do: [:aCartSession | aCartSession listCart] forCartSession: aCartId 
+	! !
+!TusLibrosFacade methodsFor: 'cart management' stamp: 'fr 12/3/2020 16:35:58' prior: 50891889!
+checkoutCart: aCartId withCard: aCardNumber expiringOn: anExpirationDate forOwner: aCardOwner 
+	
+	^self do: [:aCartSession | 	aCartSession 
+							checkoutWithCard: aCardNumber 
+							expiringOn: anExpirationDate 
+							forOwner: aCardOwner 
+							through: merchantProcessor 
+							registeringOn: salesBook.
+						self removeCart: aCartId.
+						^self newTransactionId] 
+					
+		 forCartSession: aCartId 
+
+		! !
+
+!testRun: #TusLibrosFacadeTest #test01CanCreateNewCartWithValidCredentials stamp: 'fr 12/3/2020 16:36:02'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test02CanNotCreateNewCartForInvalidUser stamp: 'fr 12/3/2020 16:36:02'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test03CanNotCreateNewCartForInvalidPassword stamp: 'fr 12/3/2020 16:36:02'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test04CanNotListNonexistentCart stamp: 'fr 12/3/2020 16:36:02'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test05AddingAnItemIsReflectedWhenListingTheCart stamp: 'fr 12/3/2020 16:36:02'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test06AddingMultipleItemsIsReflectedWhenListingTheCart stamp: 'fr 12/3/2020 16:36:02'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test07CanNotAddItemsToNonexistentCarts stamp: 'fr 12/3/2020 16:36:02'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test08CanCheckoutAValidCart stamp: 'fr 12/3/2020 16:36:02'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test09CanNotCheckoutANonexistentCart stamp: 'fr 12/3/2020 16:36:02'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test10PurchaseListHasTheCorrectQuantityOfItemsAndTotal stamp: 'fr 12/3/2020 16:36:02'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test11CanNotListPurchasesForInvalidUsername stamp: 'fr 12/3/2020 16:36:02'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test12CanNotListPurchasesForInvalidPassword stamp: 'fr 12/3/2020 16:36:02'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test13CanNotAddItemsToAnExpiredCart stamp: 'fr 12/3/2020 16:36:02'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test14CanNotListAnExpiredCart stamp: 'fr 12/3/2020 16:36:02'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test15CanNotCheckoutAnExpiredCart stamp: 'fr 12/3/2020 16:36:02'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test16CanNotPerformAnyOperationWithACartAfterCheckout stamp: 'fr 12/3/2020 16:36:02'!
+PASSED!
+
+!testRun: #CartTest #test01NewCartsAreCreatedEmpty stamp: 'fr 12/3/2020 16:36:05'!
+PASSED!
+
+!testRun: #CartTest #test02CanNotAddItemsThatDoNotBelongToStore stamp: 'fr 12/3/2020 16:36:05'!
+PASSED!
+
+!testRun: #CartTest #test03AfterAddingAnItemTheCartIsNotEmptyAnymore stamp: 'fr 12/3/2020 16:36:05'!
+PASSED!
+
+!testRun: #CartTest #test04CanNotAddNonPositiveNumberOfItems stamp: 'fr 12/3/2020 16:36:05'!
+PASSED!
+
+!testRun: #CartTest #test05CanNotAddMoreThanOneItemNotSellByTheStore stamp: 'fr 12/3/2020 16:36:05'!
+PASSED!
+
+!testRun: #CartTest #test06CartRemembersAddedItems stamp: 'fr 12/3/2020 16:36:05'!
+PASSED!
+
+!testRun: #CartTest #test07CartDoesNotHoldNotAddedItems stamp: 'fr 12/3/2020 16:36:05'!
+PASSED!
+
+!testRun: #CartTest #test08CartRemembersTheNumberOfAddedItems stamp: 'fr 12/3/2020 16:36:05'!
+PASSED!
+
+!testRun: #CashierTest #test01CanNotCheckoutAnEmptyCart stamp: 'fr 12/3/2020 16:36:05'!
+PASSED!
+
+!testRun: #CashierTest #test02CalculatedTotalIsCorrect stamp: 'fr 12/3/2020 16:36:05'!
+PASSED!
+
+!testRun: #CashierTest #test03CanNotCheckoutWithAnExpiredCreditCart stamp: 'fr 12/3/2020 16:36:05'!
+PASSED!
+
+!testRun: #CashierTest #test04CheckoutRegistersASale stamp: 'fr 12/3/2020 16:36:05'!
+PASSED!
+
+!testRun: #CashierTest #test05CashierChargesCreditCardUsingMerchantProcessor stamp: 'fr 12/3/2020 16:36:05'!
+PASSED!
+
+!testRun: #CashierTest #test06CashierDoesNotSaleWhenTheCreditCardHasNoCredit stamp: 'fr 12/3/2020 16:36:05'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test01CanCreateNewCartWithValidCredentials stamp: 'fr 12/3/2020 16:36:05'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test02CanNotCreateNewCartForInvalidUser stamp: 'fr 12/3/2020 16:36:05'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test03CanNotCreateNewCartForInvalidPassword stamp: 'fr 12/3/2020 16:36:05'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test04CanNotListNonexistentCart stamp: 'fr 12/3/2020 16:36:05'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test05AddingAnItemIsReflectedWhenListingTheCart stamp: 'fr 12/3/2020 16:36:05'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test06AddingMultipleItemsIsReflectedWhenListingTheCart stamp: 'fr 12/3/2020 16:36:05'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test07CanNotAddItemsToNonexistentCarts stamp: 'fr 12/3/2020 16:36:05'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test08CanCheckoutAValidCart stamp: 'fr 12/3/2020 16:36:05'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test09CanNotCheckoutANonexistentCart stamp: 'fr 12/3/2020 16:36:05'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test10PurchaseListHasTheCorrectQuantityOfItemsAndTotal stamp: 'fr 12/3/2020 16:36:05'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test11CanNotListPurchasesForInvalidUsername stamp: 'fr 12/3/2020 16:36:05'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test12CanNotListPurchasesForInvalidPassword stamp: 'fr 12/3/2020 16:36:05'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test13CanNotAddItemsToAnExpiredCart stamp: 'fr 12/3/2020 16:36:05'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test14CanNotListAnExpiredCart stamp: 'fr 12/3/2020 16:36:05'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test15CanNotCheckoutAnExpiredCart stamp: 'fr 12/3/2020 16:36:05'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test16CanNotPerformAnyOperationWithACartAfterCheckout stamp: 'fr 12/3/2020 16:36:05'!
+PASSED!
+!TusLibrosFacade methodsFor: 'cart management' stamp: 'fr 12/3/2020 16:36:41' prior: 50882368!
+add: aQuantity of: anItem toCart: aCartId 
+	
+	self do: [:aCartSession | aCartSession add: aQuantity of: anItem] forCartSession: aCartId 
+	! !
+
+!testRun: #TusLibrosFacadeTest #test01CanCreateNewCartWithValidCredentials stamp: 'fr 12/3/2020 16:36:42'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test02CanNotCreateNewCartForInvalidUser stamp: 'fr 12/3/2020 16:36:42'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test03CanNotCreateNewCartForInvalidPassword stamp: 'fr 12/3/2020 16:36:42'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test04CanNotListNonexistentCart stamp: 'fr 12/3/2020 16:36:42'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test05AddingAnItemIsReflectedWhenListingTheCart stamp: 'fr 12/3/2020 16:36:42'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test06AddingMultipleItemsIsReflectedWhenListingTheCart stamp: 'fr 12/3/2020 16:36:42'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test07CanNotAddItemsToNonexistentCarts stamp: 'fr 12/3/2020 16:36:42'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test08CanCheckoutAValidCart stamp: 'fr 12/3/2020 16:36:42'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test09CanNotCheckoutANonexistentCart stamp: 'fr 12/3/2020 16:36:42'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test10PurchaseListHasTheCorrectQuantityOfItemsAndTotal stamp: 'fr 12/3/2020 16:36:42'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test11CanNotListPurchasesForInvalidUsername stamp: 'fr 12/3/2020 16:36:42'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test12CanNotListPurchasesForInvalidPassword stamp: 'fr 12/3/2020 16:36:42'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test13CanNotAddItemsToAnExpiredCart stamp: 'fr 12/3/2020 16:36:42'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test14CanNotListAnExpiredCart stamp: 'fr 12/3/2020 16:36:42'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test15CanNotCheckoutAnExpiredCart stamp: 'fr 12/3/2020 16:36:42'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test16CanNotPerformAnyOperationWithACartAfterCheckout stamp: 'fr 12/3/2020 16:36:42'!
+PASSED!
+
+!testRun: #CartTest #test01NewCartsAreCreatedEmpty stamp: 'fr 12/3/2020 16:36:44'!
+PASSED!
+
+!testRun: #CartTest #test02CanNotAddItemsThatDoNotBelongToStore stamp: 'fr 12/3/2020 16:36:44'!
+PASSED!
+
+!testRun: #CartTest #test03AfterAddingAnItemTheCartIsNotEmptyAnymore stamp: 'fr 12/3/2020 16:36:44'!
+PASSED!
+
+!testRun: #CartTest #test04CanNotAddNonPositiveNumberOfItems stamp: 'fr 12/3/2020 16:36:44'!
+PASSED!
+
+!testRun: #CartTest #test05CanNotAddMoreThanOneItemNotSellByTheStore stamp: 'fr 12/3/2020 16:36:44'!
+PASSED!
+
+!testRun: #CartTest #test06CartRemembersAddedItems stamp: 'fr 12/3/2020 16:36:44'!
+PASSED!
+
+!testRun: #CartTest #test07CartDoesNotHoldNotAddedItems stamp: 'fr 12/3/2020 16:36:44'!
+PASSED!
+
+!testRun: #CartTest #test08CartRemembersTheNumberOfAddedItems stamp: 'fr 12/3/2020 16:36:44'!
+PASSED!
+
+!testRun: #CashierTest #test01CanNotCheckoutAnEmptyCart stamp: 'fr 12/3/2020 16:36:44'!
+PASSED!
+
+!testRun: #CashierTest #test02CalculatedTotalIsCorrect stamp: 'fr 12/3/2020 16:36:44'!
+PASSED!
+
+!testRun: #CashierTest #test03CanNotCheckoutWithAnExpiredCreditCart stamp: 'fr 12/3/2020 16:36:44'!
+PASSED!
+
+!testRun: #CashierTest #test04CheckoutRegistersASale stamp: 'fr 12/3/2020 16:36:44'!
+PASSED!
+
+!testRun: #CashierTest #test05CashierChargesCreditCardUsingMerchantProcessor stamp: 'fr 12/3/2020 16:36:44'!
+PASSED!
+
+!testRun: #CashierTest #test06CashierDoesNotSaleWhenTheCreditCardHasNoCredit stamp: 'fr 12/3/2020 16:36:44'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test01CanCreateNewCartWithValidCredentials stamp: 'fr 12/3/2020 16:36:44'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test02CanNotCreateNewCartForInvalidUser stamp: 'fr 12/3/2020 16:36:44'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test03CanNotCreateNewCartForInvalidPassword stamp: 'fr 12/3/2020 16:36:44'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test04CanNotListNonexistentCart stamp: 'fr 12/3/2020 16:36:44'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test05AddingAnItemIsReflectedWhenListingTheCart stamp: 'fr 12/3/2020 16:36:44'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test06AddingMultipleItemsIsReflectedWhenListingTheCart stamp: 'fr 12/3/2020 16:36:44'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test07CanNotAddItemsToNonexistentCarts stamp: 'fr 12/3/2020 16:36:44'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test08CanCheckoutAValidCart stamp: 'fr 12/3/2020 16:36:44'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test09CanNotCheckoutANonexistentCart stamp: 'fr 12/3/2020 16:36:44'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test10PurchaseListHasTheCorrectQuantityOfItemsAndTotal stamp: 'fr 12/3/2020 16:36:44'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test11CanNotListPurchasesForInvalidUsername stamp: 'fr 12/3/2020 16:36:44'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test12CanNotListPurchasesForInvalidPassword stamp: 'fr 12/3/2020 16:36:44'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test13CanNotAddItemsToAnExpiredCart stamp: 'fr 12/3/2020 16:36:44'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test14CanNotListAnExpiredCart stamp: 'fr 12/3/2020 16:36:44'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test15CanNotCheckoutAnExpiredCart stamp: 'fr 12/3/2020 16:36:44'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test16CanNotPerformAnyOperationWithACartAfterCheckout stamp: 'fr 12/3/2020 16:36:44'!
+PASSED!
+!TusLibrosFacade methodsFor: 'cart management' stamp: 'fr 12/3/2020 16:37:33'!
+do: aBlock forCartSessionFor: aCartId
+	
+	^aBlock value: (self cartSessionForCartId: aCartId) 
+	! !
+!TusLibrosFacade methodsFor: 'as yet unclassified' stamp: 'fr 12/3/2020 16:37:33' prior: 50894160!
+listCart: aCartId 
+	
+	^self do: [:aCartSession | aCartSession listCart] forCartSessionFor: aCartId 
+	! !
+!TusLibrosFacade methodsFor: 'as yet unclassified' stamp: 'fr 12/3/2020 16:37:33' prior: 50894167!
+checkoutCart: aCartId withCard: aCardNumber expiringOn: anExpirationDate forOwner: aCardOwner 
+	
+	^self do: [:aCartSession | 	aCartSession 
+							checkoutWithCard: aCardNumber 
+							expiringOn: anExpirationDate 
+							forOwner: aCardOwner 
+							through: merchantProcessor 
+							registeringOn: salesBook.
+						self removeCart: aCartId.
+						^self newTransactionId] 
+					
+		 forCartSessionFor: aCartId 
+
+		! !
+!TusLibrosFacade methodsFor: 'as yet unclassified' stamp: 'fr 12/3/2020 16:37:33' prior: 50894343!
+add: aQuantity of: anItem toCart: aCartId 
+	
+	self do: [:aCartSession | aCartSession add: aQuantity of: anItem] forCartSessionFor: aCartId 
+	! !
+
+!methodRemoval: TusLibrosFacade #do:forCartSession: stamp: 'fr 12/3/2020 16:37:33'!
+do: aBlock forCartSession: aCartId
+	
+	^aBlock value: (self cartSessionForCartId: aCartId) 
+	!
+
+!testRun: #CartTest #test01NewCartsAreCreatedEmpty stamp: 'fr 12/3/2020 16:37:38'!
+PASSED!
+
+!testRun: #CartTest #test02CanNotAddItemsThatDoNotBelongToStore stamp: 'fr 12/3/2020 16:37:38'!
+PASSED!
+
+!testRun: #CartTest #test03AfterAddingAnItemTheCartIsNotEmptyAnymore stamp: 'fr 12/3/2020 16:37:38'!
+PASSED!
+
+!testRun: #CartTest #test04CanNotAddNonPositiveNumberOfItems stamp: 'fr 12/3/2020 16:37:38'!
+PASSED!
+
+!testRun: #CartTest #test05CanNotAddMoreThanOneItemNotSellByTheStore stamp: 'fr 12/3/2020 16:37:38'!
+PASSED!
+
+!testRun: #CartTest #test06CartRemembersAddedItems stamp: 'fr 12/3/2020 16:37:38'!
+PASSED!
+
+!testRun: #CartTest #test07CartDoesNotHoldNotAddedItems stamp: 'fr 12/3/2020 16:37:38'!
+PASSED!
+
+!testRun: #CartTest #test08CartRemembersTheNumberOfAddedItems stamp: 'fr 12/3/2020 16:37:38'!
+PASSED!
+
+!testRun: #CashierTest #test01CanNotCheckoutAnEmptyCart stamp: 'fr 12/3/2020 16:37:38'!
+PASSED!
+
+!testRun: #CashierTest #test02CalculatedTotalIsCorrect stamp: 'fr 12/3/2020 16:37:38'!
+PASSED!
+
+!testRun: #CashierTest #test03CanNotCheckoutWithAnExpiredCreditCart stamp: 'fr 12/3/2020 16:37:38'!
+PASSED!
+
+!testRun: #CashierTest #test04CheckoutRegistersASale stamp: 'fr 12/3/2020 16:37:38'!
+PASSED!
+
+!testRun: #CashierTest #test05CashierChargesCreditCardUsingMerchantProcessor stamp: 'fr 12/3/2020 16:37:38'!
+PASSED!
+
+!testRun: #CashierTest #test06CashierDoesNotSaleWhenTheCreditCardHasNoCredit stamp: 'fr 12/3/2020 16:37:38'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test01CanCreateNewCartWithValidCredentials stamp: 'fr 12/3/2020 16:37:38'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test02CanNotCreateNewCartForInvalidUser stamp: 'fr 12/3/2020 16:37:38'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test03CanNotCreateNewCartForInvalidPassword stamp: 'fr 12/3/2020 16:37:38'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test04CanNotListNonexistentCart stamp: 'fr 12/3/2020 16:37:38'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test05AddingAnItemIsReflectedWhenListingTheCart stamp: 'fr 12/3/2020 16:37:38'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test06AddingMultipleItemsIsReflectedWhenListingTheCart stamp: 'fr 12/3/2020 16:37:38'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test07CanNotAddItemsToNonexistentCarts stamp: 'fr 12/3/2020 16:37:38'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test08CanCheckoutAValidCart stamp: 'fr 12/3/2020 16:37:38'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test09CanNotCheckoutANonexistentCart stamp: 'fr 12/3/2020 16:37:38'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test10PurchaseListHasTheCorrectQuantityOfItemsAndTotal stamp: 'fr 12/3/2020 16:37:38'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test11CanNotListPurchasesForInvalidUsername stamp: 'fr 12/3/2020 16:37:38'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test12CanNotListPurchasesForInvalidPassword stamp: 'fr 12/3/2020 16:37:38'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test13CanNotAddItemsToAnExpiredCart stamp: 'fr 12/3/2020 16:37:38'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test14CanNotListAnExpiredCart stamp: 'fr 12/3/2020 16:37:38'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test15CanNotCheckoutAnExpiredCart stamp: 'fr 12/3/2020 16:37:38'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test16CanNotPerformAnyOperationWithACartAfterCheckout stamp: 'fr 12/3/2020 16:37:38'!
+PASSED!
+
+----SNAPSHOT----(3 December 2020 16:37:53) CuisUniversity-4384.image priorSource: 17992858!
+!Cart methodsFor: 'initialization' stamp: 'fr 12/3/2020 16:39:48' prior: 50882721!
+initializeAcceptingItemsOf: aCatalog
+
+	catalog := aCatalog.
+	items := Bag new.! !
+!Cart methodsFor: 'listing' stamp: 'fr 12/3/2020 16:40:01' prior: 50892250!
+listCart
+	
+	^items contents 
+	! !
+!Cart methodsFor: 'enumerating' stamp: 'fr 12/3/2020 16:40:17' prior: 50888804!
+itemsQuantitiesAndPricesDo: aBlock 
+	
+	items contents keysAndValuesDo: [:anItem :aQuantity | aBlock value: anItem value: aQuantity value: (catalog at: anItem)]
+! !
+
+!testRun: #CartTest #test01NewCartsAreCreatedEmpty stamp: 'fr 12/3/2020 16:40:18'!
+PASSED!
+
+!testRun: #CartTest #test02CanNotAddItemsThatDoNotBelongToStore stamp: 'fr 12/3/2020 16:40:18'!
+PASSED!
+
+!testRun: #CartTest #test03AfterAddingAnItemTheCartIsNotEmptyAnymore stamp: 'fr 12/3/2020 16:40:18'!
+PASSED!
+
+!testRun: #CartTest #test04CanNotAddNonPositiveNumberOfItems stamp: 'fr 12/3/2020 16:40:18'!
+PASSED!
+
+!testRun: #CartTest #test05CanNotAddMoreThanOneItemNotSellByTheStore stamp: 'fr 12/3/2020 16:40:18'!
+PASSED!
+
+!testRun: #CartTest #test06CartRemembersAddedItems stamp: 'fr 12/3/2020 16:40:18'!
+PASSED!
+
+!testRun: #CartTest #test07CartDoesNotHoldNotAddedItems stamp: 'fr 12/3/2020 16:40:18'!
+PASSED!
+
+!testRun: #CartTest #test08CartRemembersTheNumberOfAddedItems stamp: 'fr 12/3/2020 16:40:18'!
+PASSED!
+
+!testRun: #CashierTest #test01CanNotCheckoutAnEmptyCart stamp: 'fr 12/3/2020 16:40:18'!
+PASSED!
+
+!testRun: #CashierTest #test02CalculatedTotalIsCorrect stamp: 'fr 12/3/2020 16:40:18'!
+PASSED!
+
+!testRun: #CashierTest #test03CanNotCheckoutWithAnExpiredCreditCart stamp: 'fr 12/3/2020 16:40:18'!
+PASSED!
+
+!testRun: #CashierTest #test04CheckoutRegistersASale stamp: 'fr 12/3/2020 16:40:18'!
+PASSED!
+
+!testRun: #CashierTest #test05CashierChargesCreditCardUsingMerchantProcessor stamp: 'fr 12/3/2020 16:40:18'!
+PASSED!
+
+!testRun: #CashierTest #test06CashierDoesNotSaleWhenTheCreditCardHasNoCredit stamp: 'fr 12/3/2020 16:40:18'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test01CanCreateNewCartWithValidCredentials stamp: 'fr 12/3/2020 16:40:18'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test02CanNotCreateNewCartForInvalidUser stamp: 'fr 12/3/2020 16:40:18'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test03CanNotCreateNewCartForInvalidPassword stamp: 'fr 12/3/2020 16:40:18'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test04CanNotListNonexistentCart stamp: 'fr 12/3/2020 16:40:18'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test05AddingAnItemIsReflectedWhenListingTheCart stamp: 'fr 12/3/2020 16:40:18'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test06AddingMultipleItemsIsReflectedWhenListingTheCart stamp: 'fr 12/3/2020 16:40:18'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test07CanNotAddItemsToNonexistentCarts stamp: 'fr 12/3/2020 16:40:18'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test08CanCheckoutAValidCart stamp: 'fr 12/3/2020 16:40:18'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test09CanNotCheckoutANonexistentCart stamp: 'fr 12/3/2020 16:40:18'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test10PurchaseListHasTheCorrectQuantityOfItemsAndTotal stamp: 'fr 12/3/2020 16:40:18'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test11CanNotListPurchasesForInvalidUsername stamp: 'fr 12/3/2020 16:40:18'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test12CanNotListPurchasesForInvalidPassword stamp: 'fr 12/3/2020 16:40:18'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test13CanNotAddItemsToAnExpiredCart stamp: 'fr 12/3/2020 16:40:18'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test14CanNotListAnExpiredCart stamp: 'fr 12/3/2020 16:40:18'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test15CanNotCheckoutAnExpiredCart stamp: 'fr 12/3/2020 16:40:18'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test16CanNotPerformAnyOperationWithACartAfterCheckout stamp: 'fr 12/3/2020 16:40:18'!
+PASSED!
+
+!methodRemoval: Cart #itemsAsDictionary stamp: 'fr 12/3/2020 16:40:26'!
+itemsAsDictionary
+
+	^ items asBag sortedElements asDictionary!
+!Cart methodsFor: 'adding' stamp: 'fr 12/3/2020 16:40:58' prior: 50882713!
+add: aQuantity of: anItem
+
+	self assertIsValidQuantity: aQuantity.
+	self assertIsValidItem: anItem.
+
+	items add: anItem withOccurrences: aQuantity! !
+
+!testRun: #CartTest #test01NewCartsAreCreatedEmpty stamp: 'fr 12/3/2020 16:40:59'!
+PASSED!
+
+!testRun: #CartTest #test02CanNotAddItemsThatDoNotBelongToStore stamp: 'fr 12/3/2020 16:40:59'!
+PASSED!
+
+!testRun: #CartTest #test03AfterAddingAnItemTheCartIsNotEmptyAnymore stamp: 'fr 12/3/2020 16:40:59'!
+PASSED!
+
+!testRun: #CartTest #test04CanNotAddNonPositiveNumberOfItems stamp: 'fr 12/3/2020 16:40:59'!
+PASSED!
+
+!testRun: #CartTest #test05CanNotAddMoreThanOneItemNotSellByTheStore stamp: 'fr 12/3/2020 16:40:59'!
+PASSED!
+
+!testRun: #CartTest #test06CartRemembersAddedItems stamp: 'fr 12/3/2020 16:40:59'!
+PASSED!
+
+!testRun: #CartTest #test07CartDoesNotHoldNotAddedItems stamp: 'fr 12/3/2020 16:40:59'!
+PASSED!
+
+!testRun: #CartTest #test08CartRemembersTheNumberOfAddedItems stamp: 'fr 12/3/2020 16:40:59'!
+PASSED!
+
+!testRun: #CashierTest #test01CanNotCheckoutAnEmptyCart stamp: 'fr 12/3/2020 16:40:59'!
+PASSED!
+
+!testRun: #CashierTest #test02CalculatedTotalIsCorrect stamp: 'fr 12/3/2020 16:40:59'!
+PASSED!
+
+!testRun: #CashierTest #test03CanNotCheckoutWithAnExpiredCreditCart stamp: 'fr 12/3/2020 16:40:59'!
+PASSED!
+
+!testRun: #CashierTest #test04CheckoutRegistersASale stamp: 'fr 12/3/2020 16:40:59'!
+PASSED!
+
+!testRun: #CashierTest #test05CashierChargesCreditCardUsingMerchantProcessor stamp: 'fr 12/3/2020 16:40:59'!
+PASSED!
+
+!testRun: #CashierTest #test06CashierDoesNotSaleWhenTheCreditCardHasNoCredit stamp: 'fr 12/3/2020 16:40:59'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test01CanCreateNewCartWithValidCredentials stamp: 'fr 12/3/2020 16:40:59'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test02CanNotCreateNewCartForInvalidUser stamp: 'fr 12/3/2020 16:40:59'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test03CanNotCreateNewCartForInvalidPassword stamp: 'fr 12/3/2020 16:40:59'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test04CanNotListNonexistentCart stamp: 'fr 12/3/2020 16:40:59'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test05AddingAnItemIsReflectedWhenListingTheCart stamp: 'fr 12/3/2020 16:40:59'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test06AddingMultipleItemsIsReflectedWhenListingTheCart stamp: 'fr 12/3/2020 16:40:59'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test07CanNotAddItemsToNonexistentCarts stamp: 'fr 12/3/2020 16:40:59'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test08CanCheckoutAValidCart stamp: 'fr 12/3/2020 16:40:59'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test09CanNotCheckoutANonexistentCart stamp: 'fr 12/3/2020 16:40:59'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test10PurchaseListHasTheCorrectQuantityOfItemsAndTotal stamp: 'fr 12/3/2020 16:40:59'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test11CanNotListPurchasesForInvalidUsername stamp: 'fr 12/3/2020 16:40:59'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test12CanNotListPurchasesForInvalidPassword stamp: 'fr 12/3/2020 16:40:59'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test13CanNotAddItemsToAnExpiredCart stamp: 'fr 12/3/2020 16:40:59'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test14CanNotListAnExpiredCart stamp: 'fr 12/3/2020 16:40:59'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test15CanNotCheckoutAnExpiredCart stamp: 'fr 12/3/2020 16:40:59'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test16CanNotPerformAnyOperationWithACartAfterCheckout stamp: 'fr 12/3/2020 16:40:59'!
+PASSED!
+!TusLibrosFacade methodsFor: 'purchase listing - private' stamp: 'fr 12/3/2020 16:41:46' prior: 50888728!
+itemsWithCountsFor: salesForCustomer
+
+	^ (self itemsWithCountsForAllSales: salesForCustomer) contents ! !
+
+!testRun: #CartTest #test01NewCartsAreCreatedEmpty stamp: 'fr 12/3/2020 16:41:48'!
+PASSED!
+
+!testRun: #CartTest #test02CanNotAddItemsThatDoNotBelongToStore stamp: 'fr 12/3/2020 16:41:48'!
+PASSED!
+
+!testRun: #CartTest #test03AfterAddingAnItemTheCartIsNotEmptyAnymore stamp: 'fr 12/3/2020 16:41:48'!
+PASSED!
+
+!testRun: #CartTest #test04CanNotAddNonPositiveNumberOfItems stamp: 'fr 12/3/2020 16:41:48'!
+PASSED!
+
+!testRun: #CartTest #test05CanNotAddMoreThanOneItemNotSellByTheStore stamp: 'fr 12/3/2020 16:41:48'!
+PASSED!
+
+!testRun: #CartTest #test06CartRemembersAddedItems stamp: 'fr 12/3/2020 16:41:48'!
+PASSED!
+
+!testRun: #CartTest #test07CartDoesNotHoldNotAddedItems stamp: 'fr 12/3/2020 16:41:48'!
+PASSED!
+
+!testRun: #CartTest #test08CartRemembersTheNumberOfAddedItems stamp: 'fr 12/3/2020 16:41:48'!
+PASSED!
+
+!testRun: #CashierTest #test01CanNotCheckoutAnEmptyCart stamp: 'fr 12/3/2020 16:41:48'!
+PASSED!
+
+!testRun: #CashierTest #test02CalculatedTotalIsCorrect stamp: 'fr 12/3/2020 16:41:48'!
+PASSED!
+
+!testRun: #CashierTest #test03CanNotCheckoutWithAnExpiredCreditCart stamp: 'fr 12/3/2020 16:41:48'!
+PASSED!
+
+!testRun: #CashierTest #test04CheckoutRegistersASale stamp: 'fr 12/3/2020 16:41:48'!
+PASSED!
+
+!testRun: #CashierTest #test05CashierChargesCreditCardUsingMerchantProcessor stamp: 'fr 12/3/2020 16:41:48'!
+PASSED!
+
+!testRun: #CashierTest #test06CashierDoesNotSaleWhenTheCreditCardHasNoCredit stamp: 'fr 12/3/2020 16:41:48'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test01CanCreateNewCartWithValidCredentials stamp: 'fr 12/3/2020 16:41:48'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test02CanNotCreateNewCartForInvalidUser stamp: 'fr 12/3/2020 16:41:48'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test03CanNotCreateNewCartForInvalidPassword stamp: 'fr 12/3/2020 16:41:48'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test04CanNotListNonexistentCart stamp: 'fr 12/3/2020 16:41:48'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test05AddingAnItemIsReflectedWhenListingTheCart stamp: 'fr 12/3/2020 16:41:48'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test06AddingMultipleItemsIsReflectedWhenListingTheCart stamp: 'fr 12/3/2020 16:41:48'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test07CanNotAddItemsToNonexistentCarts stamp: 'fr 12/3/2020 16:41:48'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test08CanCheckoutAValidCart stamp: 'fr 12/3/2020 16:41:48'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test09CanNotCheckoutANonexistentCart stamp: 'fr 12/3/2020 16:41:48'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test10PurchaseListHasTheCorrectQuantityOfItemsAndTotal stamp: 'fr 12/3/2020 16:41:48'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test11CanNotListPurchasesForInvalidUsername stamp: 'fr 12/3/2020 16:41:48'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test12CanNotListPurchasesForInvalidPassword stamp: 'fr 12/3/2020 16:41:48'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test13CanNotAddItemsToAnExpiredCart stamp: 'fr 12/3/2020 16:41:48'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test14CanNotListAnExpiredCart stamp: 'fr 12/3/2020 16:41:48'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test15CanNotCheckoutAnExpiredCart stamp: 'fr 12/3/2020 16:41:48'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test16CanNotPerformAnyOperationWithACartAfterCheckout stamp: 'fr 12/3/2020 16:41:48'!
+PASSED!
+
+----SNAPSHOT----(3 December 2020 16:41:57) CuisUniversity-4384.image priorSource: 18016173!
+
+!testRun: #CartTest #test01NewCartsAreCreatedEmpty stamp: 'fr 12/3/2020 16:43:23'!
+PASSED!
+
+!testRun: #CartTest #test02CanNotAddItemsThatDoNotBelongToStore stamp: 'fr 12/3/2020 16:43:23'!
+PASSED!
+
+!testRun: #CartTest #test03AfterAddingAnItemTheCartIsNotEmptyAnymore stamp: 'fr 12/3/2020 16:43:23'!
+PASSED!
+
+!testRun: #CartTest #test04CanNotAddNonPositiveNumberOfItems stamp: 'fr 12/3/2020 16:43:23'!
+PASSED!
+
+!testRun: #CartTest #test05CanNotAddMoreThanOneItemNotSellByTheStore stamp: 'fr 12/3/2020 16:43:23'!
+PASSED!
+
+!testRun: #CartTest #test06CartRemembersAddedItems stamp: 'fr 12/3/2020 16:43:23'!
+PASSED!
+
+!testRun: #CartTest #test07CartDoesNotHoldNotAddedItems stamp: 'fr 12/3/2020 16:43:23'!
+PASSED!
+
+!testRun: #CartTest #test08CartRemembersTheNumberOfAddedItems stamp: 'fr 12/3/2020 16:43:23'!
+PASSED!
+
+!testRun: #CashierTest #test01CanNotCheckoutAnEmptyCart stamp: 'fr 12/3/2020 16:43:23'!
+PASSED!
+
+!testRun: #CashierTest #test02CalculatedTotalIsCorrect stamp: 'fr 12/3/2020 16:43:23'!
+PASSED!
+
+!testRun: #CashierTest #test03CanNotCheckoutWithAnExpiredCreditCart stamp: 'fr 12/3/2020 16:43:23'!
+PASSED!
+
+!testRun: #CashierTest #test04CheckoutRegistersASale stamp: 'fr 12/3/2020 16:43:23'!
+PASSED!
+
+!testRun: #CashierTest #test05CashierChargesCreditCardUsingMerchantProcessor stamp: 'fr 12/3/2020 16:43:23'!
+PASSED!
+
+!testRun: #CashierTest #test06CashierDoesNotSaleWhenTheCreditCardHasNoCredit stamp: 'fr 12/3/2020 16:43:23'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test01CanCreateNewCartWithValidCredentials stamp: 'fr 12/3/2020 16:43:23'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test02CanNotCreateNewCartForInvalidUser stamp: 'fr 12/3/2020 16:43:23'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test03CanNotCreateNewCartForInvalidPassword stamp: 'fr 12/3/2020 16:43:23'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test04CanNotListNonexistentCart stamp: 'fr 12/3/2020 16:43:23'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test05AddingAnItemIsReflectedWhenListingTheCart stamp: 'fr 12/3/2020 16:43:23'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test06AddingMultipleItemsIsReflectedWhenListingTheCart stamp: 'fr 12/3/2020 16:43:23'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test07CanNotAddItemsToNonexistentCarts stamp: 'fr 12/3/2020 16:43:23'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test08CanCheckoutAValidCart stamp: 'fr 12/3/2020 16:43:23'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test09CanNotCheckoutANonexistentCart stamp: 'fr 12/3/2020 16:43:23'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test10PurchaseListHasTheCorrectQuantityOfItemsAndTotal stamp: 'fr 12/3/2020 16:43:23'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test11CanNotListPurchasesForInvalidUsername stamp: 'fr 12/3/2020 16:43:23'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test12CanNotListPurchasesForInvalidPassword stamp: 'fr 12/3/2020 16:43:23'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test13CanNotAddItemsToAnExpiredCart stamp: 'fr 12/3/2020 16:43:23'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test14CanNotListAnExpiredCart stamp: 'fr 12/3/2020 16:43:23'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test15CanNotCheckoutAnExpiredCart stamp: 'fr 12/3/2020 16:43:23'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test16CanNotPerformAnyOperationWithACartAfterCheckout stamp: 'fr 12/3/2020 16:43:23'!
+PASSED!
+
+----SNAPSHOT----(3 December 2020 16:43:27) CuisUniversity-4384.image priorSource: 18027251!

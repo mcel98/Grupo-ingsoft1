@@ -563,11 +563,11 @@ assertIsValidQuantity: aQuantity
 	aQuantity strictlyPositive ifFalse: [ self error: self invalidQuantityErrorMessage ]! !
 
 
-!Cart methodsFor: 'initialization' stamp: 'HernanWilkinson 6/17/2013 17:48'!
+!Cart methodsFor: 'initialization' stamp: 'fr 12/3/2020 16:39:48'!
 initializeAcceptingItemsOf: aCatalog
 
 	catalog := aCatalog.
-	items := OrderedCollection new.! !
+	items := Bag new.! !
 
 
 !Cart methodsFor: 'queries' stamp: 'HernanWilkinson 6/17/2013 17:45'!
@@ -598,32 +598,26 @@ add: anItem
 
 	^ self add: 1 of: anItem ! !
 
-!Cart methodsFor: 'adding' stamp: 'HernanWilkinson 6/17/2013 17:51'!
+!Cart methodsFor: 'adding' stamp: 'fr 12/3/2020 16:40:58'!
 add: aQuantity of: anItem
 
 	self assertIsValidQuantity: aQuantity.
 	self assertIsValidItem: anItem.
 
-	1 to: aQuantity do: [ :aNumber | items add: anItem ]! !
+	items add: anItem withOccurrences: aQuantity! !
 
 
-!Cart methodsFor: 'listing' stamp: 'fr 12/3/2020 11:04:31'!
+!Cart methodsFor: 'listing' stamp: 'fr 12/3/2020 16:40:01'!
 listCart
 	
-	^self itemsAsDictionary 
+	^items contents 
 	! !
 
 
-!Cart methodsFor: 'private' stamp: 'fr 12/3/2020 04:39:42'!
-itemsAsDictionary
-
-	^ items asBag sortedElements asDictionary! !
-
-
-!Cart methodsFor: 'enumerating' stamp: 'fr 12/3/2020 04:39:42'!
+!Cart methodsFor: 'enumerating' stamp: 'fr 12/3/2020 16:40:17'!
 itemsQuantitiesAndPricesDo: aBlock 
 	
-	self itemsAsDictionary keysAndValuesDo: [:anItem :aQuantity | aBlock value: anItem value: aQuantity value: (catalog at: anItem)]
+	items contents keysAndValuesDo: [:anItem :aQuantity | aBlock value: anItem value: aQuantity value: (catalog at: anItem)]
 ! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
@@ -1153,29 +1147,38 @@ Object subclass: #TusLibrosFacade
 	poolDictionaries: ''
 	category: 'TusLibros - Exercise - III'!
 
-!TusLibrosFacade methodsFor: 'cart management' stamp: 'fr 12/3/2020 00:17:52'!
+!TusLibrosFacade methodsFor: 'cart management' stamp: 'fr 12/3/2020 16:37:33'!
 add: aQuantity of: anItem toCart: aCartId 
 	
-	(self cartSessionForCartId: aCartId) add: aQuantity of: anItem
+	self do: [:aCartSession | aCartSession add: aQuantity of: anItem] forCartSessionFor: aCartId 
 	! !
 
-!TusLibrosFacade methodsFor: 'cart management' stamp: 'fr 12/3/2020 07:43:07'!
+!TusLibrosFacade methodsFor: 'cart management' stamp: 'fr 12/3/2020 16:37:33'!
 checkoutCart: aCartId withCard: aCardNumber expiringOn: anExpirationDate forOwner: aCardOwner 
 	
-	(self cartSessionForCartId: aCartId) 
-						checkoutWithCard: aCardNumber 
-						expiringOn: anExpirationDate 
-						forOwner: aCardOwner 
-						through: merchantProcessor 
-						registeringOn: salesBook.
-	self removeCart: aCartId.
-	^self newTransactionId
+	^self do: [:aCartSession | 	aCartSession 
+							checkoutWithCard: aCardNumber 
+							expiringOn: anExpirationDate 
+							forOwner: aCardOwner 
+							through: merchantProcessor 
+							registeringOn: salesBook.
+						self removeCart: aCartId.
+						^self newTransactionId] 
+					
+		 forCartSessionFor: aCartId 
+
 		! !
 
-!TusLibrosFacade methodsFor: 'cart management' stamp: 'fr 12/3/2020 02:54:00'!
+!TusLibrosFacade methodsFor: 'cart management' stamp: 'fr 12/3/2020 16:37:33'!
+do: aBlock forCartSessionFor: aCartId
+	
+	^aBlock value: (self cartSessionForCartId: aCartId) 
+	! !
+
+!TusLibrosFacade methodsFor: 'cart management' stamp: 'fr 12/3/2020 16:37:33'!
 listCart: aCartId 
 	
-	^(self cartSessionForCartId: aCartId) listCart
+	^self do: [:aCartSession | aCartSession listCart] forCartSessionFor: aCartId 
 	! !
 
 !TusLibrosFacade methodsFor: 'cart management' stamp: 'fr 12/3/2020 00:18:22'!
@@ -1225,10 +1228,10 @@ sessionDuration
 	^30 minutes! !
 
 
-!TusLibrosFacade methodsFor: 'purchase listing - private' stamp: 'fr 12/3/2020 04:39:14'!
+!TusLibrosFacade methodsFor: 'purchase listing - private' stamp: 'fr 12/3/2020 16:41:46'!
 itemsWithCountsFor: salesForCustomer
 
-	^ (self itemsWithCountsForAllSales: salesForCustomer) sortedElements asDictionary! !
+	^ (self itemsWithCountsForAllSales: salesForCustomer) contents ! !
 
 !TusLibrosFacade methodsFor: 'purchase listing - private' stamp: 'fr 12/3/2020 04:31:52'!
 itemsWithCountsForAllSales: salesForCustomer
