@@ -517,11 +517,21 @@ facade _ TusLibrosFacade
 	! !
 
 
-!TusLibrosFacadeTest methodsFor: 'authenticator' stamp: 'fr 12/3/2020 05:05:36'!
+!TusLibrosFacadeTest methodsFor: 'authenticator' stamp: 'fr 12/3/2020 16:24:04'!
+signalInvalidCredentialsError
+
+	^ self error: TusLibrosFacade invalidCredentialsErrorDescription! !
+
+!TusLibrosFacadeTest methodsFor: 'authenticator' stamp: 'fr 12/3/2020 16:24:04'!
 validateUsername: aUsername withPassword: aPassword 
 	
-	(credentials at: aUsername ifAbsent: [self error: TusLibrosFacade invalidCredentialsErrorDescription]) = aPassword ifFalse: [self error: TusLibrosFacade invalidCredentialsErrorDescription].
+	(self validateUsernameAndObtainPasswordFor: aUsername) = aPassword ifFalse: [self signalInvalidCredentialsError].
 	! !
+
+!TusLibrosFacadeTest methodsFor: 'authenticator' stamp: 'fr 12/3/2020 16:24:15'!
+validateUsernameAndObtainPasswordFor: aUsername
+
+	^ credentials at: aUsername ifAbsent: [self signalInvalidCredentialsError]! !
 
 
 !classDefinition: #Cart category: 'TusLibros - Exercise - III'!
@@ -635,13 +645,6 @@ Object subclass: #CartSession
 	poolDictionaries: ''
 	category: 'TusLibros - Exercise - III'!
 
-!CartSession methodsFor: 'initialization' stamp: 'fr 11/30/2020 19:38:23'!
-initializeFor: aCart facade: aFacade 
-	
-	cart _ aCart.
-	facade _ aFacade.
-	lastUsed _ aFacade now! !
-
 !CartSession methodsFor: 'initialization' stamp: 'fr 12/3/2020 03:48:18'!
 initializeFor: aCart on: aFacade user: aUsername 
 	
@@ -651,10 +654,15 @@ initializeFor: aCart on: aFacade user: aUsername
 	lastUsed _ facade now! !
 
 
-!CartSession methodsFor: 'validation' stamp: 'fr 12/3/2020 11:20:41'!
+!CartSession methodsFor: 'validation' stamp: 'fr 12/3/2020 16:26:05'!
 assertCartHasNotExpired
 
-	^ (facade now - lastUsed >= facade sessionDuration) ifTrue: [self error: TusLibrosFacade cartExpiredErrorDescription]! !
+	^self cartHasExpired ifTrue: [self error: TusLibrosFacade cartExpiredErrorDescription]! !
+
+!CartSession methodsFor: 'validation' stamp: 'fr 12/3/2020 16:25:59'!
+cartHasExpired
+
+	^ facade now - lastUsed >= facade sessionDuration! !
 
 
 !CartSession methodsFor: 'cart management' stamp: 'fr 12/3/2020 03:01:42'!

@@ -46865,3 +46865,159 @@ PASSED!
 ----SNAPSHOT----(3 December 2020 11:25:52) CuisUniversity-4384.image priorSource: 17982399!
 
 ----SNAPSHOT----(3 December 2020 11:26:22) CuisUniversity-4384.image priorSource: 17986070!
+
+----QUIT----(3 December 2020 11:38:52) CuisUniversity-4384.image priorSource: 17986163!
+
+----STARTUP---- (3 December 2020 16:19:05) as /home/fede/Documentos/Facultad/Inge1/Cuises/linux64/CuisUniversity-4384.image!
+
+!TusLibrosFacadeTest methodsFor: 'authenticator' stamp: 'fr 12/3/2020 16:22:21'!
+validateUsername: aUsername
+
+	^ credentials at: aUsername ifAbsent: [self error: TusLibrosFacade invalidCredentialsErrorDescription]! !
+!TusLibrosFacadeTest methodsFor: 'authenticator' stamp: 'fr 12/3/2020 16:22:21' prior: 50889344!
+validateUsername: aUsername withPassword: aPassword 
+	
+	(self validateUsername: aUsername) = aPassword ifFalse: [self error: TusLibrosFacade invalidCredentialsErrorDescription].
+	! !
+!TusLibrosFacadeTest methodsFor: 'authenticator' stamp: 'fr 12/3/2020 16:23:09'!
+validateUsernameAndObtainPasswordFor: aUsername
+
+	^ credentials at: aUsername ifAbsent: [self error: TusLibrosFacade invalidCredentialsErrorDescription]! !
+!TusLibrosFacadeTest methodsFor: 'as yet unclassified' stamp: 'fr 12/3/2020 16:23:09' prior: 50893736!
+validateUsername: aUsername withPassword: aPassword 
+	
+	(self validateUsernameAndObtainPasswordFor: aUsername) = aPassword ifFalse: [self error: TusLibrosFacade invalidCredentialsErrorDescription].
+	! !
+
+!methodRemoval: TusLibrosFacadeTest #validateUsername: stamp: 'fr 12/3/2020 16:23:09'!
+validateUsername: aUsername
+
+	^ credentials at: aUsername ifAbsent: [self error: TusLibrosFacade invalidCredentialsErrorDescription]!
+!TusLibrosFacadeTest methodsFor: 'authenticator' stamp: 'fr 12/3/2020 16:24:04'!
+signalInvalidCredentialsError
+
+	^ self error: TusLibrosFacade invalidCredentialsErrorDescription! !
+!TusLibrosFacadeTest methodsFor: 'authenticator' stamp: 'fr 12/3/2020 16:24:04' prior: 50893754!
+validateUsername: aUsername withPassword: aPassword 
+	
+	(self validateUsernameAndObtainPasswordFor: aUsername) = aPassword ifFalse: [self signalInvalidCredentialsError].
+	! !
+!TusLibrosFacadeTest methodsFor: 'authenticator' stamp: 'fr 12/3/2020 16:24:15' prior: 50893745!
+validateUsernameAndObtainPasswordFor: aUsername
+
+	^ credentials at: aUsername ifAbsent: [self signalInvalidCredentialsError]! !
+
+----SNAPSHOT----(3 December 2020 16:24:26) CuisUniversity-4384.image priorSource: 17986256!
+
+!methodRemoval: CartSession #initializeFor:facade: stamp: 'fr 12/3/2020 16:25:11'!
+initializeFor: aCart facade: aFacade 
+	
+	cart _ aCart.
+	facade _ aFacade.
+	lastUsed _ aFacade now!
+
+----SNAPSHOT----(3 December 2020 16:25:19) CuisUniversity-4384.image priorSource: 17988543!
+!CartSession methodsFor: 'validation' stamp: 'fr 12/3/2020 16:25:59'!
+cartHasExpired
+
+	^ facade now - lastUsed >= facade sessionDuration! !
+!CartSession methodsFor: 'validation' stamp: 'fr 12/3/2020 16:25:59' prior: 50893370!
+assertCartHasNotExpired
+
+	^ (self cartHasExpired) ifTrue: [self error: TusLibrosFacade cartExpiredErrorDescription]! !
+!CartSession methodsFor: 'validation' stamp: 'fr 12/3/2020 16:26:05' prior: 50893809!
+assertCartHasNotExpired
+
+	^self cartHasExpired ifTrue: [self error: TusLibrosFacade cartExpiredErrorDescription]! !
+
+----SNAPSHOT----(3 December 2020 16:26:29) CuisUniversity-4384.image priorSource: 17988819!
+
+!testRun: #CartTest #test01NewCartsAreCreatedEmpty stamp: 'fr 12/3/2020 16:26:31'!
+PASSED!
+
+!testRun: #CartTest #test02CanNotAddItemsThatDoNotBelongToStore stamp: 'fr 12/3/2020 16:26:31'!
+PASSED!
+
+!testRun: #CartTest #test03AfterAddingAnItemTheCartIsNotEmptyAnymore stamp: 'fr 12/3/2020 16:26:31'!
+PASSED!
+
+!testRun: #CartTest #test04CanNotAddNonPositiveNumberOfItems stamp: 'fr 12/3/2020 16:26:31'!
+PASSED!
+
+!testRun: #CartTest #test05CanNotAddMoreThanOneItemNotSellByTheStore stamp: 'fr 12/3/2020 16:26:31'!
+PASSED!
+
+!testRun: #CartTest #test06CartRemembersAddedItems stamp: 'fr 12/3/2020 16:26:31'!
+PASSED!
+
+!testRun: #CartTest #test07CartDoesNotHoldNotAddedItems stamp: 'fr 12/3/2020 16:26:31'!
+PASSED!
+
+!testRun: #CartTest #test08CartRemembersTheNumberOfAddedItems stamp: 'fr 12/3/2020 16:26:31'!
+PASSED!
+
+!testRun: #CashierTest #test01CanNotCheckoutAnEmptyCart stamp: 'fr 12/3/2020 16:26:31'!
+PASSED!
+
+!testRun: #CashierTest #test02CalculatedTotalIsCorrect stamp: 'fr 12/3/2020 16:26:31'!
+PASSED!
+
+!testRun: #CashierTest #test03CanNotCheckoutWithAnExpiredCreditCart stamp: 'fr 12/3/2020 16:26:31'!
+PASSED!
+
+!testRun: #CashierTest #test04CheckoutRegistersASale stamp: 'fr 12/3/2020 16:26:31'!
+PASSED!
+
+!testRun: #CashierTest #test05CashierChargesCreditCardUsingMerchantProcessor stamp: 'fr 12/3/2020 16:26:31'!
+PASSED!
+
+!testRun: #CashierTest #test06CashierDoesNotSaleWhenTheCreditCardHasNoCredit stamp: 'fr 12/3/2020 16:26:31'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test01CanCreateNewCartWithValidCredentials stamp: 'fr 12/3/2020 16:26:31'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test02CanNotCreateNewCartForInvalidUser stamp: 'fr 12/3/2020 16:26:31'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test03CanNotCreateNewCartForInvalidPassword stamp: 'fr 12/3/2020 16:26:31'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test04CanNotListNonexistentCart stamp: 'fr 12/3/2020 16:26:31'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test05AddingAnItemIsReflectedWhenListingTheCart stamp: 'fr 12/3/2020 16:26:31'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test06AddingMultipleItemsIsReflectedWhenListingTheCart stamp: 'fr 12/3/2020 16:26:31'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test07CanNotAddItemsToNonexistentCarts stamp: 'fr 12/3/2020 16:26:31'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test08CanCheckoutAValidCart stamp: 'fr 12/3/2020 16:26:31'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test09CanNotCheckoutANonexistentCart stamp: 'fr 12/3/2020 16:26:31'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test10PurchaseListHasTheCorrectQuantityOfItemsAndTotal stamp: 'fr 12/3/2020 16:26:31'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test11CanNotListPurchasesForInvalidUsername stamp: 'fr 12/3/2020 16:26:31'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test12CanNotListPurchasesForInvalidPassword stamp: 'fr 12/3/2020 16:26:31'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test13CanNotAddItemsToAnExpiredCart stamp: 'fr 12/3/2020 16:26:31'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test14CanNotListAnExpiredCart stamp: 'fr 12/3/2020 16:26:31'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test15CanNotCheckoutAnExpiredCart stamp: 'fr 12/3/2020 16:26:31'!
+PASSED!
+
+!testRun: #TusLibrosFacadeTest #test16CanNotPerformAnyOperationWithACartAfterCheckout stamp: 'fr 12/3/2020 16:26:31'!
+PASSED!
